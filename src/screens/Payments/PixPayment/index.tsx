@@ -1,23 +1,23 @@
-import {View, Text, Alert, Share, TouchableOpacity} from 'react-native';
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import { View, Text, Alert, Share, TouchableOpacity } from 'react-native';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import serviceapp from '@services/serviceapp';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
-import {AuthContext} from '@contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { AuthContext } from '@contexts/auth';
 import * as Clipboard from 'expo-clipboard';
 import Toast from 'react-native-tiny-toast';
 import QRCode from 'react-native-qrcode-svg';
 import AppLayout from '@components/AppLayout';
-import {ListStyle} from '@components/InputStyle';
-import {MaterialIcons} from '@expo/vector-icons';
+import { ListStyle } from '@components/InputStyle';
+import { MaterialIcons } from '@expo/vector-icons';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 
-const PixPayment = ({route}: any) => {
+const PixPayment = ({ route }: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {user, disconnect, setLoading, loading} = useContext(AuthContext);
-    const {order} = route?.params;
+    const { user, disconnect, setLoading, loading } = useContext(AuthContext);
+    const { order } = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
     const [qrPix, setQrPix] = useState();
 
@@ -38,7 +38,7 @@ const PixPayment = ({route}: any) => {
                         cvvCartao: '',
                     },
                 });
-                const {success, message, token, data} = response.data.resposta;
+                const { success, message, token, data } = response.data.resposta;
                 setRegisteredOrder(data);
                 if (!token) {
                     Alert.alert('Atenção', message, [
@@ -52,7 +52,7 @@ const PixPayment = ({route}: any) => {
                 }
                 if (!success) {
                     setLoading(false);
-                    Alert.alert('Atenção', message, [{text: 'Ok'}]);
+                    Alert.alert('Atenção', message, [{ text: 'Ok' }]);
                     return;
                 }
                 paymentPix(data);
@@ -61,18 +61,18 @@ const PixPayment = ({route}: any) => {
             }
         };
         getPaymentOrder();
-    }, []);
+    }, [order, user]);
 
     const paymentPix = useCallback(
         async (dataPix: any) => {
             const response = await serviceapp.get(
                 `(WS_TRANSACAO_PIX)?token=${user.token}&tempoPix=3600&valorPix=${dataPix.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
-            const {success, message, txid, banco, copiaColaPix} =
-                response.data.resposta;
+
+            const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
             setLoading(false);
             if (!success) {
-                Alert.alert('Atenção', message, [{text: 'Ok'}]);
+                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
                 return;
             }
             let dataPay = {

@@ -161,11 +161,11 @@ const Account = () => {
                             <View>
                                 <Text
                                     numberOfLines={1}
-                                    className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                    className="text-sm w-60 text-solar-blue-dark font-PoppinsMedium"
                                 >
-                                    ANDERSON ROGERIO BRASIL RODRIGUES
+                                    {accounts.nomeCliente}
                                 </Text>
-                                <Text className="text-base mr-4 text-solar-blue-dark font-Poppins_400Regular">
+                                <Text className="text-base mr-4 w-60 text-solar-blue-dark font-Poppins_400Regular">
                                     Confira seus dados abaixo e se necessário,
                                     atualize-os
                                 </Text>

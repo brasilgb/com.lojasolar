@@ -225,7 +225,7 @@ const OpenPayments = () => {
                                                 : 'text-white'
                                         }`}
                                     >
-                                        {crediario.status === ''
+                                        {crediario.status === 'P'
                                             ? 'Processando'
                                             : crediario.atraso > 0
                                             ? 'Atrasada'
