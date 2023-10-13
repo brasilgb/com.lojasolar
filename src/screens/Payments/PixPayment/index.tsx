@@ -123,6 +123,7 @@ const PixPayment = ({ route }: any) => {
     };
 
     const sendOrderAtualize = async (dataPix: any, dataPay: any) => {
+        setRegisteredOrder([]);
         let orderResponse = {
             numeroOrdem: dataPix.numeroOrdem,
             statusOrdem: 12,

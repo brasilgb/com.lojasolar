@@ -121,6 +121,7 @@ const CartPayment = ({route}: any) => {
     };
 
     const sendOrderAtualize = async (dataCart: any) => {
+        setRegisteredOrder([]);
         if (dataCart) {
             let orderResponse = {
                 numeroOrdem: dataCart.data.resposta.data.Detail.OrderNumber,
