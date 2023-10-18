@@ -70,6 +70,7 @@ const PixPayment = ({ route }: any) => {
             );
 
             const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
+
             setLoading(false);
             if (!success) {
                 Alert.alert('Atenção', message, [{ text: 'Ok' }]);
