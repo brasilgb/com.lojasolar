@@ -50,12 +50,11 @@ export const AuthProvider = ({children}: AuthContextProps) => {
         loadPosition();
     }, []);
 
-    const signIn = useCallback(async ({cpfcnpj, resetForm}: any) => {
+    const signIn = useCallback(async ({cpfcnpj}: any) => {
         setLoading(true);
         const response = await serviceapp.get(
             `(WS_LOGIN_APP)?cpfcnpj=${cpfcnpj}`,
         );
-        resetForm();
         if (response.status !== 200) {
             throw new Error(
                 'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',

@@ -1,11 +1,11 @@
-import {View, Text, Keyboard, TextInput} from 'react-native';
-import React, {useContext} from 'react';
+import { View, Text, Keyboard, TextInput } from 'react-native';
+import React, { useContext } from 'react';
 import AppLayout from '@components/AppLayout';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import schema from './schema';
-import {AuthContext} from '@contexts/auth';
-import {cnpj, cpf} from 'cpf-cnpj-validator';
-import {InputStyle, LabelStyle} from '@components/InputStyle';
+import { AuthContext } from '@contexts/auth';
+import { cnpj, cpf } from 'cpf-cnpj-validator';
+import { InputStyle, LabelStyle } from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import AppLoading from '@components/AppLoading';
 
@@ -14,7 +14,7 @@ interface ValuesForm {
 }
 
 const SignIn = () => {
-    const {signIn, loading} = useContext(AuthContext);
+    const { signIn, loading } = useContext(AuthContext);
 
     const formatCpfCnpj = (num: string) => {
         if (num.length < 12) {
@@ -43,9 +43,10 @@ const SignIn = () => {
                         cpfcnpj: '',
                     }}
                     enableReinitialize={true}
-                    onSubmit={(values: ValuesForm, {resetForm}: any) => {
+                    onSubmit={(values: ValuesForm, { resetForm }: any) => {
                         Keyboard.dismiss();
-                        signIn({cpfcnpj: values.cpfcnpj, resetForm: resetForm});
+                        signIn({ cpfcnpj: values.cpfcnpj });
+                        resetForm();
                     }}
                 >
                     {({
