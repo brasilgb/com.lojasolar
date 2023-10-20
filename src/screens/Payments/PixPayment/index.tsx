@@ -16,7 +16,7 @@ import MoneyPTBR from '@components/MoneyPTBRSimbol';
 const PixPayment = ({ route }: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { user, disconnect, setLoading, loading } = useContext(AuthContext);
+    const { user, disconnect, setLoading } = useContext(AuthContext);
     const { order } = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
     const [qrPix, setQrPix] = useState();
@@ -83,7 +83,7 @@ const PixPayment = ({ route }: any) => {
             sendOrderAtualize(dataPix, dataPay);
             setQrPix(copiaColaPix);
         },
-        [user, order],
+        [],
     );
 
     const sharingUrl = async () => {
@@ -124,7 +124,9 @@ const PixPayment = ({ route }: any) => {
     };
 
     const sendOrderAtualize = async (dataPix: any, dataPay: any) => {
+        console.log(registeredOrder);
         setRegisteredOrder([]);
+        console.log(registeredOrder);
         let orderResponse = {
             numeroOrdem: dataPix.numeroOrdem,
             statusOrdem: 12,
@@ -137,7 +139,7 @@ const PixPayment = ({ route }: any) => {
             `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
         );
     };
-
+    console.log(registeredOrder);
     return (
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">

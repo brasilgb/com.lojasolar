@@ -46,7 +46,6 @@ const SignIn = () => {
                     onSubmit={(values: ValuesForm, { resetForm }: any) => {
                         Keyboard.dismiss();
                         signIn({ cpfcnpj: values.cpfcnpj });
-                        resetForm();
                     }}
                 >
                     {({

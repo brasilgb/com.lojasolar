@@ -61,6 +61,13 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             );
         }
         const {crediario, message, data} = response.data.resposta;
+        if (data.cadastroCliente && data.cadastroSenha) {
+            navigation.navigate('CheckPassword', {
+                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
+            });
+            setLoading(false);
+
+        }
         if (!data.cadastroCliente && !data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('NoRegistered', {
@@ -70,12 +77,6 @@ export const AuthProvider = ({children}: AuthContextProps) => {
         if (data.cadastroCliente && !data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('Registered', {
-                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
-            });
-        }
-        if (data.cadastroCliente && data.cadastroSenha) {
-            setLoading(false);
-            navigation.navigate('CheckPassword', {
                 data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
             });
         }
@@ -117,10 +118,10 @@ export const AuthProvider = ({children}: AuthContextProps) => {
                 nomeCliente: nomeCliente,
                 token: data.token,
             };
-            setLoading(false);
             storageUser(userData);
             setUser(userData);
             navigation.navigate('Home');
+            setLoading(false);
         },
         [],
     );
