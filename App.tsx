@@ -41,7 +41,7 @@ const App = () => {
                 );
             }
             let token = await SecureStore.getItemAsync('secure_deviceid');
-            // console.log(token);
+            console.log('token telefone '+token);
         };
         getUidDevice();
     }, []);
@@ -56,8 +56,8 @@ const App = () => {
         if (enabled) {
             // console.log('Authorization status:', authStatus);
             let tokenFirebase = (await messaging().getToken()).toString();
-            // console.log(tokenFirebase);
-            registerDevice(tokenFirebase);
+            console.log('token firebase' + tokenFirebase && tokenFirebase);
+            registerDevice(tokenFirebase && tokenFirebase);
         }
     };
 
