@@ -28,14 +28,14 @@ interface CarouselItemProps {
 const Home = () => {
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
-    const {setLoading, signed} = useContext(AuthContext);
+    const {signed} = useContext(AuthContext);
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
     const [carrocelData, setCarrocelData] = useState<any>([]);
 
     useEffect(() => {
         async function getCarrocel() {
-            setLoading(true);
+
             await serviceapp
                 .get(`(WS_CARROCEL_PROMOCAO)`)
                 .then(response => {
@@ -44,8 +44,7 @@ const Home = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         }
         getCarrocel();
     }, []);

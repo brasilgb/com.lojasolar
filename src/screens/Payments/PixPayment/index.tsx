@@ -18,13 +18,13 @@ const PixPayment = ({ route }: any) => {
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const { user, disconnect, setLoading } = useContext(AuthContext);
     const { order } = route?.params;
-    const [registeredOrder, setRegisteredOrder] = useState<any>([]);
+
     const [qrPix, setQrPix] = useState();
 
     useEffect(() => {
         const getPaymentOrder = async () => {
             setLoading(true);
-            if (registeredOrder.length === 0) {
+            
                 const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                     token: user.token,
                     valor: order.valueTotal,
@@ -39,7 +39,7 @@ const PixPayment = ({ route }: any) => {
                     },
                 });
                 const { success, message, token, data } = response.data.resposta;
-                setRegisteredOrder(data);
+
                 if (!token) {
                     Alert.alert('Atenção', message, [
                         {
@@ -56,9 +56,6 @@ const PixPayment = ({ route }: any) => {
                     return;
                 }
                 paymentPix(data);
-            } else {
-                paymentPix(registeredOrder);
-            }
         };
         getPaymentOrder();
     }, [order, user]);
@@ -124,9 +121,6 @@ const PixPayment = ({ route }: any) => {
     };
 
     const sendOrderAtualize = async (dataPix: any, dataPay: any) => {
-        console.log(registeredOrder);
-        setRegisteredOrder([]);
-        console.log(registeredOrder);
         let orderResponse = {
             numeroOrdem: dataPix.numeroOrdem,
             statusOrdem: 12,
@@ -139,7 +133,7 @@ const PixPayment = ({ route }: any) => {
             `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
         );
     };
-    console.log(registeredOrder);
+
     return (
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
