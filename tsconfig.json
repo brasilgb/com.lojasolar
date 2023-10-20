@@ -12,6 +12,6 @@
             "@services/*": ["services/*"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx"],
+    "include": ["**/*.ts", "**/*.tsx", "config-info-plist.js"],
     "exclude": ["node_modules"]
 }
