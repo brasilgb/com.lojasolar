@@ -1,16 +1,10 @@
 {
-  "cli": {
-    "appVersionSource": "remote"
-  },
-  "build": {
-    "staging": {
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      }
+    "cli": {
+        "appVersionSource": "remote"
     },
-    "production": {
-      "autoIncrement": true
+    "build": {
+        "production": {
+            "autoIncrement": true
+        }
     }
-  }
 }

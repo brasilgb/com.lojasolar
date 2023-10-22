@@ -3,18 +3,18 @@ import React, { createContext, useCallback, useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import serviceapp from '../services/serviceapp';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({} as any);
 import * as SecureStore from 'expo-secure-store';
-import { RootStackParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface AuthContextProps {
     children: React.ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [positionGlobal, setPositionGlobal] = useState<any>([0, 0]);
@@ -144,7 +144,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     async function disconnect() {
         await AsyncStorage.clear().then(() => {
             setUser(null);
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            });
         });
+
     }
 
     return (

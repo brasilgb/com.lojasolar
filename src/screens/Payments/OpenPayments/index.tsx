@@ -29,7 +29,6 @@ const OpenPayments = () => {
     useEffect(() => {
         const getCrediarios = async () => {
             setLoading(true);
-
             await serviceapp
                 .get(`(WS_CARREGA_CREDIARIO)?token=${user?.token}`)
                 .then(response => {
