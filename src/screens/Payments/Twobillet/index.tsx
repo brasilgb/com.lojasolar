@@ -26,6 +26,7 @@ const Twobillet = () => {
                 .then(response => {
                     const {success, message, data, token} =
                         response.data.resposta;
+                        setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message);
                         return;
@@ -44,8 +45,7 @@ const Twobillet = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getPaymentSlips();
     }, []);

@@ -6,20 +6,20 @@ import {
     Alert,
     Platform,
 } from 'react-native';
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import AppLayout from '@components/AppLayout';
-import {ListStyle} from '@components/InputStyle';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '@screens/RootStackPrams';
-import {AuthContext} from '@contexts/auth';
+import { ListStyle } from '@components/InputStyle';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '@screens/RootStackPrams';
+import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import AppLoading from '@components/AppLoading';
 
 const PrivacySettings = () => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-    const {setLoading, loading, disconnect, user} = useContext(AuthContext);
+    const { setLoading, loading, disconnect, user } = useContext(AuthContext);
 
     const [autorizaCliente, setAutorizaCliente] = useState<any>([]);
 
@@ -39,8 +39,8 @@ const PrivacySettings = () => {
             await serviceapp
                 .get(`(WS_AUTORIZA_CLIENTE)?token=${user?.token}`)
                 .then(response => {
-                    const {token, message, data} = response.data.resposta;
-
+                    const { token, message, data } = response.data.resposta;
+                    setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
                             {
@@ -51,7 +51,7 @@ const PrivacySettings = () => {
                             },
                         ]);
                     }
-                    setLoading(false);
+
                     setAutorizaCliente(data?.pergunta);
                     setIsEnabledNotify(
                         data?.pergunta[0]?.resposta === 'S' ? true : false,
@@ -70,12 +70,11 @@ const PrivacySettings = () => {
     const handleSubmitPrivacity = useCallback(async () => {
         setLoading(true);
         const response = await serviceapp.get(
-            `(WS_RESPOSTA_AUTORIZA)?token=${user.token}&resposta1=${
-                isEnabledNotify ? 'S' : 'N'
+            `(WS_RESPOSTA_AUTORIZA)?token=${user.token}&resposta1=${isEnabledNotify ? 'S' : 'N'
             }&resposta2=${isEnabledEmail ? 'S' : 'N'}`,
         );
-        const {success, message} = response.data.resposta;
-
+        const { success, message } = response.data.resposta;
+        setLoading(false);
         if (!success) {
             Alert.alert('Atenção', message, [
                 {
@@ -86,9 +85,9 @@ const PrivacySettings = () => {
                 },
             ]);
         }
-        setLoading(false);
+
         Alert.alert('Atenção', 'Atualização de dados concluída com sucesso', [
-            {text: 'Ok'},
+            { text: 'Ok' },
         ]);
     }, [isEnabledNotify, isEnabledEmail]);
 
@@ -115,7 +114,7 @@ const PrivacySettings = () => {
                         </View>
                         <View>
                             <Switch
-                                trackColor={{false: '#a5a5a5', true: '#F18800'}}
+                                trackColor={{ false: '#a5a5a5', true: '#F18800' }}
                                 thumbColor={
                                     isEnabledNotify ? '#FFF' : '#f4f3f4'
                                 }
@@ -135,7 +134,7 @@ const PrivacySettings = () => {
                         </View>
                         <View>
                             <Switch
-                                trackColor={{false: '#a5a5a5', true: '#F18800'}}
+                                trackColor={{ false: '#a5a5a5', true: '#F18800' }}
                                 thumbColor={isEnabledEmail ? '#FFF' : '#f4f3f4'}
                                 ios_backgroundColor="#a5a5a5"
                                 value={isEnabledEmail}
@@ -146,11 +145,10 @@ const PrivacySettings = () => {
 
                     <View className="my-6">
                         <TouchableOpacity
-                            className={`flex items-center justify-center border-2 border-white ${
-                                Platform.OS == 'ios'
-                                    ? 'shadow-sm shadow-gray-300'
-                                    : 'shadow-sm shadow-black'
-                            } py-3 rounded-full bg-solar-orange-middle`}
+                            className={`flex items-center justify-center border-2 border-white ${Platform.OS == 'ios'
+                                ? 'shadow-sm shadow-gray-300'
+                                : 'shadow-sm shadow-black'
+                                } py-3 rounded-full bg-solar-orange-middle`}
                             onPress={() => handleSubmitPrivacity()}
                         >
                             <Text className="text-lg font-PoppinsMedium self-center text-solar-blue-dark">

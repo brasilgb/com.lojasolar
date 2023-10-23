@@ -21,6 +21,7 @@ const Crediario = () => {
             await serviceapp
                 .get('(WS_CARREGA_FAQ)')
                 .then(response => {
+                    setLoading(false);
                     const result =
                         response.data.resposta.data.categorias.filter(
                             (c: any) =>
@@ -33,8 +34,7 @@ const Crediario = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getCrediarios();
     }, []);

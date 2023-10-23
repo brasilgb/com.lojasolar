@@ -77,8 +77,8 @@ const Account = () => {
                 .get(`(WS_CARREGA_CLIENTE)?token=${tokenUser}`)
                 .then(response => {
                     const {data, message, token} = response.data.resposta;
+                    setLoading(false);
                     if (!token) {
-                        setLoading(false);
                         Alert.alert('Atenção', message, [
                             {
                                 text: 'Ok',
@@ -95,8 +95,7 @@ const Account = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getAccount();
     }, [tokenUser]);
@@ -126,8 +125,8 @@ const Account = () => {
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
         const {success, message,  } = response.data.resposta;
+        setLoading(false);
         if (success) {
-            setLoading(false);
             Alert.alert('Atenção', message, [
                 {text: 'Ok', onPress: () => navigation.navigate('Home')},
             ]);

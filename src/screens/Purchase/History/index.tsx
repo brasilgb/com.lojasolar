@@ -53,6 +53,7 @@ const History = () => {
                 )
                 .then(response => {
                     const { success, message, data } = response.data.resposta;
+                    setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
                             {
@@ -67,8 +68,7 @@ const History = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         if (isFocused) {
             getHistoricos();
@@ -144,8 +144,8 @@ const History = () => {
                     <TouchableOpacity
                         onPress={() => showPicker(true)}
                         className={`w-48 mb-6 flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                                ? 'shadow-gray-300'
-                                : 'shadow-gray-400'
+                            ? 'shadow-gray-300'
+                            : 'shadow-gray-400'
                             }`}
                     >
                         <Text className="flex-1 text-lg text-center text-solar-blue-dark font-PoppinsMedium">

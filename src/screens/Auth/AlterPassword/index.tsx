@@ -42,6 +42,7 @@ const AlterPassword = () => {
                 `(WS_ALTERAR_SENHA_APP)?cpfcnpj=cpfcnpj=${user.cpfCnpj}&senha=${values.senha}&token=${user.token}&senhaAnterior=${values.senhaAnterior}`,
             );
             const {success, message, data, token} = response.data.resposta;
+            setLoading(false);
             if (!token) {
                 Alert.alert('Atenção', message, [
                     {
@@ -59,7 +60,6 @@ const AlterPassword = () => {
                 token: data.token,
             };
             setUser(userData);
-            setLoading(false);
             resetForm();
             Alert.alert('Atenção', message, [
                 {text: 'Ok', onPress: () => navigation.navigate('Home')},

@@ -33,6 +33,7 @@ const OpenPayments = () => {
                 .get(`(WS_CARREGA_CREDIARIO)?token=${user?.token}`)
                 .then(response => {
                     const {message, token, data} = response.data.resposta;
+                    setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
                             {
@@ -47,8 +48,7 @@ const OpenPayments = () => {
                 })
                 .catch(error => {
                     console.log(error);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         if (isFocused) {
             getCrediarios();

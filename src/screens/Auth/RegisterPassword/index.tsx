@@ -45,6 +45,7 @@ const RegisterPassword = ({route}: any) => {
                 )
                 .then(response => {
                     const {success, message} = response.data.resposta;
+                    setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
                             {
@@ -62,8 +63,7 @@ const RegisterPassword = ({route}: any) => {
                 })
                 .catch(error => {
                     console.log(error);
-                })
-                .finally(() => setLoading(false));
+                });
         },
         [],
     );

@@ -24,38 +24,37 @@ const PixPayment = ({ route }: any) => {
     useEffect(() => {
         const getPaymentOrder = async () => {
             setLoading(true);
-            
-                const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-                    token: user.token,
-                    valor: order.valueTotal,
-                    parcela: order.dataOrder,
-                    tipoPagamento: 4,
-                    validaDados: 'S',
-                    dadosCartao: {
-                        numeroCartao: '',
-                        nomeCartao: '',
-                        validadeCartao: '',
-                        cvvCartao: '',
-                    },
-                });
-                const { success, message, token, data } = response.data.resposta;
 
-                if (!token) {
-                    Alert.alert('Atenção', message, [
-                        {
-                            text: 'Ok',
-                            onPress: () => {
-                                navigation.navigate('Home'), disconnect();
-                            },
+            const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
+                token: user.token,
+                valor: order.valueTotal,
+                parcela: order.dataOrder,
+                tipoPagamento: 4,
+                validaDados: 'S',
+                dadosCartao: {
+                    numeroCartao: '',
+                    nomeCartao: '',
+                    validadeCartao: '',
+                    cvvCartao: '',
+                },
+            });
+            const { success, message, token, data } = response.data.resposta;
+            setLoading(false);
+            if (!token) {
+                Alert.alert('Atenção', message, [
+                    {
+                        text: 'Ok',
+                        onPress: () => {
+                            navigation.navigate('Home'), disconnect();
                         },
-                    ]);
-                }
-                if (!success) {
-                    setLoading(false);
-                    Alert.alert('Atenção', message, [{ text: 'Ok' }]);
-                    return;
-                }
-                paymentPix(data);
+                    },
+                ]);
+            }
+            if (!success) {
+                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+                return;
+            }
+            paymentPix(data);
         };
         getPaymentOrder();
     }, [order, user]);
@@ -68,7 +67,6 @@ const PixPayment = ({ route }: any) => {
 
             const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
 
-            setLoading(false);
             if (!success) {
                 Alert.alert('Atenção', message, [{ text: 'Ok' }]);
                 return;

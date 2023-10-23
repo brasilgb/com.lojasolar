@@ -24,6 +24,11 @@ const SignIn = () => {
             return cnpj.format(num);
         }
     };
+    const handleSubmitSignIn = (values: ValuesForm, { resetForm }: any) => {
+        Keyboard.dismiss();
+        signIn({ cpfcnpj: values.cpfcnpj });
+        resetForm();
+    }
 
     return (
         <AppLayout>
@@ -43,10 +48,7 @@ const SignIn = () => {
                         cpfcnpj: '',
                     }}
                     enableReinitialize={true}
-                    onSubmit={(values: ValuesForm, { resetForm }: any) => {
-                        Keyboard.dismiss();
-                        signIn({ cpfcnpj: values.cpfcnpj });
-                    }}
+                    onSubmit={handleSubmitSignIn}
                 >
                     {({
                         values,

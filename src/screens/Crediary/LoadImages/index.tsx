@@ -226,8 +226,8 @@ const LoadImages = ({route}: any) => {
                 Renda: key == 'imaRenda' ? base64 : '',
             })
             .then(response => {
-                setLoading(false);
                 const {success, message, token} = response.data.resposta;
+                setLoading(false);
                 if (!token) {
                     Alert.alert('Atenção', message, [
                         {

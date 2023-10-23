@@ -1,19 +1,19 @@
-import {View, Text, Alert, ScrollView} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import { View, Text, Alert, ScrollView } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
 import AppLoading from '@components/AppLoading';
 import AppLayout from '@components/AppLayout';
-import {AuthContext} from '@contexts/auth';
+import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
-import {ListStyle} from '@components/InputStyle';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { ListStyle } from '@components/InputStyle';
 
-const Detail = ({route}: any) => {
-    const {data} = route.params;
+const Detail = ({ route }: any) => {
+    const { data } = route.params;
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {user, setLoading, loading, disconnect} = useContext(AuthContext);
+    const { user, setLoading, loading, disconnect } = useContext(AuthContext);
     const [details, setDetails] = useState<any>([]);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Detail = ({route}: any) => {
                     `(WS_PROTOCOLO_DETALHE)?token=${user.token}&filial=${data.filial}&nProtocolo=${data.nProtocolo}`,
                 )
                 .then(response => {
-                    const {success, message, data} = response.data.resposta;
+                    const { success, message, data } = response.data.resposta;
                     setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
@@ -97,18 +97,16 @@ const Detail = ({route}: any) => {
                                             (e: any, i: number, row: any) => (
                                                 <View
                                                     key={i}
-                                                    className={`flex-col items-left ${
-                                                        i + 1 === row.length
+                                                    className={`flex-col items-left ${i + 1 === row.length
                                                             ? ''
                                                             : 'mb-8'
-                                                    } ml-4`}
+                                                        } ml-4`}
                                                 >
                                                     <View
-                                                        className={`absolute w-6 h-6 rounded-full top-0 -left-7 ${
-                                                            i + 1 === row.length
+                                                        className={`absolute w-6 h-6 rounded-full top-0 -left-7 ${i + 1 === row.length
                                                                 ? 'bg-solar-orange-middle'
                                                                 : 'bg-gray-400'
-                                                        } border-2 border-solar-gray-dark`}
+                                                            } border-2 border-solar-gray-dark`}
                                                     />
                                                     <Text className="text-sm font-PoppinsMedium text-solar-blue-dark ml-2">
                                                         {e?.xEventos}

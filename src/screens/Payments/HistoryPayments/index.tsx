@@ -43,6 +43,7 @@ const HistoryPayments = () => {
                 .then(response => {
                     const {success, message, token, data} =
                         response.data.resposta;
+                        setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
                             {
@@ -57,8 +58,7 @@ const HistoryPayments = () => {
                 })
                 .catch(error => {
                     console.log(error);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getCrediarios();
     }, [dateIni, dateFin]);
