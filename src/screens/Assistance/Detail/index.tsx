@@ -25,6 +25,7 @@ const Detail = ({route}: any) => {
                 )
                 .then(response => {
                     const {success, message, data} = response.data.resposta;
+                    setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
                             {
@@ -39,8 +40,7 @@ const Detail = ({route}: any) => {
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getDetails();
     }, [data]);

@@ -24,6 +24,7 @@ const Protocols = () => {
                 .get(`(WS_PROTOCOLO_ASSISTENCIA)?token=${user.token}`)
                 .then(response => {
                     const {success, message, data} = response.data.resposta;
+                    setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
                             {
@@ -34,13 +35,11 @@ const Protocols = () => {
                             },
                         ]);
                     }
-                    setLoading(false);
                     setProtocols(data);
                 })
                 .catch(err => {
                     console.log(err);
-                })
-                .finally(() => setLoading(false));
+                });
         };
         getProtocols();
     }, []);

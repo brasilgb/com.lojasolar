@@ -125,7 +125,7 @@ const Account = () => {
                 values.emailCliente
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
-        const {success, message, token} = response.data.resposta;
+        const {success, message,  } = response.data.resposta;
         if (success) {
             setLoading(false);
             Alert.alert('Atenção', message, [
