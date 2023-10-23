@@ -19,7 +19,7 @@ import schema from './schema';
 import serviceapp from '@services/serviceapp';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 interface SenhaProps {
     senha: string;
@@ -30,7 +30,7 @@ interface SenhaProps {
 const AlterPassword = () => {
     const {setLoading, loading, disconnect, setUser, user} =
         useContext(AuthContext);
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [showPassword1, setShowPassword1] = useState<boolean>(true);
     const [showPassword2, setShowPassword2] = useState<boolean>(true);
     const [showPassword3, setShowPassword3] = useState<boolean>(true);
@@ -39,7 +39,7 @@ const AlterPassword = () => {
         async (values: SenhaProps, {resetForm}: any) => {
             setLoading(true);
             const response = await serviceapp.get(
-                `(WS_ALTERAR_SENHA_APP)?cpfcnpj=cpfcnpj=${user.cpfCnpj}&senha=${values.senha}&token=${user.token}&senhaAnterior=${values.senhaAnterior}`,
+                `(WS_ALTERAR_SENHA_APP)?cpfcnpj=cpfcnpj=${user.cpfCnpj}&senha=${values.senha}&token=${user?.token}&senhaAnterior=${values.senhaAnterior}`,
             );
             const {success, message, data, token} = response.data.resposta;
             setLoading(false);

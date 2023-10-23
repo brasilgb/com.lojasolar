@@ -3,7 +3,7 @@ import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {MaterialIcons} from '@expo/vector-icons';
 
 const PayCartOk = () => {

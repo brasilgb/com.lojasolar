@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({} as any);
 import * as SecureStore from 'expo-secure-store';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface AuthContextProps {
@@ -37,6 +37,16 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     }, []);
 
     useEffect(() => {
+        const getConnected = async () => {
+            console.log('Connected result: ', user?.connected);
+            if (user?.connected === false) {
+                await disconnect();
+            }
+        };
+        getConnected();
+    }, [user]);
+
+    useEffect(() => {
         async function loadPosition() {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
@@ -55,18 +65,19 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         const response = await serviceapp.get(
             `(WS_LOGIN_APP)?cpfcnpj=${cpfcnpj}`,
         );
+
         if (response.status !== 200) {
-            throw new Error(
-                'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
-            );
+            // throw new Error(
+            //     'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
+            // );
+            Alert.alert('Error', 'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.');
         }
-        const { crediario, message, data } = response.data.resposta;
+        const { data } = response.data.resposta;
         if (data.cadastroCliente && data.cadastroSenha) {
+            setLoading(false);
             navigation.navigate('CheckPassword', {
                 data: { cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente },
             });
-            setLoading(false);
-
         }
         if (!data.cadastroCliente && !data.cadastroSenha) {
             setLoading(false);
@@ -85,30 +96,22 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     const checkPassword = useCallback(
         async ({ cpfcnpj, senha, nomeCliente, connected }: any) => {
             setLoading(true);
-            const deviceToken: any =
-                await SecureStore.getItemAsync('secure_deviceid');
-
-            await SecureStore.setItemAsync(
-                'connected_device',
-                JSON.stringify({ connected: connected }),
-            );
+            const deviceToken = await SecureStore.getItemAsync('secure_deviceid');
             const response = await serviceapp.get(
-                `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${JSON.parse(
-                    deviceToken,
-                )}`,
+                `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceToken}`,
             );
-
+            setLoading(false);
             if (response.status !== 200) {
-                setLoading(false);
-                throw new Error(
-                    'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
-                );
+                // throw new Error(
+                //     'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
+                // );
+                Alert.alert('Error', 'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.');
+                return;
             }
 
             const { success, message, data } = response.data.resposta;
             if (!success) {
                 setUser(undefined);
-                setLoading(false);
                 Alert.alert('Erro', `${message}`);
                 return;
             }
@@ -117,11 +120,11 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                 cpfCnpj: cpfcnpj,
                 nomeCliente: nomeCliente,
                 token: data.token,
+                connected: connected,
             };
             storageUser(userData);
             setUser(userData);
             navigation.navigate('Home');
-            setLoading(false);
         },
         [],
     );
@@ -144,12 +147,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     async function disconnect() {
         await AsyncStorage.clear().then(() => {
             setUser(null);
-            navigation.reset({
-                index: 0,
-                routes: [{ name: 'Home' }],
-            });
         });
-
     }
 
     return (

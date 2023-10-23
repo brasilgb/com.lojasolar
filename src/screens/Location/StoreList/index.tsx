@@ -5,7 +5,7 @@ import AppLayout from '@components/AppLayout';
 import {ListStyle} from '@components/InputStyle';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const StoreList = ({route}: any) => {
     const navigation =

@@ -13,7 +13,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import serviceapp from '@services/serviceapp';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 interface ValuesForm {
     senha: string;
@@ -22,8 +22,7 @@ interface ValuesForm {
 const CheckPassword = ({route}: any) => {
     const {data} = route.params;
     const {setLoading, loading, checkPassword} = useContext(AuthContext);
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [isChecked, setChecked] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(true);
     const formatCpfCnpj = (num: string) => {

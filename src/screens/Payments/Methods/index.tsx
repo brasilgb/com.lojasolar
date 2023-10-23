@@ -3,7 +3,7 @@ import React, {useCallback, useContext} from 'react';
 import AppLayout from '@components/AppLayout';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import moment from 'moment';
@@ -20,7 +20,7 @@ const Methods = ({route}: any) => {
 
     const sendPaymentOrder = useCallback(async () => {
         const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-            token: user.token,
+            token: user?.token,
             valor: order.valueTotal,
             parcela: order.dataOrder,
             tipoPagamento: 1,
@@ -95,7 +95,7 @@ const Methods = ({route}: any) => {
             urlBoleto: dataSlip.data.resposta.data.Detail.PaymentObject.Url,
         };
         await serviceapp.get(
-            `(WS_ATUALIZA_ORDEM)?token=${user.token}&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
+            `(WS_ATUALIZA_ORDEM)?token=${user?.token}&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
         );
     }, []);
 

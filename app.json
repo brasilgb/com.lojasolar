@@ -21,7 +21,8 @@
                 "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is needed to find a store closest to you!"
             },
             "config": {
-                "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0"
+                "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0",
+                "usesNonExemptEncryption": false
             }
         },
         "android": {

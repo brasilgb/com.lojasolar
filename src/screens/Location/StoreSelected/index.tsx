@@ -10,7 +10,7 @@ import {
 import React, {useContext, useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {AuthContext} from '@contexts/auth';
 import AppLayout from '@components/AppLayout';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
@@ -20,7 +20,7 @@ type Props = {};
 
 const StoreSelected = ({route}: any) => {
     const {data} = route?.params;
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const {positionGlobal} = useContext(AuthContext);
     const mapRef = useRef<any>();
     const [initialRegion, setInitialRegion] = useState({

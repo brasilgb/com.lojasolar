@@ -11,7 +11,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {FlashList} from '@shopify/flash-list';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 interface ButtonModalProps {
     onChangeSelect: any;

@@ -9,7 +9,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AuthContext} from '@contexts/auth';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const CustomDrawer = (props: any) => {
     const navigation =
@@ -31,7 +31,7 @@ const CustomDrawer = (props: any) => {
                         />
                         <Text className="text-base text-solar-gray-light font-Poppins_400Regular px-4">
                             {signed
-                                ? `Olá, ${user.nomeCliente}`
+                                ? `Olá, ${user?.nomeCliente}`
                                 : 'Bem Vindo(a) '}
                         </Text>
                     </View>
@@ -51,8 +51,8 @@ const CustomDrawer = (props: any) => {
                 {signed && (
                     <TouchableOpacity
                         onPress={() => {
-                            signOut();
                             navigation.dispatch(DrawerActions.closeDrawer());
+                            signOut();
                         }}
                         className="flex-row items-center justify-start ml-5"
                     >

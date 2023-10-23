@@ -1,23 +1,24 @@
-import {View, Text, Alert} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import { View, Text, Alert } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
-import {AuthContext} from '@contexts/auth';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { AuthContext } from '@contexts/auth';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import serviceapp from '@services/serviceapp';
-import {useNavigation, useIsFocused} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
-import {MaterialIcons} from '@expo/vector-icons';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { MaterialIcons } from '@expo/vector-icons';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
-import {FlashList} from '@shopify/flash-list';
-import {ListStyle} from '@components/InputStyle';
+import { FlashList } from '@shopify/flash-list';
+import { ListStyle } from '@components/InputStyle';
 import ButtonPayament from '@components/ButtonPayament';
+import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 
 const OpenPayments = () => {
-    const {loading, setLoading, user, disconnect} = useContext(AuthContext);
+    const { loading, setLoading, user, disconnect } = useContext(AuthContext);
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+
     const isFocused = useIsFocused();
     const [crediarios, setCrediarios] = useState<any>([]);
     const [showModalParcelas, setShowModalParcelas] = useState(false);
@@ -32,7 +33,7 @@ const OpenPayments = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CREDIARIO)?token=${user?.token}`)
                 .then(response => {
-                    const {message, token, data} = response.data.resposta;
+                    const { message, token, data } = response.data.resposta;
                     setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
@@ -152,7 +153,7 @@ const OpenPayments = () => {
         setArrayTotals(totalSelecteds);
     };
 
-    const RenderItem = ({idx, crediario}: any) => {
+    const RenderItem = ({ idx, crediario }: any) => {
         return (
             <TouchableOpacity
                 key={idx}
@@ -170,12 +171,11 @@ const OpenPayments = () => {
                             />
                         ) : (
                             <View
-                                className={`h-6 w-6 border-2 border-solar-yellow-dark ${
-                                    arrayIndex.length > 0 &&
-                                    arrayIndex.includes(idx)
+                                className={`h-6 w-6 border-2 border-solar-yellow-dark ${arrayIndex.length > 0 &&
+                                        arrayIndex.includes(idx)
                                         ? 'bg-solar-yellow-dark'
                                         : 'bg-transparent'
-                                }  flex items-center justify-center rounded-full`}
+                                    }  flex items-center justify-center rounded-full`}
                             >
                                 {arrayIndex.length > 0 &&
                                     arrayIndex.findIndex(
@@ -209,32 +209,29 @@ const OpenPayments = () => {
                             </View>
                             <View className="flex-1">
                                 <View
-                                    className={`${
-                                        crediario.status === 'P'
+                                    className={`${crediario.status === 'P'
                                             ? 'bg-solar-orange-dark'
                                             : crediario.atraso > 0
-                                            ? 'bg-solar-yellow-light'
-                                            : ''
-                                    }  rounded-md flex items-center justify-center mb-1 ml-4`}
+                                                ? 'bg-solar-yellow-light'
+                                                : ''
+                                        }  rounded-md flex items-center justify-center mb-1 ml-4`}
                                 >
                                     <Text
-                                        className={`text-xs font-PoppinsRegular ${
-                                            crediario.status === 'P'
+                                        className={`text-xs font-PoppinsRegular ${crediario.status === 'P'
                                                 ? 'text-white'
                                                 : 'text-white'
-                                        }`}
+                                            }`}
                                     >
                                         {crediario.status === 'P'
                                             ? 'Processando'
                                             : crediario.atraso > 0
-                                            ? 'Atrasada'
-                                            : ''}
+                                                ? 'Atrasada'
+                                                : ''}
                                     </Text>
                                 </View>
                                 <View
-                                    className={`flex-col items-end justify-around ${
-                                        crediario.acrescimo > 0 ? '' : 'mt-4'
-                                    }`}
+                                    className={`flex-col items-end justify-around ${crediario.acrescimo > 0 ? '' : 'mt-4'
+                                        }`}
                                 >
                                     <Text className="text-base text-gray-400 font-PoppinsRegular">
                                         Valor:{' '}
@@ -265,9 +262,8 @@ const OpenPayments = () => {
     const ModalParcelas = () => {
         return (
             <View
-                className={`absolute bg-solar-blue-dark z-50 left-0 right-0 bottom-0 transition-all ease-in-out duration-300 ${
-                    showModalParcelas ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`absolute bg-solar-blue-dark z-50 left-0 right-0 bottom-0 transition-all ease-in-out duration-300 ${showModalParcelas ? 'opacity-100' : 'opacity-0'
+                    }`}
             >
                 <View className="flex-row">
                     <View className="flex-1 flex-col pl-4 pt-8">
@@ -359,11 +355,10 @@ const OpenPayments = () => {
                         onPress={() => handleSelectAll()}
                     >
                         <View
-                            className={`h-6 w-6 flex-row items-center justify-center rounded-full border-2 border-solar-yellow-dark ${
-                                isAllChecked
+                            className={`h-6 w-6 flex-row items-center justify-center rounded-full border-2 border-solar-yellow-dark ${isAllChecked
                                     ? 'bg-solar-yellow-dark'
                                     : 'bg-transparent'
-                            }`}
+                                }`}
                         >
                             {isAllChecked && (
                                 <MaterialIcons
@@ -383,7 +378,7 @@ const OpenPayments = () => {
                     <View className="flex-1 w-full h-full pb-2">
                         <FlashList
                             data={crediarios}
-                            renderItem={({item, index}) => (
+                            renderItem={({ item, index }) => (
                                 <RenderItem crediario={item} idx={index} />
                             )}
                             estimatedItemSize={50}

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import {
@@ -11,11 +11,10 @@ import {
     Poppins_900Black,
 } from '@expo-google-fonts/poppins';
 import Routes from './src/routes';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AuthProvider} from '@contexts/auth';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as SecureStore from 'expo-secure-store';
 import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import notifee, {
     AndroidBadgeIconType,
     AndroidImportance,
@@ -23,9 +22,9 @@ import notifee, {
     EventType,
 } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
-import {Linking, Platform} from 'react-native';
+import { Linking, Platform } from 'react-native';
 import serviceapp from '@services/serviceapp';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthProvider } from "@contexts/auth";
 
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
@@ -41,7 +40,7 @@ const App = () => {
                 );
             }
             let token = await SecureStore.getItemAsync('secure_deviceid');
-            console.log('token telefone '+token);
+            console.log('token telefone ' + token);
         };
         getUidDevice();
     }, []);
@@ -112,16 +111,16 @@ const App = () => {
             );
         });
 
-        notifee.onBackgroundEvent(async ({type, detail}) => {
-            const {notification, pressAction}: any = detail;
+        notifee.onBackgroundEvent(async ({ type, detail }) => {
+            const { notification, pressAction }: any = detail;
             if (type === EventType.PRESS && pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
                 await notifee.cancelNotification(notification?.id);
             }
         });
 
-        notifee.onForegroundEvent(async ({type, detail}) => {
-            const {notification, pressAction}: any = detail;
+        notifee.onForegroundEvent(async ({ type, detail }) => {
+            const { notification, pressAction }: any = detail;
             if (type === EventType.PRESS && pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
                 await notifee.cancelNotification(notification.id);
@@ -147,21 +146,6 @@ const App = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, []);
-
-    // Desconecta user storage cso seja false
-    useEffect(() => {
-        const getConnected = async () => {
-            let getconnected: any =
-                await SecureStore.getItemAsync('connected_device');
-            let connected = getconnected ? JSON.parse(getconnected) : false;
-            if (connected.connected === false) {
-                await AsyncStorage.clear();
-            } else {
-                return;
-            }
-        };
-        getConnected();
     }, []);
 
     useEffect(() => {

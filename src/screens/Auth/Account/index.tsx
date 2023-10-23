@@ -22,7 +22,7 @@ import {cnpj, cpf} from 'cpf-cnpj-validator';
 import {AuthContext} from '@contexts/auth';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
 
 interface FormProps {
@@ -37,9 +37,9 @@ interface FormProps {
     nascimentoCliente: string;
 }
 const Account = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const {user, setLoading, disconnect, loading} = useContext(AuthContext);
-    const tokenUser = user.token;
+    const tokenUser = user?.token;
     const [ufs, setUfs] = useState<any>([]);
     const [cities, setCities] = useState<any>([]);
     const [ufSelected, setUfSelected] = useState('');

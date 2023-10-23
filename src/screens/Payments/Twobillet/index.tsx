@@ -7,7 +7,7 @@ import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import {ListStyle} from '@components/InputStyle';
 import {FlashList} from '@shopify/flash-list';
@@ -22,7 +22,7 @@ const Twobillet = () => {
         const getPaymentSlips = async () => {
             setLoading(true);
             await serviceapp
-                .get(`(WS_SEGUNDA_VIA_BOLETO)?token=${user.token}`)
+                .get(`(WS_SEGUNDA_VIA_BOLETO)?token=${user?.token}`)
                 .then(response => {
                     const {success, message, data, token} =
                         response.data.resposta;

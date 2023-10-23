@@ -6,7 +6,7 @@ import {FlashList} from '@shopify/flash-list';
 import {ListStyle} from '@components/InputStyle';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import {MaterialIcons} from '@expo/vector-icons';
@@ -21,7 +21,7 @@ const Protocols = () => {
         const getProtocols = async () => {
             setLoading(true);
             await serviceapp
-                .get(`(WS_PROTOCOLO_ASSISTENCIA)?token=${user.token}`)
+                .get(`(WS_PROTOCOLO_ASSISTENCIA)?token=${user?.token}`)
                 .then(response => {
                     const {success, message, data} = response.data.resposta;
                     setLoading(false);

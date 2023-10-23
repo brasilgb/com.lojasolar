@@ -19,9 +19,8 @@ import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
 import serviceapp from '@services/serviceapp';
 import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList, RootStackParamList} from '@screens/RootStackPrams';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
+import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 
 interface SenhaProps {
     senha: string;
@@ -29,8 +28,7 @@ interface SenhaProps {
 }
 
 const RegisterPassword = ({route}: any) => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const {setLoading, loading, disconnect} = useContext(AuthContext);
     const [showPassword1, setShowPassword1] = useState<boolean>(false);
     const [showPassword2, setShowPassword2] = useState<boolean>(false);

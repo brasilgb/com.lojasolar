@@ -6,7 +6,7 @@ import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { ListStyle } from '@components/InputStyle';
 
 const Detail = ({ route }: any) => {
@@ -21,7 +21,7 @@ const Detail = ({ route }: any) => {
             setLoading(true);
             await serviceapp
                 .get(
-                    `(WS_PROTOCOLO_DETALHE)?token=${user.token}&filial=${data.filial}&nProtocolo=${data.nProtocolo}`,
+                    `(WS_PROTOCOLO_DETALHE)?token=${user?.token}&filial=${data.filial}&nProtocolo=${data.nProtocolo}`,
                 )
                 .then(response => {
                     const { success, message, data } = response.data.resposta;

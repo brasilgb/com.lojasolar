@@ -14,7 +14,7 @@ import * as WebBrowser from 'expo-web-browser';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 export const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -29,6 +29,7 @@ const Home = () => {
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const { signed } = useContext(AuthContext);
+
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
     const [carrocelData, setCarrocelData] = useState<any>([]);

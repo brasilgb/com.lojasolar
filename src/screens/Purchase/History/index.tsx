@@ -13,7 +13,7 @@ import AppLoading from '@components/AppLoading';
 import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { ListStyle } from '@components/InputStyle';
 import { FlashList } from '@shopify/flash-list';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -46,7 +46,7 @@ const History = () => {
             setLoading(true);
             await serviceapp
                 .get(
-                    `(WS_HISTORICO_COMPRAS)?token=${user.token
+                    `(WS_HISTORICO_COMPRAS)?token=${user?.token
                     }&dataInicial=${moment(date).format(
                         'YYYYMM',
                     )}01&dataFinal=${moment(date).format('YYYYMM')}31`,

@@ -1,19 +1,4 @@
-import {NavigatorScreenParams} from '@react-navigation/native';
-
-export type RootStackParamList = {
-    Home: undefined;
-    Account: undefined;
-    Crediary: undefined;
-    NoRegistered: {data: any};
-    Registered: {data: any};
-    RegisterUser: {data: any};
-    RegisterPassword: {data: any};
-    CheckPassword: {data: any};
-    LoadImages: {user: any};
-};
-
 export type RootDrawerParamList = {
-    StackRoutes: NavigatorScreenParams<RootStackParamList>;
     Home: undefined;
     NoRegistered: {data: any};
     RegisterUser: {data: any};

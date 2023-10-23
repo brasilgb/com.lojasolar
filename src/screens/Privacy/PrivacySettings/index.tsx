@@ -11,13 +11,13 @@ import AppLayout from '@components/AppLayout';
 import { ListStyle } from '@components/InputStyle';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import AppLoading from '@components/AppLoading';
 
 const PrivacySettings = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
 
     const { setLoading, loading, disconnect, user } = useContext(AuthContext);
 
@@ -70,7 +70,7 @@ const PrivacySettings = () => {
     const handleSubmitPrivacity = useCallback(async () => {
         setLoading(true);
         const response = await serviceapp.get(
-            `(WS_RESPOSTA_AUTORIZA)?token=${user.token}&resposta1=${isEnabledNotify ? 'S' : 'N'
+            `(WS_RESPOSTA_AUTORIZA)?token=${user?.token}&resposta1=${isEnabledNotify ? 'S' : 'N'
             }&resposta2=${isEnabledEmail ? 'S' : 'N'}`,
         );
         const { success, message } = response.data.resposta;

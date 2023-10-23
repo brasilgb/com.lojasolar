@@ -3,10 +3,10 @@ import {View, Text, Platform, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import AppLayout from '@components/AppLayout';
-import {RootStackParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const ImagesSent = () => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
 
     return (
         <AppLayout>

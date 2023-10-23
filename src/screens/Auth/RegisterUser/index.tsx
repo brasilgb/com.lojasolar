@@ -22,7 +22,7 @@ import serviceapp from '@services/serviceapp';
 import Select from '@components/Select';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { maskCelular, maskCep, maskDate, unMask } from '@components/masks';
 
 interface FormProps {
@@ -38,7 +38,7 @@ interface FormProps {
 }
 
 const RegisterUser = ({ route }: any) => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const { setLoading, loading, disconnect } = useContext(AuthContext);
     const { data } = route.params;
 

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import serviceapp from '@services/serviceapp';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { AuthContext } from '@contexts/auth';
 import AppLayout from '@components/AppLayout';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
@@ -24,7 +24,7 @@ const HistoryItens = ({ route }: any) => {
             setLoading(true);
             await serviceapp
                 .get(
-                    `(WS_HISTORICO_ITENS)?token=${user.token}&numero=${dataItem?.numero}&filial=${dataItem?.filial}&serie=${dataItem?.serie}`,
+                    `(WS_HISTORICO_ITENS)?token=${user?.token}&numero=${dataItem?.numero}&filial=${dataItem?.filial}&serie=${dataItem?.serie}`,
                 )
                 .then(response => {
                     const { success, message, data } = response.data.resposta;

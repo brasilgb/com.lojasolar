@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import serviceapp from '@services/serviceapp';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { AuthContext } from '@contexts/auth';
 import * as Clipboard from 'expo-clipboard';
 import Toast from 'react-native-tiny-toast';
@@ -26,7 +26,7 @@ const PixPayment = ({ route }: any) => {
             setLoading(true);
 
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-                token: user.token,
+                token: user?.token,
                 valor: order.valueTotal,
                 parcela: order.dataOrder,
                 tipoPagamento: 4,
@@ -51,7 +51,7 @@ const PixPayment = ({ route }: any) => {
                 ]);
             }
             if (!success) {
-                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+                // Alert.alert('Atenção', message, [{ text: 'Ok' }]);
                 return;
             }
             paymentPix(data);
@@ -62,13 +62,13 @@ const PixPayment = ({ route }: any) => {
     const paymentPix = useCallback(
         async (dataPix: any) => {
             const response = await serviceapp.get(
-                `(WS_TRANSACAO_PIX)?token=${user.token}&tempoPix=3600&valorPix=${dataPix.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
+                `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${dataPix.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
 
             const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
 
             if (!success) {
-                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+                Alert.alert('Atenção pag pix', message, [{ text: 'Ok' }]);
                 return;
             }
             let dataPay = {

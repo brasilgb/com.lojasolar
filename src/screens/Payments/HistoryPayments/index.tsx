@@ -5,7 +5,7 @@ import AppLoading from '@components/AppLoading';
 import ButtonPayament from '@components/ButtonPayament';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {AuthContext} from '@contexts/auth';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import moment from 'moment';

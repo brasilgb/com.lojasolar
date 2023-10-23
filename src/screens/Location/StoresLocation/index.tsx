@@ -6,7 +6,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AuthContext} from '@contexts/auth';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import serviceapp from '@services/serviceapp';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel';

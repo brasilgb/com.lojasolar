@@ -19,7 +19,7 @@ import moment from 'moment';
 import { cartNumber, cartValidate } from '@components/masks';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
 import { Formik } from 'formik';
 import schema from './schema';
@@ -44,7 +44,7 @@ const CartPayment = ({ route }: any) => {
         setLoading(true);
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-                token: user.token,
+                token: user?.token,
                 valor: order.valuetotal,
                 parcela: order.dataOrder,
                 tipoPagamento: 2,

@@ -4,6 +4,7 @@ import AlterPassword from './AlterPassword';
 import CheckPassword from './CheckPassword';
 import NoRegistered from './NoRegistered';
 import Registered from './Registered';
+import { Connected } from "./Connected";
 
 export {
     Account,
@@ -12,4 +13,5 @@ export {
     CheckPassword,
     NoRegistered,
     Registered,
+    Connected,
 };

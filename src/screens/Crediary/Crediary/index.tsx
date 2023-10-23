@@ -12,7 +12,7 @@ import AppLayout from '@components/AppLayout';
 import { AuthContext } from '@contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@screens/RootStackPrams';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Formik } from 'formik';
@@ -36,8 +36,8 @@ interface CrediaryForm {
 
 const Crediary = () => {
     const { setLoading, loading, disconnect, user } = useContext(AuthContext);
-    const tokenCli = user.token;
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const tokenCli = user?.token;
+    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [clientes, setClientes] = useState<any>([]);
     const [sexoSelected, setSexoSelected] = useState<string>('');
     const [escolaridadeSelected, setEscolaridadeSelected] =

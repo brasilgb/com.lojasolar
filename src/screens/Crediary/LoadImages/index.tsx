@@ -17,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import serviceapp from '../../../services/serviceapp';
 import AppLayout from '@components/AppLayout';
-import {RootDrawerParamList} from '@screens/RootStackPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {ListStyle} from '@components/InputStyle';
 
