@@ -68,7 +68,7 @@ const SignIn = () => {
                                         errors.cpfcnpj,
                                     )}
                                     value={formatCpfCnpj(values.cpfcnpj)}
-                                    onBlur={handleBlur('cpfcnpj')}
+                                    // onBlur={handleBlur('cpfcnpj')}
                                     onChangeText={handleChange('cpfcnpj')}
                                     keyboardType="numeric"
                                 />

@@ -40,7 +40,7 @@ const Contact = (props: Props) => {
                     CEP: 95750-000
                 </Text>
                 <Text className="text-base font-PoppinsMedium text-solar-blue-dark pt-24 text-center">
-                    V1.0.0
+                    V1.1.10
                 </Text>
             </View>
         </AppLayout>

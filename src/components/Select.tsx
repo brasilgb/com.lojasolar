@@ -98,9 +98,7 @@ const Select = ({
                             Platform.OS === 'ios' ? 'h-[60px]' : 'h-[56px]'
                         } rounded-lg bg-white border placeholder:text-solar-blue-dark border-gray-300 text-lg px-4 font-PoppinsRegular`}
                         value={
-                            value.length > 35
-                                ? value.slice(0, 35) + '...'
-                                : value
+                            value.length > 35 ? value.slice(0, 35) + '...': value
                         }
                         onBlur={onblur}
                         onChangeText={onchangetext}

@@ -112,7 +112,7 @@ const CheckPassword = ({route}: any) => {
                                             errors.senha,
                                         )}
                                         value={values.senha}
-                                        onBlur={handleBlur('senha')}
+                                        // onBlur={handleBlur('senha')}
                                         onChangeText={handleChange('senha')}
                                         keyboardType="default"
                                         secureTextEntry={

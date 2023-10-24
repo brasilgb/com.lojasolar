@@ -40,7 +40,7 @@ const App = () => {
                 );
             }
             let token = await SecureStore.getItemAsync('secure_deviceid');
-            console.log('token telefone ' + token);
+            // console.log('token telefone ' + token);
         };
         getUidDevice();
     }, []);
@@ -55,8 +55,8 @@ const App = () => {
         if (enabled) {
             // console.log('Authorization status:', authStatus);
             let tokenFirebase = (await messaging().getToken()).toString();
-            console.log('token firebase' + tokenFirebase && tokenFirebase);
-            registerDevice(tokenFirebase && tokenFirebase);
+            // console.log('token firebase' + tokenFirebase && tokenFirebase);
+            registerDevice(tokenFirebase);
         }
     };
 
@@ -138,7 +138,7 @@ const App = () => {
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(
                     tokenId,
-                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=102`,
+                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=1110`,
             )
             .then(response => {
                 // console.log(response.data.resposta.success);

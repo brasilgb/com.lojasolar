@@ -68,8 +68,8 @@ const PrivacyPolice = () => {
                         )
                     }
                 >
-                    <MaterialIcons name="link" size={22} color={'#FFD100'} />
-                    <Text className="text-xs pl-2 text-solar-yellow-light text-center font-PoppinsRegular py-2 underline">
+                    <MaterialIcons name="link" size={22} color={'#555'} />
+                    <Text className="text-xs pl-2 text-[#555] text-center font-PoppinsRegular py-2 underline">
                         Política de privacidade Lojas Solar
                     </Text>
                 </TouchableOpacity>

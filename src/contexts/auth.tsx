@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     useEffect(() => {
         const getConnected = async () => {
-            console.log('Connected result: ', user?.connected);
             if (user?.connected === false) {
                 await disconnect();
             }

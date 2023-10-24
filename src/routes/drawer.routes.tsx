@@ -12,7 +12,6 @@ import {
     Account,
     AlterPassword,
     CheckPassword,
-    Connected,
     NoRegistered,
     Registered,
     SignIn,
@@ -562,6 +561,7 @@ const DrawerRoutes = () => {
                 initialParams={{ data: [] }}
                 component={CheckPassword}
                 options={{
+                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -658,6 +658,7 @@ const DrawerRoutes = () => {
                 name="Methods"
                 component={Methods}
                 options={{
+                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -689,6 +690,7 @@ const DrawerRoutes = () => {
                 name="PixPayment"
                 component={PixPayment}
                 options={{
+                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -718,6 +720,7 @@ const DrawerRoutes = () => {
                 name="SlipPayment"
                 component={SlipPayment}
                 options={{
+                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -747,6 +750,7 @@ const DrawerRoutes = () => {
                 name="SignIn"
                 component={SignIn}
                 options={{
+                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
