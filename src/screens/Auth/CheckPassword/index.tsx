@@ -39,7 +39,7 @@ const CheckPassword = ({route}: any) => {
             cpfcnpj: data.cpfCnpj,
             nomeCliente: data.nomeCliente,
             senha: values.senha,
-            connected: isChecked,
+            connected: isChecked, 
         });
         resetForm();
     };

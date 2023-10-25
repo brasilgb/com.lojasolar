@@ -138,7 +138,7 @@ const App = () => {
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(
                     tokenId,
-                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=1110`,
+                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=${process.env.EXPO_PUBLIC_APP_VERSION}`,
             )
             .then(response => {
                 // console.log(response.data.resposta.success);

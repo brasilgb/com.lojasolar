@@ -1,4 +1,5 @@
 export type RootDrawerParamList = {
+    Connected: undefined;
     Home: undefined;
     NoRegistered: {data: any};
     RegisterUser: {data: any};

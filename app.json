@@ -2,7 +2,7 @@
     "expo": {
         "name": "Loja Solar",
         "slug": "comlojasolar",
-        "version": "1.1.10",
+        "version": "1.1.11",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "automatic",
@@ -13,13 +13,16 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
+            "infoPlist": {
+                "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
+                "NSLocationWhenInUseUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
+                "NSLocationAlwaysUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
+                "NSLocationUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer."
+            },
             "googleServicesFile": "./GoogleService-Info.plist",
             "supportsTablet": true,
             "bundleIdentifier": "com.loja.solar",
             "buildNumber": "2",
-            "infoPlist": {
-                "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is needed to find a store closest to you!"
-            },
             "config": {
                 "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0",
                 "usesNonExemptEncryption": false

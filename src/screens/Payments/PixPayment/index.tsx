@@ -18,69 +18,34 @@ const PixPayment = ({ route }: any) => {
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const { user, disconnect, setLoading } = useContext(AuthContext);
     const { order } = route?.params;
-
     const [qrPix, setQrPix] = useState();
+// console.log('ordem', order);
+// console.log('user',user);
 
     useEffect(() => {
-        const getPaymentOrder = async () => {
-            setLoading(true);
-
-            const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-                token: user?.token,
-                valor: order.valueTotal,
-                parcela: order.dataOrder,
-                tipoPagamento: 4,
-                validaDados: 'S',
-                dadosCartao: {
-                    numeroCartao: '',
-                    nomeCartao: '',
-                    validadeCartao: '',
-                    cvvCartao: '',
-                },
-            });
-            const { success, message, token, data } = response.data.resposta;
-            setLoading(false);
-            if (!token) {
-                Alert.alert('Atenção', message, [
-                    {
-                        text: 'Ok',
-                        onPress: () => {
-                            navigation.navigate('Home'), disconnect();
-                        },
-                    },
-                ]);
-            }
-            if (!success) {
-                // Alert.alert('Atenção', message, [{ text: 'Ok' }]);
-                return;
-            }
-            paymentPix(data);
-        };
-        getPaymentOrder();
-    }, [order, user]);
-
-    const paymentPix = useCallback(
-        async (dataPix: any) => {
+        const getPayPix = async () => {
             const response = await serviceapp.get(
-                `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${dataPix.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
+                `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${order.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
-
             const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
-
-            if (!success) {
-                Alert.alert('Atenção pag pix', message, [{ text: 'Ok' }]);
+            console.log('resposta pay pix', response.data.resposta);
+            if (success) {
+                console.log('success pay pix', success);
+                let dataPay = {
+                    idTransacao: txid,
+                    urlBoleto: banco,
+                };
+                sendOrderAtualize(order, dataPay);
+                setQrPix(copiaColaPix);
+            } else {
+                console.log('no success pay pix');
+                Alert.alert('Atenção no pay pix', message, [{ text: 'Ok' }]);
                 return;
             }
-            let dataPay = {
-                idTransacao: txid,
-                urlBoleto: banco,
-            };
-            sendOrderAtualize(dataPix, dataPay);
-            setQrPix(copiaColaPix);
-        },
-        [],
-    );
-
+        };
+        getPayPix();
+        },[]);
+                                                                                                                                                                                           
     const sharingUrl = async () => {
         try {
             const result = await Share.share({
@@ -127,9 +92,10 @@ const PixPayment = ({ route }: any) => {
             urlBoleto: String(dataPay.urlBoleto),
         };
 
-        await serviceapp.get(
-            `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
-        );
+        const response = await serviceapp.get(`(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`);
+        // const { success } = response.data.resposta
+        // console.log('pix pago ', success);
+        return;
     };
 
     return (
@@ -153,8 +119,8 @@ const PixPayment = ({ route }: any) => {
                             <Text className="text-4xl font-PoppinsMedium text-solar-blue-dark">
                                 {MoneyPTBR(
                                     parseFloat(
-                                        order.valueTotal
-                                            ? order.valueTotal
+                                        order.valorOrdem
+                                            ? order.valorOrdem
                                             : order,
                                     ),
                                 )}

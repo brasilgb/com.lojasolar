@@ -1,22 +1,22 @@
-import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
-import React, {useCallback, useContext} from 'react';
+import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
+import React, { useCallback, useContext } from 'react';
 import AppLayout from '@components/AppLayout';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {AuthContext} from '@contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import moment from 'moment';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {ListStyle} from '@components/InputStyle';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ListStyle } from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import servicepay from '@services/servicepay';
 
-const Methods = ({route}: any) => {
-    const {user, disconnect} = useContext(AuthContext);
+const Methods = ({ route }: any) => {
+    const { user, disconnect } = useContext(AuthContext);
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {order} = route?.params;
+    const { order } = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
         const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
@@ -32,7 +32,7 @@ const Methods = ({route}: any) => {
                 cvvCartao: '149',
             },
         });
-        const {success, message, token, data} = response.data.resposta;
+        const { success, message, token, data } = response.data.resposta;
         if (!token) {
             Alert.alert('Atenção', message, [
                 {
@@ -44,7 +44,7 @@ const Methods = ({route}: any) => {
             ]);
         }
         if (!success) {
-            Alert.alert('Atenção', message, [{text: 'Ok'}]);
+            Alert.alert('Atenção', message, [{ text: 'Ok' }]);
             return;
         }
         Alert.alert(
@@ -55,7 +55,7 @@ const Methods = ({route}: any) => {
                     text: 'Não',
                     style: 'cancel',
                 },
-                {text: 'Sim', onPress: () => paymentBillet(data)},
+                { text: 'Sim', onPress: () => paymentBillet(data) },
             ],
         );
     }, []);
@@ -82,22 +82,57 @@ const Methods = ({route}: any) => {
             },
             PaymentObject: {},
         });
-        sendOrderAtualize(response);
-        navigation.navigate('SlipPayment', {order: response});
+        const {data} = response.data.resposta
+        sendOrderAtualize(data);
+        navigation.navigate('SlipPayment', { order: data });
     }, []);
 
     const sendOrderAtualize = useCallback(async (dataSlip: any) => {
         let orderResponse = {
-            numeroOrdem: dataSlip.data.resposta.data.Detail.OrderNumber,
-            statusOrdem: dataSlip.data.resposta.data.Detail.TransactionStatus,
-            idTransacao: dataSlip.data.resposta.data.Detail.IdTransaction,
-            tipoPagamento: dataSlip.data.resposta.data.Detail.PaymentType,
-            urlBoleto: dataSlip.data.resposta.data.Detail.PaymentObject.Url,
+            numeroOrdem: dataSlip.Detail.OrderNumber,
+            statusOrdem: dataSlip.Detail.TransactionStatus,
+            idTransacao: dataSlip.Detail.IdTransaction,
+            tipoPagamento: dataSlip.Detail.PaymentType,
+            urlBoleto: dataSlip.Detail.PaymentObject.Url,
         };
         await serviceapp.get(
             `(WS_ATUALIZA_ORDEM)?token=${user?.token}&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
         );
     }, []);
+
+
+    const pixPaymentOrder = async () => {
+        const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
+            token: user?.token,
+            valor: order?.valueTotal,
+            parcela: order?.dataOrder,
+            tipoPagamento: 4,
+            validaDados: 'S',
+            dadosCartao: {
+                numeroCartao: '',
+                nomeCartao: '',
+                validadeCartao: '',
+                cvvCartao: '',
+            },
+        });
+        const { success, message, token, data } = response.data.resposta;
+
+        if (!token) {
+            Alert.alert('Atenção', message, [
+                {
+                    text: 'Ok',
+                    onPress: () => {
+                        navigation.navigate('Home'), disconnect();
+                    },
+                },
+            ]);
+        }
+        if (success) {
+            navigation.navigate('PixPayment', { order: data });
+        } else {
+            return;
+        }
+    }
 
     return (
         <AppLayout>
@@ -134,9 +169,7 @@ const Methods = ({route}: any) => {
                 </View>
                 <View className="flex-col itens-center justify-start mt-8">
                     <TouchableOpacity
-                        onPress={() =>
-                            navigation.navigate('PixPayment', {order: order})
-                        }
+                        onPress={() => pixPaymentOrder() }
                     >
                         <View className="flex-row items-center pb-4 pl-10">
                             <Image
@@ -162,7 +195,7 @@ const Methods = ({route}: any) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('CartPayment', {order: order})
+                            navigation.navigate('CartPayment', { order: order })
                         }
                     >
                         <View className="flex-row items-center pt-4 pl-10">

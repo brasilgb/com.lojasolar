@@ -37,15 +37,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     }, []);
 
     useEffect(() => {
-        const getConnected = async () => {
-            if (user?.connected === false) {
-                await disconnect();
-            }
-        };
-        getConnected();
-    }, [user]);
-
-    useEffect(() => {
         async function loadPosition() {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
@@ -110,7 +101,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
             const { success, message, data } = response.data.resposta;
             if (!success) {
-                setUser(undefined);
+                setUser(null);
                 Alert.alert('Erro', `${message}`);
                 return;
             }

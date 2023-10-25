@@ -43,6 +43,7 @@ import PasswordAltered from '@screens/Auth/PasswordAltered';
 import PayCartOk from '@screens/Payments/PayCartOk';
 import Home from "@screens/Home";
 import { RootDrawerParamList } from "@screens/RootDrawerPrams";
+import Connected from "@screens/Connected";
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
@@ -125,7 +126,7 @@ const DrawerRoutes = () => {
     const { modalVisible } = useContext(AuthContext);
     return (
         <Drawer.Navigator
-            initialRouteName="Home"
+            initialRouteName="Connected"
             backBehavior="history"
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
@@ -148,6 +149,16 @@ const DrawerRoutes = () => {
                 },
             }}
         >
+
+            <Drawer.Screen
+                name="Connected"
+                component={Connected}
+                options={{
+                    drawerItemStyle: {
+                        height: 0,
+                    },
+                }}
+            />
 
             <Drawer.Screen
                 name="Home"
@@ -365,7 +376,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="Detail"
-                initialParams={{ data: [] }}
                 component={Detail}
                 options={{
                     drawerItemStyle: {
@@ -395,7 +405,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="StoreSelected"
-                initialParams={{ data: [] }}
                 component={StoreSelected}
                 options={{
                     drawerItemStyle: {
@@ -409,7 +418,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="StoreList"
-                initialParams={{ data: [] }}
                 component={StoreList}
                 options={{
                     drawerItemStyle: {
@@ -422,7 +430,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="NoRegistered"
-                initialParams={{ data: [] }}
                 component={NoRegistered}
                 options={{
                     drawerItemStyle: {
@@ -436,7 +443,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="RegisterUser"
-                initialParams={{ data: [] }}
                 component={RegisterUser}
                 options={{
                     drawerItemStyle: {
@@ -468,7 +474,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="Registered"
-                initialParams={{ data: [] }}
                 component={Registered}
                 options={{
                     drawerItemStyle: {
@@ -481,7 +486,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="RegisterPassword"
-                initialParams={{ data: [] }}
                 component={RegisterPassword}
                 options={{
                     drawerItemStyle: {
@@ -514,7 +518,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="PasswordChanged"
-                initialParams={{ data: [] }}
                 component={PasswordChanged}
                 options={{
                     drawerItemStyle: {
@@ -558,10 +561,8 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="CheckPassword"
-                initialParams={{ data: [] }}
                 component={CheckPassword}
                 options={{
-                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -590,7 +591,6 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="HistoryItem"
-                initialParams={{ data: [] }}
                 component={HistoryItem}
                 options={{
                     drawerItemStyle: {
@@ -658,7 +658,6 @@ const DrawerRoutes = () => {
                 name="Methods"
                 component={Methods}
                 options={{
-                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -690,7 +689,6 @@ const DrawerRoutes = () => {
                 name="PixPayment"
                 component={PixPayment}
                 options={{
-                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -720,7 +718,6 @@ const DrawerRoutes = () => {
                 name="SlipPayment"
                 component={SlipPayment}
                 options={{
-                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },
@@ -750,7 +747,6 @@ const DrawerRoutes = () => {
                 name="SignIn"
                 component={SignIn}
                 options={{
-                    unmountOnBlur: true,
                     drawerItemStyle: {
                         height: 0,
                     },

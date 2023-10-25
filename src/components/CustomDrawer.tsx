@@ -29,7 +29,7 @@ const CustomDrawer = (props: any) => {
                             size={50}
                             color={'#FAFAFA'}
                         />
-                        <Text className="text-base text-solar-gray-light font-Poppins_400Regular px-4">
+                        <Text className="text-base text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
                             {signed
                                 ? `Olá, ${user?.nomeCliente}`
                                 : 'Bem Vindo(a) '}
