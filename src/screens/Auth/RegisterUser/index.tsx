@@ -7,23 +7,23 @@ import {
     Keyboard,
     Alert,
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
-import { cnpj, cpf } from 'cpf-cnpj-validator';
-import { MaterialIcons } from '@expo/vector-icons';
+import {cnpj, cpf} from 'cpf-cnpj-validator';
+import {MaterialIcons} from '@expo/vector-icons';
 import AppLoading from '@components/AppLoading';
-import { AuthContext } from '@contexts/auth';
-import { Formik } from 'formik';
+import {AuthContext} from '@contexts/auth';
+import {Formik} from 'formik';
 import schema from './schema';
-import { TextInput } from 'react-native-gesture-handler';
-import { InputStyle, LabelStyle } from '@components/InputStyle';
+import {TextInput} from 'react-native-gesture-handler';
+import {InputStyle, LabelStyle} from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import serviceapp from '@services/serviceapp';
 import Select from '@components/Select';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { maskCelular, maskCep, maskDate, unMask } from '@components/masks';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {maskCelular, maskCep, maskDate, unMask} from '@components/masks';
 
 interface FormProps {
     cpfcnpj: any;
@@ -37,10 +37,11 @@ interface FormProps {
     nascimentoCliente: string;
 }
 
-const RegisterUser = ({ route }: any) => {
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
-    const { setLoading, loading, disconnect } = useContext(AuthContext);
-    const { data } = route.params;
+const RegisterUser = ({route}: any) => {
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const {setLoading, loading, disconnect} = useContext(AuthContext);
+    const {data} = route.params;
 
     const [ufs, setUfs] = useState<any>([]);
     const [cities, setCities] = useState<any>([]);
@@ -50,7 +51,7 @@ const RegisterUser = ({ route }: any) => {
     useEffect(() => {
         const getUfs = async () => {
             await serviceapp.get('(WS_CARREGA_UF)').then(response => {
-                const { data } = response.data.resposta;
+                const {data} = response.data.resposta;
                 const resUfs = data.map((u: any) => u.uf);
                 setUfs(resUfs);
             });
@@ -63,7 +64,7 @@ const RegisterUser = ({ route }: any) => {
             await serviceapp
                 .get(`(WS_CARREGA_CIDADE)?uf=${ufSelected}`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     const resCities = data.map((c: any) => c.cidade);
                     setCities(resCities);
                 });
@@ -80,18 +81,21 @@ const RegisterUser = ({ route }: any) => {
         }
     };
 
-    const onsubmit = async (values: FormProps, { resetForm }: any) => {
+    const onsubmit = async (values: FormProps, {resetForm}: any) => {
         Keyboard.dismiss();
         setLoading(true);
         const response = await serviceapp.get(
-            `(WS_PRIMEIRO_ACESSO)?cpfcnpj=${values.cpfcnpj}&nomeCliente=${values.nomeCliente
+            `(WS_PRIMEIRO_ACESSO)?cpfcnpj=${values.cpfcnpj}&nomeCliente=${
+                values.nomeCliente
             }&enderecoCliente=${values.enderecoCliente}&cepCliente=${unMask(
                 values.cepCliente,
-            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${values.ufCliente
-            }&celularCliente=${values.celularCliente}&emailCliente=${values.emailCliente
+            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${
+                values.ufCliente
+            }&celularCliente=${values.celularCliente}&emailCliente=${
+                values.emailCliente
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
-        const { success, message } = response.data.resposta;
+        const {success, message} = response.data.resposta;
         setLoading(false);
         if (!success) {
             Alert.alert('Atenção', message, [
@@ -105,7 +109,7 @@ const RegisterUser = ({ route }: any) => {
             ]);
         }
 
-        navigation.navigate('Registered', { data: data });
+        navigation.navigate('Registered', {data: data});
     };
 
     return (
@@ -382,12 +386,6 @@ const RegisterUser = ({ route }: any) => {
                                             maxLength={10}
                                             keyboardType="numeric"
                                         />
-                                        {errors.nascimentoCliente &&
-                                            touched.nascimentoCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
-                                                    {errors.nascimentoCliente}
-                                                </Text>
-                                            )}
                                     </View>
 
                                     <View className="my-6">

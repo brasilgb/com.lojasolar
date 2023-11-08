@@ -2,7 +2,7 @@
     "expo": {
         "name": "Loja Solar",
         "slug": "comlojasolar",
-        "version": "1.1.7",
+        "version": "1.1.14",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "automatic",
@@ -14,10 +14,10 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "infoPlist": {
-                "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
-                "NSLocationWhenInUseUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
-                "NSLocationAlwaysUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer.",
-                "NSLocationUsageDescription": "Your location is needed to find a solar store closest to you. If you need to pay bills or make purchases, this makes it easier for the customer."
+                "NSLocationAlwaysAndWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+                "NSLocationWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+                "NSLocationAlwaysUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+                "NSLocationUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia."
             },
             "googleServicesFile": "./GoogleService-Info.plist",
             "supportsTablet": true,

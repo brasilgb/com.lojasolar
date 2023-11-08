@@ -7,16 +7,16 @@ import {
     TextInput,
     Alert,
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
-import { AuthContext } from '@contexts/auth';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Formik } from 'formik';
-import { InputStyle, LabelStyle } from '@components/InputStyle';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Formik} from 'formik';
+import {InputStyle, LabelStyle} from '@components/InputStyle';
 import serviceapp from '@services/serviceapp';
 import schema from './../schema';
 import ButtomForm from '@components/ButtomForm';
@@ -35,9 +35,10 @@ interface CrediaryForm {
 }
 
 const Crediary = () => {
-    const { setLoading, loading, disconnect, user } = useContext(AuthContext);
+    const {setLoading, loading, disconnect, user} = useContext(AuthContext);
     const tokenCli = user?.token;
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [clientes, setClientes] = useState<any>([]);
     const [sexoSelected, setSexoSelected] = useState<string>('');
     const [escolaridadeSelected, setEscolaridadeSelected] =
@@ -54,7 +55,7 @@ const Crediary = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CLIENTE)?token=${tokenCli}`)
                 .then(response => {
-                    const { token, message, data } = response.data.resposta;
+                    const {token, message, data} = response.data.resposta;
                     setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
@@ -83,7 +84,7 @@ const Crediary = () => {
             await serviceapp
                 .get(`(WS_ESCOLARIDADE)`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     setEscolaridade(data.map((es: any) => es.escolaridade));
                 })
                 .catch(erro => {
@@ -99,7 +100,7 @@ const Crediary = () => {
             await serviceapp
                 .get(`(WS_ESTADO_CIVIL)`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     setEstadoCivil(data.map((es: any) => es.estadoCivil));
                 })
                 .catch(erro => {
@@ -115,7 +116,7 @@ const Crediary = () => {
             await serviceapp
                 .get(`(WS_PROFISSAO)`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     setProfissao(data.map((es: any) => es.profissao));
                 })
                 .catch(erro => {
@@ -143,7 +144,7 @@ const Crediary = () => {
             profissao: values.profissao,
             renda: values.renda,
         });
-        const { token, success, message } = response.data.resposta;
+        const {token, success, message} = response.data.resposta;
         setLoading(false);
         if (!token) {
             Alert.alert('Atenção', message, [
@@ -157,7 +158,7 @@ const Crediary = () => {
             ]);
         }
 
-        navigation.navigate('LoadImages', { user: tokenCli });
+        navigation.navigate('LoadImages', {user: tokenCli});
     };
 
     return (

@@ -22,7 +22,8 @@ interface ValuesForm {
 const CheckPassword = ({route}: any) => {
     const {data} = route.params;
     const {setLoading, loading, checkPassword} = useContext(AuthContext);
-    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [isChecked, setChecked] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(true);
     const formatCpfCnpj = (num: string) => {
@@ -39,7 +40,7 @@ const CheckPassword = ({route}: any) => {
             cpfcnpj: data.cpfCnpj,
             nomeCliente: data.nomeCliente,
             senha: values.senha,
-            connected: isChecked, 
+            connected: isChecked,
         });
         resetForm();
     };

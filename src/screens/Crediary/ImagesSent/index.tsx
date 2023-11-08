@@ -6,7 +6,8 @@ import AppLayout from '@components/AppLayout';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const ImagesSent = () => {
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
 
     return (
         <AppLayout>

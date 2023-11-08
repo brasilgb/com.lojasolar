@@ -17,7 +17,4 @@ export default Yup.object().shape({
     emailCliente: Yup.string()
         .email('E-mail inválido')
         .required('Por favor, informe o e-mail'),
-    nascimentoCliente: Yup.string()
-        .min(8, 'Data inválida')
-        .required('Por favor, informe sua data nascimento'),
 });

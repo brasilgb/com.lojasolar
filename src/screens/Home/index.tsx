@@ -7,16 +7,16 @@ import {
     Platform,
     ScrollView,
 } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import ButtonHome from '@components/ButtonHome';
 import AppLayout from '@components/AppLayout';
 import * as WebBrowser from 'expo-web-browser';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { AuthContext } from '@contexts/auth';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 1);
 
@@ -28,7 +28,7 @@ interface CarouselItemProps {
 const Home = () => {
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
-    const { signed } = useContext(AuthContext);
+    const {signed} = useContext(AuthContext);
 
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
@@ -39,7 +39,7 @@ const Home = () => {
             await serviceapp
                 .get(`(WS_CARROCEL_PROMOCAO)`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     setCarrocelData(data.carrocel);
                 })
                 .catch(err => {
@@ -57,7 +57,7 @@ const Home = () => {
         });
     };
 
-    const CarouselCardItem = ({ item, index }: CarouselItemProps) => {
+    const CarouselCardItem = ({item, index}: CarouselItemProps) => {
         return (
             <View
                 key={index}
@@ -69,7 +69,7 @@ const Home = () => {
                         onPress={() => handlePressButtonAsync(item.carLink)}
                     >
                         <Image
-                            source={{ uri: item.carLinkImagem }}
+                            source={{uri: item.carLinkImagem}}
                             className="h-full "
                         />
                     </TouchableOpacity>
@@ -88,7 +88,7 @@ const Home = () => {
                     >
                         Olá, seja bem vindo!
                     </Text>
-                    <View style={{ flex: 1, padding: 0, margin: 0 }}>
+                    <View style={{flex: 1, padding: 0, margin: 0}}>
                         <Carousel
                             layout="default"
                             vertical={false}
@@ -175,7 +175,7 @@ const Home = () => {
                         label="Lojas"
                         icon="location-on"
                         nav={() =>
-                            navigation.navigate('StoresLocation', { data: false })
+                            navigation.navigate('StoresLocation', {data: false})
                         }
                     />
                     <ButtonHome

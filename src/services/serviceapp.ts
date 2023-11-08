@@ -10,9 +10,10 @@ const serviceapp = axios.create({
 });
 
 serviceapp.interceptors.request.use(async request => {
-
-    request.baseURL = 'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
-    BASE_URL = 'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
+    request.baseURL =
+        'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
+    BASE_URL =
+        'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
 
     requestCustom = request;
     data = request.data;

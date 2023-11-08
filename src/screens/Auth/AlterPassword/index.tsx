@@ -30,7 +30,8 @@ interface SenhaProps {
 const AlterPassword = () => {
     const {setLoading, loading, disconnect, setUser, user} =
         useContext(AuthContext);
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [showPassword1, setShowPassword1] = useState<boolean>(true);
     const [showPassword2, setShowPassword2] = useState<boolean>(true);
     const [showPassword3, setShowPassword3] = useState<boolean>(true);

@@ -21,9 +21,10 @@ import serviceapp from '@services/serviceapp';
 import {cnpj, cpf} from 'cpf-cnpj-validator';
 import {AuthContext} from '@contexts/auth';
 import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {TouchableOpacity} from 'react-native';
 
 interface FormProps {
     cpfcnpj: any;
@@ -37,7 +38,8 @@ interface FormProps {
     nascimentoCliente: string;
 }
 const Account = () => {
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const {user, setLoading, disconnect, loading} = useContext(AuthContext);
     const tokenUser = user?.token;
     const [ufs, setUfs] = useState<any>([]);
@@ -124,13 +126,28 @@ const Account = () => {
                 values.emailCliente
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
-        const {success, message,  } = response.data.resposta;
+        const {success, message} = response.data.resposta;
         setLoading(false);
         if (success) {
             Alert.alert('Atenção', message, [
                 {text: 'Ok', onPress: () => navigation.navigate('Home')},
             ]);
         }
+    };
+
+    const handleExcludeDataUser = () => {
+        const message =
+            'Iremos direciona-lo, para iniciar o processo de exclusão de dados.';
+        Alert.alert('Exclusão de dados', message, [
+            {
+                text: 'Cancelar',
+            },
+            {
+                text: 'Continuar',
+                onPress: () =>
+                    navigation.navigate('DataExclude', {data: accounts}),
+            },
+        ]);
     };
 
     return (
@@ -145,10 +162,26 @@ const Account = () => {
                     keyboardShouldPersistTaps="handled"
                 >
                     <View className="flex-1 bg-solar-gray-dark px-4">
-                        <View className="py-4 flex items-center border-b border-b-gray-300">
-                            <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium">
-                                Meus dados
-                            </Text>
+                        <View className="py-4 flex-row items-center justify-center border-b border-b-gray-300">
+                            <View className="flex-1">
+                                <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium text-center">
+                                    Meus dados
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => handleExcludeDataUser()}
+                                className={`flex-none justify-self-end bg-gray-200 border border-white rounded p-1 ${
+                                    Platform.OS == 'ios'
+                                        ? 'shadow-sm shadow-gray-300'
+                                        : 'shadow-md shadow-black'
+                                }`}
+                            >
+                                <MaterialIcons
+                                    name="person-remove"
+                                    color="#fa2b2b"
+                                    size={26}
+                                />
+                            </TouchableOpacity>
                         </View>
 
                         <View className="flex-row items-center justify-start py-3 mb-3">
@@ -424,12 +457,6 @@ const Account = () => {
                                             maxLength={10}
                                             keyboardType="numeric"
                                         />
-                                        {errors.nascimentoCliente &&
-                                            touched.nascimentoCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
-                                                    {errors.nascimentoCliente}
-                                                </Text>
-                                            )}
                                     </View>
 
                                     <View className="my-6">

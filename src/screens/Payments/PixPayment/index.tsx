@@ -1,36 +1,40 @@
-import { View, Text, Alert, Share, TouchableOpacity } from 'react-native';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import {
+    View,
+    Text,
+    Alert,
+    Share,
+    TouchableOpacity,
+    BackHandler,
+} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import serviceapp from '@services/serviceapp';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { AuthContext } from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
 import * as Clipboard from 'expo-clipboard';
-import Toast from 'react-native-tiny-toast';
 import QRCode from 'react-native-qrcode-svg';
 import AppLayout from '@components/AppLayout';
-import { ListStyle } from '@components/InputStyle';
-import { MaterialIcons } from '@expo/vector-icons';
+import {ListStyle} from '@components/InputStyle';
+import {MaterialIcons} from '@expo/vector-icons';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 
-const PixPayment = ({ route }: any) => {
+const PixPayment = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { user, disconnect, setLoading } = useContext(AuthContext);
-    const { order } = route?.params;
+
+    const {user, disconnect, setLoading} = useContext(AuthContext);
+    const {order} = route?.params;
     const [qrPix, setQrPix] = useState();
-// console.log('ordem', order);
-// console.log('user',user);
 
     useEffect(() => {
         const getPayPix = async () => {
             const response = await serviceapp.get(
                 `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${order.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
-            const { success, message, txid, banco, copiaColaPix } = response.data.resposta;
-            console.log('resposta pay pix', response.data.resposta);
+            const {success, message, txid, banco, copiaColaPix} =
+                response.data.resposta;
             if (success) {
-                console.log('success pay pix', success);
                 let dataPay = {
                     idTransacao: txid,
                     urlBoleto: banco,
@@ -38,14 +42,13 @@ const PixPayment = ({ route }: any) => {
                 sendOrderAtualize(order, dataPay);
                 setQrPix(copiaColaPix);
             } else {
-                console.log('no success pay pix');
-                Alert.alert('Atenção no pay pix', message, [{ text: 'Ok' }]);
+                Alert.alert('Atenção no pay pix', message, [{text: 'Ok'}]);
                 return;
             }
         };
         getPayPix();
-        },[]);
-                                                                                                                                                                                           
+    }, []);
+
     const sharingUrl = async () => {
         try {
             const result = await Share.share({
@@ -92,7 +95,9 @@ const PixPayment = ({ route }: any) => {
             urlBoleto: String(dataPay.urlBoleto),
         };
 
-        const response = await serviceapp.get(`(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`);
+        const response = await serviceapp.get(
+            `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
+        );
         // const { success } = response.data.resposta
         // console.log('pix pago ', success);
         return;

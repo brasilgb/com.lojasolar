@@ -1,4 +1,4 @@
-import {View, Text, Platform, Alert, Image} from 'react-native';
+import {View, Text, Platform, Alert, Image, BackHandler} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
@@ -18,6 +18,7 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 const HistoryPayments = () => {
     const {loading, setLoading, user, disconnect} = useContext(AuthContext);
+
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [crediarios, setCrediarios] = useState<any>([]);
@@ -43,7 +44,7 @@ const HistoryPayments = () => {
                 .then(response => {
                     const {success, message, token, data} =
                         response.data.resposta;
-                        setLoading(false);
+                    setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
                             {

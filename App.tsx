@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useCallback, useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import {
@@ -11,10 +11,10 @@ import {
     Poppins_900Black,
 } from '@expo-google-fonts/poppins';
 import Routes from './src/routes';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import * as SecureStore from 'expo-secure-store';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import notifee, {
     AndroidBadgeIconType,
     AndroidImportance,
@@ -22,9 +22,9 @@ import notifee, {
     EventType,
 } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
-import { Linking, Platform } from 'react-native';
+import {Linking, Platform} from 'react-native';
 import serviceapp from '@services/serviceapp';
-import { AuthProvider } from "@contexts/auth";
+import {AuthProvider} from '@contexts/auth';
 
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
@@ -111,16 +111,16 @@ const App = () => {
             );
         });
 
-        notifee.onBackgroundEvent(async ({ type, detail }) => {
-            const { notification, pressAction }: any = detail;
+        notifee.onBackgroundEvent(async ({type, detail}) => {
+            const {notification, pressAction}: any = detail;
             if (type === EventType.PRESS && pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
                 await notifee.cancelNotification(notification?.id);
             }
         });
 
-        notifee.onForegroundEvent(async ({ type, detail }) => {
-            const { notification, pressAction }: any = detail;
+        notifee.onForegroundEvent(async ({type, detail}) => {
+            const {notification, pressAction}: any = detail;
             if (type === EventType.PRESS && pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
                 await notifee.cancelNotification(notification.id);
@@ -138,7 +138,10 @@ const App = () => {
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(
                     tokenId,
-                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=${process.env.EXPO_PUBLIC_APP_VERSION}`,
+                )}&pushToken=${tokenFirebase}&deviceOs=${deviceos}&versaoApp=${process.env.EXPO_PUBLIC_APP_VERSION?.replace(
+                    /\./g,
+                    '',
+                )}`,
             )
             .then(response => {
                 // console.log(response.data.resposta.success);

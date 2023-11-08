@@ -7,24 +7,24 @@ import {
     Dimensions,
     Platform,
 } from 'react-native';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
-import { AuthContext } from '@contexts/auth';
+import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { ListStyle } from '@components/InputStyle';
-import { FlashList } from '@shopify/flash-list';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {ListStyle} from '@components/InputStyle';
+import {FlashList} from '@shopify/flash-list';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
 import MonthPicker from 'react-native-month-year-picker';
 import moment from 'moment';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 const History = () => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { user, setLoading, loading, disconnect } = useContext(AuthContext);
+    const {user, setLoading, loading, disconnect} = useContext(AuthContext);
     const [historicos, setHistoricos] = useState<any>([]);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
@@ -46,13 +46,14 @@ const History = () => {
             setLoading(true);
             await serviceapp
                 .get(
-                    `(WS_HISTORICO_COMPRAS)?token=${user?.token
-                    }&dataInicial=${moment(date).format(
+                    `(WS_HISTORICO_COMPRAS)?token=${user?.token}&dataInicial=${moment(
+                        date,
+                    ).format('YYYYMM')}01&dataFinal=${moment(date).format(
                         'YYYYMM',
-                    )}01&dataFinal=${moment(date).format('YYYYMM')}31`,
+                    )}31`,
                 )
                 .then(response => {
-                    const { success, message, data } = response.data.resposta;
+                    const {success, message, data} = response.data.resposta;
                     setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
@@ -75,10 +76,10 @@ const History = () => {
         }
     }, [date]);
 
-    const RenderItem = ({ item }: any) => {
+    const RenderItem = ({item}: any) => {
         return (
             <TouchableOpacity
-                onPress={() => navigation.navigate('HistoryItem', { data: item })}
+                onPress={() => navigation.navigate('HistoryItem', {data: item})}
                 className={`flex-row items-center justify-between bg-solar-gray-light my-1 ${ListStyle}`}
             >
                 <View className="p-2 w-full">
@@ -143,10 +144,11 @@ const History = () => {
                     </Text>
                     <TouchableOpacity
                         onPress={() => showPicker(true)}
-                        className={`w-48 mb-6 flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                            ? 'shadow-gray-300'
-                            : 'shadow-gray-400'
-                            }`}
+                        className={`w-48 mb-6 flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${
+                            Platform.OS === 'ios'
+                                ? 'shadow-gray-300'
+                                : 'shadow-gray-400'
+                        }`}
                     >
                         <Text className="flex-1 text-lg text-center text-solar-blue-dark font-PoppinsMedium">
                             {moment(date).format('MM/YYYY')}
@@ -174,7 +176,7 @@ const History = () => {
                 <View className="flex-1 w-full h-full pb-2">
                     <FlashList
                         data={historicos}
-                        renderItem={({ item }: any) => <RenderItem item={item} />}
+                        renderItem={({item}: any) => <RenderItem item={item} />}
                         estimatedItemSize={10}
                         keyboardShouldPersistTaps={'always'}
                         showsVerticalScrollIndicator={false}

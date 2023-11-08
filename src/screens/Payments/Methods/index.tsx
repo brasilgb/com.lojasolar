@@ -1,22 +1,22 @@
-import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
-import React, { useCallback, useContext } from 'react';
+import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
+import React, {useCallback, useContext} from 'react';
 import AppLayout from '@components/AppLayout';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { AuthContext } from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import moment from 'moment';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { ListStyle } from '@components/InputStyle';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {ListStyle} from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import servicepay from '@services/servicepay';
 
-const Methods = ({ route }: any) => {
-    const { user, disconnect } = useContext(AuthContext);
+const Methods = ({route}: any) => {
+    const {user, disconnect} = useContext(AuthContext);
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { order } = route?.params;
+    const {order} = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
         const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
@@ -32,7 +32,7 @@ const Methods = ({ route }: any) => {
                 cvvCartao: '149',
             },
         });
-        const { success, message, token, data } = response.data.resposta;
+        const {success, message, token, data} = response.data.resposta;
         if (!token) {
             Alert.alert('Atenção', message, [
                 {
@@ -44,7 +44,7 @@ const Methods = ({ route }: any) => {
             ]);
         }
         if (!success) {
-            Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+            Alert.alert('Atenção', message, [{text: 'Ok'}]);
             return;
         }
         Alert.alert(
@@ -55,7 +55,7 @@ const Methods = ({ route }: any) => {
                     text: 'Não',
                     style: 'cancel',
                 },
-                { text: 'Sim', onPress: () => paymentBillet(data) },
+                {text: 'Sim', onPress: () => paymentBillet(data)},
             ],
         );
     }, []);
@@ -82,9 +82,9 @@ const Methods = ({ route }: any) => {
             },
             PaymentObject: {},
         });
-        const {data} = response.data.resposta
+        const {data} = response.data.resposta;
         sendOrderAtualize(data);
-        navigation.navigate('SlipPayment', { order: data });
+        navigation.navigate('SlipPayment', {order: data});
     }, []);
 
     const sendOrderAtualize = useCallback(async (dataSlip: any) => {
@@ -100,7 +100,6 @@ const Methods = ({ route }: any) => {
         );
     }, []);
 
-
     const pixPaymentOrder = async () => {
         const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
             token: user?.token,
@@ -115,7 +114,7 @@ const Methods = ({ route }: any) => {
                 cvvCartao: '',
             },
         });
-        const { success, message, token, data } = response.data.resposta;
+        const {success, message, token, data} = response.data.resposta;
 
         if (!token) {
             Alert.alert('Atenção', message, [
@@ -128,11 +127,11 @@ const Methods = ({ route }: any) => {
             ]);
         }
         if (success) {
-            navigation.navigate('PixPayment', { order: data });
+            navigation.navigate('PixPayment', {order: data});
         } else {
             return;
         }
-    }
+    };
 
     return (
         <AppLayout>
@@ -168,9 +167,7 @@ const Methods = ({ route }: any) => {
                     </View>
                 </View>
                 <View className="flex-col itens-center justify-start mt-8">
-                    <TouchableOpacity
-                        onPress={() => pixPaymentOrder() }
-                    >
+                    <TouchableOpacity onPress={() => pixPaymentOrder()}>
                         <View className="flex-row items-center pb-4 pl-10">
                             <Image
                                 source={require('@assets/images/pix.png')}
@@ -195,7 +192,7 @@ const Methods = ({ route }: any) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('CartPayment', { order: order })
+                            navigation.navigate('CartPayment', {order: order})
                         }
                     >
                         <View className="flex-row items-center pt-4 pl-10">

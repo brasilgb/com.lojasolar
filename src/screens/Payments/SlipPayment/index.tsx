@@ -1,5 +1,12 @@
-import {View, Text, TouchableOpacity, Share, Platform} from 'react-native';
-import React from 'react';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    Share,
+    Platform,
+    BackHandler,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import AppLayout from '@components/AppLayout';
 import {MaterialIcons} from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';

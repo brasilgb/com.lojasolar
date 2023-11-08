@@ -26,7 +26,7 @@ const Twobillet = () => {
                 .then(response => {
                     const {success, message, data, token} =
                         response.data.resposta;
-                        setLoading(false);
+                    setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message);
                         return;

@@ -4,12 +4,17 @@ import {SafeAreaView} from 'react-native';
 
 interface Props {
     children: React.ReactNode;
+    classname?: any;
 }
 
-const AppLayout = ({children}: Props) => {
+const AppLayout = ({children, classname}: Props) => {
     return (
         <>
-            <SafeAreaView className="flex-1 bg-solar-blue-light">
+            <SafeAreaView
+                className={`flex-1 ${
+                    classname?.length ? classname : 'bg-solar-blue-light'
+                }`}
+            >
                 {children}
             </SafeAreaView>
             <StatusBar translucent style="light" animated />

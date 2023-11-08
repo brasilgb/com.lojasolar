@@ -6,7 +6,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const NoRegistered = ({route}: any) => {
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const {data} = route.params;
     return (
         <AppLayout>

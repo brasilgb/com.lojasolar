@@ -1,21 +1,21 @@
-import { View, Text, Alert, Image } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import {View, Text, Alert, Image} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import serviceapp from '@services/serviceapp';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { AuthContext } from '@contexts/auth';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
 import AppLayout from '@components/AppLayout';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import AppLoading from '@components/AppLoading';
-import { ListStyle } from '@components/InputStyle';
+import {ListStyle} from '@components/InputStyle';
 
-const HistoryItens = ({ route }: any) => {
+const HistoryItens = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { data } = route?.params;
+    const {data} = route?.params;
     const dataItem = data;
-    const { user, setLoading, loading, disconnect } = useContext(AuthContext);
+    const {user, setLoading, loading, disconnect} = useContext(AuthContext);
     const [historicoItems, setHistoricoItems] = useState<any>([]);
     const isFocused = useIsFocused();
 
@@ -27,7 +27,7 @@ const HistoryItens = ({ route }: any) => {
                     `(WS_HISTORICO_ITENS)?token=${user?.token}&numero=${dataItem?.numero}&filial=${dataItem?.filial}&serie=${dataItem?.serie}`,
                 )
                 .then(response => {
-                    const { success, message, data } = response.data.resposta;
+                    const {success, message, data} = response.data.resposta;
                     setLoading(false);
                     if (!success) {
                         Alert.alert('Atenção', message, [
@@ -89,7 +89,7 @@ const HistoryItens = ({ route }: any) => {
                         >
                             <View className="flex-1">
                                 <Image
-                                    source={{ uri: item?.linkImagem }}
+                                    source={{uri: item?.linkImagem}}
                                     className="h-40 w-40 rounded-l-lg"
                                 />
                             </View>

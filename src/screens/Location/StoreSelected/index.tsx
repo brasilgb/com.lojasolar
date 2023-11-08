@@ -20,7 +20,8 @@ type Props = {};
 
 const StoreSelected = ({route}: any) => {
     const {data} = route?.params;
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const {positionGlobal} = useContext(AuthContext);
     const mapRef = useRef<any>();
     const [initialRegion, setInitialRegion] = useState({

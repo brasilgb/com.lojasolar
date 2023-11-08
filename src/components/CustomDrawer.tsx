@@ -29,14 +29,14 @@ const CustomDrawer = (props: any) => {
                             size={50}
                             color={'#FAFAFA'}
                         />
-                        <Text className="text-base text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
+                        <Text className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
                             {signed
                                 ? `Olá, ${user?.nomeCliente}`
                                 : 'Bem Vindo(a) '}
                         </Text>
                     </View>
 
-                    <Text className="mt-2 text-base text-solar-gray-light font-Poppins_400Regular">
+                    <Text className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular">
                         {signed
                             ? 'Como podemos lhe ajudar hoje?'
                             : 'Faça o login e aproveite o melhor do aplicativo'}
@@ -47,7 +47,7 @@ const CustomDrawer = (props: any) => {
                 </View>
             </DrawerContentScrollView>
 
-            <View className="pb-4">
+            <View className="py-2 border-t border-gray-200">
                 {signed && (
                     <TouchableOpacity
                         onPress={() => {
@@ -61,7 +61,7 @@ const CustomDrawer = (props: any) => {
                             size={22}
                             color={'#e76464'}
                         />
-                        <Text className="ml-1 text-sm text-[#e76464] font-PoppinsRegular">
+                        <Text className="ml-1 text-base text-[#e76464] font-PoppinsRegular">
                             Sair
                         </Text>
                     </TouchableOpacity>
@@ -73,17 +73,17 @@ const CustomDrawer = (props: any) => {
                     >
                         <MaterialIcons
                             name="logout"
-                            size={26}
+                            size={22}
                             color={'#154295'}
                         />
-                        <Text className="ml-1 text-lg font-PoppinsMedium text-[#154295]">
+                        <Text className="ml-1 text-base font-PoppinsRegular text-[#154295]">
                             Login
                         </Text>
                     </TouchableOpacity>
                 )}
             </View>
 
-            <View className="h-20 bg-solar-gray-middle border-t border-t-gray-200 flex-row items-center justify-around">
+            <View className="h-16 bg-solar-gray-middle border-t border-t-gray-200 flex-row items-center justify-around">
                 <TouchableOpacity
                     className="p-2"
                     onPress={() => navigation.navigate('Questions')}

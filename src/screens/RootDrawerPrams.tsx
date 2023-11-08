@@ -34,4 +34,6 @@ export type RootDrawerParamList = {
     Twobillet: undefined;
     ActionBillet: {order: any};
     PayCartOk: undefined;
+    DataExclude: {data: any};
+    DataAnalise: {email: any};
 };
