@@ -6,18 +6,18 @@ let requestCustom: any;
 let data: any;
 
 const serviceapp = axios.create({
-    withCredentials: true,
+    withCredentials: true
 });
 
-serviceapp.interceptors.request.use(async request => {
-    request.baseURL =
-        'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
-    BASE_URL =
-        'http://services.gruposolar.com.br:8082/servicecomercial/servlet/isCobol/';
+serviceapp.interceptors.request.use(async (request) => {
+
+    request.baseURL = process.env.EXPO_PUBLIC_API_URL;
+    BASE_URL = `${process.env.EXPO_PUBLIC_API_URL}`;
+    // request.baseURL = "http://172.16.1.215:9090/servicecomercial/servlet/isCobol/";
+    // BASE_URL = "http://172.16.1.215:9090/servicecomercial/servlet/isCobol/";
 
     requestCustom = request;
     data = request.data;
-
     return request;
 });
 
@@ -28,7 +28,7 @@ serviceapp.interceptors.response.use(
 
         const axiosNew = axios.create({
             baseURL: BASE_URL,
-            withCredentials: true,
+            withCredentials: true
         });
 
         let session = await axiosNew
@@ -38,7 +38,7 @@ serviceapp.interceptors.response.use(
                 return {
                     status: 404,
                     success: false,
-                    message: 'Não foi possível conectar ao servidor 1',
+                    message: 'Não foi possível conectar ao servidor 1'
                 };
             });
 
@@ -54,14 +54,8 @@ serviceapp.interceptors.response.use(
 
         console.log('Refazendo a chamada original...');
         let originalResponse;
-        if (
-            requestCustom.method === 'POST' ||
-            requestCustom.method === 'post'
-        ) {
-            originalResponse = await serviceapp.post(
-                `${requestCustom.url}`,
-                data,
-            );
+        if (requestCustom.method === 'POST' || requestCustom.method === 'post') {
+            originalResponse = await serviceapp.post(`${requestCustom.url}`, data);
         } else {
             originalResponse = await serviceapp.get(`${requestCustom.url}`);
         }
@@ -69,7 +63,7 @@ serviceapp.interceptors.response.use(
             session = {
                 status: 404,
                 success: false,
-                message: 'Não foi possível conectar ao servidor 3',
+                message: 'Não foi possível conectar ao servidor 3'
             };
             return session;
         }

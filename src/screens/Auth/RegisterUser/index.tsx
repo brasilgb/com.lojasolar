@@ -10,7 +10,7 @@ import {
 import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import {cnpj, cpf} from 'cpf-cnpj-validator';
-import {MaterialIcons} from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import AppLoading from '@components/AppLoading';
 import {AuthContext} from '@contexts/auth';
 import {Formik} from 'formik';
@@ -97,6 +97,7 @@ const RegisterUser = ({route}: any) => {
         );
         const {success, message} = response.data.resposta;
         setLoading(false);
+        resetForm();
         if (!success) {
             Alert.alert('Atenção', message, [
                 {
@@ -133,13 +134,13 @@ const RegisterUser = ({route}: any) => {
                             </Text>
                         </View>
                         <View className="flex-row items-center justify-start border-t border-gray-300 pt-4">
-                            <MaterialIcons
-                                name="warning"
+                            <MaterialCommunityIcons
+                                name="asterisk"
                                 size={20}
                                 color={'#f78888'}
                             />
                             <Text className="text-sm ml-1 text-gray-500">
-                                Todos os dados são obrigatórios
+                                Dados obrigatórios
                             </Text>
                         </View>
 
@@ -170,7 +171,7 @@ const RegisterUser = ({route}: any) => {
                                 <View className="mt-6">
                                     <View className="">
                                         <Text className={LabelStyle}>
-                                            CPF ou CNPJ
+                                            CPF ou CNPJ <Text className="text-red-500">*</Text>
                                         </Text>
                                         <TextInput
                                             className={`${InputStyle()} bg-gray-200`}
@@ -181,7 +182,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            Nome completo
+                                            Nome completo <Text className="text-red-500">*</Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -205,7 +206,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            Endereço
+                                            Endereço <Text className="text-red-500">*</Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -230,7 +231,9 @@ const RegisterUser = ({route}: any) => {
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>CEP</Text>
+                                        <Text className={LabelStyle}>
+                                            CEP <Text className="text-red-500">*</Text>
+                                            </Text>
                                         <TextInput
                                             className={InputStyle(
                                                 touched.cepCliente,
@@ -255,7 +258,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            Estado
+                                            Estado <Text className="text-red-500">*</Text>
                                         </Text>
                                         <Select
                                             data={ufs}
@@ -283,7 +286,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            Cidade
+                                            Cidade <Text className="text-red-500">*</Text>
                                         </Text>
                                         <Select
                                             data={cities}
@@ -312,7 +315,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            Celular
+                                            Celular <Text className="text-red-500">*</Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -341,7 +344,7 @@ const RegisterUser = ({route}: any) => {
 
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
-                                            E-mail
+                                            E-mail <Text className="text-red-500">*</Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(

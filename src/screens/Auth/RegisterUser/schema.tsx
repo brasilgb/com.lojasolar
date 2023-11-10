@@ -7,7 +7,7 @@ export default Yup.object().shape({
     nomeCliente: Yup.string().required('Por favor, informe seu nome'),
     enderecoCliente: Yup.string().required('Por favor, informe seu endereço'),
     cepCliente: Yup.string()
-        .min(9, 'CEP inválido')
+        .min(8, 'CEP inválido')
         .required('Por favor, informe o CEP'),
     cidadeCliente: Yup.string().required('Por favor, selecione o Estado'),
     ufCliente: Yup.string().required('Por favor, selecione a cidade'),

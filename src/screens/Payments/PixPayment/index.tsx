@@ -107,7 +107,7 @@ const PixPayment = ({route}: any) => {
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text className="text-2xl text-solar-blue-dark py-4">
                         Pagamento
                     </Text>
                     <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">

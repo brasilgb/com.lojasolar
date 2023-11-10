@@ -127,7 +127,14 @@ const Account = () => {
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
         const {success, message} = response.data.resposta;
+        console.log(response.data.resposta);
+        
         setLoading(false);
+        if (!success) {
+            Alert.alert('Atenção', message, [
+                {text: 'Ok'},
+            ]);
+        }
         if (success) {
             Alert.alert('Atenção', message, [
                 {text: 'Ok', onPress: () => navigation.navigate('Home')},

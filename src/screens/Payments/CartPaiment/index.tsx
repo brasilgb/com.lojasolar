@@ -8,20 +8,20 @@ import {
     ScrollView,
     Platform,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import AppLayout from '@components/AppLayout';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
-import {AuthContext} from '@contexts/auth';
-import {InputStyle, LabelStyle, ListStyle} from '@components/InputStyle';
+import { AuthContext } from '@contexts/auth';
+import { InputStyle, LabelStyle, ListStyle } from '@components/InputStyle';
 import serviceapp from '@services/serviceapp';
 import servicepay from '@services/servicepay';
 import moment from 'moment';
-import {cartNumber, cartValidate} from '@components/masks';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { cartNumber, cartValidate } from '@components/masks';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import schema from './schema';
 import ButtomForm from '@components/ButtomForm';
 
@@ -32,15 +32,15 @@ interface CartProps {
     cvvCartao: string;
 }
 
-const CartPayment = ({route}: any) => {
+const CartPayment = ({ route }: any) => {
+
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {user, disconnect, setLoading, loading} = useContext(AuthContext);
-    const {order} = route?.params;
+    const { user, disconnect, setLoading, loading } = useContext(AuthContext);
+    const { order } = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
-    const onSubmit = async (values: CartProps) => {
-        // Keyboard.dismiss();
+    const onSubmit = async (values: CartProps, { resetForm }: any) => {
         setLoading(true);
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
@@ -56,8 +56,9 @@ const CartPayment = ({route}: any) => {
                     cvvCartao: values.cvvCartao,
                 },
             });
-            const {success, message, token, data} = response.data.resposta;
+            const { success, message, token, data } = response.data.resposta;
             setLoading(false);
+            resetForm();
             if (!token) {
                 Alert.alert('Atenção', message, [
                     {
@@ -65,11 +66,11 @@ const CartPayment = ({route}: any) => {
                         onPress: () => {
                             navigation.navigate('Home'), disconnect();
                         },
-                    },
+                    },  
                 ]);
             }
             if (!success) {
-                Alert.alert('Atenção deu erro', message, [{text: 'Ok'}]);
+                Alert.alert('Atenção deu erro', message, [{ text: 'Ok' }]);
                 return;
             }
             await paymentCart(data);
@@ -108,11 +109,11 @@ const CartPayment = ({route}: any) => {
                 },
             },
         });
-        const {success} = response.data.resposta;
-        const {Description, Error} = response.data.resposta.data.Detail;
+        const { success } = response.data.resposta;
+        const { Description, Error } = response.data.resposta.data.Detail;
         setLoading(false);
         if (!success) {
-            Alert.alert(Description, Error, [{text: 'Ok'}]);
+            Alert.alert(Description, Error, [{ text: 'Ok' }]);
             return;
         }
         await sendOrderAtualize(response);
@@ -134,7 +135,7 @@ const CartPayment = ({route}: any) => {
                     `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
                 )
                 .then(response => {
-                    const {success} = response.data.resposta;
+                    const { success } = response.data.resposta;
                     if (success) {
                         setLoading(false);
                         navigation.navigate('PayCartOk');

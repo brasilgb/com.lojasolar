@@ -31,8 +31,8 @@ const RegisterPassword = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const {setLoading, loading, disconnect} = useContext(AuthContext);
-    const [showPassword1, setShowPassword1] = useState<boolean>(false);
-    const [showPassword2, setShowPassword2] = useState<boolean>(false);
+    const [showPassword1, setShowPassword1] = useState<boolean>(true);
+    const [showPassword2, setShowPassword2] = useState<boolean>(true);
     const {data} = route?.params;
 
     const onsubmit = useCallback(
@@ -45,6 +45,7 @@ const RegisterPassword = ({route}: any) => {
                 .then(response => {
                     const {success, message} = response.data.resposta;
                     setLoading(false);
+                    resetForm();
                     if (!success) {
                         Alert.alert('Atenção', message, [
                             {
@@ -58,7 +59,6 @@ const RegisterPassword = ({route}: any) => {
                     }
                     navigation.navigate('PasswordChanged', {data: data});
                     Keyboard.dismiss();
-                    resetForm();
                 })
                 .catch(error => {
                     console.log(error);
@@ -140,7 +140,7 @@ const RegisterPassword = ({route}: any) => {
                                                 }
                                             />
                                             <View className="absolute right-2 top-4">
-                                                {showPassword1 ? (
+                                                {!showPassword1 ? (
                                                     <MaterialIcons
                                                         onPress={() =>
                                                             setShowPassword1(
@@ -195,7 +195,7 @@ const RegisterPassword = ({route}: any) => {
                                                 }
                                             />
                                             <View className="absolute right-2 top-4">
-                                                {showPassword2 ? (
+                                                {!showPassword2 ? (
                                                     <MaterialIcons
                                                         onPress={() =>
                                                             setShowPassword2(

@@ -14,8 +14,7 @@ interface AuthContextProps {
 }
 
 export const AuthProvider = ({children}: AuthContextProps) => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [positionGlobal, setPositionGlobal] = useState<any>([0, 0]);
@@ -51,11 +50,10 @@ export const AuthProvider = ({children}: AuthContextProps) => {
         loadPosition();
     }, []);
 
-    const signIn = useCallback(async ({cpfcnpj}: any) => {
+    const signIn = async (cpfcnpj: any) => {
+        console.log(cpfcnpj)
         setLoading(true);
-        const response = await serviceapp.get(
-            `(WS_LOGIN_APP)?cpfcnpj=${cpfcnpj}`,
-        );
+        const response = await serviceapp.get(`(WS_LOGIN_APP)?cpfcnpj=${cpfcnpj}`);
 
         if (response.status !== 200) {
             // throw new Error(
@@ -67,6 +65,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             );
         }
         const {data} = response.data.resposta;
+        console.log(data)
         if (data.cadastroCliente && data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('CheckPassword', {
@@ -85,7 +84,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
                 data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
             });
         }
-    }, []);
+    };
 
     const checkPassword = useCallback(
         async ({cpfcnpj, senha, nomeCliente, connected}: any) => {

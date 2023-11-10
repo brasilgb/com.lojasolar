@@ -79,7 +79,7 @@ const CheckPassword = ({route}: any) => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text className="text-2xl text-solar-blue-dark py-4">
                         Faça seu login
                     </Text>
                     <Text className="text-base text-solar-blue-dark py-2">
@@ -98,7 +98,6 @@ const CheckPassword = ({route}: any) => {
                         values,
                         handleChange,
                         errors,
-                        handleBlur,
                         touched,
                         isValid,
                         handleSubmit,
@@ -146,7 +145,6 @@ const CheckPassword = ({route}: any) => {
                                         )}
                                     </View>
                                 </View>
-
                                 {errors.senha && touched.senha && (
                                     <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                         {errors.senha}
