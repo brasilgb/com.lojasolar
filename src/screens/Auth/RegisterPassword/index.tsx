@@ -8,42 +8,46 @@ import {
     Alert,
     Keyboard,
 } from 'react-native';
-import React, {useCallback, useContext, useState} from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
-import {AuthContext} from '@contexts/auth';
-import {MaterialIcons} from '@expo/vector-icons';
-import {Formik} from 'formik';
-import {InputStyle, LabelStyle} from '@components/InputStyle';
+import { AuthContext } from '@contexts/auth';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Formik } from 'formik';
+import { InputStyle, LabelStyle } from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
 import serviceapp from '@services/serviceapp';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { maskCelular } from "@components/masks";
 
 interface SenhaProps {
+    email: string;
+    celular: string;
     senha: string;
     repitaSenha: string;
 }
 
-const RegisterPassword = ({route}: any) => {
+const RegisterPassword = ({ route }: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {setLoading, loading, disconnect} = useContext(AuthContext);
+    const { setLoading, loading, disconnect } = useContext(AuthContext);
     const [showPassword1, setShowPassword1] = useState<boolean>(true);
     const [showPassword2, setShowPassword2] = useState<boolean>(true);
-    const {data} = route?.params;
+
+    const { data } = route?.params;
 
     const onsubmit = useCallback(
-        async (values: SenhaProps, {resetForm}: any) => {
+        async (values: SenhaProps, { resetForm }: any) => {
             setLoading(true);
             await serviceapp
                 .get(
-                    `(WS_ALTERAR_SENHA_APP)?cpfcnpj=${data.cpfCnpj}&senha=${values.senha}`,
+                    `(WS_ALTERAR_SENHA_APP)?cpfcnpj=${data.cpfCnpj}&senha=${values.senha}&emailCliente=${values.email}&celularCliente=${values.celular}`,
                 )
                 .then(response => {
-                    const {success, message} = response.data.resposta;
+                    const { success, message } = response.data.resposta;
                     setLoading(false);
                     resetForm();
                     if (!success) {
@@ -57,7 +61,7 @@ const RegisterPassword = ({route}: any) => {
                             },
                         ]);
                     }
-                    navigation.navigate('PasswordChanged', {data: data});
+                    navigation.navigate('PasswordChanged', { data: data });
                     Keyboard.dismiss();
                 })
                 .catch(error => {
@@ -103,6 +107,8 @@ const RegisterPassword = ({route}: any) => {
                         <Formik
                             validationSchema={schema}
                             initialValues={{
+                                email: '',
+                                celular: '',
                                 senha: '',
                                 repitaSenha: '',
                             }}
@@ -119,6 +125,59 @@ const RegisterPassword = ({route}: any) => {
                                 isValid,
                             }) => (
                                 <View className="mt-6">
+
+
+                                    <View className="mt-6">
+                                        <Text className={LabelStyle}>
+                                            Insira seu e-mail
+                                        </Text>
+                                        <View className="">
+                                            <TextInput
+                                                className={InputStyle(
+                                                    touched.email,
+                                                    errors.email,
+                                                )}
+                                                value={values.email}
+                                                onBlur={handleBlur('email')}
+                                                onChangeText={handleChange(
+                                                    'email',
+                                                )}
+                                                keyboardType="email-address"
+                                            />
+                                        </View>
+                                        {errors.email && touched.email && (
+                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                {errors.email}
+                                            </Text>
+                                        )}
+                                    </View>
+
+                                    <View className="mt-6">
+                                        <Text className={LabelStyle}>
+                                            Insira seu celular
+                                        </Text>
+                                        <View className="">
+                                            <TextInput
+                                                className={InputStyle(
+                                                    touched.celular,
+                                                    errors.celular,
+                                                )}
+                                                value={maskCelular(values.celular)}
+                                                maxLength={16}
+                                                onBlur={handleBlur('celular')}
+                                                onChangeText={handleChange(
+                                                    'celular',
+                                                )}
+                                                keyboardType="numeric"
+                                            />
+                                        </View>
+                                        {errors.celular && touched.celular && (
+                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                {errors.celular}
+                                            </Text>
+                                        )}
+                                    </View>
+
                                     <View className="mt-6">
                                         <Text className={LabelStyle}>
                                             Insira sua nova senha

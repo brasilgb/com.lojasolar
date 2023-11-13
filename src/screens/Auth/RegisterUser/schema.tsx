@@ -12,7 +12,7 @@ export default Yup.object().shape({
     cidadeCliente: Yup.string().required('Por favor, selecione o Estado'),
     ufCliente: Yup.string().required('Por favor, selecione a cidade'),
     celularCliente: Yup.string()
-        .min(11, 'Celular inválido')
+        .max(13, 'Celular inválido')
         .required('Por favor, informe o telefone'),
     emailCliente: Yup.string()
         .email('E-mail inválido')

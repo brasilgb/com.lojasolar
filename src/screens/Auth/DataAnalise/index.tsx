@@ -26,17 +26,17 @@ const DataAnalise = ({route}: any) => {
                         <Text className="text-2xl text-solar-blue-dark py-4">
                             Remoção de dados
                         </Text>
-                        <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-1 px-8 text-center">
+                        <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-3 text-center">
                             Nossa equipe proceguirá com o processo para a
-                            exclusão de dados, logo enviaremos instruções para
-                        </Text>
-                        <Text className="text-sm text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
-                            {email}
+                            exclusão de dados.
                         </Text>
                     </View>
-                    <MaterialIcons name="email" size={120} color={'#154295'} />
+                    <Image
+                    className="self-center w-72 h-52"
+                    source={require('@assets/images/new_password_logo.png')}
+                />
                     <Text className="text-sm text-solar-blue-dark font-PoppinsRegular mt-6 text-center">
-                        Aguarde nosso e-mail ou ligação e prossiga com o
+                        Aguarde nosso e-mail ou ligação para prosseguir com o
                         processo de exclusão de dados.
                     </Text>
                     <TouchableOpacity

@@ -51,7 +51,6 @@ export const AuthProvider = ({children}: AuthContextProps) => {
     }, []);
 
     const signIn = async (cpfcnpj: any) => {
-        console.log(cpfcnpj)
         setLoading(true);
         const response = await serviceapp.get(`(WS_LOGIN_APP)?cpfcnpj=${cpfcnpj}`);
 
@@ -65,7 +64,6 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             );
         }
         const {data} = response.data.resposta;
-        console.log(data)
         if (data.cadastroCliente && data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('CheckPassword', {
