@@ -129,7 +129,7 @@ const DrawerRoutes = () => {
     return (
         <Drawer.Navigator
             initialRouteName="Connected"
-            backBehavior="history"
+            backBehavior="none"
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
                 headerShown: true,

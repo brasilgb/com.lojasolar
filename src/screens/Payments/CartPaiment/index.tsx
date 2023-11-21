@@ -34,15 +34,18 @@ interface CartProps {
 
 const CartPayment = ({ route }: any) => {
 
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const { user, disconnect, setLoading, loading } = useContext(AuthContext);
     const { order } = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
     const onSubmit = async (values: CartProps, { resetForm }: any) => {
         setLoading(true);
+        console.log(registeredOrder);
+
         if (registeredOrder.length === 0) {
+            console.log('Agora foi');
+
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,
                 valor: order.valuetotal,
@@ -58,7 +61,6 @@ const CartPayment = ({ route }: any) => {
             });
             const { success, message, token, data } = response.data.resposta;
             setLoading(false);
-            resetForm();
             if (!token) {
                 Alert.alert('Atenção', message, [
                     {
@@ -66,13 +68,14 @@ const CartPayment = ({ route }: any) => {
                         onPress: () => {
                             navigation.navigate('Home'), disconnect();
                         },
-                    },  
+                    },
                 ]);
             }
             if (!success) {
                 Alert.alert('Atenção deu erro', message, [{ text: 'Ok' }]);
                 return;
             }
+            setRegisteredOrder(data)
             await paymentCart(data);
         } else {
             await paymentCart(registeredOrder);
@@ -81,7 +84,6 @@ const CartPayment = ({ route }: any) => {
 
     const paymentCart = async (dataCart: any) => {
         setLoading(true);
-        setRegisteredOrder(dataCart);
         const response = await servicepay.post(`/Credit/Create`, {
             OrderNumber: dataCart.numeroOrdem,
             Amount: Number(dataCart.valorOrdem),
@@ -116,6 +118,7 @@ const CartPayment = ({ route }: any) => {
             Alert.alert(Description, Error, [{ text: 'Ok' }]);
             return;
         }
+        setRegisteredOrder([]);
         await sendOrderAtualize(response);
     };
 

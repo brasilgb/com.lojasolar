@@ -134,6 +134,7 @@ const App = () => {
     const registerDevice = useCallback(async (tokenFirebase: any) => {
         let deviceos = Platform.OS === 'ios' ? 'IOS' : 'Android';
         let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
+        
         await serviceapp
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(
