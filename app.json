@@ -2,7 +2,7 @@
     "expo": {
         "name": "Loja Solar",
         "slug": "comlojasolar",
-        "version": "1.1.11",
+        "version": "1.1.16",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "automatic",
@@ -13,13 +13,14 @@
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
+            "googleServicesFile": "./GoogleService-Info.plist",
             "infoPlist": {
+                "UIBackgroundModes": ["fetch", "remote-notification"],
                 "NSLocationAlwaysAndWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
                 "NSLocationWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
                 "NSLocationAlwaysUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
                 "NSLocationUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia."
             },
-            "googleServicesFile": "./GoogleService-Info.plist",
             "supportsTablet": true,
             "bundleIdentifier": "com.loja.solar",
             "buildNumber": "2",

@@ -87,10 +87,9 @@ export const AuthProvider = ({children}: AuthContextProps) => {
     const checkPassword = useCallback(
         async ({cpfcnpj, senha, nomeCliente, connected}: any) => {
             setLoading(true);
-            const deviceToken =
-                await SecureStore.getItemAsync('secure_deviceid');
+            let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
             const response = await serviceapp.get(
-                `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceToken}`,
+                `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${JSON.parse(tokenId)}`,
             );
             setLoading(false);
             if (response.status !== 200) {

@@ -17,8 +17,11 @@ const Methods = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const {order} = route?.params;
+console.log('methods', order);
 
     const sendPaymentOrder = useCallback(async () => {
+        // console.log(order.valueTotal);
+        // return
         const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
             token: user?.token,
             valor: order.valueTotal,
@@ -26,13 +29,15 @@ const Methods = ({route}: any) => {
             tipoPagamento: 1,
             validaDados: 'S',
             dadosCartao: {
-                numeroCartao: '5555966271525859',
-                nomeCartao: 'Joao da Silva',
-                validadeCartao: '01/25',
-                cvvCartao: '149',
+                numeroCartao: '',
+                nomeCartao: '',
+                validadeCartao: '',
+                cvvCartao: '',
             },
         });
         const {success, message, token, data} = response.data.resposta;
+        console.log(data);
+        return
         if (!token) {
             Alert.alert('Atenção', message, [
                 {
@@ -61,6 +66,7 @@ const Methods = ({route}: any) => {
     }, []);
 
     const paymentBillet = useCallback(async (dataSlip: any) => {
+        console.log('dataSlip', dataSlip);
         const response = await servicepay.post(`/Bankslip/Create`, {
             amount: Number(dataSlip.valorOrdem),
             ordernumber: dataSlip.numeroOrdem,

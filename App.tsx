@@ -126,7 +126,6 @@ const App = () => {
                 await notifee.cancelNotification(notification.id);
             }
         });
-
         return unsubscribe;
     }, []);
 
@@ -134,7 +133,7 @@ const App = () => {
     const registerDevice = useCallback(async (tokenFirebase: any) => {
         let deviceos = Platform.OS === 'ios' ? 'IOS' : 'Android';
         let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
-        
+        console.log(JSON.parse(tokenId));
         await serviceapp
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(
@@ -145,7 +144,7 @@ const App = () => {
                 )}`,
             )
             .then(response => {
-                // console.log(response.data.resposta.success);
+                console.log(response.data.resposta);
             })
             .catch(err => {
                 console.log(err);

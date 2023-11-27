@@ -24,23 +24,23 @@ const Contact = (props: Props) => {
                     </Text>
                 </View>
 
-                <Text className="text-2xl font-PoppinsBold text-solar-blue-dark pt-5">
+                <Text className="text-xl font-PoppinsBold text-solar-blue-dark pt-5">
                     51-3638-5000
                 </Text>
-                <Text className="text-base font-PoppinsMedium text-solar-blue-dark py-5">
+                <Text className="text-sm font-PoppinsMedium text-solar-blue-dark py-5">
                     sac@lojasolar.com.br
                 </Text>
-                <Text className="text-lg font-PoppinsRegular text-solar-blue-dark">
+                <Text className="text-sm font-PoppinsRegular text-solar-blue-dark">
                     Av. Duque de Caxias,385
                 </Text>
-                <Text className="text-lg font-PoppinsRegular text-solar-blue-dark">
+                <Text className="text-sm font-PoppinsRegular text-solar-blue-dark">
                     Centro - Salvador do Sul - RS
                 </Text>
-                <Text className="text-lg font-PoppinsRegular text-solar-blue-dark">
+                <Text className="text-sm font-PoppinsRegular text-solar-blue-dark">
                     CEP: 95750-000
                 </Text>
-                <Text className="text-base font-PoppinsMedium text-solar-blue-dark pt-24 text-center">
-                    {process.env.EXPO_PUBLIC_APP_VERSION}
+                <Text className="text-base font-PoppinsMedium text-solar-blue-dark pt-4 text-center">
+                    v{process.env.EXPO_PUBLIC_APP_VERSION}
                 </Text>
             </View>
         </AppLayout>

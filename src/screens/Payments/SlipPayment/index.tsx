@@ -4,9 +4,8 @@ import {
     TouchableOpacity,
     Share,
     Platform,
-    BackHandler,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {MaterialIcons} from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
@@ -18,6 +17,7 @@ const SlipPayment = ({route}: any) => {
     const {order} = route?.params;
     const Amount = order.Detail.Amount;
     const url = order.Detail.PaymentObject.Url;
+console.log(Amount);
 
     const sharingUrl = async () => {
         try {

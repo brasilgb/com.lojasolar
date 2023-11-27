@@ -381,7 +381,7 @@ const OpenPayments = () => {
                 </View>
 
                 {crediarios && (
-                    <View className="flex-1 w-full h-full pb-2">
+                    <View className={`flex-1 w-full h-full ${showModalParcelas ? 'pb-40' : 'pb-2'} `}>
                         <FlashList
                             data={crediarios}
                             renderItem={({item, index}) => (
