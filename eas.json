@@ -1,16 +1,18 @@
 {
   "cli": {
-    "appVersionSource": "remote"
+    "version": ">= 5.4.0"
   },
   "build": {
-    "staging": {
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      }
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
     },
-    "production": {
-      "autoIncrement": true
-    }
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
   }
 }

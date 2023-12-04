@@ -1,72 +1,75 @@
-import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
-import React, {useCallback, useContext} from 'react';
+import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
+import React, { useCallback, useContext, useState } from 'react';
 import AppLayout from '@components/AppLayout';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {AuthContext} from '@contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import moment from 'moment';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {ListStyle} from '@components/InputStyle';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ListStyle } from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import servicepay from '@services/servicepay';
 
-const Methods = ({route}: any) => {
-    const {user, disconnect} = useContext(AuthContext);
+const Methods = ({ route }: any) => {
+    const { user, disconnect } = useContext(AuthContext);
+    const [registeredOrder, setRegisteredOrder] = useState<any>([]);
+
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {order} = route?.params;
-console.log('methods', order);
+    const { order } = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
-        // console.log(order.valueTotal);
-        // return
-        const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
-            token: user?.token,
-            valor: order.valueTotal,
-            parcela: order.dataOrder,
-            tipoPagamento: 1,
-            validaDados: 'S',
-            dadosCartao: {
-                numeroCartao: '',
-                nomeCartao: '',
-                validadeCartao: '',
-                cvvCartao: '',
-            },
-        });
-        const {success, message, token, data} = response.data.resposta;
-        console.log(data);
-        return
-        if (!token) {
-            Alert.alert('Atenção', message, [
-                {
-                    text: 'Ok',
-                    onPress: () => {
-                        navigation.navigate('Home'), disconnect();
+        
+        if (registeredOrder.length === 0) {
+            const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
+                token: user?.token,
+                valor: order.valueTotal,
+                parcela: order.dataOrder,
+                tipoPagamento: 1,
+                validaDados: 'S',
+                dadosCartao: {
+                    numeroCartao: '',
+                    nomeCartao: '',
+                    validadeCartao: '',
+                    cvvCartao: '',
+                },
+            });
+            const { success, message, token, data } = response.data.resposta;
+            setRegisteredOrder(data);
+            if (!token) {
+                Alert.alert('Atenção', message, [
+                    {
+                        text: 'Ok',
+                        onPress: () => {
+                            navigation.navigate('Home'), disconnect();
+                        },
                     },
-                },
-            ]);
+                ]);
+            }
+            if (!success) {
+                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+                return;
+            }
+            Alert.alert(
+                'Gerar boleto?',
+                'Quer realmente gerar um boleto para pagamento?',
+                [
+                    {
+                        text: 'Não',
+                        style: 'cancel',
+                    },
+                    { text: 'Sim', onPress: () => paymentBillet(data) },
+                ],
+            );
+        } else {
+            await paymentBillet(registeredOrder);
         }
-        if (!success) {
-            Alert.alert('Atenção', message, [{text: 'Ok'}]);
-            return;
-        }
-        Alert.alert(
-            'Gerar boleto?',
-            'Quer realmente gerar um boleto para pagamento?',
-            [
-                {
-                    text: 'Não',
-                    style: 'cancel',
-                },
-                {text: 'Sim', onPress: () => paymentBillet(data)},
-            ],
-        );
     }, []);
 
     const paymentBillet = useCallback(async (dataSlip: any) => {
-        console.log('dataSlip', dataSlip);
+
         const response = await servicepay.post(`/Bankslip/Create`, {
             amount: Number(dataSlip.valorOrdem),
             ordernumber: dataSlip.numeroOrdem,
@@ -88,9 +91,10 @@ console.log('methods', order);
             },
             PaymentObject: {},
         });
-        const {data} = response.data.resposta;
+        const { data } = response.data.resposta;
         sendOrderAtualize(data);
-        navigation.navigate('SlipPayment', {order: data});
+        setRegisteredOrder([]);
+        navigation.navigate('SlipPayment', { order: data });
     }, []);
 
     const sendOrderAtualize = useCallback(async (dataSlip: any) => {
@@ -120,7 +124,7 @@ console.log('methods', order);
                 cvvCartao: '',
             },
         });
-        const {success, message, token, data} = response.data.resposta;
+        const { success, message, token, data } = response.data.resposta;
 
         if (!token) {
             Alert.alert('Atenção', message, [
@@ -133,7 +137,7 @@ console.log('methods', order);
             ]);
         }
         if (success) {
-            navigation.navigate('PixPayment', {order: data});
+            navigation.navigate('PixPayment', { order: data });
         } else {
             return;
         }
@@ -198,7 +202,7 @@ console.log('methods', order);
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('CartPayment', {order: order})
+                            navigation.navigate('CartPayment', { order: order })
                         }
                     >
                         <View className="flex-row items-center pt-4 pl-10">

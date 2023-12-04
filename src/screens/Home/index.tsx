@@ -17,8 +17,10 @@ import serviceapp from '@services/serviceapp';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-export const SLIDER_WIDTH = Dimensions.get('window').width;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 1);
+
+export const SCREEN_WIDTH = Dimensions.get('window').width;
+export const CAROUSEL_VERTICAL_OUTPUT = 1;
+export const CAROUSEL_ITEM_WIDTH = SCREEN_WIDTH - CAROUSEL_VERTICAL_OUTPUT;
 
 interface CarouselItemProps {
     item: any;
@@ -81,34 +83,42 @@ const Home = () => {
     return (
         <AppLayout>
             <View className="flex-grow bg-slate-500">
-                <View className="flex-1 w-full bg-gray-200">
-                    <Text
-                        allowFontScaling={false}
-                        className="bg-solar-gray-light text-lg font-PoppinsBold text-solar-blue-dark text-center py-3"
-                    >
-                        Olá, seja bem vindo!
-                    </Text>
-                    <View style={{ flex: 1, padding: 0, margin: 0 }}>
+                <View className="flex-1 w-full bg-gray-50">
+                    <View className=" h-24 flex items-center justify-center">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-2xl font-PoppinsBold text-solar-blue-dark text-center"
+                        >
+                            Seja bem vindo
+                        </Text>
+                        <Text className="text-solar-blue-dark">
+                            ao app das Lojas Solar
+                        </Text>
+                    </View>
+                    <View className="flex-1 py-8 bg-white border-y border-y-gray-100">
+                    
                         <Carousel
-                            layout="default"
-                            vertical={false}
+                            layout="tinder"
+                            // vertical={false}
                             layoutCardOffset={9}
                             ref={isCarousel}
                             data={carrocelData}
                             renderItem={CarouselCardItem}
-                            sliderWidth={SLIDER_WIDTH}
-                            itemWidth={ITEM_WIDTH}
+                            sliderWidth={SCREEN_WIDTH}
+                            itemWidth={CAROUSEL_ITEM_WIDTH}
+                            // itemHeight={100}r
                             inactiveSlideShift={0}
                             useScrollView={true}
                             onSnapToItem={(index: any) => setIndex(index)}
                             autoplay={true}
-                            autoplayDelay={1000}
+                            autoplayDelay={1500}
                             autoplayInterval={4000}
                             inactiveSlideScale={1}
                             loop={true}
                         />
+                    
                     </View>
-                    <View>
+                    <View className="">
                         <Pagination
                             dotsLength={carrocelData?.length}
                             activeDotIndex={index}
@@ -122,7 +132,7 @@ const Home = () => {
                                 width: 10,
                                 height: 10,
                                 borderRadius: 5,
-                                marginHorizontal: 8,
+                                marginHorizontal: 0,
                                 backgroundColor: 'rgb(0, 174, 239)',
                             }}
                             inactiveDotOpacity={0.4}

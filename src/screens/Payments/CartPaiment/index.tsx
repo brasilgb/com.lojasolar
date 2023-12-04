@@ -44,7 +44,6 @@ const CartPayment = ({ route }: any) => {
         console.log(registeredOrder);
 
         if (registeredOrder.length === 0) {
-            console.log('Agora foi');
 
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,

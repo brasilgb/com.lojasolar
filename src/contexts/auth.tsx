@@ -58,6 +58,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             // throw new Error(
             //     'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
             // );
+            setLoading(false);
             Alert.alert(
                 'Error',
                 'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
