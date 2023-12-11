@@ -26,6 +26,48 @@ import {Linking, Platform} from 'react-native';
 import serviceapp from '@services/serviceapp';
 import {AuthProvider} from '@contexts/auth';
 
+messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
+    // fireNotification(remoteMessage.data);
+    // Request permissions (required for iOS)
+    // console.log(remoteMessage.data);
+    await notifee.requestPermission();
+    //   // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+        id: 'important',
+        name: 'NotificacoesImportantes',
+    });
+
+    // Display a notification
+    await notifee.displayNotification({
+        title: remoteMessage.data.title,
+        body: remoteMessage.data.body,
+        data: {
+            url: remoteMessage.data.url,
+        },
+        android: {
+            channelId,
+            style: {
+                type: AndroidStyle.BIGPICTURE,
+                picture: remoteMessage.data.image,
+            },
+            badgeIconType: AndroidBadgeIconType.SMALL,
+            importance: AndroidImportance.HIGH,
+            pressAction: {
+                id: 'inportant',
+            },
+        },
+    });
+});
+
+notifee.onBackgroundEvent(async ({type, detail}) => {
+    console.log(detail);
+    const {notification, pressAction}: any = detail;
+    if (type === EventType.PRESS && pressAction?.id === 'inportant') {
+        await Linking.openURL(notification.data.url);
+        await notifee.cancelNotification(notification?.id);
+    }
+});
+
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
 
@@ -54,6 +96,8 @@ const App = () => {
         if (enabled) {
             let tokenFirebase = (await messaging().getToken()).toString();
             registerDevice(tokenFirebase);
+            // console.log(tokenFirebase);
+            
         }
     };
 
@@ -64,10 +108,7 @@ const App = () => {
             fireNotification(remoteMessage.data);
         });
 
-        // Register background handler
-        messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
-            fireNotification(remoteMessage.data);
-        });
+
 
         const fireNotification = async (message: any) => {
             // Request permissions (required for iOS)
@@ -105,14 +146,6 @@ const App = () => {
                 'A notificação fez com que o aplicativo fosse aberto em segundo plano:',
                 remoteMessage.notification,
             );
-        });
-
-        notifee.onBackgroundEvent(async ({type, detail}) => {
-            const {notification, pressAction}: any = detail;
-            if (type === EventType.PRESS && pressAction?.id === 'inportant') {
-                await Linking.openURL(notification.data.url);
-                await notifee.cancelNotification(notification?.id);
-            }
         });
 
         notifee.onForegroundEvent(async ({type, detail}) => {

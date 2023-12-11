@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@expo-google-fonts/poppins": "^0.2.3",
+        "@expo/config-plugins": "~7.2.2",
         "@notifee/react-native": "^7.8.0",
         "@react-native-async-storage/async-storage": "1.18.2",
         "@react-native-community/datetimepicker": "7.2.0",
@@ -45,7 +46,7 @@
         "react": "18.2.0",
         "react-native": "0.72.6",
         "react-native-gesture-handler": "~2.12.0",
-        "react-native-get-random-values": "^1.9.0",
+        "react-native-get-random-values": "~1.9.0",
         "react-native-maps": "1.7.1",
         "react-native-modal-datetime-picker": "^17.1.0",
         "react-native-month-year-picker": "^1.9.0",
