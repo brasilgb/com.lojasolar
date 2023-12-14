@@ -1,4 +1,4 @@
-import {View, Text, Alert, BackHandler} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';

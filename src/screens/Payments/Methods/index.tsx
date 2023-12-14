@@ -21,7 +21,7 @@ const Methods = ({ route }: any) => {
     const { order } = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
-        
+        console.log(registeredOrder);
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,

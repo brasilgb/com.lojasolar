@@ -6,6 +6,7 @@ import {
     Image,
     Platform,
     ScrollView,
+    BackHandler,
 } from 'react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ButtonHome from '@components/ButtonHome';
@@ -15,7 +16,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -35,6 +36,17 @@ const Home = () => {
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
     const [carrocelData, setCarrocelData] = useState<any>([]);
+
+    function handleBackButtonClick() {
+        navigation.dispatch(DrawerActions.openDrawer());
+        return true;
+      }
+      useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
 
     useEffect(() => {
         async function getCarrocel() {
@@ -98,7 +110,7 @@ const Home = () => {
                     <View className="flex-1 py-8 bg-white border-y border-y-gray-100">
                     
                         <Carousel
-                            layout="tinder"
+                            layout="default"
                             // vertical={false}
                             layoutCardOffset={9}
                             ref={isCarousel}
@@ -106,15 +118,16 @@ const Home = () => {
                             renderItem={CarouselCardItem}
                             sliderWidth={SCREEN_WIDTH}
                             itemWidth={CAROUSEL_ITEM_WIDTH}
-                            // itemHeight={100}r
+                            // itemHeight={100}
                             inactiveSlideShift={0}
                             useScrollView={true}
                             onSnapToItem={(index: any) => setIndex(index)}
                             autoplay={true}
-                            autoplayDelay={1500}
-                            autoplayInterval={4000}
+                            // autoplayDelay={1500}
+                            // autoplayInterval={4000}
                             inactiveSlideScale={1}
                             loop={true}
+                            hasParallaxImages={true}
                         />
                     
                     </View>
@@ -129,8 +142,8 @@ const Home = () => {
                                 margin: 0,
                             }}
                             dotStyle={{
-                                width: 10,
-                                height: 10,
+                                width: 15,
+                                height: 15,
                                 borderRadius: 5,
                                 marginHorizontal: 0,
                                 backgroundColor: 'rgb(0, 174, 239)',
@@ -139,7 +152,7 @@ const Home = () => {
                             inactiveDotScale={0.6}
                             tappableDots={true}
                             containerStyle={{
-                                height: 10,
+                                height: 15,
                                 padding: 0,
                                 margin: 0,
                                 backgroundColor: '#FAFAFA',

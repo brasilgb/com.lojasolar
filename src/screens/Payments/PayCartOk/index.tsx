@@ -4,7 +4,6 @@ import {
     Image,
     TouchableOpacity,
     Platform,
-    BackHandler,
 } from 'react-native';
 import React from 'react';
 import AppLayout from '@components/AppLayout';

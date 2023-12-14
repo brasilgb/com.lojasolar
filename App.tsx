@@ -22,7 +22,7 @@ import notifee, {
     EventType,
 } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
-import {Linking, Platform} from 'react-native';
+import {Linking, Platform } from 'react-native';
 import serviceapp from '@services/serviceapp';
 import {AuthProvider} from '@contexts/auth';
 
@@ -60,7 +60,6 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
 });
 
 notifee.onBackgroundEvent(async ({type, detail}) => {
-    console.log(detail);
     const {notification, pressAction}: any = detail;
     if (type === EventType.PRESS && pressAction?.id === 'inportant') {
         await Linking.openURL(notification.data.url);
@@ -96,8 +95,7 @@ const App = () => {
         if (enabled) {
             let tokenFirebase = (await messaging().getToken()).toString();
             registerDevice(tokenFirebase);
-            // console.log(tokenFirebase);
-            
+            console.log(tokenFirebase); 
         }
     };
 

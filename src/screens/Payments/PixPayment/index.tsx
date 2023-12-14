@@ -4,13 +4,9 @@ import {
     Alert,
     Share,
     TouchableOpacity,
-    BackHandler,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import serviceapp from '@services/serviceapp';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {AuthContext} from '@contexts/auth';
 import * as Clipboard from 'expo-clipboard';
 import QRCode from 'react-native-qrcode-svg';
@@ -20,8 +16,6 @@ import {MaterialIcons} from '@expo/vector-icons';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 
 const PixPayment = ({route}: any) => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
     const {user, disconnect, setLoading} = useContext(AuthContext);
     const {order} = route?.params;
