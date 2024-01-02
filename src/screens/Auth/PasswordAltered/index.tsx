@@ -18,13 +18,13 @@ const PasswordAltered = ({route}: any) => {
                 />
                 <View className="flex-col items-center justify-center px-12 pt-4">
                     <View className="py-4 flex items-center justify-center ">
-                        <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
                             Enviamos uma nova senha para o seu e-mail
                         </Text>
-                        <Text className="my-4 font-PoppinsLight text-lg text-center text-solar-yellow-dark">
+                        <Text allowFontScaling={false} className="my-4 font-PoppinsLight text-lg text-center text-solar-yellow-dark">
                             {data}
                         </Text>
-                        <Text className="text-sm text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-sm text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
                             Acesse seu e-mail e entre com a sua nova senha, você
                             poderá alterar sua senha no menu Minha Conta.
                         </Text>
@@ -38,7 +38,7 @@ const PasswordAltered = ({route}: any) => {
                                 : 'shadow-sm shadow-black'
                         } py-3 rounded-full border-2 border-white `}
                     >
-                        <Text className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
                             Fazer login
                         </Text>
                     </TouchableOpacity>

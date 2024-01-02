@@ -111,23 +111,25 @@ const Home = () => {
                     
                         <Carousel
                             layout="default"
-                            // vertical={false}
                             layoutCardOffset={9}
                             ref={isCarousel}
                             data={carrocelData}
                             renderItem={CarouselCardItem}
                             sliderWidth={SCREEN_WIDTH}
                             itemWidth={CAROUSEL_ITEM_WIDTH}
-                            // itemHeight={100}
                             inactiveSlideShift={0}
                             useScrollView={true}
                             onSnapToItem={(index: any) => setIndex(index)}
                             autoplay={true}
-                            // autoplayDelay={1500}
-                            // autoplayInterval={4000}
+                            autoplayDelay={1500}
+                            autoplayInterval={4000}
                             inactiveSlideScale={1}
+                            inactiveSlideOpacity={1}
                             loop={true}
                             hasParallaxImages={true}
+                            decelerationRate={0.25}
+                            enableMomentum={true}
+                            lockScrollWhileSnapping={true}
                         />
                     
                     </View>
@@ -143,7 +145,7 @@ const Home = () => {
                             }}
                             dotStyle={{
                                 width: 15,
-                                height: 15,
+                                height: 10,
                                 borderRadius: 5,
                                 marginHorizontal: 0,
                                 backgroundColor: 'rgb(0, 174, 239)',

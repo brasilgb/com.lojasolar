@@ -100,7 +100,7 @@ const ButtonModal = ({
                 className={classnameButtom}
                 onPress={() => setModalVisible(true)}
             >
-                <Text className={classnameText}>{label}</Text>
+                <Text allowFontScaling={false} className={classnameText}>{label}</Text>
             </TouchableOpacity>
             <Modal
                 animationType="slide"
@@ -132,7 +132,7 @@ const ButtonModal = ({
                                     color={'#154295'}
                                 />
                             </TouchableOpacity>
-                            <Text className="text-base text-gray-700 font-PoppinsMedium">
+                            <Text allowFontScaling={false} className="text-base text-gray-700 font-PoppinsMedium">
                                 {text}
                             </Text>
                             <TouchableOpacity

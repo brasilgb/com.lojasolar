@@ -18,10 +18,10 @@ const NoRegistered = ({route}: any) => {
                 />
                 <View className="flex-col items-center justify-center px-12 pt-4">
                     <View className="py-4 flex items-center justify-center ">
-                        <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
                             Você ainda não possui um cadastro!
                         </Text>
-                        <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
                             Faça o seu cadastro nas Lojas Solar para acessar
                             todas as facilidades do aplicativo
                         </Text>
@@ -38,7 +38,7 @@ const NoRegistered = ({route}: any) => {
                                 : 'shadow-sm shadow-black'
                         } py-3 rounded-full border-2 border-white `}
                     >
-                        <Text className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
                             Iniciar cadastro
                         </Text>
                     </TouchableOpacity>

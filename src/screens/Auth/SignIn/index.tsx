@@ -35,10 +35,10 @@ const SignIn = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-2xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark py-4">
                         Para continuar o acesso
                     </Text>
-                    <Text className="text-base text-solar-blue-dark py-2">
+                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark py-2">
                         Informe seu CPF ou CNPJ
                     </Text>
                 </View>
@@ -60,7 +60,7 @@ const SignIn = () => {
                     }) => (
                         <View className="h-1/2 w-full mt-10">
                             <View className="mt-6">
-                                <Text className={LabelStyle}>CPF ou CNPJ</Text>
+                                <Text allowFontScaling={false} className={LabelStyle}>CPF ou CNPJ</Text>
                                 <TextInput
                                     className={InputStyle(
                                         touched.cpfcnpj,
@@ -72,7 +72,7 @@ const SignIn = () => {
                                     keyboardType="numeric"
                                 />
                                 {errors.cpfcnpj && touched.cpfcnpj && (
-                                    <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                    <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                         {errors.cpfcnpj}
                                     </Text>
                                 )}

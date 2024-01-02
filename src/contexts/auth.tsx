@@ -1,4 +1,4 @@
-import {Alert} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import React, {createContext, useCallback, useEffect, useState} from 'react';
 import * as Location from 'expo-location';
 import serviceapp from '../services/serviceapp';
@@ -65,10 +65,11 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             );
         }
         const {data} = response.data.resposta;
+        
         if (data.cadastroCliente && data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('CheckPassword', {
-                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
+                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente, codigoCliente: data.codigoCliente},
             });
         }
         if (!data.cadastroCliente && !data.cadastroSenha) {
@@ -86,7 +87,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
     };
 
     const checkPassword = useCallback(
-        async ({cpfcnpj, senha, nomeCliente, connected}: any) => {
+        async ({cpfcnpj, senha, nomeCliente, codigoCliente, connected}: any) => {
             setLoading(true);
             let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
             const response = await serviceapp.get(
@@ -114,6 +115,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             let userData = {
                 cpfCnpj: cpfcnpj,
                 nomeCliente: nomeCliente,
+                codigoCliente: codigoCliente,
                 token: data.token,
                 connected: connected,
             };

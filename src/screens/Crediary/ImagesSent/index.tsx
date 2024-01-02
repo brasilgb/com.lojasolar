@@ -18,10 +18,10 @@ const ImagesSent = () => {
                 />
                 <View className="flex-col items-center justify-center px-12 pt-4">
                     <View className="py-4 flex items-center justify-center ">
-                        <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
                             Obrigado por se registrar no crediário da Solar
                         </Text>
-                        <Text className="text-sm text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
+                        <Text allowFontScaling={false} className="text-sm text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
                             Suas informações serão analisadas pela equipe das
                             Lojas Solar e entraremos em contato.
                         </Text>
@@ -34,7 +34,7 @@ const ImagesSent = () => {
                                 : 'shadow-sm shadow-black'
                         } py-3 rounded-full border-2 border-white `}
                     >
-                        <Text className="text-lg font-Poppins_500Medium text-solar-blue-dark">
+                        <Text allowFontScaling={false} className="text-lg font-Poppins_500Medium text-solar-blue-dark">
                             Entendi
                         </Text>
                     </TouchableOpacity>

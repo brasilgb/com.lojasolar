@@ -174,10 +174,10 @@ const Crediary = () => {
                 >
                     <View className="flex-1 bg-solar-gray-dark px-4">
                         <View className="py-4 flex items-center border-b border-b-gray-300">
-                            <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4">
+                            <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4">
                                 Crediário
                             </Text>
-                            <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
                                 Preencha o formulário
                             </Text>
                             <View className="flex-row items-center justify-start w-full">
@@ -186,7 +186,7 @@ const Crediary = () => {
                                     size={20}
                                     color={'#f78888'}
                                 />
-                                <Text className="text-sm ml-1 text-gray-500">
+                                <Text allowFontScaling={false} className="text-sm ml-1 text-gray-500">
                                     Todos os dados são obrigatórios
                                 </Text>
                             </View>
@@ -219,7 +219,7 @@ const Crediary = () => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Nome da mãe
                                         </Text>
                                         <TextInput
@@ -235,14 +235,14 @@ const Crediary = () => {
                                             )}
                                         />
                                         {errors.nomeMae && touched.nomeMae && (
-                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                 {errors.nomeMae}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Gênero
                                         </Text>
                                         <Select
@@ -259,14 +259,14 @@ const Crediary = () => {
                                         />
 
                                         {errors.sexo && touched.sexo && (
-                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                 {errors.sexo}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Escolaridade
                                         </Text>
                                         <Select
@@ -289,14 +289,14 @@ const Crediary = () => {
 
                                         {errors.escolaridade &&
                                             touched.escolaridade && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.escolaridade}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Local de trabalho
                                         </Text>
                                         <TextInput
@@ -313,14 +313,14 @@ const Crediary = () => {
                                         />
                                         {errors.localTrabalho &&
                                             touched.localTrabalho && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.localTrabalho}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Estado civil
                                         </Text>
                                         <Select
@@ -343,7 +343,7 @@ const Crediary = () => {
 
                                         {errors.estadoCivil &&
                                             touched.estadoCivil && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.estadoCivil}
                                                 </Text>
                                             )}
@@ -352,7 +352,7 @@ const Crediary = () => {
                                     {estadoCivilSelected === 'Casado' && (
                                         <>
                                             <View className="mt-6">
-                                                <Text className={LabelStyle}>
+                                                <Text allowFontScaling={false} className={LabelStyle}>
                                                     Nome do conjuge
                                                 </Text>
                                                 <TextInput
@@ -371,14 +371,14 @@ const Crediary = () => {
                                                 />
                                                 {errors.nomeConjuge &&
                                                     touched.nomeConjuge && (
-                                                        <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                        <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                             {errors.nomeConjuge}
                                                         </Text>
                                                     )}
                                             </View>
 
                                             <View className="mt-6">
-                                                <Text className={LabelStyle}>
+                                                <Text allowFontScaling={false} className={LabelStyle}>
                                                     CPF do conjuge
                                                 </Text>
                                                 <TextInput
@@ -397,7 +397,7 @@ const Crediary = () => {
                                                 />
                                                 {errors.cpfConjuge &&
                                                     touched.cpfConjuge && (
-                                                        <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                        <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                             {errors.cpfConjuge}
                                                         </Text>
                                                     )}
@@ -406,7 +406,7 @@ const Crediary = () => {
                                     )}
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Profissão
                                         </Text>
                                         <Select
@@ -428,14 +428,14 @@ const Crediary = () => {
                                         />
                                         {errors.profissao &&
                                             touched.profissao && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.profissao}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Renda
                                         </Text>
                                         <TextInput
@@ -449,7 +449,7 @@ const Crediary = () => {
                                             onChangeText={handleChange('renda')}
                                         />
                                         {errors.renda && touched.renda && (
-                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                 {errors.renda}
                                             </Text>
                                         )}

@@ -61,18 +61,18 @@ const Twobillet = () => {
                 <View className="flex-row items-center justify-between">
                     <View className="flex-col flex-1">
                         <View className="w-full flex-row items-center justify-between mb-2">
-                            <Text className="text-base font-PoppinsRegular">
+                            <Text allowFontScaling={false} className="text-base font-PoppinsRegular">
                                 Ordem pagamento{' '}
                             </Text>
-                            <Text className="text-xl font-PoppinsBold text-solar-blue-dark">
+                            <Text allowFontScaling={false} className="text-xl font-PoppinsBold text-solar-blue-dark">
                                 {MoneyPTBR(parseFloat(item.valorOrdem))}
                             </Text>
                         </View>
                         <View className="w-full flex-row items-center justify-between">
-                            <Text className="text-base font-PoppinsMedium">
+                            <Text allowFontScaling={false} className="text-base font-PoppinsMedium">
                                 {item.numeroOrdem}
                             </Text>
-                            <Text className="text-base font-PoppinsRegular">
+                            <Text allowFontScaling={false} className="text-base font-PoppinsRegular">
                                 {item.dataEmissao}
                             </Text>
                         </View>
@@ -94,7 +94,7 @@ const Twobillet = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 bg-solar-gray-dark px-4">
                 <View className="pt-4 flex items-center border-b border-b-gray-300">
-                    <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium">
+                    <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium">
                         Segunda via boletos
                     </Text>
 
@@ -120,7 +120,7 @@ const Twobillet = () => {
                     </View>
                 ) : (
                     <View className="flex-col items-center justify-center">
-                        <Text className="text-base font-PoppinsBold text-solar-blue-dark px-3 py-4 text-center">
+                        <Text allowFontScaling={false} className="text-base font-PoppinsBold text-solar-blue-dark px-3 py-4 text-center">
                             Não existem boletos disponíveis para 2ª via
                         </Text>
                     </View>

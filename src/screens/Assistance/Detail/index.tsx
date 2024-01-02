@@ -54,10 +54,10 @@ const Detail = ({route}: any) => {
                     keyboardShouldPersistTaps="handled"
                 >
                     <View className="flex-col items-center justify-center">
-                        <Text className="text-3xl text-solar-blue-dark py-4 text-center px-16">
+                        <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4 text-center px-16">
                             Detalhes da assistência
                         </Text>
-                        <Text className="text-2xl text-solar-blue-dark font-PoppinsBold py-4 text-center mt-2">
+                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsBold py-4 text-center mt-2">
                             {data?.produto}
                         </Text>
                     </View>
@@ -68,22 +68,22 @@ const Detail = ({route}: any) => {
                                 className={`flex-row items-center justify-between bg-solar-gray-light py-2 ${ListStyle}`}
                             >
                                 <View className="w-full flex-col items-start justify-start mb-2">
-                                    <Text className="text-lg font-PoppinsBold">
+                                    <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                                         Abertura:
                                     </Text>
-                                    <Text className="text-lg font-Poppins_400Regular py-1">
+                                    <Text allowFontScaling={false} className="text-lg font-Poppins_400Regular py-1">
                                         {details.Abertura}
                                     </Text>
-                                    <Text className="text-lg font-PoppinsBold">
+                                    <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                                         Descrição:
                                     </Text>
-                                    <Text className="text-lg font-Poppins_400Regular py-1">
+                                    <Text allowFontScaling={false} className="text-lg font-Poppins_400Regular py-1">
                                         {details.defeito}
                                     </Text>
-                                    <Text className="text-lg font-PoppinsBold">
+                                    <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                                         Status:
                                     </Text>
-                                    <Text className="text-lg font-Poppins_400Regular pt-1">
+                                    <Text allowFontScaling={false} className="text-lg font-Poppins_400Regular pt-1">
                                         {details.status}
                                     </Text>
                                 </View>
@@ -110,7 +110,7 @@ const Detail = ({route}: any) => {
                                                                 : 'bg-gray-400'
                                                         } border-2 border-solar-gray-dark`}
                                                     />
-                                                    <Text className="text-sm font-PoppinsMedium text-solar-blue-dark ml-2">
+                                                    <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-solar-blue-dark ml-2">
                                                         {e?.xEventos}
                                                     </Text>
                                                 </View>

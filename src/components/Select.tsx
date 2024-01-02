@@ -142,7 +142,7 @@ const Select = ({
                                     color={'#154295'}
                                 />
                             </TouchableOpacity>
-                            <Text className="text-base text-gray-700 font-PoppinsMedium">
+                            <Text allowFontScaling={false} className="text-base text-gray-700 font-PoppinsMedium">
                                 {text}
                             </Text>
                             <TouchableOpacity

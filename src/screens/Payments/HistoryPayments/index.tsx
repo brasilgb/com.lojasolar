@@ -99,16 +99,16 @@ const HistoryPayments = () => {
                     <View className="flex-1 flex-col items-start">
                         <View className="flex-row">
                             <View className="w-3/5 pl-2">
-                                <Text className="text-sm font-PoppinsRegular pb-1">
+                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular pb-1">
                                     Parcela da compra
                                 </Text>
-                                <Text className="text-lg font-PoppinsMedium">
+                                <Text allowFontScaling={false} className="text-lg font-PoppinsMedium">
                                     {crediario.numeroCarne}
                                 </Text>
-                                <Text className="text-sm font-PoppinsRegular">
+                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular">
                                     {crediario.pagamento}
                                 </Text>
-                                <Text className="text-base font-PoppinsRegular pt-1">
+                                <Text allowFontScaling={false} className="text-base font-PoppinsRegular pt-1">
                                     Parcela{' '}
                                     {crediario.parcela.replace('/', ' de ')}
                                 </Text>
@@ -132,7 +132,7 @@ const HistoryPayments = () => {
                                     </Text>
                                 </View>
                                 <View className="flex items-end">
-                                    <Text className="text-2xl font-Poppins_700Bold mt-2 text-solar-blue-dark">
+                                    <Text allowFontScaling={false} className="text-2xl font-Poppins_700Bold mt-2 text-solar-blue-dark">
                                         {MoneyPTBR(parseFloat(crediario.vPago))}
                                     </Text>
                                 </View>
@@ -162,7 +162,7 @@ const HistoryPayments = () => {
             />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center mb-4">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
                         Meus pagamentos
                     </Text>
                 </View>
@@ -188,7 +188,7 @@ const HistoryPayments = () => {
 
                 <View className="flex-row items-center justify-between w-full mt-8 mb-4">
                     <View className="flex-1 pr-2">
-                        <Text className="text-lg font-PoppinsMedium text-gray-500 mb-1">
+                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-gray-500 mb-1">
                             Data Inicial
                         </Text>
                         <TouchableOpacity
@@ -199,7 +199,7 @@ const HistoryPayments = () => {
                                     : 'shadow-gray-400'
                             }`}
                         >
-                            <Text className="text-lg text-solar-blue-dark font-PoppinsMedium">
+                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
                                 {moment(dateIni).format('DD/MM/YYYY')}
                             </Text>
                             <MaterialCommunityIcons
@@ -211,7 +211,7 @@ const HistoryPayments = () => {
                     </View>
 
                     <View className="flex-1 pl-2">
-                        <Text className="text-lg font-PoppinsMedium text-gray-500 mb-1">
+                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-gray-500 mb-1">
                             Data Final
                         </Text>
                         <TouchableOpacity
@@ -222,7 +222,7 @@ const HistoryPayments = () => {
                                     : 'shadow-gray-400'
                             }`}
                         >
-                            <Text className="text-lg text-solar-blue-dark font-PoppinsMedium">
+                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
                                 {moment(dateFin).format('DD/MM/YYYY')}
                             </Text>
                             <MaterialCommunityIcons
@@ -240,7 +240,7 @@ const HistoryPayments = () => {
                                 source={require('@assets/images/no_payments_logo.png')}
                                 className="w-[172px] h-[139px] "
                             />
-                            <Text className="text-lg font-PoppinsMedium text-solar-blue-dark mt-4 px-3 text-center">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark mt-4 px-3 text-center">
                                 Você não possui nenhum pagamento em aberto.
                             </Text>
                         </View>

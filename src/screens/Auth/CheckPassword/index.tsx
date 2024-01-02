@@ -22,8 +22,7 @@ interface ValuesForm {
 const CheckPassword = ({route}: any) => {
     const {data} = route.params;
     const {setLoading, loading, checkPassword} = useContext(AuthContext);
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [isChecked, setChecked] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(true);
     const formatCpfCnpj = (num: string) => {
@@ -41,6 +40,7 @@ const CheckPassword = ({route}: any) => {
             nomeCliente: data.nomeCliente,
             senha: values.senha,
             connected: isChecked,
+            codigoCliente: data.codigoCliente,
         });
         resetForm();
     };
@@ -79,10 +79,10 @@ const CheckPassword = ({route}: any) => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-2xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark py-4">
                         Faça seu login
                     </Text>
-                    <Text className="text-base text-solar-blue-dark py-2">
+                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark py-2">
                         {formatCpfCnpj(data?.cpfCnpj)}
                     </Text>
                 </View>
@@ -104,7 +104,7 @@ const CheckPassword = ({route}: any) => {
                     }) => (
                         <View className="h-1/2 w-full mt-10">
                             <View className="mt-6">
-                                <Text className={LabelStyle}>Senha</Text>
+                                <Text allowFontScaling={false} className={LabelStyle}>Senha</Text>
                                 <View className="relative">
                                     <TextInput
                                         className={InputStyle(
@@ -146,7 +146,7 @@ const CheckPassword = ({route}: any) => {
                                     </View>
                                 </View>
                                 {errors.senha && touched.senha && (
-                                    <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                    <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                         {errors.senha}
                                     </Text>
                                 )}
@@ -172,7 +172,7 @@ const CheckPassword = ({route}: any) => {
                                                 />
                                             )}
                                         </View>
-                                        <Text className="text-sm font-PoppinsMedium text-gray-600">
+                                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-gray-600">
                                             Continuar logado
                                         </Text>
                                     </TouchableOpacity>
@@ -182,7 +182,7 @@ const CheckPassword = ({route}: any) => {
                                                 handlePassword(data.cpfCnpj)
                                             }
                                         >
-                                            <Text className="text-sm font-PoppinsMedium text-solar-yellow-dark underline">
+                                            <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-solar-yellow-dark underline">
                                                 Esqueci a senha
                                             </Text>
                                         </TouchableOpacity>

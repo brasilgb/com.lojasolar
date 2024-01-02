@@ -39,7 +39,7 @@ const PrivacyPolice = () => {
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
                         Política de privacidade
                     </Text>
                 </View>
@@ -57,7 +57,7 @@ const PrivacyPolice = () => {
                 )}
             </View>
             <View className="py-4 w-full bg-solar-blue-light">
-                <Text className="text-xs text-white text-center font-PoppinsRegular">
+                <Text allowFontScaling={false} className="text-xs text-white text-center font-PoppinsRegular">
                     Para saber mais sobre nossa política de privacidade acesse
                 </Text>
                 <TouchableOpacity
@@ -69,7 +69,7 @@ const PrivacyPolice = () => {
                     }
                 >
                     <MaterialIcons name="link" size={22} color={'#555'} />
-                    <Text className="text-xs pl-2 text-[#555] text-center font-PoppinsRegular py-2 underline">
+                    <Text allowFontScaling={false} className="text-xs pl-2 text-[#555] text-center font-PoppinsRegular py-2 underline">
                         Política de privacidade Lojas Solar
                     </Text>
                 </TouchableOpacity>

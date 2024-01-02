@@ -168,7 +168,7 @@ const Account = () => {
                     <View className="flex-1 bg-solar-gray-dark px-4">
                         <View className="py-4 flex-row items-center justify-center border-b border-b-gray-300">
                             <View className="flex-1">
-                                <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium text-center">
+                                <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium text-center">
                                     Meus dados
                                 </Text>
                             </View>
@@ -200,7 +200,7 @@ const Account = () => {
                                 >
                                     {accounts.nomeCliente}
                                 </Text>
-                                <Text className="text-base mr-4 w-60 text-solar-blue-dark font-Poppins_400Regular">
+                                <Text allowFontScaling={false} className="text-base mr-4 w-60 text-solar-blue-dark font-Poppins_400Regular">
                                     Confira seus dados abaixo e se necessário,
                                     atualize-os
                                 </Text>
@@ -244,7 +244,7 @@ const Account = () => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             CPF ou CNPJ
                                         </Text>
                                         <TextInput
@@ -255,7 +255,7 @@ const Account = () => {
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Nome completo
                                         </Text>
                                         <TextInput
@@ -272,14 +272,14 @@ const Account = () => {
                                         />
                                         {errors.nomeCliente &&
                                             touched.nomeCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.nomeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Endereço
                                         </Text>
                                         <TextInput
@@ -298,14 +298,14 @@ const Account = () => {
                                         />
                                         {errors.enderecoCliente &&
                                             touched.enderecoCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.enderecoCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>CEP</Text>
+                                        <Text allowFontScaling={false} className={LabelStyle}>CEP</Text>
                                         <TextInput
                                             className={InputStyle(
                                                 touched.cepCliente,
@@ -321,14 +321,14 @@ const Account = () => {
                                         />
                                         {errors.cepCliente &&
                                             touched.cepCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.cepCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Estado
                                         </Text>
                                         <Select
@@ -350,14 +350,14 @@ const Account = () => {
 
                                         {errors.ufCliente &&
                                             touched.ufCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.ufCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Cidade
                                         </Text>
                                         <Select
@@ -379,14 +379,14 @@ const Account = () => {
                                         />
                                         {errors.cidadeCliente &&
                                             touched.cidadeCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.cidadeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Celular
                                         </Text>
                                         <TextInput
@@ -409,14 +409,14 @@ const Account = () => {
                                         />
                                         {errors.celularCliente &&
                                             touched.celularCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.celularCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             E-mail
                                         </Text>
                                         <TextInput
@@ -433,14 +433,14 @@ const Account = () => {
                                         />
                                         {errors.emailCliente &&
                                             touched.emailCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.emailCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Data de nascimento
                                         </Text>
                                         <TextInput

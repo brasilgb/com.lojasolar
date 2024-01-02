@@ -83,7 +83,7 @@ const AlterPassword = () => {
                 >
                     <View className="px-4">
                         <View className="py-4 flex items-center justify-center">
-                            <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 pb-2 border-b border-b-gray-300 w-full text-center">
+                            <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 pb-2 border-b border-b-gray-300 w-full text-center">
                                 Alterar senha
                             </Text>
 
@@ -93,7 +93,7 @@ const AlterPassword = () => {
                                     size={20}
                                     color={'#f78888'}
                                 />
-                                <Text className="text-sm ml-1 text-gray-500">
+                                <Text allowFontScaling={false} className="text-sm ml-1 text-gray-500">
                                     Sua senha precisa ter no mínimo 6 caracteres
                                 </Text>
                             </View>
@@ -119,7 +119,7 @@ const AlterPassword = () => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Insira a senha atual
                                         </Text>
                                         <View className="relative">
@@ -168,13 +168,13 @@ const AlterPassword = () => {
                                         </View>
                                         {errors.senhaAnterior &&
                                             touched.senhaAnterior && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.senhaAnterior}
                                                 </Text>
                                             )}
                                     </View>
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Insira sua nova senha
                                         </Text>
                                         <View className="relative">
@@ -220,13 +220,13 @@ const AlterPassword = () => {
                                             </View>
                                         </View>
                                         {errors.senha && touched.senha && (
-                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                 {errors.senha}
                                             </Text>
                                         )}
                                     </View>
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Confirme sua nova senha
                                         </Text>
                                         <View className="relative">
@@ -275,7 +275,7 @@ const AlterPassword = () => {
                                         </View>
                                         {errors.repitaSenha &&
                                             touched.repitaSenha && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.repitaSenha}
                                                 </Text>
                                             )}

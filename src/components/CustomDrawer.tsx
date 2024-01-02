@@ -29,14 +29,14 @@ const CustomDrawer = (props: any) => {
                             size={50}
                             color={'#FAFAFA'}
                         />
-                        <Text className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
+                        <Text allowFontScaling={false} className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
                             {signed
                                 ? `Olá, ${user?.nomeCliente}`
                                 : 'Bem Vindo(a) '}
                         </Text>
                     </View>
 
-                    <Text className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular">
+                    <Text allowFontScaling={false} className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular">
                         {signed
                             ? 'Como podemos lhe ajudar hoje?'
                             : 'Faça o login e aproveite o melhor do aplicativo'}
@@ -61,7 +61,7 @@ const CustomDrawer = (props: any) => {
                             size={22}
                             color={'#e76464'}
                         />
-                        <Text className="ml-1 text-base text-[#e76464] font-PoppinsRegular">
+                        <Text allowFontScaling={false} className="ml-1 text-base text-[#e76464] font-PoppinsRegular">
                             Sair
                         </Text>
                     </TouchableOpacity>
@@ -76,7 +76,7 @@ const CustomDrawer = (props: any) => {
                             size={22}
                             color={'#154295'}
                         />
-                        <Text className="ml-1 text-base font-PoppinsRegular text-[#154295]">
+                        <Text allowFontScaling={false} className="ml-1 text-base font-PoppinsRegular text-[#154295]">
                             Login
                         </Text>
                     </TouchableOpacity>
@@ -88,7 +88,7 @@ const CustomDrawer = (props: any) => {
                     className="p-2"
                     onPress={() => navigation.navigate('Questions')}
                 >
-                    <Text className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
+                    <Text allowFontScaling={false} className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
                         Perguntas frequentes
                     </Text>
                 </TouchableOpacity>
@@ -96,7 +96,7 @@ const CustomDrawer = (props: any) => {
                     className="p-2"
                     onPress={() => navigation.navigate('PrivacyPolice')}
                 >
-                    <Text className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
+                    <Text allowFontScaling={false} className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
                         Política de privacidade
                     </Text>
                 </TouchableOpacity>

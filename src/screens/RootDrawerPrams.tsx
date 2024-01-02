@@ -36,4 +36,5 @@ export type RootDrawerParamList = {
     PayCartOk: undefined;
     DataExclude: {data: any};
     DataAnalise: {email: any};
+    VerifyVersion: undefined;
 };

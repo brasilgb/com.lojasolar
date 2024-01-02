@@ -49,10 +49,10 @@ const DataExclude = ({route}: any) => {
                 >
                     <View className=" px-4">
                         <View className="py-4 flex items-center border-b border-b-gray-300">
-                            <Text className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4">
+                            <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4">
                                 Exclusão de Dados
                             </Text>
-                            <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
                                 Preencha o formulário abaixo corretamente para
                                 iniciarmos o processo de exclusão de dados.
                             </Text>
@@ -81,7 +81,7 @@ const DataExclude = ({route}: any) => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Qual o motivo?
                                         </Text>
                                         <TextInput
@@ -97,14 +97,14 @@ const DataExclude = ({route}: any) => {
                                             multiline
                                         />
                                         {errors.motivo && touched.motivo && (
-                                            <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                 {errors.motivo}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             E-mail
                                         </Text>
                                         <TextInput
@@ -121,14 +121,14 @@ const DataExclude = ({route}: any) => {
                                         />
                                         {errors.emailCliente &&
                                             touched.emailCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.emailCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text className={LabelStyle}>
+                                        <Text allowFontScaling={false} className={LabelStyle}>
                                             Celular
                                         </Text>
                                         <TextInput
@@ -149,7 +149,7 @@ const DataExclude = ({route}: any) => {
                                         />
                                         {errors.celularCliente &&
                                             touched.celularCliente && (
-                                                <Text className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
                                                     {errors.celularCliente}
                                                 </Text>
                                             )}

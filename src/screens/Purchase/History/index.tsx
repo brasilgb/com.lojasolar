@@ -84,38 +84,38 @@ const History = () => {
             >
                 <View className="p-2 w-full">
                     <View className="flex-row mb-1">
-                        <Text className="w-28 text-lg font-PoppinsRegular">
+                        <Text allowFontScaling={false} className="w-28 text-lg font-PoppinsRegular">
                             Nota fiscal:
                         </Text>
-                        <Text className="text-lg font-PoppinsBold">
+                        <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                             {item.numero}
                         </Text>
                     </View>
 
                     <View className="flex-row mb-1">
                         <View className="flex-row w-28">
-                            <Text className="text-lg font-PoppinsRegular">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsRegular">
                                 Série:
                             </Text>
-                            <Text className="text-lg font-PoppinsBold">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                                 {item.serie}
                             </Text>
                         </View>
                         <View className="flex-row">
-                            <Text className="text-lg font-PoppinsRegular">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsRegular">
                                 Filial:
                             </Text>
-                            <Text className="text-lg font-PoppinsBold">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsBold">
                                 {item.filial}
                             </Text>
                         </View>
                     </View>
 
                     <View className="flex-row items-center justify-between w-full">
-                        <Text className="text-xl font-PoppinsRegular">
+                        <Text allowFontScaling={false} className="text-xl font-PoppinsRegular">
                             Data: {item.data}
                         </Text>
-                        <Text className="text-2xl font-PoppinsBold text-solar-blue-dark">
+                        <Text allowFontScaling={false} className="text-2xl font-PoppinsBold text-solar-blue-dark">
                             {item.valor}
                         </Text>
                     </View>
@@ -139,7 +139,7 @@ const History = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
                         Histórico de compras
                     </Text>
                     <TouchableOpacity
@@ -150,7 +150,7 @@ const History = () => {
                                 : 'shadow-gray-400'
                         }`}
                     >
-                        <Text className="flex-1 text-lg text-center text-solar-blue-dark font-PoppinsMedium">
+                        <Text allowFontScaling={false} className="flex-1 text-lg text-center text-solar-blue-dark font-PoppinsMedium">
                             {moment(date).format('MM/YYYY')}
                         </Text>
                         <MaterialCommunityIcons
@@ -162,7 +162,7 @@ const History = () => {
 
                     {historicos.length === 0 && (
                         <>
-                            <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
+                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
                                 Você não possui nenhum histórico de compras no
                                 momento
                             </Text>

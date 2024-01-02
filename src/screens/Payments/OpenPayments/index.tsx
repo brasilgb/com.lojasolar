@@ -194,16 +194,16 @@ const OpenPayments = () => {
                     <View className="flex-1 flex-col items-start">
                         <View className="flex-row">
                             <View className="flex-1 pl-2">
-                                <Text className="text-xs font-PoppinsRegular pb-1">
+                                <Text allowFontScaling={false} className="text-xs font-PoppinsRegular pb-1">
                                     Núm. do contrato
                                 </Text>
-                                <Text className="text-sm font-PoppinsMedium">
+                                <Text allowFontScaling={false} className="text-sm font-PoppinsMedium">
                                     {crediario.numeroCarne}
                                 </Text>
-                                <Text className="text-xs font-PoppinsRegular">
+                                <Text allowFontScaling={false} className="text-xs font-PoppinsRegular">
                                     {crediario.vencimento}
                                 </Text>
-                                <Text className="text-sm font-PoppinsRegular pt-1">
+                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular pt-1">
                                     Parcela{' '}
                                     {crediario.parcela.replace('/', ' de ')}
                                 </Text>
@@ -237,21 +237,21 @@ const OpenPayments = () => {
                                         crediario.acrescimo > 0 ? '' : 'mt-4'
                                     }`}
                                 >
-                                    <Text className="text-base text-gray-400 font-PoppinsRegular">
+                                    <Text allowFontScaling={false} className="text-base text-gray-400 font-PoppinsRegular">
                                         Valor:{' '}
                                         {MoneyPTBR(
                                             parseFloat(crediario.vlprest),
                                         )}
                                     </Text>
                                     {crediario.acrescimo > 0 && (
-                                        <Text className="text-xs text-red-500 font-PoppinsRegular">
+                                        <Text allowFontScaling={false} className="text-xs text-red-500 font-PoppinsRegular">
                                             Juros:{' '}
                                             {MoneyPTBR(
                                                 parseFloat(crediario.acrescimo),
                                             )}
                                         </Text>
                                     )}
-                                    <Text className="text-lg font-PoppinsBold text-solar-blue-dark">
+                                    <Text allowFontScaling={false} className="text-lg font-PoppinsBold text-solar-blue-dark">
                                         {MoneyPTBR(parseFloat(crediario.total))}
                                     </Text>
                                 </View>
@@ -273,10 +273,10 @@ const OpenPayments = () => {
                 <View className="flex-row">
                     <View className="flex-1 flex-col pl-4 pt-8">
                         <View className="flex-row items-center">
-                            <Text className="text-gray-100 text-base">
+                            <Text allowFontScaling={false} className="text-gray-100 text-base">
                                 Total:{' '}
                             </Text>
-                            <Text className="text-white text-lg font-PoppinsBold">
+                            <Text allowFontScaling={false} className="text-white text-lg font-PoppinsBold">
                                 {MoneyPTBR(
                                     arrayValues.reduce(
                                         (soma: any, value: any) => {
@@ -287,7 +287,7 @@ const OpenPayments = () => {
                                 )}
                             </Text>
                         </View>
-                        <Text className="text-gray-100 text-base mt-2">
+                        <Text allowFontScaling={false} className="text-gray-100 text-base mt-2">
                             {arrayIndex.length} parcelas
                         </Text>
                     </View>
@@ -313,7 +313,7 @@ const OpenPayments = () => {
                             }}
                             className="bg-solar-orange-middle rounded-md py-4 my-10 mr-4 items-center px-8"
                         >
-                            <Text className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
                                 PAGAR
                             </Text>
                         </TouchableOpacity>
@@ -328,7 +328,7 @@ const OpenPayments = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center mb-4">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
                         Meus pagamentos
                     </Text>
                 </View>
@@ -374,7 +374,7 @@ const OpenPayments = () => {
                                 />
                             )}
                         </View>
-                        <Text className="ml-2 text-base font-PoppinsRegular text-solar-yellow-dark">
+                        <Text allowFontScaling={false} className="ml-2 text-base font-PoppinsRegular text-solar-yellow-dark">
                             Selecionar todos
                         </Text>
                     </TouchableOpacity>

@@ -147,10 +147,10 @@ const Methods = ({ route }: any) => {
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
                         Pagamento
                     </Text>
-                    <Text className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
+                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
                         Escolha sua forma de pagamento
                     </Text>
                 </View>
@@ -161,10 +161,10 @@ const Methods = ({ route }: any) => {
                         <View
                             className={`flex-col items-center justify-center w-full`}
                         >
-                            <Text className="text-lg font-PoppinsRegular text-solar-blue-dark">
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsRegular text-solar-blue-dark">
                                 Valor total do pagamento{' '}
                             </Text>
-                            <Text className="text-4xl font-PoppinsMedium text-solar-blue-dark mt-8 mb-2">
+                            <Text allowFontScaling={false} className="text-4xl font-PoppinsMedium text-solar-blue-dark mt-8 mb-2">
                                 {MoneyPTBR(
                                     parseFloat(
                                         order.valueTotal
@@ -183,7 +183,7 @@ const Methods = ({ route }: any) => {
                                 source={require('@assets/images/pix.png')}
                                 className="w-6 h-6"
                             />
-                            <Text className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Pagar com PIX
                             </Text>
                         </View>
@@ -195,7 +195,7 @@ const Methods = ({ route }: any) => {
                                 size={26}
                                 color={'#154295'}
                             />
-                            <Text className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Pagar com boleto
                             </Text>
                         </View>
@@ -211,7 +211,7 @@ const Methods = ({ route }: any) => {
                                 size={26}
                                 color={'#154295'}
                             />
-                            <Text className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Pagar com cartão de crédito
                             </Text>
                         </View>

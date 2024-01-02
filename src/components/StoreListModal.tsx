@@ -26,10 +26,10 @@ const StoreListModal = ({dataModal}: StoreListProps) => {
                 >
                     {item.cidade}
                 </Text>
-                <Text className={`text-base text-gray-700 font-PoppinsRegular`}>
+                <Text allowFontScaling={false} className={`text-base text-gray-700 font-PoppinsRegular`}>
                     {item.endereco}
                 </Text>
-                <Text className={`text-base text-gray-700 font-PoppinsRegular`}>
+                <Text allowFontScaling={false} className={`text-base text-gray-700 font-PoppinsRegular`}>
                     {item.email}
                 </Text>
                 <View className="flex-row items-center justify-between border-t border-gray-200 mt-2 py-2">

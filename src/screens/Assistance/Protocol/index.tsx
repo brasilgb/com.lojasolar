@@ -53,15 +53,15 @@ const Protocols = () => {
                 <View className="py-2 w-full flex-row items-center justify-between">
                     <View className="flex-col">
                         <View className="w-full flex-row m-2">
-                            <Text className="text-xl font-PoppinsBold">
+                            <Text allowFontScaling={false} className="text-xl font-PoppinsBold">
                                 Protocolo:{' '}
                             </Text>
-                            <Text className="text-xl font-PoppinsBold">
+                            <Text allowFontScaling={false} className="text-xl font-PoppinsBold">
                                 {item.nProtocolo}
                             </Text>
                         </View>
                         <View className="w-full m-2">
-                            <Text className="text-xl font-Poppins_400Regular">
+                            <Text allowFontScaling={false} className="text-xl font-Poppins_400Regular">
                                 {item.produto}
                             </Text>
                         </View>
@@ -83,7 +83,7 @@ const Protocols = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text className="text-3xl text-solar-blue-dark py-4 text-center px-16">
+                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4 text-center px-16">
                         Protocolo de Assistência Técnica
                     </Text>
                     {protocols.length === 0 && (
@@ -91,11 +91,11 @@ const Protocols = () => {
                             <Image
                                 source={require('@assets/images/icon_support_chat.png')}
                             />
-                            <Text className="text-xl text-solar-blue-dark font-PoppinsMedium mb-4 pt-8 text-center">
+                            <Text allowFontScaling={false} className="text-xl text-solar-blue-dark font-PoppinsMedium mb-4 pt-8 text-center">
                                 Você não possui nenhum pedido de manutenção no
                                 momento
                             </Text>
-                            <Text className="text-sm text-solar-blue-dark font-PoppinsMedium mb-4 pt-8 text-center">
+                            <Text allowFontScaling={false} className="text-sm text-solar-blue-dark font-PoppinsMedium mb-4 pt-8 text-center">
                                 Caso tenha alguma dúvida entre em contato com
                                 nosso SAC e teremos prazer em lhe ajudar
                             </Text>
