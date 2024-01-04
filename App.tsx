@@ -27,11 +27,7 @@ import serviceapp from '@services/serviceapp';
 import { AuthProvider } from '@contexts/auth';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
-    // fireNotification(remoteMessage.data);
-    // Request permissions (required for iOS)
-    // console.log(remoteMessage.data);
     await notifee.requestPermission();
-    //   // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
         id: 'important',
         name: 'NotificacoesImportantes',
@@ -82,8 +78,7 @@ const App = () => {
                 );
             }
             let tokendevice: any = await SecureStore.getItemAsync('secure_deviceid');
-            console.log(JSON.parse(tokendevice));
-            
+            // console.log(JSON.parse(tokendevice));
         };
         getUidDevice();
     }, []);
@@ -160,6 +155,7 @@ const App = () => {
     const registerDevice = useCallback(async (pushToken:any) => {
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
         let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
+
         await serviceapp
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(tokenId)}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${process.env.EXPO_PUBLIC_APP_VERSION?.replace(
@@ -195,7 +191,6 @@ const App = () => {
                 setAppIsReady(true);
             }
         }
-
         prepare();
     }, []);
 
