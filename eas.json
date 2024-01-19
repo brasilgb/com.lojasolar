@@ -15,11 +15,3 @@
         }
     }
 }
-
-// {
-//     "build": {
-//       "preview": {
-//         "distribution": "internal"
-//       }
-//     }
-//   }
