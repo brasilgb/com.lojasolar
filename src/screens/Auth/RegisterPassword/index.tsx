@@ -6,7 +6,6 @@ import {
     Platform,
     TextInput,
     Alert,
-    Keyboard,
 } from 'react-native';
 import React, { useCallback, useContext, useState } from 'react';
 import AppLayout from '@components/AppLayout';

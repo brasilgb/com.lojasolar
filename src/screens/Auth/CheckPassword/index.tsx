@@ -1,30 +1,27 @@
-import {View, Text, Keyboard, TextInput, Alert} from 'react-native';
-import React, {useCallback, useContext, useState} from 'react';
+import { View, Text, TextInput, Alert } from 'react-native';
+import React, { useCallback, useContext, useState } from 'react';
 import AppLayout from '@components/AppLayout';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import schema from './schema';
-import {AuthContext} from '@contexts/auth';
-import {MaterialIcons} from '@expo/vector-icons';
-import {cnpj, cpf} from 'cpf-cnpj-validator';
+import { AuthContext } from '@contexts/auth';
+import { MaterialIcons } from '@expo/vector-icons';
+import { cnpj, cpf } from 'cpf-cnpj-validator';
 import AppLoading from '@components/AppLoading';
-import {InputStyle, LabelStyle} from '@components/InputStyle';
+import { InputStyle, LabelStyle } from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import serviceapp from '@services/serviceapp';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 
-interface ValuesForm {
-    senha: string;
-}
-
-const CheckPassword = ({route}: any) => {
-    const {data} = route.params;
-    const {setLoading, loading, checkPassword} = useContext(AuthContext);
+const CheckPassword = ({ route }: any) => {
+    const { data } = route.params;
+    const { setLoading, loading, checkPassword } = useContext(AuthContext);
     const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [isChecked, setChecked] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(true);
+
     const formatCpfCnpj = (num: string) => {
         if (num.length < 12) {
             return cpf.format(num);
@@ -34,7 +31,7 @@ const CheckPassword = ({route}: any) => {
         }
     };
 
-    const onsubmit = async (values: ValuesForm, {resetForm}: any) => {
+    const onsubmit = async (values: any) => {
         await checkPassword({
             cpfcnpj: data.cpfCnpj,
             nomeCliente: data.nomeCliente,
@@ -42,7 +39,6 @@ const CheckPassword = ({route}: any) => {
             connected: isChecked,
             codigoCliente: data.codigoCliente,
         });
-        resetForm();
     };
 
     const handlePassword = (cpfCnpj: any) => {
@@ -50,13 +46,13 @@ const CheckPassword = ({route}: any) => {
             'Atenção',
             'Você deseja recuperar sua senha?',
             [
-                {text: 'Sim', onPress: () => resetPassword(cpfCnpj)},
+                { text: 'Sim', onPress: () => resetPassword(cpfCnpj) },
                 {
                     text: 'Não',
                     style: 'cancel',
                 },
             ],
-            {cancelable: false},
+            { cancelable: false },
         );
     };
 
@@ -65,12 +61,12 @@ const CheckPassword = ({route}: any) => {
         const response = await serviceapp.get(
             `(WS_RECUPERA_SENHA)?cpfcnpj=${cpfCnpj}`,
         );
-        const {success, message, data} = response.data.resposta;
+        const { success, message, data } = response.data.resposta;
         if (!success) {
             Alert.alert('Atenção', message);
             return;
         }
-        navigation.navigate('PasswordAltered', {data: data.email});
+        navigation.navigate('PasswordAltered', { data: data.email });
         setLoading(false);
     }, []);
 
@@ -157,11 +153,10 @@ const CheckPassword = ({route}: any) => {
                                         className="flex-row items-center justify-start"
                                     >
                                         <View
-                                            className={`border-2 rounded ${
-                                                isChecked
+                                            className={`border-2 rounded ${isChecked
                                                     ? 'border-solar-orange-middle bg-solar-orange-middle'
                                                     : 'border-gray-600'
-                                            }  h-4 w-4 mr-2`}
+                                                }  h-4 w-4 mr-2`}
                                         >
                                             {isChecked && (
                                                 <MaterialIcons

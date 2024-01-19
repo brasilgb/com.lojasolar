@@ -19,7 +19,6 @@ import serviceapp from '@services/serviceapp';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { err } from 'react-native-svg/lib/typescript/xml';
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const CAROUSEL_VERTICAL_OUTPUT = 1;

@@ -27,7 +27,7 @@ interface FormProps {
 const DataExclude = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {setLoading, loading} = useContext(AuthContext);
+    const {loading} = useContext(AuthContext);
     const {data} = route.params;
 
     const onsubmit = async (values: FormProps, {resetForm}: any) => {

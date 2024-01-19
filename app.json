@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Loja Solar",
+    "name": "Lojas Solar",
     "slug": "comlojasolar",
-    "version": "1.2.5",
+    "version": "1.2.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",

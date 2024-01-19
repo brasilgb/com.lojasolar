@@ -10,14 +10,12 @@ import {
 import AppLayout from '@components/AppLayout';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 
 const VerifyVersion = ({ route }: any) => {
     const { data } = route.params;
-    if (data) {
-        useEffect(() => {
-            BackHandler.addEventListener('hardwareBackPress', function () { return true });
-        }, []);
-    }
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
     return (
         <AppLayout>
@@ -38,7 +36,8 @@ const VerifyVersion = ({ route }: any) => {
                         <Text allowFontScaling={false} className='text-sm font-semibold '>Versão atual: {data.atual}</Text>
                         <Text allowFontScaling={false} className='text-sm font-semibold '>Versão indicada: {data.nova}</Text>
                     </View>
-                    <View className='w-full'><TouchableOpacity
+                    <View className='w-full flex '>
+                        <TouchableOpacity
                         onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.loja.solar')}
                         className={`flex items-center justify-center w-full bg-solar-orange-middle ${Platform.OS == 'ios'
                             ? 'shadow-sm shadow-gray-300'
@@ -46,7 +45,15 @@ const VerifyVersion = ({ route }: any) => {
                             } py-3 rounded-full border-2 border-white `}
                     >
                         <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
-                            Atualizar
+                            Atualizar agora
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Home')}
+                        className={`flex items-center justify-center w-full mt-8`}
+                    >
+                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-solar-gray-500 underline">
+                            Gostaria de atualizar mais tarde
                         </Text>
                     </TouchableOpacity>
                     </View>

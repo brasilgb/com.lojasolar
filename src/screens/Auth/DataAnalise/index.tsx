@@ -5,15 +5,13 @@ import {
     TouchableOpacity,
     Platform,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {MaterialIcons} from '@expo/vector-icons';
 
 const DataAnalise = ({route}: any) => {
-    const {email} = route.params;
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 

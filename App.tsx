@@ -12,9 +12,7 @@ import {
 } from '@expo-google-fonts/poppins';
 import Routes from './src/routes';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import * as SecureStore from 'expo-secure-store';
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 import notifee, {
     AndroidBadgeIconType,
     AndroidImportance,
@@ -25,6 +23,8 @@ import messaging from '@react-native-firebase/messaging';
 import { Linking, Platform } from 'react-native';
 import serviceapp from '@services/serviceapp';
 import { AuthProvider } from '@contexts/auth';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DeviceInfo from "react-native-device-info";
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     await notifee.requestPermission();
@@ -66,21 +66,17 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
     const [pushToken, setPushToken] = useState('');
+    const [userStore, setUserStore] = useState<any>([]);
 
+    // console.log(user?.codigoCliente);
     useEffect(() => {
-        const getUidDevice = async () => {
-            let uuid = uuidv4();
-            let fetchUUID = await SecureStore.getItemAsync('secure_deviceid');
-            if (fetchUUID === null) {
-                await SecureStore.setItemAsync(
-                    'secure_deviceid',
-                    JSON.stringify(uuid),
-                );
+        const getUserStore = async () => {
+            const user = await AsyncStorage.getItem('Auth_user');
+            if (user) {
+                setUserStore(JSON.parse(user));
             }
-            let tokendevice: any = await SecureStore.getItemAsync('secure_deviceid');
-            // console.log(JSON.parse(tokendevice));
         };
-        getUidDevice();
+        getUserStore();
     }, []);
 
     //*******Notifications push************************************************************** */
@@ -97,8 +93,9 @@ const App = () => {
     };
 
     useEffect(() => {
+       
         requestUserPermission();
-        registerDevice(pushToken);
+        registerDevice(pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             fireNotification(remoteMessage.data);
         });
@@ -149,19 +146,17 @@ const App = () => {
             }
         });
         return unsubscribe;
-    }, [pushToken]);
+    }, [pushToken, userStore]);
 
     // Registra ID do dispositivo e push token firbase
-    const registerDevice = useCallback(async (pushToken:any) => {
+    const registerDevice = useCallback(async (pushToken: any, codcli:any) => {
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
-        let tokenId: any = await SecureStore.getItemAsync('secure_deviceid');
+        let deviceId = DeviceInfo.getDeviceId();
+        let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g,'');
 
         await serviceapp
             .get(
-                `(WS_GRAVA_DEVICE)?deviceId=${JSON.parse(tokenId)}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${process.env.EXPO_PUBLIC_APP_VERSION?.replace(
-                    /\./g,
-                    '',
-                )}`,
+                `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}&codcli=${codcli}`,
             )
             .then(response => {
                 // console.log(response.data.resposta);

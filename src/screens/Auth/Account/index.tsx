@@ -11,7 +11,7 @@ import {
 import React, { useContext, useEffect, useState } from 'react';
 import AppLayout from '@components/AppLayout';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Formik, replace } from 'formik';
+import { Formik } from 'formik';
 import { InputStyle, LabelStyle } from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
