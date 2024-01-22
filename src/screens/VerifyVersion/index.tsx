@@ -26,6 +26,7 @@ const VerifyVersion = ({ route }: any) => {
             Linking.openURL('https://apps.apple.com/br/app/loja-solar/id6468680373');
         }
     }
+    
     return (
         <AppLayout>
             <View className="flex-1 bg-solar-gray-dark pt-4">
