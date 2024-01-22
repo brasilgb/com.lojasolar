@@ -19,14 +19,14 @@ const VerifyVersion = ({ route }: any) => {
 
     const handlerVersioning = () => {
         const os = Platform.OS;
-        if(os === 'android'){
+        if (os === 'android') {
             Linking.openURL('https://play.google.com/store/apps/details?id=com.loja.solar');
         }
-        if(os === 'ios'){
+        if (os === 'ios') {
             Linking.openURL('https://apps.apple.com/br/app/loja-solar/id6468680373');
         }
     }
-    
+
     return (
         <AppLayout>
             <View className="flex-1 bg-solar-gray-dark pt-4">
@@ -48,24 +48,24 @@ const VerifyVersion = ({ route }: any) => {
                     </View>
                     <View className='w-full flex '>
                         <TouchableOpacity
-                        onPress={handlerVersioning}
-                        className={`flex items-center justify-center w-full bg-solar-orange-middle ${Platform.OS == 'ios'
-                            ? 'shadow-sm shadow-gray-300'
-                            : 'shadow-sm shadow-black'
-                            } py-3 rounded-full border-2 border-white `}
-                    >
-                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
-                            Atualizar agora
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('Home')}
-                        className={`flex items-center justify-center w-full mt-8`}
-                    >
-                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-solar-gray-500 underline">
-                            Gostaria de atualizar mais tarde
-                        </Text>
-                    </TouchableOpacity>
+                            onPress={handlerVersioning}
+                            className={`flex items-center justify-center w-full bg-solar-orange-middle ${Platform.OS == 'ios'
+                                ? 'shadow-sm shadow-gray-300'
+                                : 'shadow-sm shadow-black'
+                                } py-3 rounded-full border-2 border-white `}
+                        >
+                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                                Atualizar agora
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Home')}
+                            className={`flex items-center justify-center w-full mt-8`}
+                        >
+                            <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-solar-gray-500 underline">
+                                Gostaria de atualizar mais tarde
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
