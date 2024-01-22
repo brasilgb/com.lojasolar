@@ -82,8 +82,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     const checkPassword = async ({ cpfcnpj, senha, nomeCliente, codigoCliente, connected }: any) => {
             setLoading(true);
-            let deviceId = DeviceInfo.getDeviceId();
-            const response = await serviceapp.get(`(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceId}`);
+            const devid: any = DeviceInfo.getUniqueId();
+            const response = await serviceapp.get(`(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${devid?._j}`);
 
             if (response.status !== 200) {
                 setLoading(false);

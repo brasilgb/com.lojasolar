@@ -68,7 +68,6 @@ const App = () => {
     const [pushToken, setPushToken] = useState('');
     const [userStore, setUserStore] = useState<any>([]);
 
-    // console.log(user?.codigoCliente);
     useEffect(() => {
         const getUserStore = async () => {
             const user = await AsyncStorage.getItem('Auth_user');
@@ -93,7 +92,6 @@ const App = () => {
     };
 
     useEffect(() => {
-
         requestUserPermission();
         registerDevice(pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
         const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -150,8 +148,9 @@ const App = () => {
 
     // Registra ID do dispositivo e push token firbase
     const registerDevice = useCallback(async (pushToken: any, codcli: any) => {
+        const devid: any = DeviceInfo.getUniqueId();
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
-        let deviceId = DeviceInfo.getDeviceId();
+        let deviceId = devid?._j;
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
 
         await serviceapp
