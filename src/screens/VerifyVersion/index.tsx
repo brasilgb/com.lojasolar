@@ -17,6 +17,15 @@ const VerifyVersion = ({ route }: any) => {
     const { data } = route.params;
     const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
+    const handlerVersioning = () => {
+        const os = Platform.OS;
+        if(os === 'android'){
+            Linking.openURL('https://play.google.com/store/apps/details?id=com.loja.solar');
+        }
+        if(os === 'ios'){
+            Linking.openURL('https://apps.apple.com/br/app/loja-solar/id6468680373');
+        }
+    }
     return (
         <AppLayout>
             <View className="flex-1 bg-solar-gray-dark pt-4">
@@ -38,7 +47,7 @@ const VerifyVersion = ({ route }: any) => {
                     </View>
                     <View className='w-full flex '>
                         <TouchableOpacity
-                        onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.loja.solar')}
+                        onPress={handlerVersioning}
                         className={`flex items-center justify-center w-full bg-solar-orange-middle ${Platform.OS == 'ios'
                             ? 'shadow-sm shadow-gray-300'
                             : 'shadow-sm shadow-black'
