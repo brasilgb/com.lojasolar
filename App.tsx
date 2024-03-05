@@ -59,7 +59,6 @@ notifee.onBackgroundEvent(async ({ type, detail }) => {
     const { notification, pressAction }: any = detail;
     if (type === EventType.PRESS && pressAction?.id === 'inportant') {
         await Linking.openURL(notification.data.url);
-        await notifee.cancelNotification(notification?.id);
     }
 });
 
@@ -140,7 +139,6 @@ const App = () => {
             const { notification, pressAction }: any = detail;
             if (type === EventType.PRESS && pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
-                await notifee.cancelNotification(notification.id);
             }
         });
         return unsubscribe;

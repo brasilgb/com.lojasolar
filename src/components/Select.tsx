@@ -85,7 +85,7 @@ const Select = ({
             setSearch(text);
         } else {
             setFilteredData(data);
-            setSearch(text);
+            setSearch('');
         }
     };
 
@@ -166,9 +166,7 @@ const Select = ({
                                     <TextInput
                                         className="py-1 px-4 placeholder:text-base placeholder:text-gray-600 text-base text-gray-600 w-[94%]"
                                         placeholder="Digite sua busca"
-                                        onChangeText={text =>
-                                            searchFilter(text)
-                                        }
+                                        onChangeText={text => searchFilter(text)}
                                         value={search}
                                     />
                                 </View>
