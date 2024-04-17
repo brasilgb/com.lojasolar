@@ -21,7 +21,6 @@ const Methods = ({ route }: any) => {
     const { order } = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
-        console.log(registeredOrder);
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,
@@ -193,7 +192,7 @@ const Methods = ({ route }: any) => {
                             <MaterialCommunityIcons
                                 name="barcode"
                                 size={26}
-                                color={'#154295'}
+                                color={'#0d3b85'}
                             />
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Pagar com boleto
@@ -209,7 +208,7 @@ const Methods = ({ route }: any) => {
                             <MaterialCommunityIcons
                                 name="credit-card"
                                 size={26}
-                                color={'#154295'}
+                                color={'#0d3b85'}
                             />
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Pagar com cartão de crédito

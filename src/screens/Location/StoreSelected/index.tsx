@@ -124,7 +124,7 @@ const StoreSelected = ({route}: any) => {
                         >
                             <MaterialIcons
                                 name="alt-route"
-                                color="#154295"
+                                color="#0d3b85"
                                 size={30}
                             />
                             <Text

@@ -72,7 +72,7 @@ const ButtonModal = ({
                 {item}
             </Text>
             {item === selected && (
-                <MaterialIcons name="check" size={22} color={'#154295'} />
+                <MaterialIcons name="check" size={22} color={'#0d3b85'} />
             )}
         </TouchableOpacity>
     );
@@ -129,7 +129,7 @@ const ButtonModal = ({
                                 <MaterialIcons
                                     name="arrow-back-ios"
                                     size={22}
-                                    color={'#154295'}
+                                    color={'#0d3b85'}
                                 />
                             </TouchableOpacity>
                             <Text allowFontScaling={false} className="text-base text-gray-700 font-PoppinsMedium">
@@ -141,7 +141,7 @@ const ButtonModal = ({
                                 <MaterialIcons
                                     name="close"
                                     size={22}
-                                    color={'#154295'}
+                                    color={'#0d3b85'}
                                 />
                             </TouchableOpacity>
                         </View>

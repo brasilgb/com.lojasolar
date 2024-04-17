@@ -11,7 +11,7 @@ const AppLoading = ({visible}: LoadingProps) => {
             <View className="flex-1 items-center justify-center">
                 <ActivityIndicator
                     size="large"
-                    color={'#154295'}
+                    color={'#0d3b85'}
                     animating={true}
                 />
             </View>

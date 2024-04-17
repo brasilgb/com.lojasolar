@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     Platform,
     Linking,
-    BackHandler,
 } from 'react-native';
 import AppLayout from '@components/AppLayout';
 import { FontAwesome } from '@expo/vector-icons';
@@ -69,7 +68,6 @@ const VerifyVersion = ({ route }: any) => {
                     </View>
                 </View>
             </View>
-
         </AppLayout>
     );
 };

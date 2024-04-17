@@ -102,7 +102,7 @@ const Twobillet = () => {
                         <MaterialCommunityIcons
                             name="barcode"
                             size={60}
-                            color={'#154295'}
+                            color={'#0d3b85'}
                         />
                     </View>
                 </View>

@@ -191,7 +191,7 @@ const Account = () => {
                             <MaterialIcons
                                 name="account-circle"
                                 size={50}
-                                color={'#154295'}
+                                color={'#0d3b85'}
                             />
                             <View>
                                 <Text

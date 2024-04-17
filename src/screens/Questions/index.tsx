@@ -30,7 +30,7 @@ const Questions = () => {
                     screenOptions={{
                         tabBarLabelStyle: {fontSize: 14},
                         tabBarItemStyle: {width: 150},
-                        tabBarStyle: {backgroundColor: '#00AEEF'},
+                        tabBarStyle: {backgroundColor: '#1a9cd9'},
                         tabBarGap: 10,
                         tabBarActiveTintColor: '#fff',
                         tabBarIndicatorStyle: {backgroundColor: '#fff'},

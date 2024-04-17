@@ -47,6 +47,8 @@ import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import Connected from '@screens/Connected';
 import DataAnalise from '@screens/Auth/DataAnalise';
 import VerifyVersion from "@screens/VerifyVersion";
+import DocsAssign from "@screens/DocsAssign";
+import ViewDoc from "@screens/DocsAssign/ViewDoc";
 // import VerifyVersion from "@screens/VerifyVersion";
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -54,7 +56,7 @@ const Drawer = createDrawerNavigator<RootDrawerParamList>();
 function LogoTitle() {
     return (
         <Image
-            className={`w-28 h-10 ${Platform.OS === 'ios' ? 'mb-2' : ''}`}
+            className={`w-52 h-10 ${Platform.OS === 'ios' ? 'mb-2' : ''}`}
             source={require('@assets/logosolar.png')}
         />
     );
@@ -137,12 +139,12 @@ const DrawerRoutes = () => {
                 headerShown: true,
                 title: '',
                 headerStyle: {
-                    backgroundColor: '#00AEEF',
+                    backgroundColor: '#1a9cd9',
                 },
                 drawerStyle: {
                     backgroundColor: '#F8F8F8',
                 },
-                headerTintColor: modalVisible ? '#00AEEF' : 'white',
+                headerTintColor: modalVisible ? '#1a9cd9' : 'white',
                 headerTitleAlign: 'center',
                 drawerActiveBackgroundColor: 'transparent',
                 drawerActiveTintColor: '#666565',
@@ -243,6 +245,27 @@ const DrawerRoutes = () => {
                                 />
                             ),
                             drawerLabel: 'Alterar senha',
+                            headerTitle: (props: any) => (
+                                <LogoTitle {...props} />
+                            ),
+                        }}
+                    />
+
+                    <Drawer.Screen
+                        name="DocsAssign"
+                        component={DocsAssign}
+                        options={{
+                            drawerItemStyle: {
+                                marginVertical: 1,
+                            },
+                            drawerIcon: ({ color, size }) => (
+                                <MaterialCommunityIcons
+                                    name="file-document-edit"
+                                    color={color}
+                                    size={22}
+                                />
+                            ),
+                            drawerLabel: 'Assinar documentos',
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),
@@ -791,9 +814,21 @@ const DrawerRoutes = () => {
                     headerTitle: (props: any) => <LogoTitle {...props} />,
                 }}
             />
+
             <Drawer.Screen
                 name="DataExclude"
                 component={DataExclude}
+                options={{
+                    drawerItemStyle: {
+                        height: 0,
+                    },
+                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                }}
+            />
+
+            <Drawer.Screen
+                name="ViewDoc"
+                component={ViewDoc}
                 options={{
                     drawerItemStyle: {
                         height: 0,

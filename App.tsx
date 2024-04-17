@@ -149,6 +149,7 @@ const App = () => {
         const devid: any = DeviceInfo.getUniqueId();
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
         let deviceId = devid?._j;
+        // let deviceId = '0000000';
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
 
         await serviceapp

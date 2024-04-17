@@ -74,9 +74,9 @@ const CustomDrawer = (props: any) => {
                         <MaterialIcons
                             name="logout"
                             size={22}
-                            color={'#154295'}
+                            color={'#0d3b85'}
                         />
-                        <Text allowFontScaling={false} className="ml-1 text-base font-PoppinsRegular text-[#154295]">
+                        <Text allowFontScaling={false} className="ml-1 text-base font-PoppinsRegular text-[#0d3b85]">
                             Login
                         </Text>
                     </TouchableOpacity>

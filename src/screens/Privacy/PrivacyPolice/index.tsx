@@ -11,14 +11,14 @@ import WebView from 'react-native-webview';
 import * as WebBrowser from 'expo-web-browser';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {MaterialIcons} from '@expo/vector-icons';
-
+ 
 export const VIEW_WIDTH = Dimensions.get('window').width;
 const PrivacyPolice = () => {
     function LoadingIndicatorView() {
         return (
             <ActivityIndicator
                 size="large"
-                color={'#154295'}
+                color={'#0d3b85'}
                 animating={true}
             />
         );
@@ -27,7 +27,7 @@ const PrivacyPolice = () => {
         uri: 'http://services.gruposolar.com.br:8082/midias/img/politica.html',
     };
 
-    let colorBar = Platform.OS === 'ios' ? 'rgba(0, 162, 227, 0)' : '#00AEEF';
+    let colorBar = Platform.OS === 'ios' ? 'rgba(0, 162, 227, 0)' : '#1a9cd9';
     const handlePressButtonAsync = async (url: any) => {
         let result = await WebBrowser.openBrowserAsync(url, {
             toolbarColor: colorBar,

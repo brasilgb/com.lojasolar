@@ -16,9 +16,7 @@ import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const OpenPayments = () => {
     const {loading, setLoading, user, disconnect} = useContext(AuthContext);
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const isFocused = useIsFocused();
     const [crediarios, setCrediarios] = useState<any>([]);
     const [showModalParcelas, setShowModalParcelas] = useState(false);

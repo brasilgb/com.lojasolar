@@ -19,6 +19,8 @@ import serviceapp from '@services/serviceapp';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const CAROUSEL_VERTICAL_OUTPUT = 1;
@@ -85,7 +87,7 @@ const Home = () => {
         getCarrocel();
     }, []);
 
-    let colorBar = Platform.OS === 'ios' ? 'rgba(0, 162, 227, 0)' : '#00AEEF';
+    let colorBar = Platform.OS === 'ios' ? 'rgba(0, 162, 227, 0)' : '#1a9cd9';
     const handlePressButtonAsync = async (url: any) => {
         let result = await WebBrowser.openBrowserAsync(url, {
             toolbarColor: colorBar,
@@ -194,7 +196,7 @@ const Home = () => {
                 >
                     <ButtonHome
                         label="Comprar"
-                        icon="shopping-basket"
+                        icon={<MaterialIcons name="shopping-basket" size={30} color="#FAFAFA" />}
                         nav={() =>
                             handlePressButtonAsync(
                                 'https://www.lojasolar.com.br/',
@@ -202,8 +204,17 @@ const Home = () => {
                         }
                     />
                     <ButtonHome
+                        label="Assinar Doc."
+                        icon={<MaterialCommunityIcons name="file-document-edit" size={30} color="#FAFAFA" />}
+                        nav={() =>
+                            signed
+                                ? navigation.navigate('DocsAssign')
+                                : navigation.navigate('SignIn')
+                        }
+                    />
+                    <ButtonHome
                         label="Pagamentos"
-                        icon="attach-money"
+                        icon={<MaterialIcons name="attach-money" size={30} color="#FAFAFA" />}
                         nav={() =>
                             signed
                                 ? navigation.navigate('OpenPayments')
@@ -212,7 +223,7 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="2 via Boleto"
-                        icon="qr-code"
+                        icon={<MaterialIcons name="qr-code" size={30} color="#FAFAFA" />}
                         nav={() =>
                             signed
                                 ? navigation.navigate('Twobillet')
@@ -221,14 +232,14 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Lojas"
-                        icon="location-on"
+                        icon={<MaterialIcons name="location-on" size={30} color="#FAFAFA" />}
                         nav={() =>
                             navigation.navigate('StoresLocation', { data: false })
                         }
                     />
                     <ButtonHome
                         label="Assistência"
-                        icon="handyman"
+                        icon={<MaterialIcons name="handyman" size={30} color="#FAFAFA" />}
                         nav={() =>
                             signed
                                 ? navigation.navigate('Protocol')
@@ -237,12 +248,12 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Fale conosco"
-                        icon="perm-phone-msg"
+                        icon={<MaterialIcons name="perm-phone-msg" size={30} color="#FAFAFA" />}
                         nav={() => navigation.navigate('Contact')}
                     />
                     <ButtonHome
                         label="Historico"
-                        icon="history"
+                        icon={<MaterialIcons name="history" size={30} color="#FAFAFA" />}
                         nav={() =>
                             signed
                                 ? navigation.navigate('History')

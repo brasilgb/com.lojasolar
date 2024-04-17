@@ -28,7 +28,7 @@ const PayCartOk = () => {
                             Cartão de crédito
                         </Text>
                     </View>
-                    <MaterialIcons name="check" size={120} color={'#154295'} />
+                    <MaterialIcons name="check" size={120} color={'#0d3b85'} />
                     <Text allowFontScaling={false} className="text-sm text-solar-blue-dark font-PoppinsRegular mt-6 text-center">
                         Cobrança gerada com sucesso!
                     </Text>

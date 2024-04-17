@@ -66,7 +66,7 @@ const PixPayment = ({route}: any) => {
         Clipboard.setStringAsync(`${qrPix}`);
         // Toast.show('QRCode copiado para a área de transferência!', {
         //     containerStyle: {
-        //         backgroundColor: '#00AEEF',
+        //         backgroundColor: '#1a9cd9',
         //         borderRadius: 15,
         //     },
         //     textStyle: {
@@ -149,7 +149,7 @@ const PixPayment = ({route}: any) => {
                             <MaterialIcons
                                 name="file-copy"
                                 size={26}
-                                color={'#154295'}
+                                color={'#0d3b85'}
                             />
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 PIX copia e cola
@@ -161,7 +161,7 @@ const PixPayment = ({route}: any) => {
                             <MaterialIcons
                                 name="send"
                                 size={26}
-                                color={'#154295'}
+                                color={'#0d3b85'}
                             />
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
                                 Compartilhar PIX

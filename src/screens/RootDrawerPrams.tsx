@@ -37,4 +37,6 @@ export type RootDrawerParamList = {
     DataExclude: {data: any};
     DataAnalise: {email: any};
     VerifyVersion: {data: any};
+    DocsAssign: undefined;
+    ViewDoc: {data: any};
 };
