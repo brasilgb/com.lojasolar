@@ -21,9 +21,9 @@ import notifee, {
 } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { Linking, Platform } from 'react-native';
-import serviceapp from '@services/serviceapp';
 import { AuthProvider } from '@contexts/auth';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import serviceapp from "@services/serviceapp";
 import DeviceInfo from "react-native-device-info";
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {

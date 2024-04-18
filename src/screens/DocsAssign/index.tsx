@@ -1,13 +1,13 @@
 import { View, Text, Pressable } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from "@contexts/auth"
-import docscanner from '../../services/docscanner';
 import AppLayout from "@components/AppLayout";
 import AppLoading from "@components/AppLoading";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import docscanner from "@services/docscanner";
 type Props = {}
 
 const DocsAssign = (props: Props) => {

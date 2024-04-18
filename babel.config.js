@@ -6,8 +6,8 @@ module.exports = function (api) {
             'react-native-reanimated/plugin',
             'nativewind/babel',
             ['@babel/plugin-transform-flow-strip-types'],
-            ['@babel/plugin-proposal-decorators', {legacy: true}],
-            ['@babel/plugin-proposal-class-properties', {loose: true}],
+            ['@babel/plugin-proposal-decorators', { legacy: true }],
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
             [
                 'module-resolver',
                 {
@@ -15,8 +15,8 @@ module.exports = function (api) {
                         '@components': './src/components',
                         '@contexts': './src/contexts',
                         '@screens': './src/screens',
+                        '@services': './src/services',
                         '@assets': './assets',
-                        '@services': './services',
                     },
                     extensions: ['.js', '.jsx', '.ts', '.tsx'],
                 },

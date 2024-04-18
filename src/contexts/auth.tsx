@@ -1,13 +1,13 @@
 import { Alert } from 'react-native';
 import React, { createContext, useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import serviceapp from '../services/serviceapp';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({} as any);
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import DeviceInfo from "react-native-device-info";
+import serviceapp from "@services/serviceapp";
 
 interface AuthContextProps {
     children: React.ReactNode;

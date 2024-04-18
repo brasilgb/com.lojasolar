@@ -8,8 +8,8 @@
             "@screens/*": ["src/screens/*"],
             "@contexts/*": ["src/contexts/*"],
             "@utils/*": ["src/contexts/*"],
+            "@services/*": ["src/services/*"],
             "@assets/*": ["assets/*"],
-            "@services/*": ["services/*"]
         }
     },
     "include": ["**/*.ts", "**/*.tsx", "config-info-plist.js"],
