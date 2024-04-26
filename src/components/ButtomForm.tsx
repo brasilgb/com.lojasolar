@@ -1,4 +1,4 @@
-import {View, Text, Platform} from 'react-native';
+import {Text, Platform} from 'react-native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 

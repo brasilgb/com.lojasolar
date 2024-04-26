@@ -17,7 +17,6 @@ const SlipPayment = ({route}: any) => {
     const {order} = route?.params;
     const Amount = order.Detail.Amount;
     const url = order.Detail.PaymentObject.Url;
-console.log(Amount);
 
     const sharingUrl = async () => {
         try {

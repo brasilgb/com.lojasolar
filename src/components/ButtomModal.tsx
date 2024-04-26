@@ -28,7 +28,6 @@ interface ButtonModalProps {
 }
 
 const ButtonModal = ({
-    onChangeSelect,
     text,
     data,
     label,

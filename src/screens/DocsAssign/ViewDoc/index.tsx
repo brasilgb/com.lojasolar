@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 import { View } from "react-native";
-type Props = {}
 
 const ViewDoc = ({ route }: any) => {
     const { data } = route?.params;

@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
-const DataAnalise = ({route}: any) => {
+const DataAnalise = () => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 

@@ -16,8 +16,6 @@ import AppLayout from '@components/AppLayout';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {MaterialIcons} from '@expo/vector-icons';
 
-type Props = {};
-
 const StoreSelected = ({route}: any) => {
     const {data} = route?.params;
     const navigation =

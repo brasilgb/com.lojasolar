@@ -2,7 +2,6 @@ import {
     View,
     Text,
     Alert,
-    Keyboard,
     TextInput,
     KeyboardAvoidingView,
     ScrollView,

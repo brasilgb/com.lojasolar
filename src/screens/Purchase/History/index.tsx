@@ -4,7 +4,6 @@ import {
     Alert,
     Image,
     TouchableOpacity,
-    Dimensions,
     Platform,
 } from 'react-native';
 import React, {useCallback, useContext, useEffect, useState} from 'react';

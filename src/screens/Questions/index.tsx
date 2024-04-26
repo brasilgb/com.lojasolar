@@ -10,7 +10,7 @@ import Comercial from './Comercial';
 const Tab = createMaterialTopTabNavigator();
 
 const Questions = () => {
-    const {loading, setLoading} = useContext(AuthContext);
+    const {loading} = useContext(AuthContext);
     return (
         <AppLayout>
             <AppLoading visible={loading} />

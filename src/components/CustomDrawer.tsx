@@ -1,26 +1,26 @@
-import React, {useContext} from 'react';
-import {View, Text, ImageBackground, Image} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text } from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItemList,
     DrawerNavigationProp,
 } from '@react-navigation/drawer';
-import {MaterialIcons} from '@expo/vector-icons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {AuthContext} from '@contexts/auth';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AuthContext } from '@contexts/auth';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 
 const CustomDrawer = (props: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {signed, user, signOut} = useContext(AuthContext);
+    const { signed, user, signOut } = useContext(AuthContext);
 
     return (
         <View className="flex-1">
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={{backgroundColor: '#009FE3'}}
+                contentContainerStyle={{ backgroundColor: '#009FE3' }}
             >
                 <View className="p-3 mb-3">
                     <View className="flex-row items-center justify-start w-60">

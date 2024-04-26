@@ -8,9 +8,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootDrawerParamList } from "@screens/RootDrawerPrams";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import docscanner from "@services/docscanner";
-type Props = {}
 
-const DocsAssign = (props: Props) => {
+const DocsAssign = () => {
   const { user, setLoading, loading } = useContext(AuthContext);
   const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
   const [assignDocs, setAssignDocs] = useState<any>([]);

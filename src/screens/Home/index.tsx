@@ -7,7 +7,6 @@ import {
     Platform,
     ScrollView,
     BackHandler,
-    Alert,
 } from 'react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ButtonHome from '@components/ButtonHome';

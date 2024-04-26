@@ -3,9 +3,7 @@ import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {Image} from 'react-native';
 
-type Props = {};
-
-const Contact = (props: Props) => {
+const Contact = () => {
     return (
         <AppLayout>
             <View className="flex-grow items-center justify-start bg-solar-gray-dark">

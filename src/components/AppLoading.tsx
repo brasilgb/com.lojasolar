@@ -1,4 +1,4 @@
-import {View, Text, Modal, ActivityIndicator, Platform} from 'react-native';
+import {View, Modal, ActivityIndicator} from 'react-native';
 import React from 'react';
 
 interface LoadingProps {
