@@ -6,8 +6,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({} as any);
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import DeviceInfo from "react-native-device-info";
 import serviceapp from "@services/serviceapp";
+import DeviceInfo from "react-native-device-info";
+import * as SecureStore from 'expo-secure-store';
 
 interface AuthContextProps {
     children: React.ReactNode;
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     // Armazena usuário no storage
     async function storageUser(data: any) {
         await AsyncStorage.setItem('Auth_user', JSON.stringify(data));
+        await SecureStore.setItemAsync('device_info', data);
     }
 
     useEffect(() => {
@@ -109,6 +111,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
                 codigoCliente: codigoCliente,
                 token: data.token,
                 connected: connected,
+                deviceid: devid?._j
             };
             setLoading(false);
             storageUser(userData);

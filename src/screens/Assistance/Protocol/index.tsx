@@ -70,7 +70,7 @@ const Protocols = () => {
                         <MaterialIcons
                             name="arrow-forward-ios"
                             size={30}
-                            color="#F18800"
+                            color="#F99F1E"
                         />
                     </View>
                 </View>

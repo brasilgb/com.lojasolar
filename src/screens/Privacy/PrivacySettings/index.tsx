@@ -116,7 +116,7 @@ const PrivacySettings = () => {
                         </View>
                         <View>
                             <Switch
-                                trackColor={{false: '#a5a5a5', true: '#F18800'}}
+                                trackColor={{false: '#a5a5a5', true: '#F99F1E'}}
                                 thumbColor={
                                     isEnabledNotify ? '#FFF' : '#f4f3f4'
                                 }
@@ -136,7 +136,7 @@ const PrivacySettings = () => {
                         </View>
                         <View>
                             <Switch
-                                trackColor={{false: '#a5a5a5', true: '#F18800'}}
+                                trackColor={{false: '#a5a5a5', true: '#F99F1E'}}
                                 thumbColor={isEnabledEmail ? '#FFF' : '#f4f3f4'}
                                 ios_backgroundColor="#a5a5a5"
                                 value={isEnabledEmail}

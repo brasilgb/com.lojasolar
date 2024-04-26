@@ -140,6 +140,7 @@ const DrawerRoutes = () => {
                 title: '',
                 headerStyle: {
                     backgroundColor: '#1a9cd9',
+                    height: 100
                 },
                 drawerStyle: {
                     backgroundColor: '#F8F8F8',
@@ -147,8 +148,8 @@ const DrawerRoutes = () => {
                 headerTintColor: modalVisible ? '#1a9cd9' : 'white',
                 headerTitleAlign: 'center',
                 drawerActiveBackgroundColor: 'transparent',
-                drawerActiveTintColor: '#666565',
-                drawerInactiveTintColor: '#666565',
+                drawerActiveTintColor: '#0d3b85',
+                drawerInactiveTintColor: '#0d3b85',
                 drawerLabelStyle: {
                     marginLeft: -25,
                     fontFamily: 'Poppins_400Regular',

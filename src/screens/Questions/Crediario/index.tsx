@@ -75,7 +75,7 @@ const Crediario = () => {
                                             <MaterialIcons
                                                 name="expand-less"
                                                 size={30}
-                                                color="#F18800"
+                                                color="#F99F1E"
                                             />
                                         </View>
                                     </TouchableOpacity>

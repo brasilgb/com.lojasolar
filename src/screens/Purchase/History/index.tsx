@@ -155,7 +155,7 @@ const History = () => {
                         <MaterialCommunityIcons
                             name="calendar-month"
                             size={32}
-                            color="#F18800"
+                            color="#F99F1E"
                         />
                     </TouchableOpacity>
 
