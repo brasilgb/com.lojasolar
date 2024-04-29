@@ -18,12 +18,20 @@ const DocsAssign = () => {
   useEffect(() => {
     const getAssignDocs = async () => {
       setLoading(true);
-      const result = await docscanner.post('(WS_SIGNATURES_BY_CUSTOMER)', {
-        code: user?.codigoCliente
-      });
-      const { signatures } = result.data.response;
-      setAssignDocs(signatures);
-      setLoading(false);
+      await docscanner.post('(WS_SIGNATURES_BY_CUSTOMER)', {
+          code: user?.codigoCliente
+        })
+        .then((res) => {
+          const { signatures } = res.data.response;
+          if(signatures === undefined){
+            setAssignDocs([]);
+            return;
+          }
+          setAssignDocs(signatures);
+        })
+        .catch((err) => {
+          console.log(err);
+        }).finally(() => setLoading(false))
     };
     if (isFocused) {
       getAssignDocs();
