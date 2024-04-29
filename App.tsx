@@ -24,7 +24,6 @@ import { Linking, Platform } from 'react-native';
 import { AuthProvider } from '@contexts/auth';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import serviceapp from "@services/serviceapp";
-import * as SecureStore from 'expo-secure-store';
 import DeviceInfo from "react-native-device-info";
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
@@ -67,7 +66,6 @@ const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
     const [pushToken, setPushToken] = useState('');
     const [userStore, setUserStore] = useState<any>([]);
-    const [infoSecureStore, setInfoSecureStore] = useState<any>([]);
 
     useEffect(() => {
         const getUserStore = async () => {
@@ -79,13 +77,6 @@ const App = () => {
         getUserStore();
     }, []);
 
-    useEffect(() => {
-        const getSecurStore = async () => {
-            let deviceinf: any = await SecureStore.getItemAsync('device_info');
-            setInfoSecureStore(JSON.parse(deviceinf))
-        };
-        getSecurStore();
-    }, []);
     //*******Notifications push************************************************************** */
     const requestUserPermission = async () => {
         const authStatus = await messaging().requestPermission();
@@ -160,12 +151,6 @@ const App = () => {
         let deviceId = devid?._j;
         // let deviceId = '0000000';
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
-
-        console.warn('codcli', codcli);
-        // console.warn('deviceos', deviceos);
-        // console.warn('deviceId', deviceId);
-        // console.warn('versaoapp', versaoapp);
-        // console.log('pushToken', pushToken);
 
         await serviceapp
             .get(
