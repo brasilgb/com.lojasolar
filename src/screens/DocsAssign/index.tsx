@@ -51,7 +51,7 @@ const DocsAssign = () => {
           </Text>
         </View>
         <View className="flex-col items-center justify-center w-full px-2">
-          {!assignDocs &&
+          {assignDocs.length < 1 &&
             <View className="bg-solar-blue-light py-2 px-4 rounded">
               <Text className="text-sm text-solar-gray-light">Não há documentos a serem assinados</Text>
             </View>
