@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import ButtonHome from '@components/ButtonHome';
 import AppLayout from '@components/AppLayout';
 import * as WebBrowser from 'expo-web-browser';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel, { Pagination } from 'react-native-snap-carousel-v4';
 import { AuthContext } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';

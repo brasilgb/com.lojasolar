@@ -9,7 +9,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import serviceapp from '@services/serviceapp';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Carousel from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel-v4';
 import ButtonModal from '@components/ButtomModal';
 import StoreListModal from '@components/StoreListModal';
 
