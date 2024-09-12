@@ -34,7 +34,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     });
 
     // Display a notification
-    await notifee.displayNotification({
+    await notifee.displayNotification({ 
         title: remoteMessage.data.title,
         body: remoteMessage.data.body,
         data: {
@@ -149,9 +149,7 @@ const App = () => {
         const devid: any = DeviceInfo.getUniqueId();
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
         let deviceId = devid?._j;
-        // let deviceId = '0000000';
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
-
         await serviceapp
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}&codcli=${codcli}`,

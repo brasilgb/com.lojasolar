@@ -3,7 +3,7 @@ import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {MaterialIcons} from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
-import Toast from 'react-native-tiny-toast';
+// import Toast from 'react-native-tiny-toast';
 import * as WebBrowser from 'expo-web-browser';
 import {ListStyle} from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
@@ -35,20 +35,20 @@ const ActionBillet = ({route}: any) => {
 
     const fetchCopiedUrl = async () => {
         Clipboard.setStringAsync(url);
-        Toast.show('Link copiado para a área de transferência!', {
-            containerStyle: {
-                backgroundColor: '#1a9cd9',
-                borderRadius: 15,
-            },
-            textStyle: {
-                color: '#fff',
-            },
-            imgStyle: {},
-            mask: false,
-            maskStyle: {},
-            duration: 2000,
-            animation: true,
-        });
+        // Toast.show('Link copiado para a área de transferência!', {
+        //     containerStyle: {
+        //         backgroundColor: '#1a9cd9',
+        //         borderRadius: 15,
+        //     },
+        //     textStyle: {
+        //         color: '#fff',
+        //     },
+        //     imgStyle: {},
+        //     mask: false,
+        //     maskStyle: {},
+        //     duration: 2000,
+        //     animation: true,
+        // });
     };
 
     let colorBar = Platform.OS === 'ios' ? 'rgba(0, 162, 227, 0)' : '#009FE3';

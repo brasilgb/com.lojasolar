@@ -131,9 +131,9 @@ const Home = () => {
                         </Text>
                     </View>
                     <View className="flex-1 py-8 bg-white border-y border-y-gray-100">
-
                         <Carousel
-                            layout="default"
+                            vertical={false}
+                            layout='default'
                             layoutCardOffset={9}
                             ref={isCarousel}
                             data={carrocelData}
@@ -150,9 +150,6 @@ const Home = () => {
                             inactiveSlideOpacity={1}
                             loop={true}
                             hasParallaxImages={true}
-                            decelerationRate={0.25}
-                            enableMomentum={true}
-                            lockScrollWhileSnapping={true}
                         />
 
                     </View>
