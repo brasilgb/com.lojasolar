@@ -26,6 +26,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import serviceapp from "@services/serviceapp";
 import DeviceInfo from "react-native-device-info";
 
+import { v4 as uuid } from 'uuid';
+import * as SecureStore from 'expo-secure-store';
+import * as Application from 'expo-application';
+
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     await notifee.requestPermission();
     const channelId = await notifee.createChannel({
@@ -34,7 +38,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     });
 
     // Display a notification
-    await notifee.displayNotification({ 
+    await notifee.displayNotification({
         title: remoteMessage.data.title,
         body: remoteMessage.data.body,
         data: {
@@ -66,6 +70,33 @@ const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
     const [pushToken, setPushToken] = useState('');
     const [userStore, setUserStore] = useState<any>([]);
+    const [deviceKeyStore, setDeviceKeyStore] = useState<string>('');
+
+    useEffect(() => {
+        const getKeyDevice = async () => {
+            const newUniqueId = Platform.OS === 'android'
+                ? Application.getAndroidId()  ?? uuid()
+                : await Application.getIosIdForVendorAsync() ?? uuid();
+
+            let uniqueId = null;
+            try {
+                uniqueId = await SecureStore.getItemAsync('uniqueId');
+            } catch (error) {
+                console.log(error);
+            }
+            try {
+                if (!uniqueId) {
+                    uniqueId = newUniqueId;
+                    await SecureStore.setItemAsync('uniqueId', JSON.stringify(uniqueId));
+                }
+            } catch (error) {
+                uniqueId = newUniqueId;
+                console.log(error);
+            }
+            setDeviceKeyStore(JSON.parse(uniqueId));
+        }
+        getKeyDevice();
+    }, []);
 
     useEffect(() => {
         const getUserStore = async () => {
@@ -92,7 +123,7 @@ const App = () => {
 
     useEffect(() => {
         requestUserPermission();
-        registerDevice(pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
+        registerDevice(deviceKeyStore,pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             fireNotification(remoteMessage.data);
         });
@@ -142,25 +173,24 @@ const App = () => {
             }
         });
         return unsubscribe;
-    }, [pushToken, userStore]);
+    }, [deviceKeyStore, pushToken, userStore]);
 
     // Registra ID do dispositivo e push token firbase
-    const registerDevice = useCallback(async (pushToken: any, codcli: any) => {
-        const devid: any = DeviceInfo.getUniqueId();
+    async function registerDevice(deviceKeyStore: string, pushToken: any, codcli: any) {
+        
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
-        let deviceId = devid?._j;
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
         await serviceapp
             .get(
-                `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}&codcli=${codcli}`,
+                `(WS_GRAVA_DEVICE)?deviceId=${deviceKeyStore}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}&codcli=${codcli}`,
             )
             .then(response => {
-                console.log(response.data.resposta);
+                console.log(response.data.resposta.success);
             })
             .catch(err => {
                 console.log(err);
             });
-    }, []);
+    };
 
     useEffect(() => {
         async function prepare() {

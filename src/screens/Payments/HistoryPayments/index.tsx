@@ -1,23 +1,23 @@
-import {View, Text, Platform, Alert, Image} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import { View, Text, Platform, Alert, Image } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
 import ButtonPayament from '@components/ButtonPayament';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {AuthContext} from '@contexts/auth';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { AuthContext } from '@contexts/auth';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import moment from 'moment';
 import serviceapp from '@services/serviceapp';
-import {FlashList} from '@shopify/flash-list';
+import { FlashList } from '@shopify/flash-list';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {ListStyle} from '@components/InputStyle';
+import { ListStyle } from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const HistoryPayments = () => {
-    const {loading, setLoading, user, disconnect} = useContext(AuthContext);
+    const { loading, setLoading, user, disconnect } = useContext(AuthContext);
 
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
@@ -42,7 +42,7 @@ const HistoryPayments = () => {
                     )}`,
                 )
                 .then(response => {
-                    const {success, message, token, data} =
+                    const { success, message, token, data } =
                         response.data.resposta;
                     setLoading(false);
                     if (!token) {
@@ -90,7 +90,7 @@ const HistoryPayments = () => {
         hideDatePicker2();
     };
 
-    const RenderItem = ({crediario}: any) => {
+    const RenderItem = ({ crediario }: any) => {
         return (
             <View
                 className={`flex-row items-center justify-between bg-solar-gray-light my-1 ${ListStyle} py-4 `}
@@ -108,31 +108,15 @@ const HistoryPayments = () => {
                                 <Text allowFontScaling={false} className="text-sm font-PoppinsRegular">
                                     {crediario.pagamento}
                                 </Text>
-                                <Text allowFontScaling={false} className="text-base font-PoppinsRegular pt-1">
-                                    Parcela{' '}
-                                    {crediario.parcela.replace('/', ' de ')}
-                                </Text>
                             </View>
                             <View className="w-2/5 flex items-center justify-between">
-                                <View
-                                    className={`${
-                                        crediario.vPago > 0
-                                            ? 'bg-solar-blue-light'
-                                            : ''
-                                    }  rounded-md mb-2 py-2 px-6`}
-                                >
-                                    <Text
-                                        className={`text-base font-PoppinsRegular ${
-                                            crediario.vPago > 0
-                                                ? 'text-white'
-                                                : 'text-solar-gray-middle'
-                                        }`}
-                                    >
-                                        Pago
-                                    </Text>
-                                </View>
+                                <View />
                                 <View className="flex items-end">
-                                    <Text allowFontScaling={false} className="text-2xl font-Poppins_700Bold mt-2 text-solar-blue-dark">
+                                    <Text allowFontScaling={false} className="text-base font-PoppinsRegular pt-1">
+                                        Parcela{' '}
+                                        {crediario.parcela}
+                                    </Text>
+                                    <Text allowFontScaling={false} className="text-xl font-Poppins_700Bold font-semibold mt-2 text-solar-blue-dark">
                                         {MoneyPTBR(parseFloat(crediario.vPago))}
                                     </Text>
                                 </View>
@@ -186,18 +170,17 @@ const HistoryPayments = () => {
                     </View>
                 </View>
 
-                <View className="flex-row items-center justify-between w-full mt-8 mb-4">
+                <View className="flex-row items-center justify-between w-full my-4">
                     <View className="flex-1 pr-2">
-                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-gray-500 mb-1">
+                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-gray-500 mb-1">
                             Data Inicial
                         </Text>
                         <TouchableOpacity
                             onPress={showDatePicker}
-                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${
-                                Platform.OS === 'ios'
-                                    ? 'shadow-gray-300'
-                                    : 'shadow-gray-400'
-                            }`}
+                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
+                                ? 'shadow-gray-300'
+                                : 'shadow-gray-400'
+                                }`}
                         >
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
                                 {moment(dateIni).format('DD/MM/YYYY')}
@@ -211,16 +194,15 @@ const HistoryPayments = () => {
                     </View>
 
                     <View className="flex-1 pl-2">
-                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-gray-500 mb-1">
+                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-gray-500 mb-1">
                             Data Final
                         </Text>
                         <TouchableOpacity
                             onPress={showDatePicker2}
-                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${
-                                Platform.OS === 'ios'
-                                    ? 'shadow-gray-300'
-                                    : 'shadow-gray-400'
-                            }`}
+                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
+                                ? 'shadow-gray-300'
+                                : 'shadow-gray-400'
+                                }`}
                         >
                             <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
                                 {moment(dateFin).format('DD/MM/YYYY')}
@@ -241,28 +223,33 @@ const HistoryPayments = () => {
                                 className="w-[172px] h-[139px] "
                             />
                             <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark mt-4 px-3 text-center">
-                                Você não possui nenhum pagamento em aberto.
+                                Você não possui nenhum pagamento para este período.
                             </Text>
                         </View>
                     </View>
                 )}
                 {crediarios && (
-                    <View className="flex-1 w-full h-full pb-2">
-                        <FlashList
-                            data={crediarios}
-                            renderItem={({item}) => (
-                                <RenderItem crediario={item} />
-                            )}
-                            estimatedItemSize={50}
-                            keyExtractor={(item: any, index) =>
-                                item.filial + index
-                            }
-                            ItemSeparatorComponent={() => (
-                                <View className="h-0.5 bg-solar-gray-darkr" />
-                            )}
-                            showsVerticalScrollIndicator={false}
-                        />
-                    </View>
+                    <>
+                        <View className="mb-4">
+                            <Text>Pagamento efetuado no período:{crediarios?.length}</Text>
+                        </View>
+                        <View className="flex-1 w-full h-full pb-2">
+                            <FlashList
+                                data={crediarios}
+                                renderItem={({ item }) => (
+                                    <RenderItem crediario={item} />
+                                )}
+                                estimatedItemSize={50}
+                                keyExtractor={(item: any, index) =>
+                                    item.filial + index
+                                }
+                                ItemSeparatorComponent={() => (
+                                    <View className="h-0.5 bg-solar-gray-darkr" />
+                                )}
+                                showsVerticalScrollIndicator={false}
+                            />
+                        </View>
+                    </>
                 )}
             </View>
         </AppLayout>

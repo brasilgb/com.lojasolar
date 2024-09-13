@@ -64,20 +64,6 @@ const PixPayment = ({route}: any) => {
 
     const fetchCopiedUrl = async () => {
         Clipboard.setStringAsync(`${qrPix}`);
-        // Toast.show('QRCode copiado para a área de transferência!', {
-        //     containerStyle: {
-        //         backgroundColor: '#1a9cd9',
-        //         borderRadius: 15,
-        //     },
-        //     textStyle: {
-        //         color: '#fff',
-        //     },
-        //     imgStyle: {},
-        //     mask: false,
-        //     maskStyle: {},
-        //     duration: 2000,
-        //     animation: true,
-        // });
     };
 
     const sendOrderAtualize = async (dataPix: any, dataPay: any) => {

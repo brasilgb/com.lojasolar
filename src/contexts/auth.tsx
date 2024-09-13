@@ -8,6 +8,7 @@ import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import serviceapp from "@services/serviceapp";
 import DeviceInfo from "react-native-device-info";
+import * as SecureStore from 'expo-secure-store';
 
 interface AuthContextProps {
     children: React.ReactNode;
@@ -25,6 +26,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     async function storageUser(data: any) {
         await AsyncStorage.setItem('Auth_user', JSON.stringify(data));
     }
+
+        
 
     useEffect(() => {
         async function loadStorage() {
@@ -82,9 +85,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
     const checkPassword = async ({ cpfcnpj, senha, nomeCliente, codigoCliente, connected }: any) => {
         setLoading(true);
-        const devid: any = DeviceInfo.getUniqueId();
-        // const devid: any = '000000000';
-        const response = await serviceapp.get(`(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${devid?._j}`);
+        const devid: any = await SecureStore.getItemAsync('uniqueId');
+        const response = await serviceapp.get(`(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${JSON.parse(devid)}`);
 
         if (response.status !== 200) {
             setLoading(false);
@@ -109,7 +111,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             codigoCliente: codigoCliente,
             token: data.token,
             connected: connected,
-            deviceid: devid?._j
+            deviceid: devid
         };
         setLoading(false);
         storageUser(userData);
