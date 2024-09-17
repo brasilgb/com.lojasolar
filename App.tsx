@@ -122,6 +122,8 @@ const App = () => {
     };
 
     useEffect(() => {
+        console.log(deviceKeyStore);
+        
         requestUserPermission();
         registerDevice(deviceKeyStore,pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
         const unsubscribe = messaging().onMessage(async remoteMessage => {

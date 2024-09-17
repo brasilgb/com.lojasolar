@@ -19,15 +19,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const HistoryPayments = () => {
     const { loading, setLoading, user, disconnect } = useContext(AuthContext);
 
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [crediarios, setCrediarios] = useState<any>([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
     const datePrev = moment().add(-1, 'days').format('DD');
-    const [dateIni, setDateIni] = useState<any>(
-        moment().add(-datePrev, 'days'),
-    );
+    const [dateIni, setDateIni] = useState<any>(moment().add(-datePrev, 'days'));
     const [dateFin, setDateFin] = useState<any>(new Date());
 
     useEffect(() => {
@@ -103,10 +100,10 @@ const HistoryPayments = () => {
                                     Parcela da compra
                                 </Text>
                                 <Text allowFontScaling={false} className="text-lg font-PoppinsMedium">
-                                    {crediario.numeroCarne}
+                                    {crediario?.numeroCarne}
                                 </Text>
                                 <Text allowFontScaling={false} className="text-sm font-PoppinsRegular">
-                                    {crediario.pagamento}
+                                    {crediario?.pagamento}
                                 </Text>
                             </View>
                             <View className="w-2/5 flex items-center justify-between">
@@ -114,10 +111,10 @@ const HistoryPayments = () => {
                                 <View className="flex items-end">
                                     <Text allowFontScaling={false} className="text-base font-PoppinsRegular pt-1">
                                         Parcela{' '}
-                                        {crediario.parcela}
+                                        {crediario?.parcela}
                                     </Text>
                                     <Text allowFontScaling={false} className="text-xl font-Poppins_700Bold font-semibold mt-2 text-solar-blue-dark">
-                                        {MoneyPTBR(parseFloat(crediario.vPago))}
+                                        {MoneyPTBR(parseFloat(crediario?.vPago))}
                                     </Text>
                                 </View>
                             </View>
@@ -215,7 +212,7 @@ const HistoryPayments = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                {crediarios && crediarios.length < 1 && (
+                {crediarios && crediarios?.length < 1 && (
                     <View className="flex-col my-6">
                         <View className="w-full flex-col items-center justify-center py-6">
                             <Image
@@ -228,10 +225,11 @@ const HistoryPayments = () => {
                         </View>
                     </View>
                 )}
-                {crediarios && (
+                {crediarios && crediarios?.length > 0 && (
                     <>
-                        <View className="mb-4">
-                            <Text>Pagamento efetuado no período:{crediarios?.length}</Text>
+                        <View className="mb-2 bg-solar-blue-light rounded-lg w-full flex-row border border-white">
+                            <Text className="text-white text-base font-semibold flex-1 px-4 py-2">Total do período: </Text>
+                            <Text className="bg-solar-green-light text-solar-blue-dark text-base font-PoppinsBold py-2 px-4 rounded-r-md">{MoneyPTBR(crediarios?.reduce((total: any, valor: any) => ((total) += parseFloat(valor.vPago)), 0))}</Text>
                         </View>
                         <View className="flex-1 w-full h-full pb-2">
                             <FlashList
