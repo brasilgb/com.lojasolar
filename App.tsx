@@ -24,7 +24,6 @@ import {Linking, Platform} from 'react-native';
 import {AuthProvider} from '@contexts/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import serviceapp from '@services/serviceapp';
-import DeviceInfo from 'react-native-device-info';
 
 import {v4 as uuid} from 'uuid';
 import * as SecureStore from 'expo-secure-store';
@@ -70,9 +69,18 @@ const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
     const [pushToken, setPushToken] = useState('');
     const [userStore, setUserStore] = useState<any>([]);
-    const [deviceKeyStore, setDeviceKeyStore] = useState<string>('');
+    const [deviceKeyStore, setDeviceKeyStore] = useState('');
 
     useEffect(() => {
+        const getUserStore = async () => {
+            const user = await AsyncStorage.getItem('Auth_user');
+            if (user) {
+                setUserStore(JSON.parse(user));
+            }
+        };
+        getUserStore();
+    }, []);
+
         const getKeyDevice = async () => {
             const newUniqueId =
                 Platform.OS === 'android'
@@ -99,18 +107,6 @@ const App = () => {
             }
             setDeviceKeyStore(JSON.parse(uniqueId));
         };
-        getKeyDevice();
-    }, []);
-
-    useEffect(() => {
-        const getUserStore = async () => {
-            const user = await AsyncStorage.getItem('Auth_user');
-            if (user) {
-                setUserStore(JSON.parse(user));
-            }
-        };
-        getUserStore();
-    }, []);
 
     //*******Notifications push************************************************************** */
     const requestUserPermission = async () => {
@@ -126,9 +122,8 @@ const App = () => {
     };
 
     useEffect(() => {
-        console.log(deviceKeyStore);
-
         requestUserPermission();
+        getKeyDevice();
         registerDevice(deviceKeyStore, pushToken, userStore?.codigoCliente); // Insere pushToken e código do cliente em sce002
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             fireNotification(remoteMessage.data);
@@ -179,11 +174,11 @@ const App = () => {
             }
         });
         return unsubscribe;
-    }, [deviceKeyStore, pushToken, userStore]);
+    }, [deviceKeyStore,pushToken, userStore]);
 
     // Registra ID do dispositivo e push token firbase
     async function registerDevice(
-        deviceKeyStore: string,
+        deviceKeyStore: any,
         pushToken: any,
         codcli: any,
     ) {
@@ -191,10 +186,10 @@ const App = () => {
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
         await serviceapp
             .get(
-                `(WS_GRAVA_DEVICE)?deviceId=${deviceKeyStore}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}&codcli=${codcli}`,
+                `(WS_GRAVA_DEVICE)?deviceId=${deviceKeyStore}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}`,
             )
             .then(response => {
-                console.log(response.data.resposta.success);
+                // console.log(response.data.resposta.success);
             })
             .catch(err => {
                 console.log(err);
