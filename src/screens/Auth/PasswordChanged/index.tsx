@@ -18,10 +18,16 @@ const PasswordChanged = ({route}: any) => {
                 />
                 <View className="flex-col items-center justify-center px-12 pt-4">
                     <View className="py-4 flex items-center justify-center ">
-                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center"
+                        >
                             Senha criada com sucesso!
                         </Text>
-                        <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 text-center">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 text-center"
+                        >
                             Lembre-se você irá utilizar essa senha sempre que
                             fazer login no aplicativo das Lojas Solar.
                         </Text>
@@ -38,7 +44,10 @@ const PasswordChanged = ({route}: any) => {
                                 : 'shadow-sm shadow-black'
                         } py-3 rounded-full border-2 border-white `}
                     >
-                        <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-lg font-PoppinsMedium text-solar-blue-dark"
+                        >
                             Continuar
                         </Text>
                     </TouchableOpacity>

@@ -9,7 +9,7 @@
             "@contexts/*": ["src/contexts/*"],
             "@utils/*": ["src/contexts/*"],
             "@services/*": ["src/services/*"],
-            "@assets/*": ["assets/*"],
+            "@assets/*": ["assets/*"]
         }
     },
     "include": ["**/*.ts", "**/*.tsx", "config-info-plist.js"],

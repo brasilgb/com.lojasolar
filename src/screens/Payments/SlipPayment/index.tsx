@@ -1,10 +1,4 @@
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    Share,
-    Platform,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Share, Platform} from 'react-native';
 import React from 'react';
 import AppLayout from '@components/AppLayout';
 import {MaterialIcons} from '@expo/vector-icons';
@@ -67,10 +61,16 @@ const SlipPayment = ({route}: any) => {
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-3xl text-solar-blue-dark py-4"
+                    >
                         Pagamento
                     </Text>
-                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center"
+                    >
                         Boleto bancário
                     </Text>
                 </View>
@@ -81,13 +81,22 @@ const SlipPayment = ({route}: any) => {
                         <View
                             className={`flex-col items-center justify-center w-full`}
                         >
-                            <Text allowFontScaling={false} className="text-4xl font-PoppinsMedium text-solar-blue-dark">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-4xl font-PoppinsMedium text-solar-blue-dark"
+                            >
                                 {MoneyPTBR(parseFloat(Amount))}
                             </Text>
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsRegular text-solar-blue-dark my-3">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsRegular text-solar-blue-dark my-3"
+                            >
                                 Boleto gerado via url
                             </Text>
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsBold text-solar-blue-dark my-3">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsBold text-solar-blue-dark my-3"
+                            >
                                 (selecionar opção abaixo)
                             </Text>
                         </View>
@@ -101,7 +110,10 @@ const SlipPayment = ({route}: any) => {
                                 size={26}
                                 color={'#0d3b85'}
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Copiar link
                             </Text>
                         </View>
@@ -113,7 +125,10 @@ const SlipPayment = ({route}: any) => {
                                 size={26}
                                 color={'#0d3b85'}
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Compartilhar Link
                             </Text>
                         </View>
@@ -125,7 +140,10 @@ const SlipPayment = ({route}: any) => {
                                 size={26}
                                 color={'#0d3b85'}
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Vizualizar boleto
                             </Text>
                         </View>

@@ -16,7 +16,8 @@ import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const OpenPayments = () => {
     const {loading, setLoading, user, disconnect} = useContext(AuthContext);
-    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const isFocused = useIsFocused();
     const [crediarios, setCrediarios] = useState<any>([]);
     const [showModalParcelas, setShowModalParcelas] = useState(false);
@@ -192,16 +193,28 @@ const OpenPayments = () => {
                     <View className="flex-1 flex-col items-start">
                         <View className="flex-row">
                             <View className="flex-1 pl-2">
-                                <Text allowFontScaling={false} className="text-xs font-PoppinsRegular pb-1">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-xs font-PoppinsRegular pb-1"
+                                >
                                     Núm. do contrato
                                 </Text>
-                                <Text allowFontScaling={false} className="text-sm font-PoppinsMedium">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-sm font-PoppinsMedium"
+                                >
                                     {crediario.numeroCarne}
                                 </Text>
-                                <Text allowFontScaling={false} className="text-xs font-PoppinsRegular">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-xs font-PoppinsRegular"
+                                >
                                     {crediario.vencimento}
                                 </Text>
-                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular pt-1">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-sm font-PoppinsRegular pt-1"
+                                >
                                     Parcela{' '}
                                     {crediario.parcela.replace('/', ' de ')}
                                 </Text>
@@ -212,8 +225,8 @@ const OpenPayments = () => {
                                         crediario.status === 'P'
                                             ? 'bg-solar-orange-dark'
                                             : crediario.atraso > 0
-                                            ? 'bg-solar-yellow-light'
-                                            : ''
+                                              ? 'bg-solar-yellow-light'
+                                              : ''
                                     }  rounded-md flex items-center justify-center mb-1 ml-4`}
                                 >
                                     <Text
@@ -226,8 +239,8 @@ const OpenPayments = () => {
                                         {crediario.status === 'P'
                                             ? 'Processando'
                                             : crediario.atraso > 0
-                                            ? 'Atrasada'
-                                            : ''}
+                                              ? 'Atrasada'
+                                              : ''}
                                     </Text>
                                 </View>
                                 <View
@@ -235,21 +248,30 @@ const OpenPayments = () => {
                                         crediario.acrescimo > 0 ? '' : 'mt-4'
                                     }`}
                                 >
-                                    <Text allowFontScaling={false} className="text-base text-gray-400 font-PoppinsRegular">
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-base text-gray-400 font-PoppinsRegular"
+                                    >
                                         Valor:{' '}
                                         {MoneyPTBR(
                                             parseFloat(crediario.vlprest),
                                         )}
                                     </Text>
                                     {crediario.acrescimo > 0 && (
-                                        <Text allowFontScaling={false} className="text-xs text-red-500 font-PoppinsRegular">
+                                        <Text
+                                            allowFontScaling={false}
+                                            className="text-xs text-red-500 font-PoppinsRegular"
+                                        >
                                             Juros:{' '}
                                             {MoneyPTBR(
                                                 parseFloat(crediario.acrescimo),
                                             )}
                                         </Text>
                                     )}
-                                    <Text allowFontScaling={false} className="text-lg font-PoppinsBold text-solar-blue-dark">
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-lg font-PoppinsBold text-solar-blue-dark"
+                                    >
                                         {MoneyPTBR(parseFloat(crediario.total))}
                                     </Text>
                                 </View>
@@ -271,10 +293,16 @@ const OpenPayments = () => {
                 <View className="flex-row">
                     <View className="flex-1 flex-col pl-4 pt-8">
                         <View className="flex-row items-center">
-                            <Text allowFontScaling={false} className="text-gray-100 text-base">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-gray-100 text-base"
+                            >
                                 Total:{' '}
                             </Text>
-                            <Text allowFontScaling={false} className="text-white text-lg font-PoppinsBold">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-white text-lg font-PoppinsBold"
+                            >
                                 {MoneyPTBR(
                                     arrayValues.reduce(
                                         (soma: any, value: any) => {
@@ -285,7 +313,10 @@ const OpenPayments = () => {
                                 )}
                             </Text>
                         </View>
-                        <Text allowFontScaling={false} className="text-gray-100 text-base mt-2">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-gray-100 text-base mt-2"
+                        >
                             {arrayIndex.length} parcelas
                         </Text>
                     </View>
@@ -311,7 +342,10 @@ const OpenPayments = () => {
                             }}
                             className="bg-solar-orange-middle rounded-md py-4 my-10 mr-4 items-center px-8"
                         >
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsMedium text-solar-blue-dark"
+                            >
                                 PAGAR
                             </Text>
                         </TouchableOpacity>
@@ -326,7 +360,10 @@ const OpenPayments = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center mb-4">
-                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-3xl text-solar-blue-dark py-4"
+                    >
                         Meus pagamentos
                     </Text>
                 </View>
@@ -372,14 +409,19 @@ const OpenPayments = () => {
                                 />
                             )}
                         </View>
-                        <Text allowFontScaling={false} className="ml-2 text-base font-PoppinsRegular text-solar-yellow-dark">
+                        <Text
+                            allowFontScaling={false}
+                            className="ml-2 text-base font-PoppinsRegular text-solar-yellow-dark"
+                        >
                             Selecionar todos
                         </Text>
                     </TouchableOpacity>
                 </View>
 
                 {crediarios && (
-                    <View className={`flex-1 w-full h-full ${showModalParcelas ? 'pb-40' : 'pb-2'} `}>
+                    <View
+                        className={`flex-1 w-full h-full ${showModalParcelas ? 'pb-40' : 'pb-2'} `}
+                    >
                         <FlashList
                             data={crediarios}
                             renderItem={({item, index}) => (

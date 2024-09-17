@@ -61,7 +61,10 @@ const Crediario = () => {
                                         }`}
                                     >
                                         <View className="flex-1">
-                                            <Text allowFontScaling={false} className="text-sm font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-sm font-PoppinsMedium"
+                                            >
                                                 {per?.pergunta}
                                             </Text>
                                         </View>
@@ -82,7 +85,10 @@ const Crediario = () => {
                                     {idFaq === idx && (
                                         <View className="border-b border-b-gray-300 pb-4 transition-all duration-500">
                                             <View className="px-4">
-                                                <Text allowFontScaling={false} className="text-xs font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="text-xs font-PoppinsRegular"
+                                                >
                                                     {per?.resposta}
                                                 </Text>
                                             </View>

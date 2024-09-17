@@ -2,11 +2,11 @@ import {
     DrawerNavigationProp,
     createDrawerNavigator,
 } from '@react-navigation/drawer';
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Image, Platform, View } from 'react-native';
-import { Crediary, ImagesSent, LoadImages } from '@screens/Crediary';
+import {MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
+import {Image, Platform, View} from 'react-native';
+import {Crediary, ImagesSent, LoadImages} from '@screens/Crediary';
 import CustomDrawer from '@components/CustomDrawer';
-import { History } from '@screens/Purchase';
+import {History} from '@screens/Purchase';
 import Contact from '@screens/Contact';
 import {
     Account,
@@ -17,18 +17,18 @@ import {
     Registered,
     SignIn,
 } from '@screens/Auth';
-import { useNavigation } from '@react-navigation/native';
-import { PrivacyPolice, PrivacySettings } from '@screens/Privacy';
-import { StoresLocation } from '@screens/Location';
-import { useContext } from 'react';
-import { AuthContext } from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {PrivacyPolice, PrivacySettings} from '@screens/Privacy';
+import {StoresLocation} from '@screens/Location';
+import {useContext} from 'react';
+import {AuthContext} from '@contexts/auth';
 import StoreSelected from '@screens/Location/StoreSelected';
 import StoreList from '@screens/Location/StoreList';
 import RegisterUser from '@screens/Auth/RegisterUser';
 import RegisterPassword from '@screens/Auth/RegisterPassword';
 import PasswordChanged from '@screens/Auth/PasswordChanged';
 import HistoryItem from '@screens/Purchase/HistoryItem';
-import { Detail, Protocol } from '@screens/Assistance';
+import {Detail, Protocol} from '@screens/Assistance';
 import Questions from '@screens/Questions';
 import {
     CartPayment,
@@ -43,12 +43,12 @@ import ActionBillet from '@screens/Payments/Twobillet/ActionBillet';
 import PasswordAltered from '@screens/Auth/PasswordAltered';
 import PayCartOk from '@screens/Payments/PayCartOk';
 import Home from '@screens/Home';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import Connected from '@screens/Connected';
 import DataAnalise from '@screens/Auth/DataAnalise';
-import VerifyVersion from "@screens/VerifyVersion";
-import DocsAssign from "@screens/DocsAssign";
-import ViewDoc from "@screens/DocsAssign/ViewDoc";
+import VerifyVersion from '@screens/VerifyVersion';
+import DocsAssign from '@screens/DocsAssign';
+import ViewDoc from '@screens/DocsAssign/ViewDoc';
 // import VerifyVersion from "@screens/VerifyVersion";
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -65,12 +65,12 @@ function LogoTitle() {
 function ButtonRight() {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { dataMap } = useContext(AuthContext);
+    const {dataMap} = useContext(AuthContext);
     return (
         <View className="pr-[15]">
             <MaterialIcons
                 onPress={() =>
-                    navigation.navigate('StoreList', { data: dataMap })
+                    navigation.navigate('StoreList', {data: dataMap})
                 }
                 name="list-alt"
                 size={26}
@@ -87,7 +87,7 @@ function ButtonLeftStorage() {
         <View className="pl-[15]">
             <MaterialIcons
                 onPress={() =>
-                    navigation.navigate('StoresLocation', { data: false })
+                    navigation.navigate('StoresLocation', {data: false})
                 }
                 name="arrow-back-ios"
                 size={26}
@@ -128,8 +128,8 @@ function ButtonHome() {
 }
 
 const DrawerRoutes = () => {
-    const { signed } = useContext(AuthContext);
-    const { modalVisible } = useContext(AuthContext);
+    const {signed} = useContext(AuthContext);
+    const {modalVisible} = useContext(AuthContext);
     return (
         <Drawer.Navigator
             initialRouteName="Connected"
@@ -140,7 +140,7 @@ const DrawerRoutes = () => {
                 title: '',
                 headerStyle: {
                     backgroundColor: '#1a9cd9',
-                    height: 100
+                    height: 100,
                 },
                 drawerStyle: {
                     backgroundColor: '#F8F8F8',
@@ -175,7 +175,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         marginVertical: 1,
                     },
-                    drawerIcon: ({ color, size }) => (
+                    drawerIcon: ({color, size}) => (
                         <MaterialCommunityIcons
                             name="home-outline"
                             color={color}
@@ -196,7 +196,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialIcons
                                     name="person-outline"
                                     color={color}
@@ -217,7 +217,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialCommunityIcons
                                     name="handshake-outline"
                                     color={color}
@@ -238,7 +238,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialCommunityIcons
                                     name="lock-reset"
                                     color={color}
@@ -259,7 +259,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialCommunityIcons
                                     name="file-document-edit"
                                     color={color}
@@ -280,7 +280,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialCommunityIcons
                                     name="shield-account-outline"
                                     color={color}
@@ -298,14 +298,14 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="StoresLocation"
-                initialParams={{ data: false }}
+                initialParams={{data: false}}
                 component={StoresLocation}
                 options={{
                     headerRight: (props: any) => <ButtonRight />,
                     drawerItemStyle: {
                         marginVertical: 1,
                     },
-                    drawerIcon: ({ color, size }) => (
+                    drawerIcon: ({color, size}) => (
                         <MaterialCommunityIcons
                             name="map-marker-outline"
                             color={color}
@@ -324,7 +324,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         marginVertical: 1,
                     },
-                    drawerIcon: ({ color, size }) => (
+                    drawerIcon: ({color, size}) => (
                         <MaterialCommunityIcons
                             name="phone-message-outline"
                             color={color}
@@ -345,7 +345,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialIcons
                                     name="attach-money"
                                     color={color}
@@ -366,7 +366,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialIcons
                                     name="history"
                                     color={color}
@@ -387,7 +387,7 @@ const DrawerRoutes = () => {
                             drawerItemStyle: {
                                 marginVertical: 1,
                             },
-                            drawerIcon: ({ color, size }) => (
+                            drawerIcon: ({color, size}) => (
                                 <MaterialIcons
                                     name="handyman"
                                     color={color}
@@ -559,7 +559,7 @@ const DrawerRoutes = () => {
 
             <Drawer.Screen
                 name="LoadImages"
-                initialParams={{ user: [] }}
+                initialParams={{user: []}}
                 component={LoadImages}
                 options={{
                     drawerItemStyle: {
@@ -801,7 +801,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerShown: false
+                    headerShown: false,
                 }}
             />
 

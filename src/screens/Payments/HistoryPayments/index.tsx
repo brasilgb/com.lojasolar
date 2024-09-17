@@ -1,30 +1,33 @@
-import { View, Text, Platform, Alert, Image } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import {View, Text, Platform, Alert, Image} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
 import ButtonPayament from '@components/ButtonPayament';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { AuthContext } from '@contexts/auth';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import moment from 'moment';
 import serviceapp from '@services/serviceapp';
-import { FlashList } from '@shopify/flash-list';
+import {FlashList} from '@shopify/flash-list';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { ListStyle } from '@components/InputStyle';
+import {ListStyle} from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 const HistoryPayments = () => {
-    const { loading, setLoading, user, disconnect } = useContext(AuthContext);
+    const {loading, setLoading, user, disconnect} = useContext(AuthContext);
 
-    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation =
+        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [crediarios, setCrediarios] = useState<any>([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
     const datePrev = moment().add(-1, 'days').format('DD');
-    const [dateIni, setDateIni] = useState<any>(moment().add(-datePrev, 'days'));
+    const [dateIni, setDateIni] = useState<any>(
+        moment().add(-datePrev, 'days'),
+    );
     const [dateFin, setDateFin] = useState<any>(new Date());
 
     useEffect(() => {
@@ -39,7 +42,7 @@ const HistoryPayments = () => {
                     )}`,
                 )
                 .then(response => {
-                    const { success, message, token, data } =
+                    const {success, message, token, data} =
                         response.data.resposta;
                     setLoading(false);
                     if (!token) {
@@ -87,7 +90,7 @@ const HistoryPayments = () => {
         hideDatePicker2();
     };
 
-    const RenderItem = ({ crediario }: any) => {
+    const RenderItem = ({crediario}: any) => {
         return (
             <View
                 className={`flex-row items-center justify-between bg-solar-gray-light my-1 ${ListStyle} py-4 `}
@@ -96,25 +99,41 @@ const HistoryPayments = () => {
                     <View className="flex-1 flex-col items-start">
                         <View className="flex-row">
                             <View className="w-3/5 pl-2">
-                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular pb-1">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-sm font-PoppinsRegular pb-1"
+                                >
                                     Parcela da compra
                                 </Text>
-                                <Text allowFontScaling={false} className="text-lg font-PoppinsMedium">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-lg font-PoppinsMedium"
+                                >
                                     {crediario?.numeroCarne}
                                 </Text>
-                                <Text allowFontScaling={false} className="text-sm font-PoppinsRegular">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-sm font-PoppinsRegular"
+                                >
                                     {crediario?.pagamento}
                                 </Text>
                             </View>
                             <View className="w-2/5 flex items-center justify-between">
                                 <View />
                                 <View className="flex items-end">
-                                    <Text allowFontScaling={false} className="text-base font-PoppinsRegular pt-1">
-                                        Parcela{' '}
-                                        {crediario?.parcela}
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-base font-PoppinsRegular pt-1"
+                                    >
+                                        Parcela {crediario?.parcela}
                                     </Text>
-                                    <Text allowFontScaling={false} className="text-xl font-Poppins_700Bold font-semibold mt-2 text-solar-blue-dark">
-                                        {MoneyPTBR(parseFloat(crediario?.vPago))}
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-xl font-Poppins_700Bold font-semibold mt-2 text-solar-blue-dark"
+                                    >
+                                        {MoneyPTBR(
+                                            parseFloat(crediario?.vPago),
+                                        )}
                                     </Text>
                                 </View>
                             </View>
@@ -143,7 +162,10 @@ const HistoryPayments = () => {
             />
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center mb-4">
-                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-3xl text-solar-blue-dark py-4"
+                    >
                         Meus pagamentos
                     </Text>
                 </View>
@@ -169,17 +191,24 @@ const HistoryPayments = () => {
 
                 <View className="flex-row items-center justify-between w-full my-4">
                     <View className="flex-1 pr-2">
-                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-gray-500 mb-1">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-sm font-PoppinsMedium text-gray-500 mb-1"
+                        >
                             Data Inicial
                         </Text>
                         <TouchableOpacity
                             onPress={showDatePicker}
-                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                                ? 'shadow-gray-300'
-                                : 'shadow-gray-400'
-                                }`}
+                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${
+                                Platform.OS === 'ios'
+                                    ? 'shadow-gray-300'
+                                    : 'shadow-gray-400'
+                            }`}
                         >
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsMedium"
+                            >
                                 {moment(dateIni).format('DD/MM/YYYY')}
                             </Text>
                             <MaterialCommunityIcons
@@ -191,17 +220,24 @@ const HistoryPayments = () => {
                     </View>
 
                     <View className="flex-1 pl-2">
-                        <Text allowFontScaling={false} className="text-sm font-PoppinsMedium text-gray-500 mb-1">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-sm font-PoppinsMedium text-gray-500 mb-1"
+                        >
                             Data Final
                         </Text>
                         <TouchableOpacity
                             onPress={showDatePicker2}
-                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                                ? 'shadow-gray-300'
-                                : 'shadow-gray-400'
-                                }`}
+                            className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${
+                                Platform.OS === 'ios'
+                                    ? 'shadow-gray-300'
+                                    : 'shadow-gray-400'
+                            }`}
                         >
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsMedium">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsMedium"
+                            >
                                 {moment(dateFin).format('DD/MM/YYYY')}
                             </Text>
                             <MaterialCommunityIcons
@@ -219,8 +255,12 @@ const HistoryPayments = () => {
                                 source={require('@assets/images/no_payments_logo.png')}
                                 className="w-[172px] h-[139px] "
                             />
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium text-solar-blue-dark mt-4 px-3 text-center">
-                                Você não possui nenhum pagamento para este período.
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsMedium text-solar-blue-dark mt-4 px-3 text-center"
+                            >
+                                Você não possui nenhum pagamento para este
+                                período.
                             </Text>
                         </View>
                     </View>
@@ -228,13 +268,23 @@ const HistoryPayments = () => {
                 {crediarios && crediarios?.length > 0 && (
                     <>
                         <View className="mb-2 bg-solar-blue-light rounded-lg w-full flex-row border border-white">
-                            <Text className="text-white text-base font-semibold flex-1 px-4 py-2">Total do período: </Text>
-                            <Text className="bg-solar-green-light text-solar-blue-dark text-base font-PoppinsBold py-2 px-4 rounded-r-md">{MoneyPTBR(crediarios?.reduce((total: any, valor: any) => ((total) += parseFloat(valor.vPago)), 0))}</Text>
+                            <Text className="text-white text-base font-semibold flex-1 px-4 py-2">
+                                Total do período:{' '}
+                            </Text>
+                            <Text className="bg-solar-green-light text-solar-blue-dark text-base font-PoppinsBold py-2 px-4 rounded-r-md">
+                                {MoneyPTBR(
+                                    crediarios?.reduce(
+                                        (total: any, valor: any) =>
+                                            (total += parseFloat(valor.vPago)),
+                                        0,
+                                    ),
+                                )}
+                            </Text>
                         </View>
                         <View className="flex-1 w-full h-full pb-2">
                             <FlashList
                                 data={crediarios}
-                                renderItem={({ item }) => (
+                                renderItem={({item}) => (
                                     <RenderItem crediario={item} />
                                 )}
                                 estimatedItemSize={50}

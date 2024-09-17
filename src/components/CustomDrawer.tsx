@@ -1,26 +1,26 @@
-import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import React, {useContext} from 'react';
+import {View, Text} from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItemList,
     DrawerNavigationProp,
 } from '@react-navigation/drawer';
-import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { AuthContext } from '@contexts/auth';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import {MaterialIcons} from '@expo/vector-icons';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {AuthContext} from '@contexts/auth';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 
 const CustomDrawer = (props: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { signed, user, signOut } = useContext(AuthContext);
+    const {signed, user, signOut} = useContext(AuthContext);
 
     return (
         <View className="flex-1">
             <DrawerContentScrollView
                 {...props}
-                contentContainerStyle={{ backgroundColor: '#009FE3' }}
+                contentContainerStyle={{backgroundColor: '#009FE3'}}
             >
                 <View className="p-3 mb-3">
                     <View className="flex-row items-center justify-start w-60">
@@ -29,14 +29,20 @@ const CustomDrawer = (props: any) => {
                             size={50}
                             color={'#FAFAFA'}
                         />
-                        <Text allowFontScaling={false} className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5"
+                        >
                             {signed
                                 ? `Olá, ${user?.nomeCliente}`
                                 : 'Bem Vindo(a) '}
                         </Text>
                     </View>
 
-                    <Text allowFontScaling={false} className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular">
+                    <Text
+                        allowFontScaling={false}
+                        className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular"
+                    >
                         {signed
                             ? 'Como podemos lhe ajudar hoje?'
                             : 'Faça o login e aproveite o melhor do aplicativo'}
@@ -61,7 +67,10 @@ const CustomDrawer = (props: any) => {
                             size={22}
                             color={'#e76464'}
                         />
-                        <Text allowFontScaling={false} className="ml-1 text-base text-[#e76464] font-PoppinsRegular">
+                        <Text
+                            allowFontScaling={false}
+                            className="ml-1 text-base text-[#e76464] font-PoppinsRegular"
+                        >
                             Sair
                         </Text>
                     </TouchableOpacity>
@@ -76,7 +85,10 @@ const CustomDrawer = (props: any) => {
                             size={22}
                             color={'#0d3b85'}
                         />
-                        <Text allowFontScaling={false} className="ml-1 text-base font-PoppinsRegular text-[#0d3b85]">
+                        <Text
+                            allowFontScaling={false}
+                            className="ml-1 text-base font-PoppinsRegular text-[#0d3b85]"
+                        >
                             Login
                         </Text>
                     </TouchableOpacity>
@@ -88,7 +100,10 @@ const CustomDrawer = (props: any) => {
                     className="p-2"
                     onPress={() => navigation.navigate('Questions')}
                 >
-                    <Text allowFontScaling={false} className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-[10px] font-Poppins_400Regular text-solar-blue-dark"
+                    >
                         Perguntas frequentes
                     </Text>
                 </TouchableOpacity>
@@ -96,7 +111,10 @@ const CustomDrawer = (props: any) => {
                     className="p-2"
                     onPress={() => navigation.navigate('PrivacyPolice')}
                 >
-                    <Text allowFontScaling={false} className="text-[10px] font-Poppins_400Regular text-solar-blue-dark">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-[10px] font-Poppins_400Regular text-solar-blue-dark"
+                    >
                         Política de privacidade
                     </Text>
                 </TouchableOpacity>

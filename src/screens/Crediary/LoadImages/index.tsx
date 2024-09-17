@@ -19,7 +19,7 @@ import AppLayout from '@components/AppLayout';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import {ListStyle} from '@components/InputStyle';
-import serviceapp from "@services/serviceapp";
+import serviceapp from '@services/serviceapp';
 
 const LoadImages = ({route}: any) => {
     const navigation =
@@ -265,7 +265,10 @@ const LoadImages = ({route}: any) => {
                     onTouchEnd={() => setModalVisible(false)}
                 >
                     <View className="bg-[#f1f1f1eb] w-full rounded-t-3xl border border-white">
-                        <Text allowFontScaling={false} className="text-[20px] text-solar-blue-dark font-Poppins_500Medium py-2 pl-6">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-[20px] text-solar-blue-dark font-Poppins_500Medium py-2 pl-6"
+                        >
                             Selecione a fonte
                         </Text>
                         <View className="border-b border-gray-300 mb-4 mx-4" />
@@ -283,7 +286,10 @@ const LoadImages = ({route}: any) => {
                                     size={45}
                                     color="#024D9F"
                                 />
-                                <Text allowFontScaling={false} className="text-xs text-solar-blue-dark">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-xs text-solar-blue-dark"
+                                >
                                     Câmera
                                 </Text>
                             </TouchableOpacity>
@@ -296,7 +302,10 @@ const LoadImages = ({route}: any) => {
                                     size={45}
                                     color="#024D9F"
                                 />
-                                <Text allowFontScaling={false} className="text-xs text-solar-blue-dark">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-xs text-solar-blue-dark"
+                                >
                                     Galeria
                                 </Text>
                             </TouchableOpacity>
@@ -313,10 +322,16 @@ const LoadImages = ({route}: any) => {
                     >
                         <View className="bg-solar-gray-dark px-4">
                             <View className="py-4 flex items-center">
-                                <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4"
+                                >
                                     Documentos
                                 </Text>
-                                <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-base text-solar-blue-dark font-PoppinsRegular mb-4"
+                                >
                                     Você deve enviar uma selfie e uma foto do
                                     seu documento
                                 </Text>
@@ -333,7 +348,10 @@ const LoadImages = ({route}: any) => {
                                         className={`flex-row items-center justify-between py-2 mb-2 ${ListStyle}`}
                                     >
                                         <View className="w-[80%]">
-                                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                            >
                                                 {contentUpload[0].Description}
                                             </Text>
                                         </View>
@@ -365,7 +383,10 @@ const LoadImages = ({route}: any) => {
                                         className={`flex-row items-center justify-between py-2 mb-2 ${ListStyle}`}
                                     >
                                         <View className="w-[80%]">
-                                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                            >
                                                 {contentUpload[1].Description}
                                             </Text>
                                         </View>
@@ -399,7 +420,10 @@ const LoadImages = ({route}: any) => {
                                         className={`flex-row items-center justify-between py-2 mb-2 ${ListStyle}`}
                                     >
                                         <View className="w-[80%]">
-                                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                            >
                                                 {contentUpload[2].Description}
                                             </Text>
                                         </View>
@@ -433,7 +457,10 @@ const LoadImages = ({route}: any) => {
                                         className={`flex-row items-center justify-between py-2 mb-2 ${ListStyle}`}
                                     >
                                         <View className="w-[80%]">
-                                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                            >
                                                 {contentUpload[3].Description}
                                             </Text>
                                         </View>
@@ -465,7 +492,10 @@ const LoadImages = ({route}: any) => {
                                         className={`flex-row items-center justify-between py-2 mb-2 ${ListStyle}`}
                                     >
                                         <View className="w-[80%]">
-                                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                                            >
                                                 {contentUpload[4].Description}
                                             </Text>
                                         </View>

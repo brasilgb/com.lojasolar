@@ -200,10 +200,16 @@ const StoresLocation = ({route}: any) => {
             <StoreListModal dataModal={locationLojasProxima} />
             <View className="flex-1 bg-solar-gray-dark">
                 <View className="py-4 flex items-center justify-center ">
-                    <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center"
+                    >
                         Lojas mais próximas
                     </Text>
-                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-base text-solar-blue-dark font-PoppinsRegular mb-4"
+                    >
                         Encontre a loja solar mais próxima de você
                     </Text>
                 </View>
@@ -217,10 +223,16 @@ const StoresLocation = ({route}: any) => {
                         />
                     </View>
                     <View className="flex-grow items-start justify-between py-1 pl-3 h-14">
-                        <Text allowFontScaling={false} className="text-base text-white">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-base text-white"
+                        >
                             Sua localização
                         </Text>
-                        <Text allowFontScaling={false} className="text-base text-white uppercase">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-base text-white uppercase"
+                        >
                             {data ? data : ''}
                         </Text>
                     </View>

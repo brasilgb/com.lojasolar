@@ -126,10 +126,16 @@ const RegisterUser = ({route}: any) => {
                         keyboardShouldPersistTaps="handled"
                     >
                         <View className="flex-col items-center justify-center mb-2">
-                            <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4 px-8 text-center">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-3xl text-solar-blue-dark py-4 px-8 text-center"
+                            >
                                 Faça seu cadastro nas lojas solar!
                             </Text>
-                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark py-2">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-solar-blue-dark py-2"
+                            >
                                 Ou preencha o formulário abaixo
                             </Text>
                         </View>
@@ -139,7 +145,10 @@ const RegisterUser = ({route}: any) => {
                                 size={20}
                                 color={'#f78888'}
                             />
-                            <Text allowFontScaling={false} className="text-sm ml-1 text-gray-500">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-sm ml-1 text-gray-500"
+                            >
                                 Dados obrigatórios
                             </Text>
                         </View>
@@ -170,8 +179,17 @@ const RegisterUser = ({route}: any) => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            CPF ou CNPJ <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            CPF ou CNPJ{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <TextInput
                                             className={`${InputStyle()} bg-gray-200`}
@@ -181,8 +199,17 @@ const RegisterUser = ({route}: any) => {
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            Nome completo <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            Nome completo{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -198,15 +225,27 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.nomeCliente &&
                                             touched.nomeCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.nomeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            Endereço <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            Endereço{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -224,16 +263,28 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.enderecoCliente &&
                                             touched.enderecoCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.enderecoCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            CEP <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            CEP{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
                                             </Text>
+                                        </Text>
                                         <TextInput
                                             className={InputStyle(
                                                 touched.cepCliente,
@@ -250,15 +301,27 @@ const RegisterUser = ({route}: any) => {
 
                                         {errors.cepCliente &&
                                             touched.cepCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.cepCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            Estado <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            Estado{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <Select
                                             data={ufs}
@@ -278,15 +341,27 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.ufCliente &&
                                             touched.ufCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.ufCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            Cidade <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            Cidade{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <Select
                                             data={cities}
@@ -307,15 +382,27 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.cidadeCliente &&
                                             touched.cidadeCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.cidadeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            Celular <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            Celular{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -336,15 +423,27 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.celularCliente &&
                                             touched.celularCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.celularCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
-                                            E-mail <Text allowFontScaling={false} className="text-red-500">*</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            E-mail{' '}
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="text-red-500"
+                                            >
+                                                *
+                                            </Text>
                                         </Text>
                                         <TextInput
                                             className={InputStyle(
@@ -361,14 +460,20 @@ const RegisterUser = ({route}: any) => {
                                         />
                                         {errors.emailCliente &&
                                             touched.emailCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.emailCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Data nascimento
                                         </Text>
                                         <TextInput

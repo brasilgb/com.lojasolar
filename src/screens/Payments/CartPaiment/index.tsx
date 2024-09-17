@@ -7,20 +7,20 @@ import {
     ScrollView,
     Platform,
 } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
-import { AuthContext } from '@contexts/auth';
-import { InputStyle, LabelStyle, ListStyle } from '@components/InputStyle';
+import {AuthContext} from '@contexts/auth';
+import {InputStyle, LabelStyle, ListStyle} from '@components/InputStyle';
 import serviceapp from '@services/serviceapp';
 import servicepay from '@services/servicepay';
 import moment from 'moment';
-import { cartNumber, cartValidate } from '@components/masks';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import {cartNumber, cartValidate} from '@components/masks';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
-import { Formik } from 'formik';
+import {Formik} from 'formik';
 import schema from './schema';
 import ButtomForm from '@components/ButtomForm';
 
@@ -31,19 +31,18 @@ interface CartProps {
     cvvCartao: string;
 }
 
-const CartPayment = ({ route }: any) => {
-
-    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { user, disconnect, setLoading, loading } = useContext(AuthContext);
-    const { order } = route?.params;
+const CartPayment = ({route}: any) => {
+    const navigation =
+        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const {user, disconnect, setLoading, loading} = useContext(AuthContext);
+    const {order} = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
-    const onSubmit = async (values: CartProps, { resetForm }: any) => {
+    const onSubmit = async (values: CartProps, {resetForm}: any) => {
         setLoading(true);
         console.log(registeredOrder);
 
         if (registeredOrder.length === 0) {
-
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,
                 valor: order.valuetotal,
@@ -57,7 +56,7 @@ const CartPayment = ({ route }: any) => {
                     cvvCartao: values.cvvCartao,
                 },
             });
-            const { success, message, token, data } = response.data.resposta;
+            const {success, message, token, data} = response.data.resposta;
             setLoading(false);
             if (!token) {
                 Alert.alert('Atenção', message, [
@@ -70,10 +69,10 @@ const CartPayment = ({ route }: any) => {
                 ]);
             }
             if (!success) {
-                Alert.alert('Atenção deu erro', message, [{ text: 'Ok' }]);
+                Alert.alert('Atenção deu erro', message, [{text: 'Ok'}]);
                 return;
             }
-            setRegisteredOrder(data)
+            setRegisteredOrder(data);
             await paymentCart(data);
         } else {
             await paymentCart(registeredOrder);
@@ -109,11 +108,11 @@ const CartPayment = ({ route }: any) => {
                 },
             },
         });
-        const { success } = response.data.resposta;
-        const { Description, Error } = response.data.resposta.data.Detail;
+        const {success} = response.data.resposta;
+        const {Description, Error} = response.data.resposta.data.Detail;
         setLoading(false);
         if (!success) {
-            Alert.alert(Description, Error, [{ text: 'Ok' }]);
+            Alert.alert(Description, Error, [{text: 'Ok'}]);
             return;
         }
         setRegisteredOrder([]);
@@ -136,7 +135,7 @@ const CartPayment = ({ route }: any) => {
                     `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
                 )
                 .then(response => {
-                    const { success } = response.data.resposta;
+                    const {success} = response.data.resposta;
                     if (success) {
                         setLoading(false);
                         navigation.navigate('PayCartOk');
@@ -158,10 +157,16 @@ const CartPayment = ({ route }: any) => {
                         keyboardShouldPersistTaps="handled"
                     >
                         <View className="flex-col items-center justify-center">
-                            <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-3xl text-solar-blue-dark py-4"
+                            >
                                 Pagamento
                             </Text>
-                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center"
+                            >
                                 Cartão de crédito
                             </Text>
                         </View>
@@ -172,10 +177,16 @@ const CartPayment = ({ route }: any) => {
                                 <View
                                     className={`flex-col items-center justify-center w-full`}
                                 >
-                                    <Text allowFontScaling={false} className="text-lg font-PoppinsRegular text-solar-blue-dark mb-3">
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-lg font-PoppinsRegular text-solar-blue-dark mb-3"
+                                    >
                                         Valor total do pagamento
                                     </Text>
-                                    <Text allowFontScaling={false} className="text-4xl font-PoppinsMedium text-solar-blue-dark">
+                                    <Text
+                                        allowFontScaling={false}
+                                        className="text-4xl font-PoppinsMedium text-solar-blue-dark"
+                                    >
                                         {MoneyPTBR(
                                             parseFloat(order.valueTotal),
                                         )}
@@ -208,7 +219,10 @@ const CartPayment = ({ route }: any) => {
                                 }) => (
                                     <View>
                                         <View>
-                                            <Text allowFontScaling={false} className={LabelStyle}>
+                                            <Text
+                                                allowFontScaling={false}
+                                                className={LabelStyle}
+                                            >
                                                 Número do cartão de crédito
                                             </Text>
                                             <TextInput
@@ -230,13 +244,19 @@ const CartPayment = ({ route }: any) => {
                                             />
                                             {errors.numeroCartao &&
                                                 touched.numeroCartao && (
-                                                    <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                    <Text
+                                                        allowFontScaling={false}
+                                                        className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                    >
                                                         {errors.numeroCartao}
                                                     </Text>
                                                 )}
                                         </View>
                                         <View className="mt-6">
-                                            <Text allowFontScaling={false} className={LabelStyle}>
+                                            <Text
+                                                allowFontScaling={false}
+                                                className={LabelStyle}
+                                            >
                                                 Nome impresso no cartão
                                             </Text>
                                             <TextInput
@@ -256,7 +276,10 @@ const CartPayment = ({ route }: any) => {
                                             />
                                             {errors.nomeCartao &&
                                                 touched.nomeCartao && (
-                                                    <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                    <Text
+                                                        allowFontScaling={false}
+                                                        className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                    >
                                                         {errors.nomeCartao}
                                                     </Text>
                                                 )}
@@ -264,7 +287,10 @@ const CartPayment = ({ route }: any) => {
 
                                         <View className="flex-row items-start justify-start mt-6">
                                             <View className="mr-2 flex-1">
-                                                <Text allowFontScaling={false} className={LabelStyle}>
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className={LabelStyle}
+                                                >
                                                     Validade
                                                 </Text>
                                                 <TextInput
@@ -286,7 +312,12 @@ const CartPayment = ({ route }: any) => {
                                                 />
                                                 {errors.validadeCartao &&
                                                     touched.validadeCartao && (
-                                                        <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                        <Text
+                                                            allowFontScaling={
+                                                                false
+                                                            }
+                                                            className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                        >
                                                             {
                                                                 errors.validadeCartao
                                                             }
@@ -294,7 +325,10 @@ const CartPayment = ({ route }: any) => {
                                                     )}
                                             </View>
                                             <View className="ml-2 flex-1">
-                                                <Text allowFontScaling={false} className={LabelStyle}>
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className={LabelStyle}
+                                                >
                                                     Código CVV
                                                 </Text>
                                                 <TextInput
@@ -313,7 +347,12 @@ const CartPayment = ({ route }: any) => {
                                                 />
                                                 {errors.cvvCartao &&
                                                     touched.cvvCartao && (
-                                                        <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                        <Text
+                                                            allowFontScaling={
+                                                                false
+                                                            }
+                                                            className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                        >
                                                             {errors.cvvCartao}
                                                         </Text>
                                                     )}

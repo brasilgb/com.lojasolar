@@ -8,18 +8,18 @@ import {
     ScrollView,
     BackHandler,
 } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import ButtonHome from '@components/ButtonHome';
 import AppLayout from '@components/AppLayout';
 import * as WebBrowser from 'expo-web-browser';
-import Carousel, { Pagination } from 'react-native-snap-carousel-v4';
-import { AuthContext } from '@contexts/auth';
+import Carousel, {Pagination} from 'react-native-snap-carousel-v4';
+import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {MaterialIcons} from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const CAROUSEL_VERTICAL_OUTPUT = 1;
@@ -31,33 +31,39 @@ interface CarouselItemProps {
 }
 
 const Home = () => {
-    const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
-    const { signed } = useContext(AuthContext);
+    const navigation =
+        useNavigation<StackNavigationProp<RootDrawerParamList>>();
+    const {signed} = useContext(AuthContext);
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
     const [carrocelData, setCarrocelData] = useState<any>([]);
 
     useEffect(() => {
         const getVersionCheck = async () => {
-            let versionApp: any = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
-            await serviceapp.get('WS_VERSAO_APP')
-                .then((response) => {
-                    const { android, ios } = response.data.resposta.data;
+            let versionApp: any = process.env.EXPO_PUBLIC_APP_VERSION?.replace(
+                /\./g,
+                '',
+            );
+            await serviceapp
+                .get('WS_VERSAO_APP')
+                .then(response => {
+                    const {android, ios} = response.data.resposta.data;
                     const version = Platform.OS === 'ios' ? ios : android; // Sistema opreacional
                     let versionNew: any = version.split('').join('.'); // Adiciona pontos após unidade
                     const data = {
                         atual: process.env.EXPO_PUBLIC_APP_VERSION,
-                        nova: versionNew
-                    }
+                        nova: versionNew,
+                    };
                     if (version > versionApp) {
-                        navigation.navigate('VerifyVersion', { data: data });
+                        navigation.navigate('VerifyVersion', {data: data});
                     }
-                }).catch((err) => {
-                    console.log(err);
                 })
+                .catch(err => {
+                    console.log(err);
+                });
         };
         getVersionCheck();
-    }, [])
+    }, []);
 
     function handleBackButtonClick() {
         navigation.dispatch(DrawerActions.openDrawer());
@@ -65,9 +71,15 @@ const Home = () => {
     }
 
     useEffect(() => {
-        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            handleBackButtonClick,
+        );
         return () => {
-            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener(
+                'hardwareBackPress',
+                handleBackButtonClick,
+            );
         };
     }, []);
 
@@ -76,7 +88,7 @@ const Home = () => {
             await serviceapp
                 .get(`(WS_CARROCEL_PROMOCAO)`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     setCarrocelData(data.carrocel);
                 })
                 .catch(err => {
@@ -94,7 +106,7 @@ const Home = () => {
         });
     };
 
-    const CarouselCardItem = ({ item, index }: CarouselItemProps) => {
+    const CarouselCardItem = ({item, index}: CarouselItemProps) => {
         return (
             <View
                 key={index}
@@ -106,7 +118,7 @@ const Home = () => {
                         onPress={() => handlePressButtonAsync(item.carLink)}
                     >
                         <Image
-                            source={{ uri: item.carLinkImagem }}
+                            source={{uri: item.carLinkImagem}}
                             className="h-full "
                         />
                     </TouchableOpacity>
@@ -133,7 +145,7 @@ const Home = () => {
                     <View className="flex-1 py-8 bg-white border-y border-y-gray-100">
                         <Carousel
                             vertical={false}
-                            layout='default'
+                            layout="default"
                             layoutCardOffset={9}
                             ref={isCarousel}
                             data={carrocelData}
@@ -151,7 +163,6 @@ const Home = () => {
                             loop={true}
                             hasParallaxImages={true}
                         />
-
                     </View>
                     <View className="">
                         <Pagination
@@ -192,7 +203,13 @@ const Home = () => {
                 >
                     <ButtonHome
                         label="Comprar"
-                        icon={<MaterialIcons name="shopping-basket" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="shopping-basket"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             handlePressButtonAsync(
                                 'https://www.lojasolar.com.br/',
@@ -201,7 +218,13 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Assinar Doc."
-                        icon={<MaterialCommunityIcons name="file-document-edit" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialCommunityIcons
+                                name="file-document-edit"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             signed
                                 ? navigation.navigate('DocsAssign')
@@ -210,7 +233,13 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Pagamentos"
-                        icon={<MaterialIcons name="attach-money" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="attach-money"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             signed
                                 ? navigation.navigate('OpenPayments')
@@ -219,7 +248,13 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="2 via Boleto"
-                        icon={<MaterialIcons name="qr-code" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="qr-code"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             signed
                                 ? navigation.navigate('Twobillet')
@@ -228,14 +263,26 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Lojas"
-                        icon={<MaterialIcons name="location-on" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="location-on"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
-                            navigation.navigate('StoresLocation', { data: false })
+                            navigation.navigate('StoresLocation', {data: false})
                         }
                     />
                     <ButtonHome
                         label="Assistência"
-                        icon={<MaterialIcons name="handyman" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="handyman"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             signed
                                 ? navigation.navigate('Protocol')
@@ -244,12 +291,24 @@ const Home = () => {
                     />
                     <ButtonHome
                         label="Fale conosco"
-                        icon={<MaterialIcons name="perm-phone-msg" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="perm-phone-msg"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() => navigation.navigate('Contact')}
                     />
                     <ButtonHome
                         label="Historico"
-                        icon={<MaterialIcons name="history" size={30} color="#FAFAFA" />}
+                        icon={
+                            <MaterialIcons
+                                name="history"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
                         nav={() =>
                             signed
                                 ? navigation.navigate('History')

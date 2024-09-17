@@ -23,10 +23,16 @@ const StoreList = ({route}: any) => {
                 >
                     {item.cidade}
                 </Text>
-                <Text allowFontScaling={false} className={`text-base text-gray-700 font-PoppinsRegular`}>
+                <Text
+                    allowFontScaling={false}
+                    className={`text-base text-gray-700 font-PoppinsRegular`}
+                >
                     {item.endereco}
                 </Text>
-                <Text allowFontScaling={false} className={`text-base text-gray-700 font-PoppinsRegular`}>
+                <Text
+                    allowFontScaling={false}
+                    className={`text-base text-gray-700 font-PoppinsRegular`}
+                >
                     {item.email}
                 </Text>
                 <View className="flex-row items-center justify-between border-t border-gray-200 mt-2 py-2">
@@ -50,10 +56,16 @@ const StoreList = ({route}: any) => {
             <View className="flex-1 items-center justify-center bg-solar-gray-dark w-full">
                 <View className="flex-1 w-full px-4 ">
                     <View className="flex-col items-center justify-center mt-4">
-                        <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center"
+                        >
                             Lojas mais próximas
                         </Text>
-                        <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                        <Text
+                            allowFontScaling={false}
+                            className="text-base text-solar-blue-dark font-PoppinsRegular mb-4"
+                        >
                             Encontre a loja solar mais próxima de você
                         </Text>
                     </View>

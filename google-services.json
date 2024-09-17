@@ -1,29 +1,29 @@
 {
-  "project_info": {
-    "project_number": "223066356046",
-    "project_id": "applojasolar",
-    "storage_bucket": "applojasolar.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:223066356046:android:0d329e1a2b50caeda8061f",
-        "android_client_info": {
-          "package_name": "com.loja.solar"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
+    "project_info": {
+        "project_number": "223066356046",
+        "project_id": "applojasolar",
+        "storage_bucket": "applojasolar.appspot.com"
+    },
+    "client": [
         {
-          "current_key": "AIzaSyAsQ4eob4uHpUxY_yRuYZC6vDfhsll-udY"
+            "client_info": {
+                "mobilesdk_app_id": "1:223066356046:android:0d329e1a2b50caeda8061f",
+                "android_client_info": {
+                    "package_name": "com.loja.solar"
+                }
+            },
+            "oauth_client": [],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyAsQ4eob4uHpUxY_yRuYZC6vDfhsll-udY"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": []
+                }
+            }
         }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+    ],
+    "configuration_version": "1"
 }

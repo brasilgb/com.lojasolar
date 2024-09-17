@@ -8,9 +8,9 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                "solar-blue-dark": "#0d3b85",
-                "solar-blue-light": "#1a9cd9",
-                "solar-green-light": "#A7C414",
+                'solar-blue-dark': '#0d3b85',
+                'solar-blue-light': '#1a9cd9',
+                'solar-green-light': '#A7C414',
                 'solar-yellow-dark': '#F99F1E',
                 'solar-yellow-light': '#FFD100',
                 'solar-gray-dark': '#F1F1F1',

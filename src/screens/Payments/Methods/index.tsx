@@ -1,24 +1,24 @@
-import { View, Text, Alert, TouchableOpacity, Image } from 'react-native';
-import React, { useCallback, useContext, useState } from 'react';
+import {View, Text, Alert, TouchableOpacity, Image} from 'react-native';
+import React, {useCallback, useContext, useState} from 'react';
 import AppLayout from '@components/AppLayout';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { AuthContext } from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {AuthContext} from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import moment from 'moment';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { ListStyle } from '@components/InputStyle';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {ListStyle} from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import servicepay from '@services/servicepay';
 
-const Methods = ({ route }: any) => {
-    const { user, disconnect } = useContext(AuthContext);
+const Methods = ({route}: any) => {
+    const {user, disconnect} = useContext(AuthContext);
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { order } = route?.params;
+    const {order} = route?.params;
 
     const sendPaymentOrder = useCallback(async () => {
         if (registeredOrder.length === 0) {
@@ -35,7 +35,7 @@ const Methods = ({ route }: any) => {
                     cvvCartao: '',
                 },
             });
-            const { success, message, token, data } = response.data.resposta;
+            const {success, message, token, data} = response.data.resposta;
             setRegisteredOrder(data);
             if (!token) {
                 Alert.alert('Atenção', message, [
@@ -48,7 +48,7 @@ const Methods = ({ route }: any) => {
                 ]);
             }
             if (!success) {
-                Alert.alert('Atenção', message, [{ text: 'Ok' }]);
+                Alert.alert('Atenção', message, [{text: 'Ok'}]);
                 return;
             }
             Alert.alert(
@@ -59,7 +59,7 @@ const Methods = ({ route }: any) => {
                         text: 'Não',
                         style: 'cancel',
                     },
-                    { text: 'Sim', onPress: () => paymentBillet(data) },
+                    {text: 'Sim', onPress: () => paymentBillet(data)},
                 ],
             );
         } else {
@@ -68,7 +68,6 @@ const Methods = ({ route }: any) => {
     }, []);
 
     const paymentBillet = useCallback(async (dataSlip: any) => {
-
         const response = await servicepay.post(`/Bankslip/Create`, {
             amount: Number(dataSlip.valorOrdem),
             ordernumber: dataSlip.numeroOrdem,
@@ -90,10 +89,10 @@ const Methods = ({ route }: any) => {
             },
             PaymentObject: {},
         });
-        const { data } = response.data.resposta;
+        const {data} = response.data.resposta;
         sendOrderAtualize(data);
         setRegisteredOrder([]);
-        navigation.navigate('SlipPayment', { order: data });
+        navigation.navigate('SlipPayment', {order: data});
     }, []);
 
     const sendOrderAtualize = useCallback(async (dataSlip: any) => {
@@ -123,7 +122,7 @@ const Methods = ({ route }: any) => {
                 cvvCartao: '',
             },
         });
-        const { success, message, token, data } = response.data.resposta;
+        const {success, message, token, data} = response.data.resposta;
 
         if (!token) {
             Alert.alert('Atenção', message, [
@@ -136,7 +135,7 @@ const Methods = ({ route }: any) => {
             ]);
         }
         if (success) {
-            navigation.navigate('PixPayment', { order: data });
+            navigation.navigate('PixPayment', {order: data});
         } else {
             return;
         }
@@ -146,10 +145,16 @@ const Methods = ({ route }: any) => {
         <AppLayout>
             <View className="flex-1 items-center justify-start bg-solar-gray-dark px-4">
                 <View className="flex-col items-center justify-center">
-                    <Text allowFontScaling={false} className="text-3xl text-solar-blue-dark py-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-3xl text-solar-blue-dark py-4"
+                    >
                         Pagamento
                     </Text>
-                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-base text-solar-blue-dark font-PoppinsRegular mb-4 px-8 text-center"
+                    >
                         Escolha sua forma de pagamento
                     </Text>
                 </View>
@@ -160,10 +165,16 @@ const Methods = ({ route }: any) => {
                         <View
                             className={`flex-col items-center justify-center w-full`}
                         >
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsRegular text-solar-blue-dark">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsRegular text-solar-blue-dark"
+                            >
                                 Valor total do pagamento{' '}
                             </Text>
-                            <Text allowFontScaling={false} className="text-4xl font-PoppinsMedium text-solar-blue-dark mt-8 mb-2">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-4xl font-PoppinsMedium text-solar-blue-dark mt-8 mb-2"
+                            >
                                 {MoneyPTBR(
                                     parseFloat(
                                         order.valueTotal
@@ -182,7 +193,10 @@ const Methods = ({ route }: any) => {
                                 source={require('@assets/images/pix.png')}
                                 className="w-6 h-6"
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Pagar com PIX
                             </Text>
                         </View>
@@ -194,14 +208,17 @@ const Methods = ({ route }: any) => {
                                 size={26}
                                 color={'#0d3b85'}
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Pagar com boleto
                             </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() =>
-                            navigation.navigate('CartPayment', { order: order })
+                            navigation.navigate('CartPayment', {order: order})
                         }
                     >
                         <View className="flex-row items-center pt-4 pl-10">
@@ -210,7 +227,10 @@ const Methods = ({ route }: any) => {
                                 size={26}
                                 color={'#0d3b85'}
                             />
-                            <Text allowFontScaling={false} className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg text-solar-blue-dark font-PoppinsRegular ml-6"
+                            >
                                 Pagar com cartão de crédito
                             </Text>
                         </View>

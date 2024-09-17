@@ -8,23 +8,23 @@ import {
     Keyboard,
     Alert,
 } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Formik } from 'formik';
-import { InputStyle, LabelStyle } from '@components/InputStyle';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Formik} from 'formik';
+import {InputStyle, LabelStyle} from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
-import { maskCelular, maskCep, maskDate, unMask } from '@components/masks';
+import {maskCelular, maskCep, maskDate, unMask} from '@components/masks';
 import Select from '@components/Select';
 import serviceapp from '@services/serviceapp';
-import { cnpj, cpf } from 'cpf-cnpj-validator';
-import { AuthContext } from '@contexts/auth';
-import { useNavigation } from '@react-navigation/native';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import {cnpj, cpf} from 'cpf-cnpj-validator';
+import {AuthContext} from '@contexts/auth';
+import {useNavigation} from '@react-navigation/native';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { TouchableOpacity } from 'react-native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {TouchableOpacity} from 'react-native';
 
 interface FormProps {
     cpfcnpj: any;
@@ -40,7 +40,7 @@ interface FormProps {
 const Account = () => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { user, setLoading, disconnect, loading } = useContext(AuthContext);
+    const {user, setLoading, disconnect, loading} = useContext(AuthContext);
     const tokenUser = user?.token;
     const [ufs, setUfs] = useState<any>([]);
     const [cities, setCities] = useState<any>([]);
@@ -51,7 +51,7 @@ const Account = () => {
     useEffect(() => {
         const getUfs = async () => {
             await serviceapp.get('(WS_CARREGA_UF)').then(response => {
-                const { data } = response.data.resposta;
+                const {data} = response.data.resposta;
                 const resUfs = data.map((u: any) => u.uf);
                 setUfs(resUfs);
             });
@@ -64,7 +64,7 @@ const Account = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CIDADE)?uf=${ufSelected}`)
                 .then(response => {
-                    const { data } = response.data.resposta;
+                    const {data} = response.data.resposta;
                     const resCities = data.map((c: any) => c.cidade);
                     setCities(resCities);
                 });
@@ -78,7 +78,7 @@ const Account = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CLIENTE)?token=${tokenUser}`)
                 .then(response => {
-                    const { data, message, token } = response.data.resposta;
+                    const {data, message, token} = response.data.resposta;
 
                     setLoading(false);
                     if (!token) {
@@ -117,24 +117,25 @@ const Account = () => {
         setLoading(true);
         Keyboard.dismiss();
         const response = await serviceapp.get(
-            `(WS_ALTERA_CLIENTE)?token=${tokenUser}&nomeCliente=${values.nomeCliente
+            `(WS_ALTERA_CLIENTE)?token=${tokenUser}&nomeCliente=${
+                values.nomeCliente
             }&enderecoCliente=${values.enderecoCliente}&cepCliente=${unMask(
                 values.cepCliente,
-            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${values.ufCliente
-            }&celularCliente=${unMask(values.celularCliente)}&emailCliente=${values.emailCliente
+            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${
+                values.ufCliente
+            }&celularCliente=${unMask(values.celularCliente)}&emailCliente=${
+                values.emailCliente
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
-        const { success, message } = response.data.resposta;
+        const {success, message} = response.data.resposta;
 
         setLoading(false);
         if (!success) {
-            Alert.alert('Atenção', message, [
-                { text: 'Ok' },
-            ]);
+            Alert.alert('Atenção', message, [{text: 'Ok'}]);
         }
         if (success) {
             Alert.alert('Atenção', message, [
-                { text: 'Ok', onPress: () => navigation.navigate('Home') },
+                {text: 'Ok', onPress: () => navigation.navigate('Home')},
             ]);
         }
     };
@@ -149,7 +150,7 @@ const Account = () => {
             {
                 text: 'Continuar',
                 onPress: () =>
-                    navigation.navigate('DataExclude', { data: accounts }),
+                    navigation.navigate('DataExclude', {data: accounts}),
             },
         ]);
     };
@@ -168,16 +169,20 @@ const Account = () => {
                     <View className="flex-1 bg-solar-gray-dark px-4">
                         <View className="py-4 flex-row items-center justify-center border-b border-b-gray-300">
                             <View className="flex-1">
-                                <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium text-center">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-2xl text-solar-blue-dark font-PoppinsMedium text-center"
+                                >
                                     Meus dados
                                 </Text>
                             </View>
                             <TouchableOpacity
                                 onPress={() => handleExcludeDataUser()}
-                                className={`flex-none justify-self-end bg-gray-200 border border-white rounded p-1 ${Platform.OS == 'ios'
-                                    ? 'shadow-sm shadow-gray-300'
-                                    : 'shadow-md shadow-black'
-                                    }`}
+                                className={`flex-none justify-self-end bg-gray-200 border border-white rounded p-1 ${
+                                    Platform.OS == 'ios'
+                                        ? 'shadow-sm shadow-gray-300'
+                                        : 'shadow-md shadow-black'
+                                }`}
                             >
                                 <MaterialIcons
                                     name="person-remove"
@@ -200,7 +205,10 @@ const Account = () => {
                                 >
                                     {accounts.nomeCliente}
                                 </Text>
-                                <Text allowFontScaling={false} className="text-base mr-4 w-60 text-solar-blue-dark font-Poppins_400Regular">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-base mr-4 w-60 text-solar-blue-dark font-Poppins_400Regular"
+                                >
                                     Confira seus dados abaixo e se necessário,
                                     atualize-os
                                 </Text>
@@ -227,7 +235,10 @@ const Account = () => {
                                 ),
                                 emailCliente: accounts.emailCliente,
                                 nascimentoCliente: maskDate(
-                                    unMask(accounts.nascimentoCliente) === '00000000' ? '' : accounts.nascimentoCliente,
+                                    unMask(accounts.nascimentoCliente) ===
+                                        '00000000'
+                                        ? ''
+                                        : accounts.nascimentoCliente,
                                 ),
                             }}
                             enableReinitialize
@@ -244,7 +255,10 @@ const Account = () => {
                             }) => (
                                 <View className="mt-6">
                                     <View className="">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             CPF ou CNPJ
                                         </Text>
                                         <TextInput
@@ -255,7 +269,10 @@ const Account = () => {
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Nome completo
                                         </Text>
                                         <TextInput
@@ -272,14 +289,20 @@ const Account = () => {
                                         />
                                         {errors.nomeCliente &&
                                             touched.nomeCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.nomeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Endereço
                                         </Text>
                                         <TextInput
@@ -298,14 +321,22 @@ const Account = () => {
                                         />
                                         {errors.enderecoCliente &&
                                             touched.enderecoCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.enderecoCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>CEP</Text>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
+                                            CEP
+                                        </Text>
                                         <TextInput
                                             className={InputStyle(
                                                 touched.cepCliente,
@@ -321,14 +352,20 @@ const Account = () => {
                                         />
                                         {errors.cepCliente &&
                                             touched.cepCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.cepCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Estado
                                         </Text>
                                         <Select
@@ -350,14 +387,20 @@ const Account = () => {
 
                                         {errors.ufCliente &&
                                             touched.ufCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.ufCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Cidade
                                         </Text>
                                         <Select
@@ -379,14 +422,20 @@ const Account = () => {
                                         />
                                         {errors.cidadeCliente &&
                                             touched.cidadeCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.cidadeCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Celular
                                         </Text>
                                         <TextInput
@@ -409,14 +458,20 @@ const Account = () => {
                                         />
                                         {errors.celularCliente &&
                                             touched.celularCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.celularCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             E-mail
                                         </Text>
                                         <TextInput
@@ -433,14 +488,20 @@ const Account = () => {
                                         />
                                         {errors.emailCliente &&
                                             touched.emailCliente && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.emailCliente}
                                                 </Text>
                                             )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Data de nascimento
                                         </Text>
                                         <TextInput
@@ -448,7 +509,15 @@ const Account = () => {
                                                 errors.nascimentoCliente,
                                                 touched.nascimentoCliente,
                                             )}
-                                            value={unMask(accounts.nascimentoCliente) === '00000000' ? '' : maskDate(values.nascimentoCliente)}
+                                            value={
+                                                unMask(
+                                                    accounts.nascimentoCliente,
+                                                ) === '00000000'
+                                                    ? ''
+                                                    : maskDate(
+                                                          values.nascimentoCliente,
+                                                      )
+                                            }
                                             onBlur={handleBlur(
                                                 'nascimentoCliente',
                                             )}

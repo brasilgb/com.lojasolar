@@ -98,10 +98,16 @@ const PrivacySettings = () => {
             <AppLoading visible={loading} />
             <View className="flex-1 bg-solar-gray-dark px-4">
                 <View className="py-4 flex items-center justify-center">
-                    <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 text-center"
+                    >
                         Configurações de privacidade
                     </Text>
-                    <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsRegular mb-4">
+                    <Text
+                        allowFontScaling={false}
+                        className="text-base text-solar-blue-dark font-PoppinsRegular mb-4"
+                    >
                         Configure as opções de privacidade abaixo
                     </Text>
                 </View>
@@ -110,7 +116,10 @@ const PrivacySettings = () => {
                         className={`${ListStyle} flex-row items-center justify-center mb-4`}
                     >
                         <View className="flex-1 py-2">
-                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                            >
                                 {autorizaCliente && autorizaCliente[0]?.texto}
                             </Text>
                         </View>
@@ -130,7 +139,10 @@ const PrivacySettings = () => {
                         className={`${ListStyle} flex-row items-center justify-center`}
                     >
                         <View className="flex-1 py-2">
-                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark font-PoppinsMedium">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                            >
                                 {autorizaCliente && autorizaCliente[1]?.texto}
                             </Text>
                         </View>
@@ -154,7 +166,10 @@ const PrivacySettings = () => {
                             } py-3 rounded-full bg-solar-orange-middle`}
                             onPress={() => handleSubmitPrivacity()}
                         >
-                            <Text allowFontScaling={false} className="text-lg font-PoppinsMedium self-center text-solar-blue-dark">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-lg font-PoppinsMedium self-center text-solar-blue-dark"
+                            >
                                 Concluir
                             </Text>
                         </TouchableOpacity>

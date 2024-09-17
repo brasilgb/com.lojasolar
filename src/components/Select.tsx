@@ -142,7 +142,10 @@ const Select = ({
                                     color={'#0d3b85'}
                                 />
                             </TouchableOpacity>
-                            <Text allowFontScaling={false} className="text-base text-gray-700 font-PoppinsMedium">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-gray-700 font-PoppinsMedium"
+                            >
                                 {text}
                             </Text>
                             <TouchableOpacity
@@ -166,7 +169,9 @@ const Select = ({
                                     <TextInput
                                         className="py-1 px-4 placeholder:text-base placeholder:text-gray-600 text-base text-gray-600 w-[94%]"
                                         placeholder="Digite sua busca"
-                                        onChangeText={text => searchFilter(text)}
+                                        onChangeText={text =>
+                                            searchFilter(text)
+                                        }
                                         value={search}
                                     />
                                 </View>

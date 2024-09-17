@@ -23,7 +23,10 @@ const ButtonPayament = ({
                     : 'shadow-sm shadow-black'
             } py-2 rounded-lg w-full`}
         >
-            <Text allowFontScaling={false} className={`text-lg ${txcolor} font-PoppinsMedium`}>
+            <Text
+                allowFontScaling={false}
+                className={`text-lg ${txcolor} font-PoppinsMedium`}
+            >
                 {label}
             </Text>
         </TouchableOpacity>

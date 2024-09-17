@@ -7,20 +7,20 @@ import {
     TextInput,
     Alert,
 } from 'react-native';
-import React, { useCallback, useContext, useState } from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
-import { AuthContext } from '@contexts/auth';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Formik } from 'formik';
-import { InputStyle, LabelStyle } from '@components/InputStyle';
+import {AuthContext} from '@contexts/auth';
+import {MaterialIcons} from '@expo/vector-icons';
+import {Formik} from 'formik';
+import {InputStyle, LabelStyle} from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
 import serviceapp from '@services/serviceapp';
-import { useNavigation } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { RootDrawerParamList } from '@screens/RootDrawerPrams';
-import { maskCelular } from "@components/masks";
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import {maskCelular} from '@components/masks';
 
 interface SenhaProps {
     email: string;
@@ -29,25 +29,25 @@ interface SenhaProps {
     repitaSenha: string;
 }
 
-const RegisterPassword = ({ route }: any) => {
+const RegisterPassword = ({route}: any) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const { setLoading, loading, disconnect } = useContext(AuthContext);
+    const {setLoading, loading, disconnect} = useContext(AuthContext);
     const [showPassword1, setShowPassword1] = useState<boolean>(true);
     const [showPassword2, setShowPassword2] = useState<boolean>(true);
 
-    const { data } = route?.params;
+    const {data} = route?.params;
 
     const onsubmit = useCallback(
-        async (values: SenhaProps, { resetForm }: any) => {
+        async (values: SenhaProps, {resetForm}: any) => {
             setLoading(true);
             await serviceapp
                 .get(
                     `(WS_ALTERAR_SENHA_APP)?cpfcnpj=${data.cpfCnpj}&senha=${values.senha}&emailCliente=${values.email}&celularCliente=${values.celular}`,
                 )
                 .then(response => {
-                    const { success, message } = response.data.resposta;
-                    
+                    const {success, message} = response.data.resposta;
+
                     setLoading(false);
                     resetForm();
                     if (!success) {
@@ -62,7 +62,7 @@ const RegisterPassword = ({ route }: any) => {
                         ]);
                         return;
                     }
-                    navigation.navigate('PasswordChanged', { data: data });
+                    navigation.navigate('PasswordChanged', {data: data});
                 })
                 .catch(error => {
                     console.log(error);
@@ -85,10 +85,16 @@ const RegisterPassword = ({ route }: any) => {
                 >
                     <View className="px-4">
                         <View className="py-4 flex items-center justify-center">
-                            <Text allowFontScaling={false} className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 pb-2 text-center">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-2xl text-solar-blue-dark font-PoppinsMedium mb-4 pb-2 text-center"
+                            >
                                 Este é seu primeiro acesso?
                             </Text>
-                            <Text allowFontScaling={false} className="text-base text-solar-blue-dark py-2 pb-6 border-b border-b-gray-300 w-full text-center">
+                            <Text
+                                allowFontScaling={false}
+                                className="text-base text-solar-blue-dark py-2 pb-6 border-b border-b-gray-300 w-full text-center"
+                            >
                                 por favor, defina uma senha que você irá
                                 utilizar sempre que fizer login no aplicativo
                                 das Lojas Solar
@@ -99,7 +105,10 @@ const RegisterPassword = ({ route }: any) => {
                                     size={20}
                                     color={'#f78888'}
                                 />
-                                <Text allowFontScaling={false} className="text-sm ml-1 text-gray-500">
+                                <Text
+                                    allowFontScaling={false}
+                                    className="text-sm ml-1 text-gray-500"
+                                >
                                     Sua senha precisa ter no mínimo 6 caracteres
                                 </Text>
                             </View>
@@ -125,10 +134,11 @@ const RegisterPassword = ({ route }: any) => {
                                 isValid,
                             }) => (
                                 <View className="mt-6">
-
-
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Insira seu e-mail
                                         </Text>
                                         <View className="">
@@ -146,14 +156,20 @@ const RegisterPassword = ({ route }: any) => {
                                             />
                                         </View>
                                         {errors.email && touched.email && (
-                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                            >
                                                 {errors.email}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Insira seu celular
                                         </Text>
                                         <View className="">
@@ -162,7 +178,9 @@ const RegisterPassword = ({ route }: any) => {
                                                     touched.celular,
                                                     errors.celular,
                                                 )}
-                                                value={maskCelular(values.celular)}
+                                                value={maskCelular(
+                                                    values.celular,
+                                                )}
                                                 maxLength={16}
                                                 onBlur={handleBlur('celular')}
                                                 onChangeText={handleChange(
@@ -172,14 +190,20 @@ const RegisterPassword = ({ route }: any) => {
                                             />
                                         </View>
                                         {errors.celular && touched.celular && (
-                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                            >
                                                 {errors.celular}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Insira sua nova senha
                                         </Text>
                                         <View className="relative">
@@ -225,14 +249,20 @@ const RegisterPassword = ({ route }: any) => {
                                             </View>
                                         </View>
                                         {errors.senha && touched.senha && (
-                                            <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                            <Text
+                                                allowFontScaling={false}
+                                                className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                            >
                                                 {errors.senha}
                                             </Text>
                                         )}
                                     </View>
 
                                     <View className="mt-6">
-                                        <Text allowFontScaling={false} className={LabelStyle}>
+                                        <Text
+                                            allowFontScaling={false}
+                                            className={LabelStyle}
+                                        >
                                             Confirme sua nova senha
                                         </Text>
                                         <View className="relative">
@@ -281,7 +311,10 @@ const RegisterPassword = ({ route }: any) => {
                                         </View>
                                         {errors.repitaSenha &&
                                             touched.repitaSenha && (
-                                                <Text allowFontScaling={false} className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular">
+                                                <Text
+                                                    allowFontScaling={false}
+                                                    className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
+                                                >
                                                     {errors.repitaSenha}
                                                 </Text>
                                             )}
