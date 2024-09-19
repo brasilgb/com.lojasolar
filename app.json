@@ -1,6 +1,6 @@
 {
     "expo": {
-        "name": "LojasSolar",
+        "name": "Lojas Solar",
         "slug": "comlojasolar",
         "version": "1.3.5",
         "orientation": "portrait",
@@ -60,7 +60,7 @@
         },
         "plugins": [
             "@react-native-firebase/app",
-            "./react-native-maps-plugin",
+            "./react-native-maps-plugin.js",
             [
                 "expo-build-properties",
                 {
