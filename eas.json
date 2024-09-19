@@ -1,21 +1,22 @@
 {
     "cli": {
-        "appVersionSource": "remote"
+        "version": ">= 10.1.0",
+        "appVersionSource": "remote",
     },
     "build": {
         "development": {
             "developmentClient": true,
-            "distribution": "internal"
+            "distribution": "internal",
         },
         "preview": {
-            "distribution": "internal"
+            "distribution": "internal",
         },
         "production": {
             "releaseChannel": "production",
             "ios": {
-                "image": "latest"
+                "image": "latest",
             },
-            "autoIncrement": true
-        }
-    }
+            "autoIncrement": true,
+        },
+    },
 }
