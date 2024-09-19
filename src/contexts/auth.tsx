@@ -1,20 +1,19 @@
-import {Alert} from 'react-native';
-import React, {createContext, useEffect, useState} from 'react';
+import { Alert } from 'react-native';
+import React, { createContext, useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const AuthContext = createContext({} as any);
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import serviceapp from '@services/serviceapp';
-import DeviceInfo from 'react-native-device-info';
-import * as SecureStore from 'expo-secure-store';
+import DeviceInfo from "react-native-device-info";
 
 interface AuthContextProps {
     children: React.ReactNode;
 }
 
-export const AuthProvider = ({children}: AuthContextProps) => {
+export const AuthProvider = ({ children }: AuthContextProps) => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const [loading, setLoading] = useState(false);
@@ -40,12 +39,12 @@ export const AuthProvider = ({children}: AuthContextProps) => {
 
     useEffect(() => {
         async function loadPosition() {
-            let {status} = await Location.requestForegroundPermissionsAsync();
+            let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.log('Permission to access location was denied');
             }
             const location = await Location.getCurrentPositionAsync({});
-            const {latitude, longitude} = location.coords;
+            const { latitude, longitude } = location.coords;
             setPositionGlobal([latitude, longitude]);
         }
         loadPosition();
@@ -63,7 +62,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
                 'Erro ao conectar ao servidor. O serviço da aplicação parece estar parado.',
             );
         }
-        const {data} = response.data.resposta;
+        const { data } = response.data.resposta;
         if (data.cadastroCliente && data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('CheckPassword', {
@@ -77,13 +76,13 @@ export const AuthProvider = ({children}: AuthContextProps) => {
         if (!data.cadastroCliente && !data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('NoRegistered', {
-                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
+                data: { cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente },
             });
         }
         if (data.cadastroCliente && !data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('Registered', {
-                data: {cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente},
+                data: { cpfCnpj: cpfcnpj, nomeCliente: data.nomeCliente },
             });
         }
     };
@@ -96,9 +95,9 @@ export const AuthProvider = ({children}: AuthContextProps) => {
         connected,
     }: any) => {
         setLoading(true);
-        const devid: any = await SecureStore.getItemAsync('uniqueId');
+        let deviceId = DeviceInfo.getUniqueIdSync();
         const response = await serviceapp.get(
-            `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${JSON.parse(devid)}`,
+            `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceId}`,
         );
 
         if (response.status !== 200) {
@@ -110,7 +109,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             return;
         }
 
-        const {success, message, data} = response.data.resposta;
+        const { success, message, data } = response.data.resposta;
         if (!success) {
             setLoading(false);
             setUser(null);
@@ -123,8 +122,7 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             nomeCliente: nomeCliente,
             codigoCliente: codigoCliente,
             token: data.token,
-            connected: connected,
-            deviceid: devid,
+            connected: connected
         };
         setLoading(false);
         storageUser(userData);
@@ -137,13 +135,13 @@ export const AuthProvider = ({children}: AuthContextProps) => {
             'Atenção - Ação de Logout',
             'Você será desconectado, deseja continuar?',
             [
-                {text: 'Sim', onPress: () => disconnect()},
+                { text: 'Sim', onPress: () => disconnect() },
                 {
                     text: 'Não',
                     style: 'cancel',
                 },
             ],
-            {cancelable: false},
+            { cancelable: false },
         );
     }
 
