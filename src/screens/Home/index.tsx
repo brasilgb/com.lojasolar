@@ -49,7 +49,7 @@ const Home = () => {
                 .then(response => {
                     const {android, ios} = response.data.resposta.data;
                     const version = Platform.OS === 'ios' ? ios : android; // Sistema opreacional
-                    let versionNew: any = version?.split('').join('.'); // Adiciona pontos após unidade
+                    let versionNew: any = version.split('').join('.'); // Adiciona pontos após unidade
                     const data = {
                         atual: process.env.EXPO_PUBLIC_APP_VERSION,
                         nova: versionNew,
