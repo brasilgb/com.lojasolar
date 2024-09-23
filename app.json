@@ -15,6 +15,9 @@
         "ios": {
             "googleServicesFile": "./GoogleService-Info.plist",
             "infoPlist": {
+                "NSAppTransportSecurity": {
+                    "NSAllowsArbitraryLoads": true
+                },
                 "UIBackgroundModes": ["fetch", "remote-notification"],
                 "NSLocationAlwaysAndWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
                 "NSLocationWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
@@ -65,12 +68,7 @@
                 {
                     "ios": {
                         "useFrameworks": "static",
-                        "deploymentTarget": "14.0",
-                        "infoPlist": {
-                            "NSAppTransportSecurity": {
-                                "NSAllowsArbitraryLoads": true
-                            }
-                        }
+                        "deploymentTarget": "14.0"
                     },
                     "android": {
                         "usesCleartextTraffic": true,
