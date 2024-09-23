@@ -14,6 +14,9 @@
         "assetBundlePatterns": ["**/*"],
         "ios": {
             "googleServicesFile": "./GoogleService-Info.plist",
+            "entitlements": {
+                "aps-environment": "preview"
+            },
             "infoPlist": {
                 "NSAppTransportSecurity": {
                     "NSAllowsArbitraryLoads": true
