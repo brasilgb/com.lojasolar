@@ -39,6 +39,21 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
         data: {
             url: remoteMessage.data.url,
         },
+        ios: {
+            // action: {},
+            // foregroundPresentationOptions: {
+            //     badge: true,
+            //     sound: true,
+            //     banner: true,
+            //     list: true,
+            // },
+            targetContentId: '',
+            attachments: [
+                {
+                    url: remoteMessage.data.image
+                },
+            ],
+        },
         android: {
             channelId,
             style: {
@@ -56,7 +71,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
 
 notifee.onBackgroundEvent(async ({ type, detail }) => {
     const { notification, pressAction }: any = detail;
-    if (type === EventType.PRESS && pressAction?.id === 'inportant') {
+    if (type === EventType.PRESS || pressAction?.id === 'inportant') {
         await Linking.openURL(notification.data.url);
     }
 });
@@ -99,6 +114,19 @@ const App = () => {
                 data: {
                     url: message.url,
                 },
+                ios: {
+                    // foregroundPresentationOptions: {
+                    //     badge: true,
+                    //     sound: true,
+                    //     banner: true,
+                    //     list: true,
+                    // },
+                    attachments: [
+                        {
+                            url: message.image
+                        },
+                    ]
+                },
                 android: {
                     channelId,
                     style: {
@@ -123,7 +151,7 @@ const App = () => {
 
         notifee.onForegroundEvent(async ({ type, detail }) => {
             const { notification, pressAction }: any = detail;
-            if (type === EventType.PRESS && pressAction?.id === 'inportant') {
+            if (type === EventType.PRESS || pressAction?.id === 'inportant') {
                 await Linking.openURL(notification.data.url);
             }
         });

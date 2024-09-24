@@ -282,7 +282,7 @@ const LoadImages = ({route}: any) => {
                                 onPress={() => getImageUpload('camera')}
                             >
                                 <Ionicons
-                                    name="ios-camera"
+                                    name="camera"
                                     size={45}
                                     color="#024D9F"
                                 />
@@ -298,7 +298,7 @@ const LoadImages = ({route}: any) => {
                                 onPress={() => getImageUpload('gallery')}
                             >
                                 <Ionicons
-                                    name="ios-image"
+                                    name="image"
                                     size={45}
                                     color="#024D9F"
                                 />

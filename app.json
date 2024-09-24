@@ -15,7 +15,7 @@
         "ios": {
             "googleServicesFile": "./GoogleService-Info.plist",
             "entitlements": {
-                "aps-environment": "preview"
+                "aps-environment": "production"
             },
             "infoPlist": {
                 "NSAppTransportSecurity": {
