@@ -24,9 +24,10 @@ import { Linking, Platform } from 'react-native';
 import { AuthProvider } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
-    await notifee.requestPermission();
+    await messaging().requestPermission();
     const channelId = await notifee.createChannel({
         id: 'important',
         name: 'NotificacoesImportantes',
@@ -69,17 +70,32 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     });
 });
 
-notifee.onBackgroundEvent(async ({ type, detail }) => {
-    const { notification, pressAction }: any = detail;
-    if (type === EventType.PRESS || pressAction?.id === 'inportant') {
-        await Linking.openURL(notification.data.url);
-    }
-});
-
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
+    const [uiidDevice, setUiidDevice] = useState<any>();
 
-    //*******Notifications push************************************************************** */
+    //*******Save key UUID in Secure Store ****************************************************/
+    useEffect(() => {
+        const setValueDevice = async () => {
+
+            try {
+                const value = await AsyncStorage.getItem("deviceid");
+                if (value !== null) {
+                    console.log(value);
+                    return;
+                }
+                if (value === null) {
+                    DeviceInfo.syncUniqueId().then(async (uniqueId) => {
+                        await AsyncStorage.setItem("deviceid", uniqueId);
+                    });
+                }
+            } catch (error) {
+                console.error('AsyncStorage Error: ', error);
+            }
+        }
+        setValueDevice();
+    }, []);
+
     const requestUserPermission = async () => {
         const authStatus = await messaging().requestPermission();
         const enabled =
@@ -92,6 +108,13 @@ const App = () => {
         }
     };
 
+    notifee.onBackgroundEvent(async ({ type, detail }) => {
+        const { notification, pressAction }: any = detail;
+        if (type === EventType.PRESS || pressAction?.id === 'inportant') {
+            await Linking.openURL(notification.data.url);
+        }
+    });
+
     useEffect(() => {
         requestUserPermission();
         const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -101,13 +124,11 @@ const App = () => {
         const fireNotification = async (message: any) => {
             // Request permissions (required for iOS)
             await notifee.requestPermission();
-            //   // Create a channel (required for Android)
             const channelId = await notifee.createChannel({
                 id: 'important',
                 name: 'NotificacoesImportantes',
             });
 
-            // Display a notification
             await notifee.displayNotification({
                 title: message.title,
                 body: message.body,
@@ -164,7 +185,7 @@ const App = () => {
     ) {
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
-        let deviceId = DeviceInfo.getUniqueIdSync();
+        let deviceId = await AsyncStorage.getItem("deviceid");
 
         await serviceapp
             .get(
