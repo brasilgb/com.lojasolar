@@ -97,12 +97,17 @@ const App = () => {
     }, []);
 
     const requestUserPermission = async () => {
+        await notifee.createChannel({
+            id: 'important',
+            name: 'NotificacoesImportantes',
+        });
         const authStatus = await messaging().requestPermission();
         const enabled =
             authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
             authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
         if (enabled) {
+
             let tokenFirebase = (await messaging().getToken()).toString();
             registerDevice(tokenFirebase); // Insere pushToken e código do cliente em sce002
         }
@@ -128,7 +133,6 @@ const App = () => {
                 id: 'important',
                 name: 'NotificacoesImportantes',
             });
-
             await notifee.displayNotification({
                 title: message.title,
                 body: message.body,
@@ -136,12 +140,12 @@ const App = () => {
                     url: message.url,
                 },
                 ios: {
-                    // foregroundPresentationOptions: {
-                    //     badge: true,
-                    //     sound: true,
-                    //     banner: true,
-                    //     list: true,
-                    // },
+                    foregroundPresentationOptions: {
+                        badge: true,
+                        sound: true,
+                        banner: true,
+                        list: true,
+                    },
                     attachments: [
                         {
                             url: message.image
@@ -162,6 +166,10 @@ const App = () => {
                 },
             });
         };
+        messaging().getInitialNotification()
+            .then((remoteMessage) => {
+                console.log("Notification caused app to open from quit state:", remoteMessage?.notification)
+            });
 
         messaging().onNotificationOpenedApp(async (remoteMessage: any) => {
             console.log(
@@ -192,7 +200,7 @@ const App = () => {
                 `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}`,
             )
             .then(response => {
-                // console.log(response.data.resposta.success);
+                console.log(response.data.resposta);
             })
             .catch(err => {
                 console.log(err);
