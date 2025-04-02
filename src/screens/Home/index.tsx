@@ -142,7 +142,7 @@ const Home = () => {
             <View className="flex-grow bg-slate-500">
                 <View className="flex-1 w-full bg-gray-50">
                     <View className=" h-24 flex items-center justify-center">
-                        <Text>{uiidDevice}</Text>
+
                         <Text
                             allowFontScaling={false}
                             className="text-2xl font-PoppinsBold text-solar-blue-dark text-center"
@@ -258,17 +258,17 @@ const Home = () => {
                         }
                     />
                     <ButtonHome
-                        label="2 via Boleto"
+                        label="Cashback"
                         icon={
                             <MaterialIcons
-                                name="qr-code"
+                                name="currency-exchange"
                                 size={30}
                                 color="#FAFAFA"
                             />
                         }
                         nav={() =>
                             signed
-                                ? navigation.navigate('Twobillet')
+                                ? navigation.navigate('CashBack')
                                 : navigation.navigate('SignIn')
                         }
                     />
@@ -323,6 +323,21 @@ const Home = () => {
                         nav={() =>
                             signed
                                 ? navigation.navigate('History')
+                                : navigation.navigate('SignIn')
+                        }
+                    />
+                    <ButtonHome
+                        label="2 via Boleto"
+                        icon={
+                            <MaterialIcons
+                                name="qr-code"
+                                size={30}
+                                color="#FAFAFA"
+                            />
+                        }
+                        nav={() =>
+                            signed
+                                ? navigation.navigate('Twobillet')
                                 : navigation.navigate('SignIn')
                         }
                     />

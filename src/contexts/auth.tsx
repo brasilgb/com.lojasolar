@@ -7,7 +7,7 @@ export const AuthContext = createContext({} as any);
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import serviceapp from '@services/serviceapp';
-import DeviceInfo from "react-native-device-info";
+// import DeviceInfo from "react-native-device-info";
 
 interface AuthContextProps {
     children: React.ReactNode;
@@ -95,7 +95,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         connected,
     }: any) => {
         setLoading(true);
-        let deviceId = DeviceInfo.getUniqueIdSync();
+        // let deviceId = DeviceInfo.getUniqueIdSync();
+        let deviceId = 'd49cd9c01bd43cf8';
         const response = await serviceapp.get(
             `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceId}`,
         );

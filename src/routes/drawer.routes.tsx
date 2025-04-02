@@ -49,6 +49,7 @@ import DataAnalise from '@screens/Auth/DataAnalise';
 import VerifyVersion from '@screens/VerifyVersion';
 import DocsAssign from '@screens/DocsAssign';
 import ViewDoc from '@screens/DocsAssign/ViewDoc';
+import CashBack from '@screens/CashBack';
 // import VerifyVersion from "@screens/VerifyVersion";
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -353,6 +354,27 @@ const DrawerRoutes = () => {
                                 />
                             ),
                             drawerLabel: 'Faça seu pagamento',
+                            headerTitle: (props: any) => (
+                                <LogoTitle {...props} />
+                            ),
+                        }}
+                    />
+
+                    <Drawer.Screen
+                        name="CashBack"
+                        component={CashBack}
+                        options={{
+                            drawerItemStyle: {
+                                marginVertical: 1,
+                            },
+                            drawerIcon: ({color, size}) => (
+                                <MaterialIcons
+                                    name="currency-exchange"
+                                    color={color}
+                                    size={22}
+                                />
+                            ),
+                            drawerLabel: 'Cashback',
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),

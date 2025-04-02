@@ -71,7 +71,7 @@
                 {
                     "ios": {
                         "useFrameworks": "static",
-                        "deploymentTarget": "14.0"
+                        "deploymentTarget": "15.1"
                     },
                     "android": {
                         "usesCleartextTraffic": true,
