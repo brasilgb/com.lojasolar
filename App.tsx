@@ -25,6 +25,7 @@ import { AuthProvider } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
 // import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
 //     await messaging().requestPermission();
@@ -33,41 +34,41 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //         name: 'NotificacoesImportantes',
 //     });
 
-    // Display a notification
-    // await notifee.displayNotification({
-    //     title: remoteMessage.data.title,
-    //     body: remoteMessage.data.body,
-    //     data: {
-    //         url: remoteMessage.data.url,
-    //     },
-    //     ios: {
-    //         // action: {},
-    //         // foregroundPresentationOptions: {
-    //         //     badge: true,
-    //         //     sound: true,
-    //         //     banner: true,
-    //         //     list: true,
-    //         // },
-    //         targetContentId: '',
-    //         attachments: [
-    //             {
-    //                 url: remoteMessage.data.image
-    //             },
-    //         ],
-    //     },
-    //     android: {
-    //         channelId,
-    //         style: {
-    //             type: AndroidStyle.BIGPICTURE,
-    //             picture: remoteMessage.data.image,
-    //         },
-    //         badgeIconType: AndroidBadgeIconType.SMALL,
-    //         importance: AndroidImportance.HIGH,
-    //         pressAction: {
-    //             id: 'inportant',
-    //         },
-    //     },
-    // });
+// Display a notification
+// await notifee.displayNotification({
+//     title: remoteMessage.data.title,
+//     body: remoteMessage.data.body,
+//     data: {
+//         url: remoteMessage.data.url,
+//     },
+//     ios: {
+//         // action: {},
+//         // foregroundPresentationOptions: {
+//         //     badge: true,
+//         //     sound: true,
+//         //     banner: true,
+//         //     list: true,
+//         // },
+//         targetContentId: '',
+//         attachments: [
+//             {
+//                 url: remoteMessage.data.image
+//             },
+//         ],
+//     },
+//     android: {
+//         channelId,
+//         style: {
+//             type: AndroidStyle.BIGPICTURE,
+//             picture: remoteMessage.data.image,
+//         },
+//         badgeIconType: AndroidBadgeIconType.SMALL,
+//         importance: AndroidImportance.HIGH,
+//         pressAction: {
+//             id: 'inportant',
+//         },
+//     },
+// });
 // });
 
 const App = () => {
@@ -241,13 +242,13 @@ const App = () => {
     }
 
     return (
-        <SafeAreaProvider onLayout={onLayout}>
-            <NavigationContainer>
-                <AuthProvider>
-                    <Routes />
-                </AuthProvider>
-            </NavigationContainer>
-        </SafeAreaProvider>
+            <SafeAreaProvider onLayout={onLayout}>
+                <NavigationContainer>
+                    <AuthProvider>
+                        <Routes />
+                    </AuthProvider>
+                </NavigationContainer>
+            </SafeAreaProvider>
     );
 };
 

@@ -50,6 +50,7 @@ import VerifyVersion from '@screens/VerifyVersion';
 import DocsAssign from '@screens/DocsAssign';
 import ViewDoc from '@screens/DocsAssign/ViewDoc';
 import CashBack from '@screens/CashBack';
+import StackRoutes from './stack.routes';
 // import VerifyVersion from "@screens/VerifyVersion";
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -378,6 +379,28 @@ const DrawerRoutes = () => {
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),
+                        }}
+                    />
+
+                    <Drawer.Screen
+                        name="StatusCashBack"
+                        component={StackRoutes}
+                        options={{
+                            drawerItemStyle: {
+                                height: 0
+                            },
+                            drawerIcon: ({color, size}) => (
+                                <MaterialIcons
+                                    name="currency-exchange"
+                                    color={color}
+                                    size={22}
+                                />
+                            ),
+                            drawerLabel: 'Cashback',
+                            headerTitle: (props: any) => (
+                                <LogoTitle {...props} />
+                            ),
+                            drawerStatusBarAnimation: "slide"
                         }}
                     />
 

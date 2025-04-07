@@ -28,6 +28,7 @@ export type RootDrawerParamList = {
     Methods: {order: any};
     OpenPayments: undefined;
     CashBack: undefined;
+    StatusCashBack: undefined;
     HistoryPayments: undefined;
     PixPayment: {order: any};
     SlipPayment: {order: any};
