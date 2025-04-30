@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import StatusCashback from '@screens/CashBack/StatusCashBack';
+import Cashback from '@screens/CashBack';
+import HistoricoCashback from '@screens/CashBack/HistoricoCashback';
 import React from 'react'
 
 export default function StackRoutes() {
@@ -13,7 +14,14 @@ export default function StackRoutes() {
     >
       <Stack.Screen
       name='Home'
-      component={StatusCashback}
+      component={Cashback}
+      options={{
+        headerShown: false
+      }}
+      />
+      <Stack.Screen
+      name='HistoricoCashback'
+      component={HistoricoCashback}
       options={{
         headerShown: false
       }}

@@ -12,9 +12,9 @@ import moment from 'moment';
 import serviceapp from '@services/serviceapp';
 import {FlashList} from '@shopify/flash-list';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {ListStyle} from '@components/InputStyle';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import { ListStyle } from '@components/InputStyle';
 
 const HistoryPayments = () => {
     const {loading, setLoading, user, disconnect} = useContext(AuthContext);

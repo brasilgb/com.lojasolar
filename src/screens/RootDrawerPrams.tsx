@@ -27,6 +27,7 @@ export type RootDrawerParamList = {
     Questions: undefined;
     Methods: {order: any};
     OpenPayments: undefined;
+    HistoricoCashback: undefined;
     CashBack: undefined;
     StatusCashBack: undefined;
     HistoryPayments: undefined;
