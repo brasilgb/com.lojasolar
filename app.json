@@ -1,91 +1,99 @@
 {
-    "expo": {
-        "name": "Lojas Solar",
-        "slug": "comlojasolar",
-        "version": "1.3.7",
-        "orientation": "portrait",
-        "icon": "./assets/icon.png",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./assets/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#1a9cd9"
+  "expo": {
+    "name": "Lojas Solar",
+    "slug": "comlojasolar",
+    "version": "1.3.7",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a9cd9"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "entitlements": {
+        "aps-environment": "production"
+      },
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
         },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "googleServicesFile": "./GoogleService-Info.plist",
-            "entitlements": {
-                "aps-environment": "production"
-            },
-            "infoPlist": {
-                "NSAppTransportSecurity": {
-                    "NSAllowsArbitraryLoads": true
-                },
-                "UIBackgroundModes": ["fetch", "remote-notification"],
-                "NSLocationAlwaysAndWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
-                "NSLocationWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
-                "NSLocationAlwaysUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
-                "NSLocationUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia."
-            },
-            "privacyManifests": {
-                "NSPrivacyAccessedAPITypes": [
-                    {
-                        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-                        "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
-                    }
-                ]
-            },
-            "supportsTablet": true,
-            "bundleIdentifier": "com.loja.solar",
-            "buildNumber": "2",
-            "config": {
-                "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0",
-                "usesNonExemptEncryption": false
-            }
-        },
-        "android": {
-            "permissions": [
-                "android.permission.READ_MEDIA_IMAGES",
-                "android.permission.READ_MEDIA_VIDEO"
-            ],
-            "googleServicesFile": "./google-services.json",
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            },
-            "config": {
-                "googleMaps": {
-                    "apiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0"
-                }
-            },
-            "package": "com.loja.solar",
-            "versionCode": 2
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "plugins": [
-            "@react-native-firebase/app",
-            [
-                "expo-build-properties",
-                {
-                    "ios": {
-                        "useFrameworks": "static",
-                        "deploymentTarget": "15.1"
-                    },
-                    "android": {
-                        "usesCleartextTraffic": true,
-                        "compileSdkVersion": 34,
-                        "targetSdkVersion": 34,
-                        "buildToolsVersion": "34.0.0"
-                    }
-                }
-            ]
+        "UIBackgroundModes": [
+          "fetch",
+          "remote-notification"
         ],
-        "extra": {
-            "eas": {
-                "projectId": "52d35a9c-4dab-4fe2-9519-1c32bba74e17"
-            }
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+        "NSLocationWhenInUseUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+        "NSLocationAlwaysUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia.",
+        "NSLocationUsageDescription": "Sua localização é necessária para encontrar uma loja solar mais próxima de você. Se você precisa pagar contas ou fazer compras, irá agilizar seu dia."
+      },
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ]
+      },
+      "supportsTablet": true,
+      "bundleIdentifier": "com.loja.solar",
+      "buildNumber": "2",
+      "config": {
+        "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0",
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "permissions": [
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO"
+      ],
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0"
         }
+      },
+      "package": "com.loja.solar",
+      "versionCode": 2
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static",
+            "deploymentTarget": "15.1"
+          },
+          "android": {
+            "usesCleartextTraffic": true,
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "34.0.0"
+          }
+        }
+      ],
+      "expo-web-browser"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "52d35a9c-4dab-4fe2-9519-1c32bba74e17"
+      }
     }
+  }
 }

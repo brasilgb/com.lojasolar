@@ -49,8 +49,9 @@ import DataAnalise from '@screens/Auth/DataAnalise';
 import VerifyVersion from '@screens/VerifyVersion';
 import DocsAssign from '@screens/DocsAssign';
 import ViewDoc from '@screens/DocsAssign/ViewDoc';
-import StackRoutes from './stack.routes';
 import Cashback from '@screens/CashBack';
+import HistoricoCashback from '@screens/CashBack/HistoricoCashback';
+import CashbackRequested from '@screens/CashBack/CashbackRequested';
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
@@ -382,8 +383,8 @@ const DrawerRoutes = () => {
                     />
 
                     <Drawer.Screen
-                        name="StatusCashBack"
-                        component={StackRoutes}
+                        name="HistoricoCashback"
+                        component={HistoricoCashback}
                         options={{
                             drawerItemStyle: {
                                 height: 0
@@ -395,7 +396,29 @@ const DrawerRoutes = () => {
                                     size={22}
                                 />
                             ),
-                            drawerLabel: 'Cashback',
+                            drawerLabel: '',
+                            headerTitle: (props: any) => (
+                                <LogoTitle {...props} />
+                            ),
+                            drawerStatusBarAnimation: "slide"
+                        }}
+                    />
+
+                    <Drawer.Screen
+                        name="CashbackRequested"
+                        component={CashbackRequested}
+                        options={{
+                            drawerItemStyle: {
+                                height: 0
+                            },
+                            drawerIcon: ({ color, size }) => (
+                                <MaterialIcons
+                                    name="currency-exchange"
+                                    color={color}
+                                    size={22}
+                                />
+                            ),
+                            drawerLabel: '',
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),
