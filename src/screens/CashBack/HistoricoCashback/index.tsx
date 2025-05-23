@@ -14,7 +14,7 @@ import { FlashList } from '@shopify/flash-list';
 import MoneyPTBR from '@components/MoneyPTBRSimbol';
 
 const HistoricoCashback = ({ route }: any) => {
-    const { user, setLoading, loading, disconnect } = useContext(AuthContext);
+    const { user, setLoading, loading } = useContext(AuthContext);
     const [activeOrder, setActiveOrder] = useState<any>();
     const [cashbackSolicitado, setCashbackSolicitado] = useState<any>([]);
     const [date, setDate] = useState(new Date());
@@ -29,9 +29,9 @@ const HistoricoCashback = ({ route }: any) => {
         const getPdvCustomer = async () => {
             setLoading(true);
             await serviceapp.post('(LISTA_PDV_CASHBACK)', {
-                "codcli": 4522376,
-                "meschave": 1,
-                "anochave": 2025
+                "codcli": user?.codigoCliente,
+                "meschave": moment(date).format("MM"),
+                "anochave": moment(date).format("YYYY")
             })
                 .then((response) => {
                     // console.log('response', response.data.resposta.dados);
@@ -63,10 +63,7 @@ const HistoricoCashback = ({ route }: any) => {
 
     const handleCashbackRequest = () => {
         let maxCashbach = (cashbackSolicitado.total * 17) / 100;
-        console.log(cred);
-        console.log(maxCashbach.toFixed(2));
         let applyCashback = (cred >= maxCashbach.toFixed(2)) ? maxCashbach.toFixed(2) : cred;
-        console.log(applyCashback);
         let data = {
             valcashback: applyCashback,
             dtpedido: cashbackSolicitado.dtpedido,
@@ -74,7 +71,7 @@ const HistoricoCashback = ({ route }: any) => {
             filial: cashbackSolicitado.filial,
             total: cashbackSolicitado.total,
         }
-        
+
         navigation.navigate('CashbackRequested', { cashdata: data });
     }
 
@@ -109,6 +106,8 @@ const HistoricoCashback = ({ route }: any) => {
             />
         );
     };
+
+console.log(pdvCustomer.length);
 
     return (
         <AppLayout>
@@ -171,9 +170,9 @@ const HistoricoCashback = ({ route }: any) => {
                     </View>
 
                     <TouchableOpacity
-                        disabled={activeOrder === null ? true : false}
+                        disabled={activeOrder === null || pdvCustomer.length == 0 ? true : false}
                         className={`flex items-center justify-center border-2 border-white  
-                            ${activeOrder === null ? 'bg-solar-gray-dark' : 'bg-solar-orange-middle'}
+                            ${activeOrder === null || pdvCustomer.length == 0 ? 'bg-solar-gray-dark' : 'bg-solar-orange-middle'}
                             ${Platform.OS == 'ios'
                                 ? 'shadow-sm shadow-gray-300'
                                 : 'shadow-sm shadow-black'
@@ -182,7 +181,7 @@ const HistoricoCashback = ({ route }: any) => {
                     >
                         <Text
                             className={`text-lg font-PoppinsMedium self-center
-                                ${activeOrder === null ? 'text-gray-400' : 'text-solar-blue-dark'}
+                                ${activeOrder === null || pdvCustomer.length == 0 ? 'text-gray-400' : 'text-solar-blue-dark'}
                             }`}
                         >
                             Solicitar cashback

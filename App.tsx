@@ -13,63 +13,62 @@ import {
 import Routes from './src/routes';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-get-random-values';
-// import notifee, {
-//     AndroidBadgeIconType,
-//     AndroidImportance,
-//     AndroidStyle,
-//     EventType,
-// } from '@notifee/react-native';
+import notifee, {
+    AndroidBadgeIconType,
+    AndroidImportance,
+    AndroidStyle,
+    EventType,
+} from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { Linking, Platform } from 'react-native';
 import { AuthProvider } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-// import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-// messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
-//     await messaging().requestPermission();
-//     const channelId = await notifee.createChannel({
-//         id: 'important',
-//         name: 'NotificacoesImportantes',
-//     });
+messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
+    await messaging().requestPermission();
+    const channelId = await notifee.createChannel({
+        id: 'important',
+        name: 'NotificacoesImportantes',
+    });
 
-// Display a notification
-// await notifee.displayNotification({
-//     title: remoteMessage.data.title,
-//     body: remoteMessage.data.body,
-//     data: {
-//         url: remoteMessage.data.url,
-//     },
-//     ios: {
-//         // action: {},
-//         // foregroundPresentationOptions: {
-//         //     badge: true,
-//         //     sound: true,
-//         //     banner: true,
-//         //     list: true,
-//         // },
-//         targetContentId: '',
-//         attachments: [
-//             {
-//                 url: remoteMessage.data.image
-//             },
-//         ],
-//     },
-//     android: {
-//         channelId,
-//         style: {
-//             type: AndroidStyle.BIGPICTURE,
-//             picture: remoteMessage.data.image,
-//         },
-//         badgeIconType: AndroidBadgeIconType.SMALL,
-//         importance: AndroidImportance.HIGH,
-//         pressAction: {
-//             id: 'inportant',
-//         },
-//     },
-// });
-// });
+    // Display a notification
+    await notifee.displayNotification({
+        title: remoteMessage.data.title,
+        body: remoteMessage.data.body,
+        data: {
+            url: remoteMessage.data.url,
+        },
+        ios: {
+            foregroundPresentationOptions: {
+                badge: true,
+                sound: true,
+                banner: true,
+                list: true,
+            },
+            targetContentId: '',
+            attachments: [
+                {
+                    url: remoteMessage.data.image
+                },
+            ],
+        },
+        android: {
+            channelId,
+            style: {
+                type: AndroidStyle.BIGPICTURE,
+                picture: remoteMessage.data.image,
+            },
+            badgeIconType: AndroidBadgeIconType.SMALL,
+            importance: AndroidImportance.HIGH,
+            pressAction: {
+                id: 'inportant',
+            },
+        },
+    });
+});
 
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
@@ -86,9 +85,9 @@ const App = () => {
                     return;
                 }
                 if (value === null) {
-                    // DeviceInfo.syncUniqueId().then(async (uniqueId) => {
-                    //     await AsyncStorage.setItem("deviceid", uniqueId);
-                    // });
+                    DeviceInfo.syncUniqueId().then(async (uniqueId) => {
+                        await AsyncStorage.setItem("deviceid", uniqueId);
+                    });
                 }
             } catch (error) {
                 console.error('AsyncStorage Error: ', error);
@@ -97,96 +96,96 @@ const App = () => {
         setValueDevice();
     }, []);
 
-    // const requestUserPermission = async () => {
-    //     await notifee.createChannel({
-    //         id: 'important',
-    //         name: 'NotificacoesImportantes',
-    //     });
-    //     const authStatus = await messaging().requestPermission();
-    //     const enabled =
-    //         authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    //         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    const requestUserPermission = async () => {
+        await notifee.createChannel({
+            id: 'important',
+            name: 'NotificacoesImportantes',
+        });
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-    //     if (enabled) {
+        if (enabled) {
 
-    //         let tokenFirebase = (await messaging().getToken()).toString();
-    //         registerDevice(tokenFirebase); // Insere pushToken e código do cliente em sce002
-    //     }
-    // };
+            let tokenFirebase = (await messaging().getToken()).toString();
+            registerDevice(tokenFirebase); // Insere pushToken e código do cliente em sce002
+        }
+    };
 
-    // notifee.onBackgroundEvent(async ({ type, detail }) => {
-    //     const { notification, pressAction }: any = detail;
-    //     if (type === EventType.PRESS || pressAction?.id === 'inportant') {
-    //         await Linking.openURL(notification.data.url);
-    //     }
-    // });
+    notifee.onBackgroundEvent(async ({ type, detail }) => {
+        const { notification, pressAction }: any = detail;
+        if (type === EventType.PRESS || pressAction?.id === 'inportant') {
+            await Linking.openURL(notification.data.url);
+        }
+    });
 
-    // useEffect(() => {
-    //     requestUserPermission();
-    //     const unsubscribe = messaging().onMessage(async remoteMessage => {
-    //         fireNotification(remoteMessage.data);
-    //     });
+    useEffect(() => {
+        requestUserPermission();
+        const unsubscribe = messaging().onMessage(async remoteMessage => {
+            fireNotification(remoteMessage.data);
+        });
 
-    //     const fireNotification = async (message: any) => {
-    //         // Request permissions (required for iOS)
-    //         await notifee.requestPermission();
-    //         const channelId = await notifee.createChannel({
-    //             id: 'important',
-    //             name: 'NotificacoesImportantes',
-    //         });
-    //         await notifee.displayNotification({
-    //             title: message.title,
-    //             body: message.body,
-    //             data: {
-    //                 url: message.url,
-    //             },
-    //             ios: {
-    //                 foregroundPresentationOptions: {
-    //                     badge: true,
-    //                     sound: true,
-    //                     banner: true,
-    //                     list: true,
-    //                 },
-    //                 attachments: [
-    //                     {
-    //                         url: message.image
-    //                     },
-    //                 ]
-    //             },
-    //             android: {
-    //                 channelId,
-    //                 style: {
-    //                     type: AndroidStyle.BIGPICTURE,
-    //                     picture: message.image,
-    //                 },
-    //                 badgeIconType: AndroidBadgeIconType.SMALL,
-    //                 importance: AndroidImportance.HIGH,
-    //                 pressAction: {
-    //                     id: 'inportant',
-    //                 },
-    //             },
-    //         });
-    //     };
-    //     messaging().getInitialNotification()
-    //         .then((remoteMessage) => {
-    //             console.log("Notification caused app to open from quit state:", remoteMessage?.notification)
-    //         });
+        const fireNotification = async (message: any) => {
+            // Request permissions (required for iOS)
+            await notifee.requestPermission();
+            const channelId = await notifee.createChannel({
+                id: 'important',
+                name: 'NotificacoesImportantes',
+            });
+            await notifee.displayNotification({
+                title: message.title,
+                body: message.body,
+                data: {
+                    url: message.url,
+                },
+                ios: {
+                    foregroundPresentationOptions: {
+                        badge: true,
+                        sound: true,
+                        banner: true,
+                        list: true,
+                    },
+                    attachments: [
+                        {
+                            url: message.image
+                        },
+                    ]
+                },
+                android: {
+                    channelId,
+                    style: {
+                        type: AndroidStyle.BIGPICTURE,
+                        picture: message.image,
+                    },
+                    badgeIconType: AndroidBadgeIconType.SMALL,
+                    importance: AndroidImportance.HIGH,
+                    pressAction: {
+                        id: 'inportant',
+                    },
+                },
+            });
+        };
+        messaging().getInitialNotification()
+            .then((remoteMessage) => {
+                console.log("Notification caused app to open from quit state:", remoteMessage?.notification)
+            });
 
-    //     messaging().onNotificationOpenedApp(async (remoteMessage: any) => {
-    //         console.log(
-    //             'A notificação fez com que o aplicativo fosse aberto em segundo plano:',
-    //             remoteMessage.notification,
-    //         );
-    //     });
+        messaging().onNotificationOpenedApp(async (remoteMessage: any) => {
+            console.log(
+                'A notificação fez com que o aplicativo fosse aberto em segundo plano:',
+                remoteMessage.notification,
+            );
+        });
 
-    //     notifee.onForegroundEvent(async ({ type, detail }) => {
-    //         const { notification, pressAction }: any = detail;
-    //         if (type === EventType.PRESS || pressAction?.id === 'inportant') {
-    //             await Linking.openURL(notification.data.url);
-    //         }
-    //     });
-    //     return unsubscribe;
-    // }, []);
+        notifee.onForegroundEvent(async ({ type, detail }) => {
+            const { notification, pressAction }: any = detail;
+            if (type === EventType.PRESS || pressAction?.id === 'inportant') {
+                await Linking.openURL(notification.data.url);
+            }
+        });
+        return unsubscribe;
+    }, []);
 
     // Registra ID do dispositivo e push token firbase
     async function registerDevice(
@@ -242,13 +241,13 @@ const App = () => {
     }
 
     return (
-            <SafeAreaProvider onLayout={onLayout}>
-                <NavigationContainer>
-                    <AuthProvider>
-                        <Routes />
-                    </AuthProvider>
-                </NavigationContainer>
-            </SafeAreaProvider>
+        <SafeAreaProvider onLayout={onLayout}>
+            <NavigationContainer>
+                <AuthProvider>
+                    <Routes />
+                </AuthProvider>
+            </NavigationContainer>
+        </SafeAreaProvider>
     );
 };
 

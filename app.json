@@ -51,6 +51,7 @@
       }
     },
     "android": {
+      "edgeToEdgeEnabled": true,
       "permissions": [
         "android.permission.READ_MEDIA_IMAGES",
         "android.permission.READ_MEDIA_VIDEO"
@@ -73,6 +74,7 @@
     },
     "plugins": [
       "@react-native-firebase/app",
+      "@react-native-firebase/messaging",
       [
         "expo-build-properties",
         {
@@ -81,10 +83,15 @@
             "deploymentTarget": "15.1"
           },
           "android": {
+            "extraMavenRepos": [
+              "../../node_modules/@notifee/react-native/android/libs"
+            ],
+            "compileSdkVersion": 35,
+            "defaultConfig": {
+              "targetSdkVersion": 35
+            },
             "usesCleartextTraffic": true,
-            "compileSdkVersion": 34,
-            "targetSdkVersion": 34,
-            "buildToolsVersion": "34.0.0"
+            "buildToolsVersion": "35.0.0"
           }
         }
       ],

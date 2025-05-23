@@ -52,33 +52,33 @@ export default function CashBack() {
     hideDatePicker2();
   };
 
-
   useEffect(() => {
     const getHistoricoCashback = async () => {
       setLoading(true);
       await serviceapp.post('(WS_CONSULTA_CASHBACK)', {
-        "codcli": 342955,
-        "dataInicial": 20241119,
-        "dataFinal": 20241130
+        "codcli": user?.codigoCliente,
+        "dataInicial": moment(dateIni).format("YYYYMMDD"),
+        "dataFinal": moment(dateFin).format("YYYYMMDD")
       })
         .then((response) => {
           setHisoricoCashback(response.data.respcash);
         })
         .catch((error) => {
           console.log('error', error);
-        }).finally(() => setLoading(false));
+        })
+        .finally(() => setLoading(false));
     };
     if (isFocused) {
       getHistoricoCashback();
     }
-  }, []);
+  }, [user, dateIni, dateFin]);
 
   const renderItem = ({ item }: any) => (
-    <TouchableOpacity className='border border-gray-500 rounded py-2 px-2 my-2 bg-solar-blue-light'>
-      <View className='flex-row justify-between'>
-        <Text className='text-white'>Série: {item.serie}</Text>
-        <Text className='text-white'>NF: {item.numnf}</Text>
-        <Text className='text-white'>Itens: {item.itens}</Text>
+    <TouchableOpacity className='flex-1 m-1 rounded-lg bg-solar-blue-light py-0.5 px-2 my-1' style={{ maxWidth: '100%' }}>
+      <View className='flex-row items-center justify-between'>
+        <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Série: {item.serie}</Text>
+        <Text className='text-white border-r border-white/20 pr-1.5 py-3'>NF: {item.numnf}</Text>
+        <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Itens: {item.itens}</Text>
         <Text className='text-white'>Valor: {item.valor}</Text>
       </View>
     </TouchableOpacity>
@@ -89,7 +89,9 @@ export default function CashBack() {
       <FlashList
         data={historicoCashback.data}
         renderItem={renderItem}
-        estimatedItemSize={200}
+        estimatedItemSize={100}
+        numColumns={1}
+        contentContainerStyle={{ paddingBottom: 20 }}
       />
     );
   };
@@ -190,14 +192,17 @@ export default function CashBack() {
 
       </View>
       <TouchableOpacity
-        className={`flex items-center justify-center mb-4 border-2 border-white bg-solar-orange-middle ${Platform.OS == 'ios'
-          ? 'shadow-sm shadow-gray-300'
-          : 'shadow-sm shadow-black'
+        className={`flex items-center justify-center mb-4 border-2 border-white
+          ${historicoCashback.length > 0 ? 'bg-solar-orange-middle' : 'bg-solar-gray-dark'}  ${Platform.OS == 'ios'
+            ? 'shadow-sm shadow-gray-300'
+            : 'shadow-sm shadow-black'
           } py-3 rounded-full`}
         onPress={() => navigation.navigate('HistoricoCashback', { cred: historicoCashback.credTotal })}
+        disabled={historicoCashback.length > 0 ? false : true}
       >
         <Text
-          className={`text-lg font-PoppinsMedium self-center text-solar-blue-dark
+          className={`text-lg font-PoppinsMedium self-center
+            ${historicoCashback.length > 0 ? 'text-solar-blue-dark' : 'text-gray-400'} 
             }`}
         >
           Acessar pedidos
