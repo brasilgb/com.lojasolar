@@ -38,15 +38,6 @@ const Home = () => {
     const isCarousel: any = useRef(null);
     const [index, setIndex] = useState(0);
     const [carrocelData, setCarrocelData] = useState<any>([]);
-    const [uiidDevice, setUiidDevice] = useState<any>('');
-
-    useEffect(() => {
-        const getKeyApp = async () => {
-            const value = await AsyncStorage.getItem("deviceid");
-            setUiidDevice(value)
-        };
-        getKeyApp();
-    }, []);
 
     useEffect(() => {
         const getVersionCheck = async () => {
@@ -81,15 +72,12 @@ const Home = () => {
     }
 
     useEffect(() => {
-        BackHandler.addEventListener(
+        const subscription = BackHandler.addEventListener(
             'hardwareBackPress',
             handleBackButtonClick,
         );
         return () => {
-            BackHandler.removeEventListener(
-                'hardwareBackPress',
-                handleBackButtonClick,
-            );
+            subscription.remove();
         };
     }, []);
 
@@ -208,7 +196,7 @@ const Home = () => {
 
             <View className="flex-none bg-solar-blue-light">
                 <ScrollView
-                    horizontal
+                    horizontal 
                     showsHorizontalScrollIndicator={false}
                     className="flex-row"
                 >

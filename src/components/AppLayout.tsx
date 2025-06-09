@@ -11,7 +11,7 @@ const AppLayout = ({children, classname}: Props) => {
     return (
         <>
             <SafeAreaView
-                className={`flex-1 ${
+                className={`flex-1 pb-12 ${
                     classname?.length ? classname : 'bg-solar-blue-light'
                 }`}
             >
@@ -21,4 +21,5 @@ const AppLayout = ({children, classname}: Props) => {
         </>
     );
 };
+
 export default AppLayout;

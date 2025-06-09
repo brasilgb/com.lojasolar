@@ -387,7 +387,8 @@ const DrawerRoutes = () => {
                         component={HistoricoCashback}
                         options={{
                             drawerItemStyle: {
-                                height: 0
+                                height: 0,
+                                marginBottom: -10
                             },
                             drawerIcon: ({ color, size }) => (
                                 <MaterialIcons
@@ -396,7 +397,6 @@ const DrawerRoutes = () => {
                                     size={22}
                                 />
                             ),
-                            drawerLabel: '',
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),
@@ -418,7 +418,6 @@ const DrawerRoutes = () => {
                                     size={22}
                                 />
                             ),
-                            drawerLabel: '',
                             headerTitle: (props: any) => (
                                 <LogoTitle {...props} />
                             ),

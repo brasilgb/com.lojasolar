@@ -23,9 +23,8 @@ import messaging from '@react-native-firebase/messaging';
 import { Linking, Platform } from 'react-native';
 import { AuthProvider } from '@contexts/auth';
 import serviceapp from '@services/serviceapp';
-import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import DeviceInfo from 'react-native-device-info';
 
 messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
     await messaging().requestPermission();
@@ -39,7 +38,19 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
         title: remoteMessage.data.title,
         body: remoteMessage.data.body,
         data: {
-            url: remoteMessage.data.url,
+            url: remoteMessage.data.url
+        },
+        android: {
+            channelId,
+            style: {
+                type: AndroidStyle.BIGPICTURE,
+                picture: remoteMessage.data.image,
+            },
+            badgeIconType: AndroidBadgeIconType.SMALL,
+            importance: AndroidImportance.HIGH,
+            pressAction: {
+                id: 'inportant',
+            },
         },
         ios: {
             foregroundPresentationOptions: {
@@ -55,45 +66,47 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
                 },
             ],
         },
-        android: {
-            channelId,
-            style: {
-                type: AndroidStyle.BIGPICTURE,
-                picture: remoteMessage.data.image,
-            },
-            badgeIconType: AndroidBadgeIconType.SMALL,
-            importance: AndroidImportance.HIGH,
-            pressAction: {
-                id: 'inportant',
-            },
-        },
     });
+});
+notifee.onBackgroundEvent(async ({ type, detail }) => {
+    const { notification, pressAction }: any = detail;
+
+    if (type === EventType.PRESS || pressAction?.id == 'important') {
+        await Linking.openURL(notification.data.url);
+    }
+});
+
+notifee.onForegroundEvent(async ({ type, detail }) => {
+
+    const { notification, pressAction }: any = detail;
+
+    if (type === EventType.PRESS || pressAction?.id == 'important') {
+        await Linking.openURL(notification.data.url);
+    }
 });
 
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
-    const [uiidDevice, setUiidDevice] = useState<any>();
-
-    //*******Save key UUID in Secure Store ****************************************************/
+    
+    const [deviceId, setDeviceId] = useState<string | null>(null);
     useEffect(() => {
-        const setValueDevice = async () => {
-
+        const getValueDevice = async () => {
             try {
                 const value = await AsyncStorage.getItem("deviceid");
                 if (value !== null) {
-                    console.log(value);
-                    return;
-                }
-                if (value === null) {
-                    DeviceInfo.syncUniqueId().then(async (uniqueId) => {
+                    setDeviceId(value);
+                } else {
+                    const uniqueId = await DeviceInfo.getUniqueId();
+                    if (uniqueId) {
                         await AsyncStorage.setItem("deviceid", uniqueId);
-                    });
+                        setDeviceId(uniqueId);
+                    }
                 }
             } catch (error) {
                 console.error('AsyncStorage Error: ', error);
             }
         }
-        setValueDevice();
+        getValueDevice();
     }, []);
 
     const requestUserPermission = async () => {
@@ -122,12 +135,14 @@ const App = () => {
 
     useEffect(() => {
         requestUserPermission();
+
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             fireNotification(remoteMessage.data);
         });
 
         const fireNotification = async (message: any) => {
             // Request permissions (required for iOS)
+
             await notifee.requestPermission();
             const channelId = await notifee.createChannel({
                 id: 'important',
@@ -138,6 +153,18 @@ const App = () => {
                 body: message.body,
                 data: {
                     url: message.url,
+                },
+                android: {
+                    channelId,
+                    style: {
+                        type: AndroidStyle.BIGPICTURE,
+                        picture: message.image,
+                    },
+                    badgeIconType: AndroidBadgeIconType.SMALL,
+                    importance: AndroidImportance.HIGH,
+                    pressAction: {
+                        id: 'inportant2',
+                    },
                 },
                 ios: {
                     foregroundPresentationOptions: {
@@ -152,20 +179,9 @@ const App = () => {
                         },
                     ]
                 },
-                android: {
-                    channelId,
-                    style: {
-                        type: AndroidStyle.BIGPICTURE,
-                        picture: message.image,
-                    },
-                    badgeIconType: AndroidBadgeIconType.SMALL,
-                    importance: AndroidImportance.HIGH,
-                    pressAction: {
-                        id: 'inportant',
-                    },
-                },
             });
         };
+
         messaging().getInitialNotification()
             .then((remoteMessage) => {
                 console.log("Notification caused app to open from quit state:", remoteMessage?.notification)
@@ -178,12 +194,7 @@ const App = () => {
             );
         });
 
-        notifee.onForegroundEvent(async ({ type, detail }) => {
-            const { notification, pressAction }: any = detail;
-            if (type === EventType.PRESS || pressAction?.id === 'inportant') {
-                await Linking.openURL(notification.data.url);
-            }
-        });
+
         return unsubscribe;
     }, []);
 
@@ -193,17 +204,16 @@ const App = () => {
     ) {
         let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
         let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
-        let deviceId = await AsyncStorage.getItem("deviceid");
 
         await serviceapp
             .get(
                 `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}`,
             )
             .then(response => {
-                console.log(response.data.resposta);
+                // console.log(response.data.resposta);
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             });
     }
 

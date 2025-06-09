@@ -11,11 +11,13 @@ export default function CashbackRequested({ route }: any) {
     const { item } = route?.params;
     return (
         <View className='flex-1 py-4 px-2'>
-            <Pressable
-                onPress={() => navigation.navigate('CashBack')}
+            <View className='flex-row justify-end'>
+                <Pressable
+                onPress={() => navigation.navigate('Home')}
             >
-                <MaterialCommunityIcons name='arrow-left' size={25} color="#1a9cd9" />
+                <MaterialCommunityIcons name='close' size={35} color="#1a9cd9" />
             </Pressable>
+            </View>
             <View className='flex-1 flex-row items-center justify-center'>
                 <Text className='text-solar-green-light'>
                     <MaterialIcons name="currency-exchange" size={100} />

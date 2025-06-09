@@ -56,7 +56,7 @@ export default function CashBack() {
     const getHistoricoCashback = async () => {
       setLoading(true);
       await serviceapp.post('(WS_CONSULTA_CASHBACK)', {
-        "codcli": user?.codigoCliente,
+        "codcli": String(user?.codigoCliente).slice(0,6),
         "dataInicial": moment(dateIni).format("YYYYMMDD"),
         "dataFinal": moment(dateFin).format("YYYYMMDD")
       })
@@ -71,7 +71,7 @@ export default function CashBack() {
     if (isFocused) {
       getHistoricoCashback();
     }
-  }, [user, dateIni, dateFin]);
+  }, [user, dateIni, dateFin, isFocused]);
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity className='flex-1 m-1 rounded-lg bg-solar-blue-light py-0.5 px-2 my-1' style={{ maxWidth: '100%' }}>
@@ -97,7 +97,7 @@ export default function CashBack() {
   };
 
   return (
-    <AppLayout classname="bg-solar-gray-dark p-4">
+    <AppLayout classname="bg-solar-gray-dark">
       <AppLoading visible={loading} />
 
       <DateTimePickerModal
@@ -113,101 +113,102 @@ export default function CashBack() {
         onConfirm={handleConfirm2}
         onCancel={hideDatePicker2}
       />
-
-      <View className="flex-1 items-center justify-start bg-solar-gray-dark">
-        <View className="flex-col items-center justify-center">
-          <Text
-            allowFontScaling={false}
-            className="text-2xl text-solar-blue-dark py-4"
-          >
-            Histórico de cashback
-          </Text>
-        </View>
-        <View className=' bg-white flex-row items-center justify-center rounded-lg px-4 py-2 shadow-sm shadow-slate-950'>
-          <Text className='text-lg font-semibold mr-4'>Saldo disponível</Text>
-          <View className={` flex items-center justify-center`}>
-            <Text className={`text-2xl ${historicoCashback.credTotal > 0 ? 'text-sky-800' : 'text-red-500'} font-semibold`}>{MoneyPTBR((typeof historicoCashback.credTotal === 'undefined') ? 0 : historicoCashback.credTotal)}</Text>
-          </View>
-        </View>
-        <View className="flex-row items-center justify-between w-full my-4">
-          <View className="flex-1 pr-2">
+      <View className='flex-1 px-4'>
+        <View className="flex-1 items-center justify-start bg-solar-gray-dark">
+          <View className="flex-col items-center justify-center">
             <Text
               allowFontScaling={false}
-              className="text-sm font-PoppinsMedium text-gray-500 mb-1"
+              className="text-2xl text-solar-blue-dark py-4"
             >
-              Data Inicial
+              Histórico de cashback
             </Text>
-            <TouchableOpacity
-              onPress={showDatePicker}
-              className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                ? 'shadow-gray-300'
-                : 'shadow-gray-400'
-                }`}
-            >
+          </View>
+          <View className=' bg-white flex-row items-center justify-center rounded-lg px-4 py-2 shadow-sm shadow-slate-950'>
+            <Text className='text-lg font-semibold mr-4'>Saldo disponível</Text>
+            <View className={` flex items-center justify-center`}>
+              <Text className={`text-2xl ${historicoCashback?.data?.length > 0 ? 'text-sky-800' : 'text-red-500'} font-semibold`}>{MoneyPTBR(historicoCashback?.data?.length > 0 ? historicoCashback?.credTotal : 0)}</Text>
+            </View>
+          </View>
+          <View className="flex-row items-center justify-between w-full my-4">
+            <View className="flex-1 pr-2">
               <Text
                 allowFontScaling={false}
-                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                className="text-sm font-PoppinsMedium text-gray-500 mb-1"
               >
-                {moment(dateIni).format('DD/MM/YYYY')}
+                Data Inicial
               </Text>
-              <MaterialCommunityIcons
-                name="calendar-month"
-                size={28}
-                color="#F99F1E"
-              />
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                onPress={showDatePicker}
+                className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
+                  ? 'shadow-gray-300'
+                  : 'shadow-gray-400'
+                  }`}
+              >
+                <Text
+                  allowFontScaling={false}
+                  className="text-base text-solar-blue-dark font-PoppinsMedium"
+                >
+                  {moment(dateIni).format('DD/MM/YYYY')}
+                </Text>
+                <MaterialCommunityIcons
+                  name="calendar-month"
+                  size={28}
+                  color="#F99F1E"
+                />
+              </TouchableOpacity>
+            </View>
 
-          <View className="flex-1 pl-2">
-            <Text
-              allowFontScaling={false}
-              className="text-sm font-PoppinsMedium text-gray-500 mb-1"
-            >
-              Data Final
-            </Text>
-            <TouchableOpacity
-              onPress={showDatePicker2}
-              className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
-                ? 'shadow-gray-300'
-                : 'shadow-gray-400'
-                }`}
-            >
+            <View className="flex-1 pl-2">
               <Text
                 allowFontScaling={false}
-                className="text-base text-solar-blue-dark font-PoppinsMedium"
+                className="text-sm font-PoppinsMedium text-gray-500 mb-1"
               >
-                {moment(dateFin).format('DD/MM/YYYY')}
+                Data Final
               </Text>
-              <MaterialCommunityIcons
-                name="calendar-month"
-                size={28}
-                color="#F99F1E"
-              />
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={showDatePicker2}
+                className={`flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
+                  ? 'shadow-gray-300'
+                  : 'shadow-gray-400'
+                  }`}
+              >
+                <Text
+                  allowFontScaling={false}
+                  className="text-base text-solar-blue-dark font-PoppinsMedium"
+                >
+                  {moment(dateFin).format('DD/MM/YYYY')}
+                </Text>
+                <MaterialCommunityIcons
+                  name="calendar-month"
+                  size={28}
+                  color="#F99F1E"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View className='flex-1 w-full'>
-          <CashbackList />
-        </View>
+          <View className='flex-1 w-full'>
+            <CashbackList />
+          </View>
 
-      </View>
-      <TouchableOpacity
-        className={`flex items-center justify-center mb-4 border-2 border-white
-          ${historicoCashback.length > 0 ? 'bg-solar-orange-middle' : 'bg-solar-gray-dark'}  ${Platform.OS == 'ios'
-            ? 'shadow-sm shadow-gray-300'
-            : 'shadow-sm shadow-black'
-          } py-3 rounded-full`}
-        onPress={() => navigation.navigate('HistoricoCashback', { cred: historicoCashback.credTotal })}
-        disabled={historicoCashback.length > 0 ? false : true}
-      >
-        <Text
-          className={`text-lg font-PoppinsMedium self-center
-            ${historicoCashback.length > 0 ? 'text-solar-blue-dark' : 'text-gray-400'} 
-            }`}
+        </View>
+        <TouchableOpacity
+          className={`flex items-center justify-center mb-4 border-2 border-white
+          ${historicoCashback?.data?.length > 0 ? 'bg-solar-orange-middle' : 'bg-solar-gray-dark'}  ${Platform.OS == 'ios'
+              ? 'shadow-sm shadow-gray-300'
+              : 'shadow-sm shadow-black'
+            } py-3 rounded-full`}
+          onPress={() => navigation.navigate('HistoricoCashback', { cred: historicoCashback })}
+          disabled={historicoCashback?.data?.length > 0 ? false : true}
         >
-          Acessar pedidos
-        </Text>
-      </TouchableOpacity>
+          <Text
+            className={`text-lg font-PoppinsMedium self-center
+            ${historicoCashback?.data?.length > 0 ? 'text-solar-blue-dark' : 'text-gray-400'} 
+            }`}
+          >
+            Acessar pedidos
+          </Text>
+        </TouchableOpacity>
+      </View>
     </AppLayout>
   )
 }

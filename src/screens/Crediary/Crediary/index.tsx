@@ -237,7 +237,7 @@ const Crediary = () => {
                                         <TextInput
                                             className={InputStyle(
                                                 touched.nomeMae,
-                                                errors.nomeMae,
+                                                errors?.nomeMae,
                                             )}
                                             autoCapitalize="characters"
                                             value={values.nomeMae}
@@ -246,12 +246,12 @@ const Crediary = () => {
                                                 'nomeMae',
                                             )}
                                         />
-                                        {errors.nomeMae && touched.nomeMae && (
+                                        {errors?.nomeMae && touched.nomeMae && (
                                             <Text
                                                 allowFontScaling={false}
                                                 className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                             >
-                                                {errors.nomeMae}
+                                                {errors?.nomeMae}
                                             </Text>
                                         )}
                                     </View>
@@ -276,12 +276,12 @@ const Crediary = () => {
                                             showSearch={false}
                                         />
 
-                                        {errors.sexo && touched.sexo && (
+                                        {errors?.sexo && touched.sexo && (
                                             <Text
                                                 allowFontScaling={false}
                                                 className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                             >
-                                                {errors.sexo}
+                                                {errors?.sexo}
                                             </Text>
                                         )}
                                     </View>
@@ -311,13 +311,13 @@ const Crediary = () => {
                                             showSearch={true}
                                         />
 
-                                        {errors.escolaridade &&
+                                        {errors?.escolaridade &&
                                             touched.escolaridade && (
                                                 <Text
                                                     allowFontScaling={false}
                                                     className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                 >
-                                                    {errors.escolaridade}
+                                                    {errors?.escolaridade}
                                                 </Text>
                                             )}
                                     </View>
@@ -332,7 +332,7 @@ const Crediary = () => {
                                         <TextInput
                                             className={InputStyle(
                                                 touched.localTrabalho,
-                                                errors.localTrabalho,
+                                                errors?.localTrabalho,
                                             )}
                                             autoCapitalize="characters"
                                             value={values.localTrabalho}
@@ -341,13 +341,13 @@ const Crediary = () => {
                                                 'localTrabalho',
                                             )}
                                         />
-                                        {errors.localTrabalho &&
+                                        {errors?.localTrabalho &&
                                             touched.localTrabalho && (
                                                 <Text
                                                     allowFontScaling={false}
                                                     className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                 >
-                                                    {errors.localTrabalho}
+                                                    {errors?.localTrabalho}
                                                 </Text>
                                             )}
                                     </View>
@@ -377,13 +377,13 @@ const Crediary = () => {
                                             showSearch={false}
                                         />
 
-                                        {errors.estadoCivil &&
+                                        {errors?.estadoCivil &&
                                             touched.estadoCivil && (
                                                 <Text
                                                     allowFontScaling={false}
                                                     className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                 >
-                                                    {errors.estadoCivil}
+                                                    {errors?.estadoCivil}
                                                 </Text>
                                             )}
                                     </View>
@@ -400,7 +400,7 @@ const Crediary = () => {
                                                 <TextInput
                                                     className={InputStyle(
                                                         touched.nomeConjuge,
-                                                        errors.nomeConjuge,
+                                                        errors?.nomeConjuge,
                                                     )}
                                                     autoCapitalize="characters"
                                                     value={values.nomeConjuge}
@@ -411,7 +411,7 @@ const Crediary = () => {
                                                         'nomeConjuge',
                                                     )}
                                                 />
-                                                {errors.nomeConjuge &&
+                                                {errors?.nomeConjuge &&
                                                     touched.nomeConjuge && (
                                                         <Text
                                                             allowFontScaling={
@@ -419,7 +419,7 @@ const Crediary = () => {
                                                             }
                                                             className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                         >
-                                                            {errors.nomeConjuge}
+                                                            {errors?.nomeConjuge}
                                                         </Text>
                                                     )}
                                             </View>
@@ -434,7 +434,7 @@ const Crediary = () => {
                                                 <TextInput
                                                     className={InputStyle(
                                                         touched.cpfConjuge,
-                                                        errors.cpfConjuge,
+                                                        errors?.cpfConjuge,
                                                     )}
                                                     autoCapitalize="characters"
                                                     value={values.cpfConjuge}
@@ -445,7 +445,7 @@ const Crediary = () => {
                                                         'cpfConjuge',
                                                     )}
                                                 />
-                                                {errors.cpfConjuge &&
+                                                {errors?.cpfConjuge &&
                                                     touched.cpfConjuge && (
                                                         <Text
                                                             allowFontScaling={
@@ -453,7 +453,7 @@ const Crediary = () => {
                                                             }
                                                             className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                         >
-                                                            {errors.cpfConjuge}
+                                                            {errors?.cpfConjuge}
                                                         </Text>
                                                     )}
                                             </View>
@@ -484,13 +484,13 @@ const Crediary = () => {
                                             height="h-full"
                                             showSearch={true}
                                         />
-                                        {errors.profissao &&
+                                        {errors?.profissao &&
                                             touched.profissao && (
                                                 <Text
                                                     allowFontScaling={false}
                                                     className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                                 >
-                                                    {errors.profissao}
+                                                    {errors?.profissao}
                                                 </Text>
                                             )}
                                     </View>
@@ -505,19 +505,19 @@ const Crediary = () => {
                                         <TextInput
                                             className={InputStyle(
                                                 touched.renda,
-                                                errors.renda,
+                                                errors?.renda,
                                             )}
                                             autoCapitalize="characters"
                                             value={values.renda}
                                             onBlur={handleBlur('renda')}
                                             onChangeText={handleChange('renda')}
                                         />
-                                        {errors.renda && touched.renda && (
+                                        {errors?.renda && touched.renda && (
                                             <Text
                                                 allowFontScaling={false}
                                                 className="self-end pr-1 pt-1 text-xs text-red-600 font-PoppinsRegular"
                                             >
-                                                {errors.renda}
+                                                {errors?.renda}
                                             </Text>
                                         )}
                                     </View>

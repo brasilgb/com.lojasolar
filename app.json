@@ -6,11 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1a9cd9"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -93,6 +88,14 @@
             "usesCleartextTraffic": true,
             "buildToolsVersion": "35.0.0"
           }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "backgroundColor": "#232323",
+          "imageWidth": 200
         }
       ],
       "expo-web-browser"

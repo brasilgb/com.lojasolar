@@ -15,7 +15,7 @@ import MoneyPTBR from '@components/MoneyPTBRSimbol';
 
 const HistoricoCashback = ({ route }: any) => {
     const { user, setLoading, loading } = useContext(AuthContext);
-    const [activeOrder, setActiveOrder] = useState<any>();
+    const [activeOrder, setActiveOrder] = useState<any>(null);
     const [cashbackSolicitado, setCashbackSolicitado] = useState<any>([]);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
@@ -29,9 +29,9 @@ const HistoricoCashback = ({ route }: any) => {
         const getPdvCustomer = async () => {
             setLoading(true);
             await serviceapp.post('(LISTA_PDV_CASHBACK)', {
-                "codcli": user?.codigoCliente,
-                "meschave": moment(date).format("MM"),
-                "anochave": moment(date).format("YYYY")
+                "codcli": parseInt(user?.codigoCliente),
+                "meschave": parseInt(moment(date).format("M")),
+                "anochave": parseInt(moment(date).format("YYYY"))
             })
                 .then((response) => {
                     // console.log('response', response.data.resposta.dados);
@@ -41,10 +41,11 @@ const HistoricoCashback = ({ route }: any) => {
                     console.log('error', error);
                 }).finally(() => setLoading(false));
         };
+
         if (isFocused) {
             getPdvCustomer();
         }
-    }, []);
+    }, [user, date, isFocused]);
 
     const onValueChange = useCallback(
         (event: any, newDate: any) => {
@@ -61,18 +62,25 @@ const HistoricoCashback = ({ route }: any) => {
         setCashbackSolicitado(item);
     }
 
-    const handleCashbackRequest = () => {
+    const handleCashbackRequest = async () => {
         let maxCashbach = (cashbackSolicitado.total * 17) / 100;
-        let applyCashback = (cred >= maxCashbach.toFixed(2)) ? maxCashbach.toFixed(2) : cred;
-        let data = {
-            valcashback: applyCashback,
-            dtpedido: cashbackSolicitado.dtpedido,
-            numpedido: cashbackSolicitado.numpedido,
-            filial: cashbackSolicitado.filial,
-            total: cashbackSolicitado.total,
-        }
-
-        navigation.navigate('CashbackRequested', { cashdata: data });
+        let applyCashback = (cred?.credTotal >= maxCashbach.toFixed(2)) ? maxCashbach.toFixed(2) : cred?.credTotal;
+        await serviceapp.post('(WS_GRAVA_CASHBACK)', {
+            "datped": cashbackSolicitado.dtpedido,
+            "numped": cashbackSolicitado.numpedido,
+            "codcli": user?.codigoCliente,
+            "datsol": moment().format('YYYYMMDD'),
+            "vlrtot": cashbackSolicitado.total,
+            "vlrcash": applyCashback,
+            "105depto": 1,
+            "105orige": cred?.data?.orige,
+            "105serie": cred?.data?.serie,
+            "105numnf": cred?.data?.numnf,
+        }).then((response) => {
+            console.log(response.data.respcash.success);
+            setDate(new Date);
+            navigation.navigate('CashbackRequested', { item: cashbackSolicitado });
+        })
     }
 
     const renderItem = ({ item, index }: any) => (
@@ -106,8 +114,6 @@ const HistoricoCashback = ({ route }: any) => {
             />
         );
     };
-
-console.log(pdvCustomer.length);
 
     return (
         <AppLayout>
@@ -165,14 +171,14 @@ console.log(pdvCustomer.length);
                 </View>
                 <View className="my-6">
                     <View className='flex-row items-center justify-end pb-4'>
-                        <Text className={`text-lg font-medium px-4 ${cred > 0 ? 'text-emerald-800' : 'text-red-500'}`}>Saldo disponível</Text>
-                        <Text className={`rounded-full py-2 px-4 font-bold text-xl ${cred > 0 ? 'bg-solar-green-light' : 'bg-red-500'} text-white`}>{MoneyPTBR(cred)}</Text>
+                        <Text className={`text-lg font-medium px-4 ${cred?.credTotal > 0 ? 'text-emerald-800' : 'text-red-500'}`}>Saldo disponível</Text>
+                        <Text className={`rounded-full py-2 px-4 font-bold text-xl ${cred?.credTotal > 0 ? 'bg-solar-green-light' : 'bg-red-500'} text-white`}>{MoneyPTBR(cred?.credTotal)}</Text>
                     </View>
 
                     <TouchableOpacity
-                        disabled={activeOrder === null || pdvCustomer.length == 0 ? true : false}
+                        disabled={activeOrder === null ? true : false}
                         className={`flex items-center justify-center border-2 border-white  
-                            ${activeOrder === null || pdvCustomer.length == 0 ? 'bg-solar-gray-dark' : 'bg-solar-orange-middle'}
+                            ${activeOrder === null ? 'bg-solar-gray-dark' : 'bg-solar-orange-middle'}
                             ${Platform.OS == 'ios'
                                 ? 'shadow-sm shadow-gray-300'
                                 : 'shadow-sm shadow-black'
@@ -181,10 +187,10 @@ console.log(pdvCustomer.length);
                     >
                         <Text
                             className={`text-lg font-PoppinsMedium self-center
-                                ${activeOrder === null || pdvCustomer.length == 0 ? 'text-gray-400' : 'text-solar-blue-dark'}
+                                ${activeOrder === null ? 'text-gray-400' : 'text-solar-blue-dark'}
                             }`}
                         >
-                            Solicitar cashback
+                            Solicitar cashback{activeOrder}
                         </Text>
                     </TouchableOpacity>
                 </View>

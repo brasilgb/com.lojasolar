@@ -12,6 +12,6 @@
             "@assets/*": ["assets/*"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx", "config-info-plist.js"],
+    "include": ["**/*.ts", "**/*.tsx", "config-info-plist.js", "index.js"],
     "exclude": ["node_modules"]
 }

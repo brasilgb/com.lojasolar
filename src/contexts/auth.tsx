@@ -3,12 +3,11 @@ import React, { createContext, useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export const AuthContext = createContext({} as any);
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import serviceapp from '@services/serviceapp';
-// import DeviceInfo from "react-native-device-info";
 
+export const AuthContext = createContext({} as any);
 interface AuthContextProps {
     children: React.ReactNode;
 }
@@ -35,7 +34,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             }
         }
         loadStorage();
-    }, []);
+    }, [AsyncStorage]);
 
     useEffect(() => {
         async function loadPosition() {
@@ -93,10 +92,12 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         nomeCliente,
         codigoCliente,
         connected,
+        deviceId
     }: any) => {
+        console.log('deviceId', deviceId);
+
         setLoading(true);
-        // let deviceId = DeviceInfo.getUniqueIdSync();
-        let deviceId = 'd49cd9c01bd43cf8';
+
         const response = await serviceapp.get(
             `(WS_VERIFICAR_SENHA_APP)?cpfcnpj=${cpfcnpj}&senha=${senha}&deviceId=${deviceId}`,
         );
@@ -147,10 +148,15 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     }
 
     async function disconnect() {
-        await AsyncStorage.clear().then(() => {
+        const keys = ['Auth_user', 'deviceid']
+        try {
+            await AsyncStorage.multiRemove(keys)
             setUser(null);
-        });
-        navigation.navigate('Home');
+            navigation.navigate('Home');
+        } catch (e) {
+            console.log('Error removing keys from AsyncStorage:', e);
+
+        }
     }
 
     return (

@@ -6,7 +6,7 @@ import {
     DrawerNavigationProp,
 } from '@react-navigation/drawer';
 import {MaterialIcons} from '@expo/vector-icons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Pressable} from 'react-native-gesture-handler';
 import {AuthContext} from '@contexts/auth';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {RootDrawerParamList} from '@screens/RootDrawerPrams';
@@ -55,7 +55,7 @@ const CustomDrawer = (props: any) => {
 
             <View className="py-2 border-t border-gray-200">
                 {signed && (
-                    <TouchableOpacity
+                    <Pressable
                         onPress={() => {
                             navigation.dispatch(DrawerActions.closeDrawer());
                             signOut();
@@ -73,10 +73,10 @@ const CustomDrawer = (props: any) => {
                         >
                             Sair
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 )}
                 {!signed && (
-                    <TouchableOpacity
+                    <Pressable
                         onPress={() => navigation.navigate('SignIn')}
                         className="flex-row items-center justify-start ml-5"
                     >
@@ -91,12 +91,12 @@ const CustomDrawer = (props: any) => {
                         >
                             Login
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 )}
             </View>
 
-            <View className="h-16 bg-solar-gray-middle border-t border-t-gray-200 flex-row items-center justify-around">
-                <TouchableOpacity
+            <View className="h-16 bg-solar-gray-middle border-t border-t-gray-200 flex-row items-center justify-around mb-10">
+                <Pressable
                     className="p-2"
                     onPress={() => navigation.navigate('Questions')}
                 >
@@ -106,8 +106,8 @@ const CustomDrawer = (props: any) => {
                     >
                         Perguntas frequentes
                     </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
+                </Pressable>
+                <Pressable
                     className="p-2"
                     onPress={() => navigation.navigate('PrivacyPolice')}
                 >
@@ -117,7 +117,7 @@ const CustomDrawer = (props: any) => {
                     >
                         Política de privacidade
                     </Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </View>
     );
