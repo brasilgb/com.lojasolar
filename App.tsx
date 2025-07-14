@@ -68,6 +68,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
         },
     });
 });
+
 notifee.onBackgroundEvent(async ({ type, detail }) => {
     const { notification, pressAction }: any = detail;
 
@@ -87,7 +88,7 @@ notifee.onForegroundEvent(async ({ type, detail }) => {
 
 const App = () => {
     const [appIsReady, setAppIsReady] = useState(false);
-    
+
     const [deviceId, setDeviceId] = useState<string | null>(null);
     useEffect(() => {
         const getValueDevice = async () => {

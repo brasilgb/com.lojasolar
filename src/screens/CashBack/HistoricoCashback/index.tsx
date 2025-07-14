@@ -17,6 +17,7 @@ const HistoricoCashback = ({ route }: any) => {
     const { user, setLoading, loading } = useContext(AuthContext);
     const [activeOrder, setActiveOrder] = useState<any>(null);
     const [cashbackSolicitado, setCashbackSolicitado] = useState<any>([]);
+    const [applyCashback, setApplyCashback] = useState<any>(0);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const isFocused = useIsFocused();
@@ -28,13 +29,13 @@ const HistoricoCashback = ({ route }: any) => {
     useEffect(() => {
         const getPdvCustomer = async () => {
             setLoading(true);
+            setActiveOrder(null);
             await serviceapp.post('(LISTA_PDV_CASHBACK)', {
                 "codcli": parseInt(user?.codigoCliente),
                 "meschave": parseInt(moment(date).format("M")),
                 "anochave": parseInt(moment(date).format("YYYY"))
             })
                 .then((response) => {
-                    // console.log('response', response.data.resposta.dados);
                     setPdvCustomer(response.data.resposta.dados);
                 })
                 .catch((error) => {
@@ -60,31 +61,26 @@ const HistoricoCashback = ({ route }: any) => {
     const handleSelectCachback = (id: any, item: any) => {
         setActiveOrder(id);
         setCashbackSolicitado(item);
+        let maxCashbach = ((item?.total * cred?.porcent) / 100);
+        const applyCashback = (cred?.credTotal >= maxCashbach.toFixed(2)) ? maxCashbach : cred?.credTotal;
+        setApplyCashback(applyCashback);
     }
 
     const handleCashbackRequest = async () => {
-        let maxCashbach = (cashbackSolicitado.total * 17) / 100;
-        let applyCashback = (cred?.credTotal >= maxCashbach.toFixed(2)) ? maxCashbach.toFixed(2) : cred?.credTotal;
         await serviceapp.post('(WS_GRAVA_CASHBACK)', {
-            "datped": cashbackSolicitado.dtpedido,
+            "datped": moment(cashbackSolicitado.dtpedido).format('YYYYMMDD'),
+            "filped": cashbackSolicitado.filial,
             "numped": cashbackSolicitado.numpedido,
             "codcli": user?.codigoCliente,
-            "datsol": moment().format('YYYYMMDD'),
-            "vlrtot": cashbackSolicitado.total,
             "vlrcash": applyCashback,
-            "105depto": 1,
-            "105orige": cred?.data?.orige,
-            "105serie": cred?.data?.serie,
-            "105numnf": cred?.data?.numnf,
         }).then((response) => {
-            console.log(response.data.respcash.success);
             setDate(new Date);
             navigation.navigate('CashbackRequested', { item: cashbackSolicitado });
         })
     }
 
     const renderItem = ({ item, index }: any) => (
-        <TouchableOpacity onPress={() => handleSelectCachback(index, item)} className={`border border-gray-50 rounded p-1 my-2 ${activeOrder == index ? 'bg-solar-green-light' : 'bg-solar-blue-light'}`}>
+        <Pressable onPress={() => handleSelectCachback(index, item)} className={`border border-gray-50 rounded p-1 my-2 ${activeOrder == index ? 'bg-solar-green-light' : 'bg-solar-blue-light'}`}>
             {activeOrder == index && <Text className='absolute z-50 -top-0.5 right-0 text-solar-green-light'>
                 <MaterialCommunityIcons name="check-circle" size={26} />
             </Text>}
@@ -96,13 +92,13 @@ const HistoricoCashback = ({ route }: any) => {
                     <Text className='w-[30%] text-white'>Valor</Text>
                 </View>
                 <View className='flex-row items-center justify-between bg-gray-50 p-1 rounded'>
-                    <Text className='w-[25%]'>{item.dtpedido}</Text>
+                    <Text className='w-[25%]'>{moment(cashbackSolicitado.dtpedido).format('DD/MM/YYYY')}</Text>
                     <Text className='w-[10%]'>{item.filial}</Text>
                     <Text className='w-[20%]'>{item.numpedido}</Text>
                     <Text className='w-[30%]'>{item.total}</Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 
     const PdvList = () => {
@@ -142,7 +138,7 @@ const HistoricoCashback = ({ route }: any) => {
                         Histórico de pedidos
                     </Text>
                     <View className='flex-row items-center justify-center'>
-                        <TouchableOpacity
+                        <Pressable
                             onPress={() => showPicker(true)}
                             className={`w-48 mb-6 flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
                                 ? 'shadow-gray-300'
@@ -160,10 +156,13 @@ const HistoricoCashback = ({ route }: any) => {
                                 size={32}
                                 color="#F99F1E"
                             />
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
                     <View>
-                        <Text>*Selecione um pedido abaixo para usar seu saldo.</Text>
+                        {pdvCustomer.length > 0
+                            ? <Text className='text-sm font-semibold'>* Clique em um pedido abaixo para solicitar cashback.</Text>
+                            : <Text className='text-sm font-medium text-red-400'>* Não há pedidos para o mês corrente, selecione outro mês acima.</Text>
+                        }
                     </View>
                     <View className='flex-1 w-full'>
                         <PdvList />
@@ -171,8 +170,8 @@ const HistoricoCashback = ({ route }: any) => {
                 </View>
                 <View className="my-6">
                     <View className='flex-row items-center justify-end pb-4'>
-                        <Text className={`text-lg font-medium px-4 ${cred?.credTotal > 0 ? 'text-emerald-800' : 'text-red-500'}`}>Saldo disponível</Text>
-                        <Text className={`rounded-full py-2 px-4 font-bold text-xl ${cred?.credTotal > 0 ? 'bg-solar-green-light' : 'bg-red-500'} text-white`}>{MoneyPTBR(cred?.credTotal)}</Text>
+                        <Text className={`text-lg font-medium px-4 ${applyCashback > 0 && activeOrder !== null ? 'text-emerald-800' : 'text-red-500'}`}>Cashback liberado</Text>
+                        <Text className={`rounded-full py-2 px-4 font-bold text-xl ${applyCashback > 0 && activeOrder !== null ? 'bg-solar-green-light' : 'bg-red-500'} text-white`}>{MoneyPTBR(activeOrder !== null ? applyCashback : 0)}</Text>
                     </View>
 
                     <TouchableOpacity
@@ -190,7 +189,7 @@ const HistoricoCashback = ({ route }: any) => {
                                 ${activeOrder === null ? 'text-gray-400' : 'text-solar-blue-dark'}
                             }`}
                         >
-                            Solicitar cashback{activeOrder}
+                            Solicitar cashback
                         </Text>
                     </TouchableOpacity>
                 </View>
