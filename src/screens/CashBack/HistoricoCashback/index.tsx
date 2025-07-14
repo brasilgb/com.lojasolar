@@ -92,7 +92,7 @@ const HistoricoCashback = ({ route }: any) => {
                     <Text className='w-[30%] text-white'>Valor</Text>
                 </View>
                 <View className='flex-row items-center justify-between bg-gray-50 p-1 rounded'>
-                    <Text className='w-[25%]'>{moment(cashbackSolicitado.dtpedido).format('DD/MM/YYYY')}</Text>
+                    <Text className='w-[25%]'>{moment(`${item.dtpedido}`).format('DD/MM/YYYY')}</Text>
                     <Text className='w-[10%]'>{item.filial}</Text>
                     <Text className='w-[20%]'>{item.numpedido}</Text>
                     <Text className='w-[30%]'>{item.total}</Text>

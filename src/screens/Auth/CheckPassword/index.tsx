@@ -49,8 +49,6 @@ const CheckPassword = ({ route }: any) => {
         getData();
     }, [AsyncStorage]);
 
-    console.log('showDeviceId', showDeviceId);
-
     const onsubmit = async (values: any) => {
 
         await checkPassword({
