@@ -17,7 +17,8 @@ const VerifyVersion = ({route}: any) => {
             Linking.openURL(
                 'https://play.google.com/store/apps/details?id=com.loja.solar',
             );
-        } else {
+        } 
+        if (Platform.OS === 'ios') {
             Linking.openURL(
                 'https://apps.apple.com/br/app/loja-solar/id6468680373',
             );

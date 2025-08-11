@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Platform, Pressable } from 'react-native'
+import { View, Text, TouchableOpacity, Platform } from 'react-native'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -20,7 +20,6 @@ const HistoricoCashback = ({ route }: any) => {
     const [applyCashback, setApplyCashback] = useState<any>(0);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
-    const isFocused = useIsFocused();
     const showPicker = useCallback((value: any) => setShow(value), []);
     const navigation = useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [pdvCustomer, setPdvCustomer] = useState<any>([]);
@@ -42,11 +41,9 @@ const HistoricoCashback = ({ route }: any) => {
                     console.log('error', error);
                 }).finally(() => setLoading(false));
         };
+        getPdvCustomer();
+    }, [user, date]);
 
-        if (isFocused) {
-            getPdvCustomer();
-        }
-    }, [user, date, isFocused]);
 
     const onValueChange = useCallback(
         (event: any, newDate: any) => {
@@ -62,13 +59,13 @@ const HistoricoCashback = ({ route }: any) => {
         setActiveOrder(id);
         setCashbackSolicitado(item);
         let maxCashbach = ((item?.total * cred?.porcent) / 100);
-        const applyCashback = (cred?.credTotal >= maxCashbach.toFixed(2)) ? maxCashbach : cred?.credTotal;
-        setApplyCashback(applyCashback);
+        const aapplyCashback = (cred?.credTotal >= maxCashbach.toFixed(2)) ? maxCashbach : cred?.credTotal;
+        setApplyCashback(aapplyCashback);
     }
 
     const handleCashbackRequest = async () => {
         await serviceapp.post('(WS_GRAVA_CASHBACK)', {
-            "datped": moment(cashbackSolicitado.dtpedido).format('YYYYMMDD'),
+            "datped": moment(`${cashbackSolicitado.dtpedido}`).format('YYYYMMDD'),
             "filped": cashbackSolicitado.filial,
             "numped": cashbackSolicitado.numpedido,
             "codcli": user?.codigoCliente,
@@ -80,25 +77,48 @@ const HistoricoCashback = ({ route }: any) => {
     }
 
     const renderItem = ({ item, index }: any) => (
-        <Pressable onPress={() => handleSelectCachback(index, item)} className={`border border-gray-50 rounded p-1 my-2 ${activeOrder == index ? 'bg-solar-green-light' : 'bg-solar-blue-light'}`}>
-            {activeOrder == index && <Text className='absolute z-50 -top-0.5 right-0 text-solar-green-light'>
-                <MaterialCommunityIcons name="check-circle" size={26} />
-            </Text>}
-            <View className='bg-solar-blue-light rounded-md p-1'>
-                <View className='flex-row items-center justify-between pb-1'>
-                    <Text className='w-[25%] text-white'>Data pedido</Text>
-                    <Text className='w-[10%] text-white'>Filial</Text>
-                    <Text className='w-[20%] text-white'>N° Pedido</Text>
-                    <Text className='w-[30%] text-white'>Valor</Text>
+        <>
+            {!item.pixgerado
+                ? <TouchableOpacity onPress={() => handleSelectCachback(index, item)} className={`border border-gray-50 rounded p-1 my-2 ${activeOrder == index ? 'bg-solar-green-light' : 'bg-solar-blue-light'}`}>
+                    {activeOrder == index && <Text className='absolute z-50 -top-0.5 right-0 text-solar-green-light'>
+                        <MaterialCommunityIcons name="check-circle" size={26} />
+                    </Text>}
+                    <View className='bg-solar-blue-light rounded-md p-1'>
+                        <View className='flex-row items-center justify-between pb-1'>
+                            <Text className='w-[25%] text-white'>Data pedido</Text>
+                            <Text className='w-[10%] text-white'>Filial</Text>
+                            <Text className='w-[20%] text-white'>N° Pedido</Text>
+                            <Text className='w-[30%] text-white'>Valor</Text>
+                        </View>
+                        <View className='flex-row items-center justify-between bg-gray-50 p-1 rounded'>
+                            <Text className='w-[25%]'>{moment(`${item.dtpedido}`).format('DD/MM/YYYY')}</Text>
+                            <Text className='w-[10%]'>{item.filial}</Text>
+                            <Text className='w-[20%]'>{item.numpedido}</Text>
+                            <Text className='w-[30%]'>{item.total}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+                : <View className={`border border-gray-50 rounded p-1 my-2 ${activeOrder == index ? 'bg-solar-green-light' : 'bg-solar-blue-light/50'}`}>
+                    {activeOrder == index && <Text className='absolute z-50 -top-0.5 right-0 text-solar-green-light'>
+                        <MaterialCommunityIcons name="check-circle" size={26} />
+                    </Text>}
+                    <View className='bg-solar-blue-light/50 rounded-md p-1'>
+                        <View className='flex-row items-center justify-between pb-1'>
+                            <Text className='w-[25%] text-white'>Data pedido</Text>
+                            <Text className='w-[10%] text-white'>Filial</Text>
+                            <Text className='w-[20%] text-white'>N° Pedido</Text>
+                            <Text className='w-[30%] text-white'>Valor</Text>
+                        </View>
+                        <View className='flex-row items-center justify-between bg-gray-50 p-1 rounded'>
+                            <Text className='w-[25%]'>{moment(`${item.dtpedido}`).format('DD/MM/YYYY')}</Text>
+                            <Text className='w-[10%]'>{item.filial}</Text>
+                            <Text className='w-[20%]'>{item.numpedido}</Text>
+                            <Text className='w-[30%]'>{item.total}</Text>
+                        </View>
+                    </View>
                 </View>
-                <View className='flex-row items-center justify-between bg-gray-50 p-1 rounded'>
-                    <Text className='w-[25%]'>{moment(`${item.dtpedido}`).format('DD/MM/YYYY')}</Text>
-                    <Text className='w-[10%]'>{item.filial}</Text>
-                    <Text className='w-[20%]'>{item.numpedido}</Text>
-                    <Text className='w-[30%]'>{item.total}</Text>
-                </View>
-            </View>
-        </Pressable>
+            }
+        </>
     );
 
     const PdvList = () => {
@@ -126,11 +146,11 @@ const HistoricoCashback = ({ route }: any) => {
             <AppLoading visible={loading} />
             <View className='bg-gray-50 flex-1 px-2'>
                 <View className='flex-1 py-4 w-full'>
-                    <Pressable
+                    <TouchableOpacity
                         onPress={() => navigation.navigate('CashBack')}
                     >
                         <MaterialCommunityIcons name='arrow-left' size={25} color="#1a9cd9" />
-                    </Pressable>
+                    </TouchableOpacity>
                     <Text
                         allowFontScaling={false}
                         className="text-2xl text-solar-blue-dark text-center"
@@ -138,7 +158,7 @@ const HistoricoCashback = ({ route }: any) => {
                         Histórico de pedidos
                     </Text>
                     <View className='flex-row items-center justify-center'>
-                        <Pressable
+                        <TouchableOpacity
                             onPress={() => showPicker(true)}
                             className={`w-48 mb-6 flex-row items-center justify-between bg-solar-gray-dark border-2 border-white rounded-lg py-2 pl-2 shadow-sm ${Platform.OS === 'ios'
                                 ? 'shadow-gray-300'
@@ -156,12 +176,12 @@ const HistoricoCashback = ({ route }: any) => {
                                 size={32}
                                 color="#F99F1E"
                             />
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         {pdvCustomer.length > 0
-                            ? <Text className='text-sm font-semibold'>* Clique em um pedido abaixo para solicitar cashback.</Text>
-                            : <Text className='text-sm font-medium text-red-400'>* Não há pedidos para o mês corrente, selecione outro mês acima.</Text>
+                            ? <Text className='text-xs font-semibold'>* Clique em um pedido abaixo para solicitar cashback. caso não esteja clicável está em processo de avaliação.</Text>
+                            : <Text className='text-xs font-medium text-red-400'>* Não há pedidos para o mês corrente, selecione outro mês acima.</Text>
                         }
                     </View>
                     <View className='flex-1 w-full'>

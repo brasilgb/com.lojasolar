@@ -94,7 +94,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
         connected,
         deviceId
     }: any) => {
-        console.log('deviceId', deviceId);
 
         setLoading(true);
 

@@ -12,9 +12,6 @@
         },
         "production": {
             "releaseChannel": "production",
-            "android": {
-                "buildType": "apk"
-            },
             "ios": {
                 "image": "latest"
             },

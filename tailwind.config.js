@@ -18,6 +18,8 @@ module.exports = {
                 'solar-gray-light': '#FAFAFA',
                 'solar-orange-middle': '#F99F1E',
                 'solar-orange-dark': '#EC6608',
+                'solar-wine-dark': '#c1478a',
+                'solar-red-dark': '#e54757',
             },
             fontFamily: {
                 PoppinsLight: ['Poppins_300Light'],
