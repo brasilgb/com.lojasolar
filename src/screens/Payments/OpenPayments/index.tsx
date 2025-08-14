@@ -25,7 +25,6 @@ const OpenPayments = () => {
     const [arrayIndex, setArrayIndex] = useState<any>([]);
     const [arrayValues, setArrayValues] = useState<any>([]);
     const [arrayTotals, setArrayTotals] = useState<any>([]);
-
     useEffect(() => {
         const getCrediarios = async () => {
             setLoading(true);

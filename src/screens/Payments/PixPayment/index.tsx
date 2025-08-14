@@ -14,6 +14,7 @@ const PixPayment = ({route}: any) => {
     const {order} = route?.params;
     const [qrPix, setQrPix] = useState();
 
+
     useEffect(() => {
         const getPayPix = async () => {
             const response = await serviceapp.get(
