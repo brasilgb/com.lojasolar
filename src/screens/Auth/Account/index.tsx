@@ -8,23 +8,23 @@ import {
     Keyboard,
     Alert,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppLayout from '@components/AppLayout';
-import {MaterialIcons} from '@expo/vector-icons';
-import {Formik} from 'formik';
-import {InputStyle, LabelStyle} from '@components/InputStyle';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Formik } from 'formik';
+import { InputStyle, LabelStyle } from '@components/InputStyle';
 import ButtomForm from '@components/ButtomForm';
 import schema from './schema';
-import {maskCelular, maskCep, maskDate, unMask} from '@components/masks';
+import { maskCelular, maskCep, maskDate, unMask } from '@components/masks';
 import Select from '@components/Select';
 import serviceapp from '@services/serviceapp';
-import {cnpj, cpf} from 'cpf-cnpj-validator';
-import {AuthContext} from '@contexts/auth';
-import {useNavigation} from '@react-navigation/native';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { cnpj, cpf } from 'cpf-cnpj-validator';
+import { AuthContext } from '@contexts/auth';
+import { useNavigation } from '@react-navigation/native';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import AppLoading from '@components/AppLoading';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {TouchableOpacity} from 'react-native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { TouchableOpacity } from 'react-native';
 
 interface FormProps {
     cpfcnpj: any;
@@ -40,7 +40,7 @@ interface FormProps {
 const Account = () => {
     const navigation =
         useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {user, setLoading, disconnect, loading} = useContext(AuthContext);
+    const { user, setLoading, disconnect, loading } = useContext(AuthContext);
     const tokenUser = user?.token;
     const [ufs, setUfs] = useState<any>([]);
     const [cities, setCities] = useState<any>([]);
@@ -51,7 +51,7 @@ const Account = () => {
     useEffect(() => {
         const getUfs = async () => {
             await serviceapp.get('(WS_CARREGA_UF)').then(response => {
-                const {data} = response.data.resposta;
+                const { data } = response.data.resposta;
                 const resUfs = data.map((u: any) => u.uf);
                 setUfs(resUfs);
             });
@@ -64,7 +64,7 @@ const Account = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CIDADE)?uf=${ufSelected}`)
                 .then(response => {
-                    const {data} = response.data.resposta;
+                    const { data } = response.data.resposta;
                     const resCities = data.map((c: any) => c.cidade);
                     setCities(resCities);
                 });
@@ -78,8 +78,7 @@ const Account = () => {
             await serviceapp
                 .get(`(WS_CARREGA_CLIENTE)?token=${tokenUser}`)
                 .then(response => {
-                    const {data, message, token} = response.data.resposta;
-
+                    const { data, message, token } = response.data.resposta;
                     setLoading(false);
                     if (!token) {
                         Alert.alert('Atenção', message, [
@@ -117,25 +116,22 @@ const Account = () => {
         setLoading(true);
         Keyboard.dismiss();
         const response = await serviceapp.get(
-            `(WS_ALTERA_CLIENTE)?token=${tokenUser}&nomeCliente=${
-                values.nomeCliente
+            `(WS_ALTERA_CLIENTE)?token=${tokenUser}&nomeCliente=${values.nomeCliente
             }&enderecoCliente=${values.enderecoCliente}&cepCliente=${unMask(
                 values.cepCliente,
-            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${
-                values.ufCliente
-            }&celularCliente=${unMask(values.celularCliente)}&emailCliente=${
-                values.emailCliente
+            )}&cidadeCliente=${values.cidadeCliente}&ufCliente=${values.ufCliente
+            }&celularCliente=${unMask(values.celularCliente)}&emailCliente=${values.emailCliente
             }&nascimentoCliente=${values.nascimentoCliente}`,
         );
-        const {success, message} = response.data.resposta;
+        const { success, message } = response.data.resposta;
 
         setLoading(false);
         if (!success) {
-            Alert.alert('Atenção', message, [{text: 'Ok'}]);
+            Alert.alert('Atenção', message, [{ text: 'Ok' }]);
         }
         if (success) {
             Alert.alert('Atenção', message, [
-                {text: 'Ok', onPress: () => navigation.navigate('Home')},
+                { text: 'Ok', onPress: () => navigation.navigate('Home') },
             ]);
         }
     };
@@ -150,7 +146,7 @@ const Account = () => {
             {
                 text: 'Continuar',
                 onPress: () =>
-                    navigation.navigate('DataExclude', {data: accounts}),
+                    navigation.navigate('DataExclude', { data: accounts }),
             },
         ]);
     };
@@ -178,11 +174,10 @@ const Account = () => {
                             </View>
                             <TouchableOpacity
                                 onPress={() => handleExcludeDataUser()}
-                                className={`flex-none justify-self-end bg-gray-200 border border-white rounded p-1 ${
-                                    Platform.OS == 'ios'
-                                        ? 'shadow-sm shadow-gray-300'
-                                        : 'shadow-md shadow-black'
-                                }`}
+                                className={`flex-none justify-self-end bg-gray-200 border border-white rounded p-1 ${Platform.OS == 'ios'
+                                    ? 'shadow-sm shadow-gray-300'
+                                    : 'shadow-md shadow-black'
+                                    }`}
                             >
                                 <MaterialIcons
                                     name="person-remove"
@@ -515,8 +510,8 @@ const Account = () => {
                                                 ) === '00000000'
                                                     ? ''
                                                     : maskDate(
-                                                          values.nascimentoCliente,
-                                                      )
+                                                        values.nascimentoCliente,
+                                                    )
                                             }
                                             onBlur={handleBlur(
                                                 'nascimentoCliente',

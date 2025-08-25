@@ -164,7 +164,7 @@ const RegisterUser = ({route}: any) => {
                                 ufCliente: '',
                                 celularCliente: '',
                                 emailCliente: '',
-                                nascimentoCliente: '',
+                                nascimentoCliente: ''
                             }}
                             onSubmit={onsubmit}
                         >

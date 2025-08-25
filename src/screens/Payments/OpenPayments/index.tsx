@@ -1,9 +1,8 @@
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import AppLoading from '@components/AppLoading';
 import {AuthContext} from '@contexts/auth';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import serviceapp from '@services/serviceapp';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
@@ -25,6 +24,7 @@ const OpenPayments = () => {
     const [arrayIndex, setArrayIndex] = useState<any>([]);
     const [arrayValues, setArrayValues] = useState<any>([]);
     const [arrayTotals, setArrayTotals] = useState<any>([]);
+    
     useEffect(() => {
         const getCrediarios = async () => {
             setLoading(true);

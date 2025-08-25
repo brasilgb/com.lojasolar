@@ -125,6 +125,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             token: data.token,
             connected: connected
         };
+
         setLoading(false);
         storageUser(userData);
         setUser(userData);
@@ -154,7 +155,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             navigation.navigate('Home');
         } catch (e) {
             console.log('Error removing keys from AsyncStorage:', e);
-
         }
     }
 

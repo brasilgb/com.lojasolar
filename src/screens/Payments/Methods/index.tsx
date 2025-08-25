@@ -69,7 +69,7 @@ const Methods = ({route}: any) => {
 
     const paymentBillet = useCallback(async (dataSlip: any) => {
         const response = await servicepay.post(`/Bankslip/Create`, {
-            amount: Number(dataSlip.valorOrdem),
+            amount: 5.00,
             ordernumber: dataSlip.numeroOrdem,
             customer: {
                 identity: dataSlip.cpfcnpj,
@@ -90,6 +90,15 @@ const Methods = ({route}: any) => {
             PaymentObject: {},
         });
         const {data} = response.data.resposta;
+
+        if (data.HasError) {
+            Alert.alert('Atenção', `${data.Detail.Description}, tente novamente mais tarde.`, [
+                {
+                    text: 'Ok',
+                },
+            ]);
+            return;
+        }
         sendOrderAtualize(data);
         setRegisteredOrder([]);
         navigation.navigate('SlipPayment', {order: data});
