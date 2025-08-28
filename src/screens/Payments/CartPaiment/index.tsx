@@ -13,9 +13,7 @@ import MoneyPTBR from '@components/MoneyPTBRSimbol';
 import { AuthContext } from '@contexts/auth';
 import { InputStyle, LabelStyle, ListStyle } from '@components/InputStyle';
 import serviceapp from '@services/serviceapp';
-import servicepay from '@services/servicepay';
-import moment from 'moment';
-import { cartNumber, cartValidate } from '@components/masks';
+import { cartNumber, cartValidate, unMask } from '@components/masks';
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { RootDrawerParamList } from '@screens/RootDrawerPrams';
@@ -41,8 +39,7 @@ const CartPayment = ({ route }: any) => {
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
     const onSubmit = async (values: CartProps, { resetForm }: any) => {
-        // setLoading(true);
-        // console.log(getCardBrandName(values.numeroCartao));
+        setLoading(true);
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,
@@ -81,7 +78,8 @@ const CartPayment = ({ route }: any) => {
     };
 
     const paymentCart = async (dataCart: any) => {
-        // setLoading(true);
+        setLoading(true);
+
         const response = await servicecart.post(`(PAG_CARTAO_CREDITO)`, {
             MerchantOrderId: dataCart.numeroOrdem,
             Payment: {
@@ -98,37 +96,37 @@ const CartPayment = ({ route }: any) => {
                 Recurrent: false,
                 SoftDescriptor: "123456789ABCD",
                 CreditCard: {
-                    CardNumber: dataCart.dadosCartao.numeroCartao,
+                    CardNumber: unMask(dataCart.dadosCartao.numeroCartao),
                     Holder: dataCart.dadosCartao.nomeCartao,
                     ExpirationDate: dataCart.dadosCartao.validadeCartao,
                     SecurityCode: dataCart.dadosCartao.cvvCartao,
                     SaveCard: false,
-                    Brand: getCardBrandName(dataCart.dadosCartao.numeroCartao)
+                    Brand: getCardBrandName((dataCart.dadosCartao.numeroCartao)) === 'amex' ? 'amex' : 'visa'
                 }
             }
         });
 
-        const { success } = response.data.response;
-        const { Description, Error } = response.data.resposta.data.Detail;
+        const { success, ReturnMessage, ReturnCode } = response.data.response;
 
         setLoading(false);
-        if (!success) {
-            Alert.alert(Description, Error, [{ text: 'Ok' }]);
+        if (success && ReturnCode !== '00') {
+            Alert.alert('Error', ReturnMessage, [{ text: 'Ok' }]);
             return;
         }
         setRegisteredOrder([]);
-        await sendOrderAtualize(response);
+        await sendOrderAtualize(response.data.response);
     };
 
     const sendOrderAtualize = async (dataCart: any) => {
+
         setLoading(true);
+
         if (dataCart) {
             let orderResponse = {
-                numeroOrdem: dataCart.data.resposta.data.Detail.OrderNumber,
-                statusOrdem:
-                    dataCart.data.resposta.data.Detail.TransactionStatus,
-                idTransacao: dataCart.data.resposta.data.Detail.IdTransaction,
-                tipoPagamento: dataCart.data.resposta.data.Detail.PaymentType,
+                numeroOrdem: dataCart.MerchantOrderId,
+                statusOrdem: dataCart.Status,
+                idTransacao: dataCart.Tid,
+                tipoPagamento: 2,
                 urlBoleto: '',
             };
             await serviceapp
@@ -345,6 +343,7 @@ const CartPayment = ({ route }: any) => {
                                                         'cvvCartao',
                                                     )}
                                                     keyboardType="numeric"
+                                                    maxLength={getCardBrandName(values.numeroCartao) === 'amex' ? 4 : 3}
                                                 />
                                                 {errors.cvvCartao &&
                                                     touched.cvvCartao && (

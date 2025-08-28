@@ -106,7 +106,7 @@ export default function CashBack() {
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Sér: {item.serie}</Text>
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>NF: {item.numnf}</Text>
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Orig: {item.orige}</Text>
-            <Text className='text-white'>Val: {maskMoney(`${item.valor}`)}</Text>
+            <Text className='text-white'>Val: {maskMoney(item.valor)}</Text>
           </View>
         </TouchableOpacity>
       }
@@ -120,7 +120,7 @@ export default function CashBack() {
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>Sér: {item.serie}</Text>
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>NF: {item.numnf}</Text>
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>Orig: {item.orige}</Text>
-            <Text className='text-gray-600'>Val: {maskMoney(`${item.valor}`)}</Text>
+            <Text className='text-gray-600'>Val: {maskMoney(item.valor)}</Text>
           </View>
         </View>
       }

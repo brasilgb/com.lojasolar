@@ -29,7 +29,7 @@ servicecart.interceptors.response.use(
         });
 
         let session = await axiosNew
-            .get('(pagamentos)')
+            .get('(pagamentos)?company=1')
             .then(resp => resp)
             .catch(_err => {
                 return {
