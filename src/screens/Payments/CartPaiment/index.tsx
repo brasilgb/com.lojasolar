@@ -125,7 +125,7 @@ const CartPayment = ({ route }: any) => {
             let orderResponse = {
                 numeroOrdem: dataCart.MerchantOrderId,
                 statusOrdem: dataCart.Status,
-                idTransacao: dataCart.Tid,
+                idTransacao: dataCart.PaymentId,
                 tipoPagamento: 2,
                 urlBoleto: '',
             };

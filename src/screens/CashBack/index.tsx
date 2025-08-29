@@ -28,8 +28,6 @@ export default function CashBack() {
   let dataAnterior = new Date(dataAtual.getFullYear(), dataAtual.getMonth() - 6, dataAtual.getDate());
   const [dateIni, setDateIni] = useState<any>(dataAnterior);
   const [dateFin, setDateFin] = useState<any>(new Date());
-  const [modalVisible, setModalVisible] = useState<any>(false);
-  const [modalData, setModalData] = useState<any>([]);
   const [itemsModal, setItemsModal] = useState<any>([]);
 
   const modalizeRef = useRef<Modalize>(null);
@@ -106,7 +104,7 @@ export default function CashBack() {
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Sér: {item.serie}</Text>
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>NF: {item.numnf}</Text>
             <Text className='text-white border-r border-white/20 pr-1.5 py-3'>Orig: {item.orige}</Text>
-            <Text className='text-white'>Val: {maskMoney(item.valor)}</Text>
+            <Text className='text-white'>Val: {maskMoney((item.valor).toFixed(2))}</Text>
           </View>
         </TouchableOpacity>
       }
@@ -120,7 +118,7 @@ export default function CashBack() {
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>Sér: {item.serie}</Text>
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>NF: {item.numnf}</Text>
             <Text className='text-gray-600 border-r border-white/20 pr-1.5 py-3'>Orig: {item.orige}</Text>
-            <Text className='text-gray-600'>Val: {maskMoney(item.valor)}</Text>
+            <Text className='text-gray-600'>Val: {maskMoney((item.valor).toFixed(2))}</Text>
           </View>
         </View>
       }
