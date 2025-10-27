@@ -1,15 +1,14 @@
-import {View, Text, TouchableOpacity, Platform} from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import React from 'react';
 import AppLayout from '@components/AppLayout';
-import {useNavigation} from '@react-navigation/native';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {MaterialIcons} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const PayCartOk = () => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    
     return (
         <AppLayout>
             <View className="flex-1 bg-solar-gray-dark pt-4">
@@ -37,11 +36,10 @@ const PayCartOk = () => {
                     </Text>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Home')}
-                        className={`flex items-center justify-center w-full bg-solar-orange-middle my-6 ${
-                            Platform.OS == 'ios'
+                        className={`flex items-center justify-center w-full bg-solar-orange-middle my-6 ${Platform.OS == 'ios'
                                 ? 'shadow-sm shadow-gray-300'
                                 : 'shadow-sm shadow-black'
-                        } py-3 rounded-full border-2 border-white `}
+                            } py-3 rounded-full border-2 border-white `}
                     >
                         <Text
                             allowFontScaling={false}

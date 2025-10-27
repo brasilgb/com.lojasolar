@@ -32,14 +32,14 @@ interface CartProps {
 }
 
 const CartPayment = ({ route }: any) => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
     const { user, disconnect, setLoading, loading } = useContext(AuthContext);
     const { order } = route?.params;
     const [registeredOrder, setRegisteredOrder] = useState<any>([]);
 
     const onSubmit = async (values: CartProps, { resetForm }: any) => {
         setLoading(true);
+        
         if (registeredOrder.length === 0) {
             const response = await serviceapp.post('(WS_ORDEM_PAGAMENTO)', {
                 token: user?.token,
@@ -54,6 +54,7 @@ const CartPayment = ({ route }: any) => {
                     cvvCartao: values.cvvCartao,
                 },
             });
+
             const { success, message, token, data } = response.data.resposta;
             setLoading(false);
             if (!token) {
@@ -79,12 +80,11 @@ const CartPayment = ({ route }: any) => {
 
     const paymentCart = async (dataCart: any) => {
         setLoading(true);
-
         const response = await servicecart.post(`(PAG_CARTAO_CREDITO)`, {
             MerchantOrderId: dataCart.numeroOrdem,
             Payment: {
                 Type: "CreditCard",
-                Amount: Number(dataCart.valorOrdem),
+                Amount: Number(dataCart.valorOrdem) * 100,
                 Currency: "BRL",
                 Country: "BRA",
                 Provider: "Cielo",
@@ -101,7 +101,7 @@ const CartPayment = ({ route }: any) => {
                     ExpirationDate: dataCart.dadosCartao.validadeCartao,
                     SecurityCode: dataCart.dadosCartao.cvvCartao,
                     SaveCard: false,
-                    Brand: getCardBrandName((dataCart.dadosCartao.numeroCartao)) === 'amex' ? 'amex' : 'visa'
+                    Brand: getCardBrandName((dataCart.dadosCartao.numeroCartao)) ? getCardBrandName((dataCart.dadosCartao.numeroCartao)) : ''
                 }
             }
         });
@@ -109,7 +109,7 @@ const CartPayment = ({ route }: any) => {
         const { success, ReturnMessage, ReturnCode } = response.data.response;
 
         setLoading(false);
-        if (success && ReturnCode !== '00') {
+        if (success && ReturnCode !== "00") {
             Alert.alert('Error', ReturnMessage, [{ text: 'Ok' }]);
             return;
         }
@@ -124,14 +124,20 @@ const CartPayment = ({ route }: any) => {
         if (dataCart) {
             let orderResponse = {
                 numeroOrdem: dataCart.MerchantOrderId,
-                statusOrdem: dataCart.Status,
+                statusOrdem: 2,
                 idTransacao: dataCart.PaymentId,
                 tipoPagamento: 2,
-                urlBoleto: '',
+                urlBoleto: dataCart.AuthorizationCode,
             };
             await serviceapp
                 .get(
-                    `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
+                    `(WS_ATUALIZA_ORDEM)
+                    ?token=91362590064312210014616
+                    &numeroOrdem=${orderResponse.numeroOrdem}
+                    &statusOrdem=${orderResponse.statusOrdem}
+                    &idTransacao=${orderResponse.idTransacao}
+                    &tipoPagamento=${orderResponse.tipoPagamento}
+                    &urlBoleto=${orderResponse.urlBoleto}`,
                 )
                 .then(response => {
                     const { success } = response.data.resposta;
