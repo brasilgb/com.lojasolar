@@ -1,54 +1,53 @@
-import React, {useContext} from 'react';
-import {View, Text} from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text } from 'react-native';
 import {
     DrawerContentScrollView,
     DrawerItemList,
     DrawerNavigationProp,
 } from '@react-navigation/drawer';
-import {MaterialIcons} from '@expo/vector-icons';
-import {Pressable} from 'react-native-gesture-handler';
-import {AuthContext} from '@contexts/auth';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Pressable } from 'react-native-gesture-handler';
+import { AuthContext } from '@contexts/auth';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 
 const CustomDrawer = (props: any) => {
-    const navigation =
-        useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
-    const {signed, user, signOut} = useContext(AuthContext);
+    const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+    const { signed, user, signOut } = useContext(AuthContext);
+
 
     return (
-        <View className="flex-1">
-            <DrawerContentScrollView
-                {...props}
-                contentContainerStyle={{backgroundColor: '#009FE3'}}
-            >
-                <View className="p-3 mb-3">
-                    <View className="flex-row items-center justify-start w-60">
-                        <MaterialIcons
-                            name="account-circle"
-                            size={50}
-                            color={'#FAFAFA'}
-                        />
-                        <Text
-                            allowFontScaling={false}
-                            className="text-sm text-solar-gray-light font-Poppins_400Regular pl-4 pr-5"
-                        >
-                            {signed
-                                ? `Olá, ${user?.nomeCliente}`
-                                : 'Bem Vindo(a) '}
-                        </Text>
-                    </View>
-
+        <View className="h-full">
+            <View className="p-4 bg-solar-blue-light rounded-tr-lg">
+                <View className="flex-row items-center justify-start mt-8">
+                    <MaterialIcons
+                        name="account-circle"
+                        size={50}
+                        color={'#FAFAFA'}
+                    />
                     <Text
                         allowFontScaling={false}
-                        className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular"
+                        className="text-sm text-solar-gray-light font-Poppins_400Regular"
                     >
                         {signed
-                            ? 'Como podemos lhe ajudar hoje?'
-                            : 'Faça o login e aproveite o melhor do aplicativo'}
+                            ? `Olá, ${user?.nomeCliente}`
+                            : 'Bem Vindo(a) '}
                     </Text>
                 </View>
-                <View className="flex-1 bg-solar-gray-middle pt-2.5">
+
+                <Text className="mt-2 text-sm text-solar-gray-light font-Poppins_400Regular"
+                >
+                    {signed
+                        ? 'Como podemos lhe ajudar hoje?'
+                        : 'Faça o login e aproveite o melhor do aplicativo'}
+                </Text>
+            </View>
+            <DrawerContentScrollView
+                {...props}
+                scrollEnabled={true}
+                drawerHideStatusBarOnOpen={'slide'}
+            >
+                <View className=" bg-solar-gray-middle w-full">
                     <DrawerItemList {...props} />
                 </View>
             </DrawerContentScrollView>

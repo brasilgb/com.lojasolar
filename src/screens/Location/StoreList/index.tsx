@@ -39,7 +39,7 @@ const StoreList = ({route}: any) => {
                     <Text
                         className={`text-lg text-solar-blue-dark font-PoppinsMedium`}
                     >
-                        {item.telefone}
+                        {item.whats}
                     </Text>
                     <Text
                         className={`text-lg text-solar-yellow-dark font-PoppinsMedium`}
@@ -73,7 +73,6 @@ const StoreList = ({route}: any) => {
                     <FlashList
                         data={data}
                         renderItem={({item}: any) => <RenderItem item={item} />}
-                        estimatedItemSize={10}
                         keyboardShouldPersistTaps={'always'}
                         showsVerticalScrollIndicator={false}
                     />

@@ -21,7 +21,7 @@ const StoreSelected = ({route}: any) => {
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const {positionGlobal} = useContext(AuthContext);
-    const mapRef = useRef<any>();
+    const mapRef = useRef<any>(null);
     const [initialRegion, setInitialRegion] = useState({
         latitude: parseFloat(data.latitude),
         longitude: parseFloat(data.longitude),
@@ -110,7 +110,7 @@ const StoreSelected = ({route}: any) => {
                         allowFontScaling={false}
                         className="text-lg font-PoppinsRegular text-solar-blue-dark ml-2"
                     >
-                        {data.telefone}
+                        {data.whats}
                     </Text>
                 </View>
 

@@ -20,15 +20,14 @@ import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const SCREEN_WIDTH = Dimensions.get('window').width;
 export const CAROUSEL_VERTICAL_OUTPUT = 1;
 export const CAROUSEL_ITEM_WIDTH = SCREEN_WIDTH - CAROUSEL_VERTICAL_OUTPUT;
 
-interface CarouselItemProps {
+interface CarouselRenderItemProps {
     item: any;
-    index: any;
+    index: number;
 }
 
 const Home = () => {
@@ -104,26 +103,23 @@ const Home = () => {
         });
     };
 
-    const CarouselCardItem = ({ item, index }: CarouselItemProps) => {
-        return (
-            <View
-                key={index}
-                className="flex-1 items-center justify-center w-full bg-green-300"
-            >
-                <View className="bg-solar-gray-dark w-full">
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        onPress={() => handlePressButtonAsync(item.carLink)}
-                    >
-                        <Image
-                            source={{ uri: item.carLinkImagem }}
-                            className="h-full "
-                        />
-                    </TouchableOpacity>
-                </View>
+    const CarouselCardItem = ({ item, index }: CarouselRenderItemProps) => (
+        <View
+            className="flex-1 items-center justify-center w-full bg-green-300"
+        >
+            <View className="bg-solar-gray-dark w-full">
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => handlePressButtonAsync(item.carLink)}
+                >
+                    <Image
+                        source={{ uri: item.carLinkImagem }}
+                        className="h-full"
+                    />
+                </TouchableOpacity>
             </View>
-        );
-    };
+        </View>
+    );
 
     return (
         <AppLayout>
@@ -141,14 +137,14 @@ const Home = () => {
                             ao app das Lojas Solar
                         </Text>
                     </View>
-                    <View className="flex-1 py-8 bg-white border-y border-y-gray-100">
+                    <View className="flex-1 py-8 bg-white border-b border-y-gray-100/90">
                         <Carousel
                             vertical={false}
                             layout="default"
                             layoutCardOffset={9}
                             ref={isCarousel}
-                            data={carrocelData}
-                            renderItem={CarouselCardItem}
+                            data={carrocelData as any[]}
+                            renderItem={({ item, index }) => <CarouselCardItem item={item} index={index} />}
                             sliderWidth={SCREEN_WIDTH}
                             itemWidth={CAROUSEL_ITEM_WIDTH}
                             inactiveSlideShift={0}
@@ -196,7 +192,7 @@ const Home = () => {
 
             <View className="flex-none bg-solar-blue-light">
                 <ScrollView
-                    horizontal 
+                    horizontal
                     showsHorizontalScrollIndicator={false}
                     className="flex-row"
                 >
@@ -335,4 +331,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home

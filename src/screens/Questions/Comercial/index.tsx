@@ -1,14 +1,11 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {MaterialIcons} from '@expo/vector-icons';
 import serviceapp from '@services/serviceapp';
 import {AuthContext} from '@contexts/auth';
-import AppLoading from '@components/AppLoading';
 
 const Comercial = () => {
-    const {setLoading, loading} = useContext(AuthContext);
-    const [showCategory, setShowCategory] = useState(false);
+    const {setLoading} = useContext(AuthContext);
     const [comerciais, setComerciais] = useState<any>([]);
     const [idFaq, setIdFaq] = useState(null);
 
@@ -22,7 +19,6 @@ const Comercial = () => {
             await serviceapp
                 .get('(WS_CARREGA_FAQ)')
                 .then(response => {
-                    setLoading(false);
                     const result =
                         response.data.resposta.data.categorias.filter(
                             (c: any) =>
@@ -33,6 +29,8 @@ const Comercial = () => {
                 })
                 .catch(err => {
                     console.log(err);
+                }).finally(() => {
+                    setLoading(false);
                 });
         };
         getComerciais();
@@ -40,7 +38,6 @@ const Comercial = () => {
 
     return (
         <View className="bg-gray-200">
-            <AppLoading visible={loading} />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"

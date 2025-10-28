@@ -1,13 +1,11 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {MaterialIcons} from '@expo/vector-icons';
 import serviceapp from '@services/serviceapp';
 import {AuthContext} from '@contexts/auth';
-import AppLoading from '@components/AppLoading';
 
 const Crediario = () => {
-    const {setLoading, loading} = useContext(AuthContext);
+    const {setLoading} = useContext(AuthContext);
     const [crediarios, setCrediarios] = useState<any>([]);
     const [idFaq, setIdFaq] = useState(null);
 
@@ -21,7 +19,6 @@ const Crediario = () => {
             await serviceapp
                 .get('(WS_CARREGA_FAQ)')
                 .then(response => {
-                    setLoading(false);
                     const result =
                         response.data.resposta.data.categorias.filter(
                             (c: any) =>
@@ -34,6 +31,8 @@ const Crediario = () => {
                 })
                 .catch(err => {
                     console.log(err);
+                }).finally(() => {
+                    setLoading(false);
                 });
         };
         getCrediarios();
@@ -41,7 +40,6 @@ const Crediario = () => {
 
     return (
         <View className="bg-gray-200">
-            <AppLoading visible={loading} />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"

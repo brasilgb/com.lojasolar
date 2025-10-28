@@ -197,7 +197,7 @@ const Methods = ({route}: any) => {
                 </View>
                 <View className="flex-col itens-center justify-start mt-8">
                     <TouchableOpacity onPress={() => pixPaymentOrder()}>
-                        <View className="flex-row items-center pb-4 pl-10">
+                        <View className="flex-row items-center pb-4">
                             <Image
                                 source={require('@assets/images/pix.png')}
                                 className="w-6 h-6"
@@ -210,7 +210,7 @@ const Methods = ({route}: any) => {
                             </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => sendPaymentOrder()}>
+                    {/* <TouchableOpacity onPress={() => sendPaymentOrder()}>
                         <View className="flex-row items-center py-4 border-y-2 border-y-gray-300 pl-10">
                             <MaterialCommunityIcons
                                 name="barcode"
@@ -224,13 +224,13 @@ const Methods = ({route}: any) => {
                                 Pagar com boleto
                             </Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         onPress={() =>
                             navigation.navigate('CartPayment', {order: order})
                         }
                     >
-                        <View className="flex-row items-center pt-4 pl-10">
+                        <View className="flex-row items-center pt-4 border-t border-t-gray-400">
                             <MaterialCommunityIcons
                                 name="credit-card"
                                 size={26}

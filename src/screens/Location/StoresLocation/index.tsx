@@ -1,8 +1,7 @@
-import {View, Text, Platform, Animated, Dimensions} from 'react-native';
+import {View, Text, Platform, Animated, Dimensions, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import AppLayout from '@components/AppLayout';
 import {MaterialIcons} from '@expo/vector-icons';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {AuthContext} from '@contexts/auth';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -34,7 +33,7 @@ const StoresLocation = ({route}: any) => {
     const [citiesStore, setCitiesStore] = useState<any>([]);
     const isFocused = useIsFocused();
 
-    const mapRef = useRef<any>();
+    const mapRef = useRef<any>(null);
     let mapAnimation = new Animated.Value(0);
 
     const [region, setRegion] = useState({
@@ -149,7 +148,7 @@ const StoresLocation = ({route}: any) => {
                         numberOfLines={1}
                         className="text-base text-solar-blue-dark font-Poppins_500Medium pb-1.5"
                     >
-                        {item.telefone}
+                        {item.whats}
                     </Text>
                     <Text
                         allowFontScaling={false}

@@ -3,7 +3,7 @@ import {
     createDrawerNavigator,
 } from '@react-navigation/drawer';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Image, Platform, View } from 'react-native';
+import { Image, Platform, View, Text } from 'react-native';
 import { Crediary, ImagesSent, LoadImages } from '@screens/Crediary';
 import CustomDrawer from '@components/CustomDrawer';
 import { History } from '@screens/Purchase';
@@ -52,15 +52,19 @@ import ViewDoc from '@screens/DocsAssign/ViewDoc';
 import Cashback from '@screens/CashBack';
 import HistoricoCashback from '@screens/CashBack/HistoricoCashback';
 import CashbackRequested from '@screens/CashBack/CashbackRequested';
+import DrawerHeader from '@components/DrawerHeader';
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
 function LogoTitle() {
     return (
-        <Image
-            className={`w-52 h-10 ${Platform.OS === 'ios' ? 'mb-2' : ''}`}
-            source={require('@assets/logosolar.png')}
-        />
+        <View className="flex-1 flex-row items-center justify-center ml-10">
+            
+            <Image
+                className={`${Platform.OS === 'ios' ? 'mb-2' : ''}`}
+                source={require('@assets/logosolar.png')} style={{ width: 220, height: 40 }} 
+            />
+        </View>
     );
 }
 
@@ -140,20 +144,20 @@ const DrawerRoutes = () => {
             screenOptions={{
                 headerShown: true,
                 title: '',
+
                 headerStyle: {
                     backgroundColor: '#1a9cd9',
-                    height: 100,
                 },
                 drawerStyle: {
-                    backgroundColor: '#F8F8F8',
+                    backgroundColor: '#F8F8F8'
                 },
                 headerTintColor: modalVisible ? '#1a9cd9' : 'white',
-                headerTitleAlign: 'center',
-                drawerActiveBackgroundColor: 'transparent',
-                drawerActiveTintColor: '#0d3b85',
-                drawerInactiveTintColor: '#0d3b85',
+                // headerTitleAlign: 'center',
+                // drawerActiveBackgroundColor: 'transparent',
+                // drawerActiveTintColor: '#0d3b85',
+                // drawerInactiveTintColor: '#0d3b85',
                 drawerLabelStyle: {
-                    marginLeft: -25,
+                    marginLeft: 0,
                     fontFamily: 'Poppins_400Regular',
                     padding: 0,
                     margin: -3,
@@ -181,11 +185,11 @@ const DrawerRoutes = () => {
                         <MaterialCommunityIcons
                             name="home-outline"
                             color={color}
-                            size={22}
+                            size={size}
                         />
                     ),
                     drawerLabel: 'Inicio',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -202,7 +206,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="person-outline"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Minha conta',
@@ -223,7 +227,7 @@ const DrawerRoutes = () => {
                                 <MaterialCommunityIcons
                                     name="handshake-outline"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Crediário',
@@ -244,7 +248,7 @@ const DrawerRoutes = () => {
                                 <MaterialCommunityIcons
                                     name="lock-reset"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Alterar senha',
@@ -265,7 +269,7 @@ const DrawerRoutes = () => {
                                 <MaterialCommunityIcons
                                     name="file-document-edit"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Assinar documentos',
@@ -286,7 +290,7 @@ const DrawerRoutes = () => {
                                 <MaterialCommunityIcons
                                     name="shield-account-outline"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Configurações de privacidade',
@@ -311,11 +315,11 @@ const DrawerRoutes = () => {
                         <MaterialCommunityIcons
                             name="map-marker-outline"
                             color={color}
-                            size={22}
+                            size={size}
                         />
                     ),
                     drawerLabel: 'Lojas próximas de você',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -330,11 +334,11 @@ const DrawerRoutes = () => {
                         <MaterialCommunityIcons
                             name="phone-message-outline"
                             color={color}
-                            size={22}
+                            size={size}
                         />
                     ),
                     drawerLabel: 'Fale conosco',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -351,7 +355,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="attach-money"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Faça seu pagamento',
@@ -372,7 +376,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="currency-exchange"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Cashback',
@@ -394,7 +398,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="currency-exchange"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             headerTitle: (props: any) => (
@@ -415,7 +419,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="currency-exchange"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             headerTitle: (props: any) => (
@@ -430,13 +434,13 @@ const DrawerRoutes = () => {
                         component={History}
                         options={{
                             drawerItemStyle: {
-                                marginVertical: 1,
+                                marginTop: 10,
                             },
                             drawerIcon: ({ color, size }) => (
                                 <MaterialIcons
                                     name="history"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Histórico de compras',
@@ -457,7 +461,7 @@ const DrawerRoutes = () => {
                                 <MaterialIcons
                                     name="handyman"
                                     color={color}
-                                    size={22}
+                                    size={size}
                                 />
                             ),
                             drawerLabel: 'Protocolo de assistência',
@@ -476,7 +480,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -506,7 +510,7 @@ const DrawerRoutes = () => {
                         height: 0,
                     },
                     drawerLabel: 'Store selected',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => <ButtonLeftStorage />,
                 }}
             />
@@ -518,7 +522,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => <ButtonLeftStorage />,
                 }}
             />
@@ -530,7 +534,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => <ButtonLeftReturn />,
                     headerRight: () => <ButtonHome />,
                 }}
@@ -543,7 +547,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -586,7 +590,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -631,7 +635,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -661,7 +665,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -691,7 +695,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -721,7 +725,7 @@ const DrawerRoutes = () => {
                         height: 0,
                     },
                     drawerLabel: 'Minha conta',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -733,7 +737,7 @@ const DrawerRoutes = () => {
                         height: 0,
                     },
                     drawerLabel: 'Minha conta',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -745,7 +749,7 @@ const DrawerRoutes = () => {
                         height: 0,
                     },
                     drawerLabel: 'Minha conta',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -757,7 +761,7 @@ const DrawerRoutes = () => {
                         height: 0,
                     },
                     drawerLabel: 'Minha conta',
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => '',
                     headerRight: () => {
                         const navigation =
@@ -787,7 +791,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -816,7 +820,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -845,7 +849,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -856,7 +860,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -878,7 +882,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -889,7 +893,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -900,7 +904,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -911,7 +915,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -922,7 +926,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                 }}
             />
 
@@ -933,7 +937,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => {
                         const navigation =
                             useNavigation<
@@ -962,7 +966,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => '',
                     headerRight: () => {
                         const navigation =
@@ -990,7 +994,7 @@ const DrawerRoutes = () => {
                     drawerItemStyle: {
                         height: 0,
                     },
-                    headerTitle: (props: any) => <LogoTitle {...props} />,
+                    header: () => <DrawerHeader />,
                     headerLeft: () => '',
                     headerRight: () => {
                         const navigation =
