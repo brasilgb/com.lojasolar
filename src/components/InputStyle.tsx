@@ -1,8 +1,8 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 export const InputStyle = (touched?: any, errors?: any) =>
     `
-    ${Platform.OS === 'ios' ? 'py-4' : 'py-3 '}
+h-12
     px-4
     rounded-xl
     text-lg 
@@ -11,10 +11,9 @@ export const InputStyle = (touched?: any, errors?: any) =>
     bg-white 
     border 
     placeholder:text-slate-400 
-    ${
-        touched && errors
-            ? 'text-red-600 border-red-600'
-            : 'text-solar-blue-dark border-gray-300'
+    ${touched && errors
+        ? 'text-red-600 border-red-600'
+        : 'text-solar-blue-dark border-gray-300'
     }`;
 
 export const LabelStyle = `

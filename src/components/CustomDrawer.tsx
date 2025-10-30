@@ -19,7 +19,7 @@ const CustomDrawer = (props: any) => {
     return (
         <View className="h-full">
             <View className="p-4 bg-solar-blue-light rounded-tr-lg">
-                <View className="flex-row items-center justify-start mt-8">
+                <View className="flex-row items-center justify-start mt-8 w-60">
                     <MaterialIcons
                         name="account-circle"
                         size={50}

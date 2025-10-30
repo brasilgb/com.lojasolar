@@ -7,20 +7,20 @@ import {
     Platform,
     Animated,
 } from 'react-native';
-import React, {useContext, useRef, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
-import {AuthContext} from '@contexts/auth';
+import React, { useContext, useRef, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
+import { AuthContext } from '@contexts/auth';
 import AppLayout from '@components/AppLayout';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {MaterialIcons} from '@expo/vector-icons';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { MaterialIcons } from '@expo/vector-icons';
 
-const StoreSelected = ({route}: any) => {
-    const {data} = route?.params;
+const StoreSelected = ({ route }: any) => {
+    const { data } = route?.params;
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
-    const {positionGlobal} = useContext(AuthContext);
+    const { positionGlobal } = useContext(AuthContext);
     const mapRef = useRef<any>(null);
     const [initialRegion, setInitialRegion] = useState({
         latitude: parseFloat(data.latitude),
@@ -46,7 +46,7 @@ const StoreSelected = ({route}: any) => {
                     style: 'cancel',
                 },
             ],
-            {cancelable: false},
+            { cancelable: false },
         );
     };
 
@@ -68,10 +68,10 @@ const StoreSelected = ({route}: any) => {
                                 longitude: parseFloat(data.longitude),
                             }}
                         >
-                            <Animated.View className="items-center justify-center w-12 h-12">
+                            <Animated.View className="items-center justify-center w-10 h-10">
                                 <Animated.Image
-                                    source={require('@assets/map_marker.png')}
-                                    className="w-12 h-12"
+                                    source={require('../../../../assets/map_marker.png')}
+                                    className="w-8 h-8"
                                     resizeMode="cover"
                                 />
                             </Animated.View>
@@ -136,9 +136,8 @@ const StoreSelected = ({route}: any) => {
                 </View>
 
                 <View
-                    className={`flex-row items-center justify-between bg-solar-orange-middle px-4 ${
-                        Platform.OS === 'ios' ? 'pt-4 pb-14' : 'py-4'
-                    }`}
+                    className={`flex-row items-center justify-between bg-solar-orange-middle px-4 ${Platform.OS === 'ios' ? 'pt-4 pb-14' : 'py-4'
+                        }`}
                 >
                     <View>
                         <Text

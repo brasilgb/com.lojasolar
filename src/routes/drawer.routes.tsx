@@ -142,6 +142,7 @@ const DrawerRoutes = () => {
             backBehavior="none"
             drawerContent={props => <CustomDrawer {...props} />}
             screenOptions={{
+                drawerType: 'slide',
                 headerShown: true,
                 title: '',
 

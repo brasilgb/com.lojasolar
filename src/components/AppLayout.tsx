@@ -1,24 +1,21 @@
-import {StatusBar} from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
     children: React.ReactNode;
     classname?: any;
 }
 
-const AppLayout = ({children, classname}: Props) => {
+const AppLayout = ({ children, classname }: Props) => {
     return (
-        <>
-            <View
-                className={`flex-1 ${
-                    classname?.length ? classname : 'bg-solar-blue-dark'
-                }`}
-            >
+        <SafeAreaProvider>
+            <SafeAreaView className={`flex-1 ${classname?.length ? classname : 'bg-solar-blue-light'
+                }`}>
                 {children}
-            </View>
+            </SafeAreaView>
             <StatusBar translucent style="light" animated />
-        </>
+        </SafeAreaProvider>
     );
 };
 

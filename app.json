@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lojas Solar",
     "slug": "comlojasolar",
-    "version": "1.4.8",
+    "version": "1.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -41,7 +41,7 @@
       "bundleIdentifier": "com.loja.solar",
       "buildNumber": "2",
       "config": {
-        "googleMapsApiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0",
+        "googleMapsApiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI",
         "usesNonExemptEncryption": false
       }
     },
@@ -59,7 +59,7 @@
       },
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAYjbaMCvIXWuy2A1Q7lznIK08YtzlCkA0"
+          "apiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI"
         }
       },
       "package": "com.loja.solar",
@@ -69,6 +69,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      [
+        "react-native-maps",
+        {
+          "iosGoogleMapsApiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI",
+          "androidGoogleMapsApiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI"
+        }
+      ],
       "@react-native-firebase/app",
       "@react-native-firebase/messaging",
       [
@@ -76,7 +83,8 @@
         {
           "ios": {
             "useFrameworks": "static",
-            "deploymentTarget": "15.1"
+            "deploymentTarget": "15.1",
+            "buildReactNativeFromSource": true
           },
           "android": {
             "extraMavenRepos": [
@@ -94,7 +102,7 @@
         {
           "image": "./assets/icon.png",
           "backgroundColor": "#1a9cd9",
-          "imageWidth": 160
+          "imageWidth": 250
         }
       ],
       "expo-web-browser"

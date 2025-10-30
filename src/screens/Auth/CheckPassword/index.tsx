@@ -146,7 +146,7 @@ const CheckPassword = ({ route }: any) => {
                                             showPassword ? true : false
                                         }
                                     />
-                                    <View className="absolute right-2 top-4">
+                                    <View className="absolute right-2 top-2">
                                         {showPassword ? (
                                             <MaterialIcons
                                                 onPress={() =>

@@ -1,18 +1,18 @@
-import {View, Text, Platform, Animated, Dimensions, TouchableOpacity} from 'react-native';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import { View, Text, Platform, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import AppLayout from '@components/AppLayout';
-import {MaterialIcons} from '@expo/vector-icons';
-import {AuthContext} from '@contexts/auth';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootDrawerParamList} from '@screens/RootDrawerPrams';
+import { MaterialIcons } from '@expo/vector-icons';
+import { AuthContext } from '@contexts/auth';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootDrawerParamList } from '@screens/RootDrawerPrams';
 import serviceapp from '@services/serviceapp';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import Carousel from 'react-native-snap-carousel-v4';
 import ButtonModal from '@components/ButtomModal';
 import StoreListModal from '@components/StoreListModal';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 export const HEIGHT = Dimensions.get('window').height;
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
@@ -23,9 +23,9 @@ interface ListCitiesProps {
     index: any;
 }
 
-const StoresLocation = ({route}: any) => {
-    const {data} = route?.params;
-    const {positionGlobal, setDataMap} = useContext(AuthContext);
+const StoresLocation = ({ route }: any) => {
+    const { data } = route?.params;
+    const { positionGlobal, setDataMap } = useContext(AuthContext);
     const navigation =
         useNavigation<StackNavigationProp<RootDrawerParamList>>();
     const [location, setLocation] = useState<[any, any]>([0, 0]);
@@ -60,7 +60,7 @@ const StoresLocation = ({route}: any) => {
                         );
                         setLocationLojasProxima(result);
                         setDataMap(result);
-                        const {latitude, longitude} = result[0];
+                        const { latitude, longitude } = result[0];
                         setTimeout(() => {
                             const setregion = {
                                 latitude: parseFloat(latitude),
@@ -106,18 +106,17 @@ const StoresLocation = ({route}: any) => {
         }
     }, []);
 
-    const renderItem = ({item, index}: ListCitiesProps) => (
+    const renderItem = ({ item, index }: ListCitiesProps) => (
         <TouchableOpacity
             activeOpacity={1}
-            onPress={() => navigation.navigate('StoreSelected', {data: item})}
+            onPress={() => navigation.navigate('StoreSelected', { data: item })}
         >
             <View
                 key={index}
-                className={` ${
-                    Platform.OS == 'ios'
+                className={` ${Platform.OS == 'ios'
                         ? 'shadow-sm shadow-gray-300'
                         : 'shadow-sm shadow-black'
-                } bg-solar-gray-middle m-2 border border-white rounded-lg`}
+                    } bg-solar-gray-middle m-2 border border-white rounded-lg`}
             >
                 <View className="p-4">
                     <Text
@@ -163,7 +162,7 @@ const StoresLocation = ({route}: any) => {
     );
 
     const onCaroucelItemChange = (index: any) => {
-        const {latitude, longitude} = locationLojasProxima[index];
+        const { latitude, longitude } = locationLojasProxima[index];
 
         const setregion = {
             latitude: parseFloat(latitude),
@@ -190,7 +189,7 @@ const StoresLocation = ({route}: any) => {
                 extrapolate: 'clamp',
             });
 
-            return {scale};
+            return { scale };
         },
     );
 
@@ -237,11 +236,10 @@ const StoresLocation = ({route}: any) => {
                     </View>
                     <View>
                         <ButtonModal
-                            classnameButtom={`border-2 border-white ${
-                                Platform.OS == 'ios'
+                            classnameButtom={`border-2 border-white ${Platform.OS == 'ios'
                                     ? 'shadow-sm shadow-gray-700'
                                     : 'shadow-sm shadow-black'
-                            } py-2 px-4 my-2 rounded-full bg-solar-orange-middle`}
+                                } py-2 px-4 my-2 rounded-full bg-solar-orange-middle`}
                             classnameText="text-base font-PoppinsMedium self-center text-solar-blue-dark"
                             onChangeSelect={undefined}
                             text="Selecione a cidade"
@@ -280,11 +278,11 @@ const StoresLocation = ({route}: any) => {
                                         longitude: parseFloat(marker.longitude),
                                     }}
                                 >
-                                    <Animated.View className="items-center justify-center w-14 h-14">
+                                    <Animated.View className=" items-center justify-center w-8 h-8">
                                         <Animated.Image
                                             source={require('../../../../assets/map_marker.png')}
                                             style={[scaleStyle]}
-                                            className="w-5 h-5"
+                                            className="w-5 h-5 absolute"
                                             resizeMode="cover"
                                         />
                                     </Animated.View>
