@@ -24,6 +24,7 @@ export default function CashBack() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
   // const datePrev = moment().add(-6, 'month').format('MM');
+
   let dataAtual = new Date();
   let dataAnterior = new Date(dataAtual.getFullYear(), dataAtual.getMonth() - 6, dataAtual.getDate());
   const [dateIni, setDateIni] = useState<any>(dataAnterior);
@@ -130,7 +131,6 @@ export default function CashBack() {
       <FlashList
         data={historicoCashback?.data}
         renderItem={renderItem}
-        estimatedItemSize={100}
         numColumns={1}
         contentContainerStyle={{ paddingBottom: 20 }}
       />
@@ -262,6 +262,7 @@ export default function CashBack() {
             </Text>
           </TouchableOpacity>
         </View>
+        
         <Modalize
           ref={modalizeRef}
         >

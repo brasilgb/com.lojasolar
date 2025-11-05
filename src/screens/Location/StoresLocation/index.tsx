@@ -114,8 +114,8 @@ const StoresLocation = ({ route }: any) => {
             <View
                 key={index}
                 className={` ${Platform.OS == 'ios'
-                        ? 'shadow-sm shadow-gray-300'
-                        : 'shadow-sm shadow-black'
+                    ? 'shadow-sm shadow-gray-300'
+                    : 'shadow-sm shadow-black'
                     } bg-solar-gray-middle m-2 border border-white rounded-lg`}
             >
                 <View className="p-4">
@@ -237,8 +237,8 @@ const StoresLocation = ({ route }: any) => {
                     <View>
                         <ButtonModal
                             classnameButtom={`border-2 border-white ${Platform.OS == 'ios'
-                                    ? 'shadow-sm shadow-gray-700'
-                                    : 'shadow-sm shadow-black'
+                                ? 'shadow-sm shadow-gray-700'
+                                : 'shadow-sm shadow-black'
                                 } py-2 px-4 my-2 rounded-full bg-solar-orange-middle`}
                             classnameText="text-base font-PoppinsMedium self-center text-solar-blue-dark"
                             onChangeSelect={undefined}

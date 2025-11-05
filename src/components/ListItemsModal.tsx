@@ -5,7 +5,6 @@ import { AuthContext } from '@contexts/auth';
 import { maskMoney } from './masks';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function ListItemsModal({ modalData }: any) {
     const { setLoading, loading } = useContext(AuthContext);

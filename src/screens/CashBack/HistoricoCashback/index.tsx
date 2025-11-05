@@ -44,7 +44,6 @@ const HistoricoCashback = ({ route }: any) => {
         getPdvCustomer();
     }, [user, date]);
 
-
     const onValueChange = useCallback(
         (event: any, newDate: any) => {
             const selectedDate = newDate || date;
@@ -126,7 +125,6 @@ const HistoricoCashback = ({ route }: any) => {
             <FlashList
                 data={pdvCustomer}
                 renderItem={renderItem}
-                estimatedItemSize={50}
             />
         );
     };

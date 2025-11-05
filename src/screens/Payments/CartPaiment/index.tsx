@@ -82,8 +82,7 @@ const CartPayment = ({ route }: any) => {
             MerchantOrderId: dataCart.numeroOrdem,
             Payment: {
                 Type: "CreditCard",
-                // Amount: Number(dataCart.valorOrdem) * 100,
-                Amount: 1,
+                Amount: Number(dataCart.valorOrdem) * 100,
                 Currency: "BRL",
                 Country: "BRA",
                 Provider: "Cielo",
