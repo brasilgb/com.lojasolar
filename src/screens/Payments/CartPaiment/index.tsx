@@ -55,8 +55,9 @@ const CartPayment = ({ route }: any) => {
             });
 
             const { success, message, token, data } = response.data.resposta;
-            setLoading(false);
+
             if (!token) {
+                setLoading(false);
                 Alert.alert('Atenção', message, [
                     {
                         text: 'Ok',
@@ -65,12 +66,15 @@ const CartPayment = ({ route }: any) => {
                         },
                     },
                 ]);
+                return;
             }
             if (!success) {
+                setLoading(false);
                 Alert.alert('Atenção deu erro', message, [{ text: 'Ok' }]);
                 return;
             }
             setRegisteredOrder(data);
+
             await paymentCart(data);
         } else {
             await paymentCart(registeredOrder);
@@ -103,13 +107,16 @@ const CartPayment = ({ route }: any) => {
                 }
             }
         });
+
         const { success, ReturnMessage, ReturnCode, data } = response.data.response;
         // console.log('Aqui é o cartão', response.data.response);
-        if (success && ReturnCode !== '00') {
+        if (success && ReturnCode === '00') {
+            // Aqui atualiza a ordem de pagamento caso de certo
+            await sendOrderAtualize(response.data.response);
+        } else {
+            setLoading(false);
             Alert.alert('Atenção', ReturnMessage, [{ text: 'Ok' }]);
         }
-        // Aqui atualiza a ordem de pagamento caso de certo
-        await sendOrderAtualize(response.data.response);
     }
 
     const sendOrderAtualize = async (dataCart: any) => {

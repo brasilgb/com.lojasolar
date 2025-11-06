@@ -19,8 +19,7 @@ const PixPayment = ({route}: any) => {
             const response = await serviceapp.get(
                 `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${order.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
-            const {success, message, txid, banco, copiaColaPix} =
-                response.data.resposta;
+            const {success, message, txid, banco, copiaColaPix} = response.data.resposta;
             if (success) {
                 let dataPay = {
                     idTransacao: txid,
