@@ -20,6 +20,7 @@ const PixPayment = ({route}: any) => {
                 `(WS_TRANSACAO_PIX)?token=${user?.token}&tempoPix=3600&valorPix=${order.valorOrdem}&mensagemPix=Pagamento Pix Grupo Solar`,
             );
             const {success, message, txid, banco, copiaColaPix} = response.data.resposta;
+            
             if (success) {
                 let dataPay = {
                     idTransacao: txid,
@@ -64,15 +65,12 @@ const PixPayment = ({route}: any) => {
             statusOrdem: 12,
             idTransacao: dataPay.idTransacao,
             tipoPagamento: 4,
-            urlBoleto: String(dataPay.urlBoleto),
+            urlBoleto: dataPay.urlBoleto,
         };
 
         const response = await serviceapp.get(
             `(WS_ATUALIZA_ORDEM)?token=91362590064312210014616&numeroOrdem=${orderResponse.numeroOrdem}&statusOrdem=${orderResponse.statusOrdem}&idTransacao=${orderResponse.idTransacao}&tipoPagamento=${orderResponse.tipoPagamento}&urlBoleto=${orderResponse.urlBoleto}`,
         );
-        // const { success } = response.data.resposta
-        // console.log('pix pago ', success);
-        return;
     };
 
     return (
@@ -110,6 +108,7 @@ const PixPayment = ({route}: any) => {
                                             : order,
                                     ),
                                 )}
+                                
                             </Text>
                             <Text
                                 allowFontScaling={false}

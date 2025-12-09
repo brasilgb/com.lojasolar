@@ -287,7 +287,6 @@ const HistoryPayments = () => {
                                 renderItem={({item}) => (
                                     <RenderItem crediario={item} />
                                 )}
-                                estimatedItemSize={50}
                                 keyExtractor={(item: any, index) =>
                                     item.filial + index
                                 }

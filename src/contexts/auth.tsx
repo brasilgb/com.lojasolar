@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
             );
         }
         const { data } = response.data.resposta;
+        
         if (data.cadastroCliente && data.cadastroSenha) {
             setLoading(false);
             navigation.navigate('CheckPassword', {

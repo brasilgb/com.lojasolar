@@ -4,7 +4,7 @@ import OpenPayments from './OpenPayments';
 import SlipPayment from './SlipPayment';
 import Twobillet from './Twobillet';
 import PixPayment from './PixPayment';
-import CartPayment from './CartPaiment';
+import CartPayment from './CartPayment';
 
 export {
     CartPayment,

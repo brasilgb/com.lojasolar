@@ -91,41 +91,47 @@ const App = () => {
 
     const [deviceId, setDeviceId] = useState<string | null>(null);
     useEffect(() => {
-        const getValueDevice = async () => {
-            try {
-                const value = await AsyncStorage.getItem("deviceid");
-                if (value !== null) {
-                    setDeviceId(value);
-                } else {
-                    const uniqueId = await DeviceInfo.getUniqueId();
-                    if (uniqueId) {
-                        await AsyncStorage.setItem("deviceid", uniqueId);
-                        setDeviceId(uniqueId);
+        const initializeNotifications = async () => {
+            await notifee.createChannel({
+                id: 'important',
+                name: 'NotificacoesImportantes',
+            });
+            const authStatus = await messaging().requestPermission();
+            const enabled =
+                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+                authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+            if (enabled) {
+                const setupDevice = async () => {
+                    try {
+                        let id = await AsyncStorage.getItem("deviceid");
+                        if (!id) {
+                            console.log('Não chega no id', id);
+                            
+                            const uniqueId = await DeviceInfo.getUniqueId();
+                            if (uniqueId) {
+                                await AsyncStorage.setItem("deviceid", uniqueId);
+                                id = uniqueId;
+                            }
+                        }
+                        console.log('Chegando aqui', id);
+                        setDeviceId(id);
+
+                        if (id) {
+                            const tokenFirebase = (await messaging().getToken()).toString();
+                            registerDevice(id, tokenFirebase);
+                        }
+                    } catch (error) {
+                        console.error('Erro ao configurar o dispositivo:', error);
                     }
-                }
-            } catch (error) {
-                console.error('AsyncStorage Error: ', error);
+                };
+
+                setupDevice();
             }
-        }
-        getValueDevice();
+        };
+
+        initializeNotifications();
     }, []);
-
-    const requestUserPermission = async () => {
-        await notifee.createChannel({
-            id: 'important',
-            name: 'NotificacoesImportantes',
-        });
-        const authStatus = await messaging().requestPermission();
-        const enabled =
-            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-        if (enabled) {
-
-            let tokenFirebase = (await messaging().getToken()).toString();
-            registerDevice(tokenFirebase); // Insere pushToken e código do cliente em sce002
-        }
-    };
 
     notifee.onBackgroundEvent(async ({ type, detail }) => {
         const { notification, pressAction }: any = detail;
@@ -135,8 +141,6 @@ const App = () => {
     });
 
     useEffect(() => {
-        requestUserPermission();
-
         const unsubscribe = messaging().onMessage(async remoteMessage => {
             fireNotification(remoteMessage.data);
         });
@@ -201,21 +205,23 @@ const App = () => {
 
     // Registra ID do dispositivo e push token firbase
     async function registerDevice(
+        currentDeviceId: string,
         pushToken: any
     ) {
-        let deviceos = Platform.OS === 'ios' ? 'ios' : 'android';
-        let versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
+        try {
+            const deviceos = Platform.OS;
+            const versaoapp = process.env.EXPO_PUBLIC_APP_VERSION?.replace(/\./g, '');
 
-        await serviceapp
-            .get(
-                `(WS_GRAVA_DEVICE)?deviceId=${deviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}`,
-            )
-            .then(response => {
-                // console.log(response.data.resposta);
-            })
-            .catch(err => {
-                // console.log(err);
-            });
+            console.log(`Tentando registrar dispositivo: ID=${currentDeviceId}`);
+
+            const response = await serviceapp.get(
+                `(WS_GRAVA_DEVICE)?deviceId=${currentDeviceId}&pushToken=${pushToken}&deviceOs=${deviceos}&versaoApp=${versaoapp}`,
+            );
+
+            console.log('Dispositivo registrado com sucesso:', response.data.resposta);
+        } catch (err) {
+            console.error('Falha ao registrar o dispositivo:', err);
+        }
     }
 
     useEffect(() => {

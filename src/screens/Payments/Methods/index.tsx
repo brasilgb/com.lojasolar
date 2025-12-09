@@ -146,7 +146,8 @@ const Methods = ({route}: any) => {
         if (success) {
             navigation.navigate('PixPayment', {order: data});
         } else {
-            return;
+            console.log(message);
+            Alert.alert('Atenção', message, [{text: 'Ok'}]);
         }
     };
 
@@ -196,7 +197,7 @@ const Methods = ({route}: any) => {
                     </View>
                 </View>
                 <View className="flex-col itens-center justify-start mt-8">
-                    <TouchableOpacity onPress={() => pixPaymentOrder()}>
+                    <TouchableOpacity onPress={pixPaymentOrder}>
                         <View className="flex-row items-center pb-4">
                             <Image
                                 source={require('@assets/images/pix.png')}

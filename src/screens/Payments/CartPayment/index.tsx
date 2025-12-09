@@ -74,7 +74,6 @@ const CartPayment = ({ route }: any) => {
                 return;
             }
             setRegisteredOrder(data);
-
             await paymentCart(data);
         } else {
             await paymentCart(registeredOrder);

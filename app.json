@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lojas Solar",
     "slug": "comlojasolar",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -69,13 +69,6 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "react-native-maps",
-        {
-          "iosGoogleMapsApiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI",
-          "androidGoogleMapsApiKey": "AIzaSyDs-4JCmCL-HG9r99SIvNWs6b4Lt4Tw_PI"
-        }
-      ],
       "@react-native-firebase/app",
       "@react-native-firebase/messaging",
       [
